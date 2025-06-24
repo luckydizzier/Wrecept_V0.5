@@ -13,3 +13,8 @@
 - [ ] Implement UX failsafe logic for invoice navigation.
 - [ ] Expose database path helper and log location.
 - [x] Implement keyboard-navigable menu system.
+- [ ] Add filter dialogs for invoice list (date, supplier, product group, product).
+- [ ] Implement CRUD views for Supplier and Product master data.
+- [ ] Replace in-memory repositories with SQLite implementation and seed demo data.
+- [ ] Provide Settings window for theme selection saved to JSON.
+- [ ] Document new features and database location.
