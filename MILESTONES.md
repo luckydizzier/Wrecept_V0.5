@@ -15,6 +15,12 @@
 - UX failsafe navigation and visible database location.
 - Menu system baseline with keyboard access. [Menu System: Implemented baseline]
 
+## M3.1: Persistence, Filters and Settings
+- Switch to SQLite repositories with schema migration.
+- Add filter dialogs for date, supplier, product group and product.
+- CRUD maintenance for suppliers and products.
+- Settings window for theme and preferences.
+
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.
 - Define extension points and loading mechanism.
