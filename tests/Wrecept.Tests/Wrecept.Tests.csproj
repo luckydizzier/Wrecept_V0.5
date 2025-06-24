@@ -11,5 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wrecept.Core\Wrecept.Core.csproj" />
+    <ProjectReference Include="..\..\Wrecept.csproj" />
   </ItemGroup>
 </Project>
