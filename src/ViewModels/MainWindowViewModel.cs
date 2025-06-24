@@ -31,12 +31,53 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private Invoice? _selectedInvoice;
 
+    [ObservableProperty]
+    private string _statusMessage = string.Empty;
+
     public void EnsureValidSelection()
     {
         if (SelectedInvoice is null && Invoices.Count > 0)
         {
             SelectedInvoice = Invoices[^1];
         }
+    }
+
+    public bool MoveSelectionUp()
+    {
+        if (Invoices.Count == 0)
+            return false;
+
+        if (SelectedInvoice is null)
+        {
+            SelectedInvoice = Invoices[0];
+            return true;
+        }
+
+        var index = Invoices.IndexOf(SelectedInvoice);
+        if (index <= 0)
+            return false;
+
+        SelectedInvoice = Invoices[index - 1];
+        return true;
+    }
+
+    public bool MoveSelectionDown()
+    {
+        if (Invoices.Count == 0)
+            return false;
+
+        if (SelectedInvoice is null)
+        {
+            SelectedInvoice = Invoices[0];
+            return true;
+        }
+
+        var index = Invoices.IndexOf(SelectedInvoice);
+        if (index >= Invoices.Count - 1)
+            return false;
+
+        SelectedInvoice = Invoices[index + 1];
+        return true;
     }
 
     [RelayCommand]

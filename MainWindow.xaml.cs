@@ -48,10 +48,28 @@ public partial class MainWindow : Window
                 var view = new InvoiceEditorView { DataContext = editorVm, Owner = this };
                 view.ShowDialog();
             }
+            else
+            {
+                SystemSounds.Beep.Play();
+                vm.StatusMessage = "Lista teteje";
+            }
         }
-        else if (e.Key == Key.Down && InvoiceGrid.SelectedIndex == InvoiceGrid.Items.Count - 1)
+        else if (e.Key == Key.Down)
         {
-            System.Media.SystemSounds.Beep.Play();
+            if (!vm.MoveSelectionDown())
+            {
+                SystemSounds.Beep.Play();
+                vm.StatusMessage = "Lista vége";
+            }
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Up)
+        {
+            if (!vm.MoveSelectionUp())
+            {
+                SystemSounds.Beep.Play();
+                vm.StatusMessage = "Lista teteje";
+            }
             e.Handled = true;
         }
     }

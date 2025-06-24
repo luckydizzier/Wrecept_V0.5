@@ -9,3 +9,5 @@
 - Escape closes the editor or dismisses the confirmation.
 - Repeated Up or Down at the edges plays a beep and keeps the current row.
 - Deleting a row selects the last remaining invoice if any.
+- When navigation is blocked a short message appears in the status bar.
+- Selection is clamped within the list after any change.

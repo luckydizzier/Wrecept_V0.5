@@ -14,6 +14,10 @@ public partial class InvoiceEditorView : Window
         base.OnPreviewKeyDown(e);
         if (e.Key == System.Windows.Input.Key.Escape)
         {
+            if (DataContext is ViewModels.InvoiceEditorViewModel vm)
+            {
+                vm.CancelEdit();
+            }
             Close();
             e.Handled = true;
         }
@@ -21,6 +25,10 @@ public partial class InvoiceEditorView : Window
 
     private void OnClose(object sender, RoutedEventArgs e)
     {
+        if (DataContext is ViewModels.InvoiceEditorViewModel vm)
+        {
+            vm.CancelEdit();
+        }
         Close();
     }
 }

@@ -2,6 +2,7 @@ namespace Wrecept.Infrastructure;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.Services;
@@ -9,9 +10,16 @@ using Wrecept.Services;
 public static class AppContext
 {
     private static readonly Dictionary<Type, object> _services;
+    public static string DatabasePath { get; }
 
     static AppContext()
     {
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var dir = Path.Combine(appData, "Wrecept");
+        Directory.CreateDirectory(dir);
+        DatabasePath = Path.Combine(dir, "wrecept.db");
+        Console.WriteLine($"Database path: {DatabasePath}");
+
         var seedInvoices = new[]
         {
             new Wrecept.Core.Domain.Invoice { Id = Guid.NewGuid(), SerialNumber = "INV-001", IssueDate = DateOnly.FromDateTime(DateTime.Today) },

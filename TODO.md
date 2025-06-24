@@ -10,3 +10,5 @@
 - [ ] Implement plugin loader in Wrecept.Core.
 - [ ] Provide sample IPlugin implementation.
 - [x] Implement invoice list keyboard navigation and creation flow.
+- [ ] Implement UX failsafe logic for invoice navigation.
+- [ ] Expose database path helper and log location.

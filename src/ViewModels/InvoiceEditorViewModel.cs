@@ -5,6 +5,7 @@ namespace Wrecept.ViewModels;
 
 public partial class InvoiceEditorViewModel : ObservableObject
 {
+    private readonly Invoice _original;
     [ObservableProperty]
     private Invoice _invoice;
 
@@ -15,7 +16,23 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     public InvoiceEditorViewModel(Invoice invoice, bool isEditMode)
     {
-        _invoice = invoice;
+        _original = invoice;
+        _invoice = new Invoice
+        {
+            Id = invoice.Id,
+            SerialNumber = invoice.SerialNumber,
+            IssueDate = invoice.IssueDate
+        };
         IsEditMode = isEditMode;
+    }
+
+    public void CancelEdit()
+    {
+        Invoice = new Invoice
+        {
+            Id = _original.Id,
+            SerialNumber = _original.SerialNumber,
+            IssueDate = _original.IssueDate
+        };
     }
 }
