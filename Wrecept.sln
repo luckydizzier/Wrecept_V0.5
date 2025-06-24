@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36221.1 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept", "Wrecept.csproj", "{95EB6994-94AF-49D9-8A74-2AC0EA2D296C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0F2029A1-3C6E-49DC-9404-58FBCD928889}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core", "src\Wrecept.Core\Wrecept.Core.csproj", "{4D013AB3-B706-4C65-BA5E-822D174D666C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +19,18 @@ Global
 		{95EB6994-94AF-49D9-8A74-2AC0EA2D296C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95EB6994-94AF-49D9-8A74-2AC0EA2D296C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95EB6994-94AF-49D9-8A74-2AC0EA2D296C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D013AB3-B706-4C65-BA5E-822D174D666C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D013AB3-B706-4C65-BA5E-822D174D666C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D013AB3-B706-4C65-BA5E-822D174D666C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D013AB3-B706-4C65-BA5E-822D174D666C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CD5B2806-13FE-4100-BB51-BDAE586B4DFD}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D013AB3-B706-4C65-BA5E-822D174D666C} = {0F2029A1-3C6E-49DC-9404-58FBCD928889}
 	EndGlobalSection
 EndGlobal
