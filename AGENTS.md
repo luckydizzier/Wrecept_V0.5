@@ -43,17 +43,23 @@ Agents never become runtime components; they only read, create or modify reposit
   - Keyboard-first navigation (Tab, arrow keys, accelerators).  
   - No embedded code-behind.
 
-### 2.4 **TestWriter**
+### 2.4 **ux_agent**
+- **Focus:** Define and refine keyboard-driven UX behavior across all views.
+- **Input:** XAML files, ViewModel UI states, event bindings.
+- **Output:** UX recommendations, focus paths, TabIndex maps.
+- **Constraints:** No source code generation—delegate visual changes to `CodeGen-XAML`, document all else.
+
+### 2.5 **TestWriter**
 - **Focus:** Generate xUnit + FluentAssertions tests.  
 - **Input:** new or changed source code.  
 - **Output:** full `.cs` test files.  
 - **Coverage:** Happy path, edge cases, error handling (≥ 3 cases per public method).  
 
-### 2.5 **DocWriter**
+### 2.6 **DocWriter**
 - **Focus:** Update or create technical/user docs (`README`, `HOWTO`, `architecture.md`, …).  
 - **Style:** succinct, task-oriented, reuse existing sections—no duplication.  
 
-### 2.6 **Reviewer**
+### 2.7 **Reviewer**
 - **Focus:** Static analysis and code review comments.  
 - **Input:** diff or entire file set.  
 - **Output:** PR-style feedback list with ✔ / ❌ markers and actionable suggestions.  
@@ -70,7 +76,8 @@ Agents never become runtime components; they only read, create or modify reposit
 | `src/**/*ViewModel.cs`                | CodeGen-CSharp     |
 | `tests/**/*.cs`                       | TestWriter         |
 | `Specs/**/*.md`                       | Architect          |
-| `docs/**/*.md` (except Specs)         | DocWriter          |
+| `docs/ui_flow.md`, `docs/themes.md`   | ux_agent           |
+| `docs/**/*.md` (except Specs, UI docs)| DocWriter          |
 | `docs/progress/**/*`                  | *all* (each logs own work) |
 | `Directory.Build.props`, `.editorconfig` | Architect (with NEEDS_HUMAN_DECISION) |
 
