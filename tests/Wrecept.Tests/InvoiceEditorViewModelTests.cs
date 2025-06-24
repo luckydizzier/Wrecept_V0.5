@@ -13,8 +13,21 @@ public class InvoiceEditorViewModelTests
 
         var vm = new InvoiceEditorViewModel(invoice, true);
 
-        Assert.Equal(invoice, vm.Invoice);
+        Assert.NotSame(invoice, vm.Invoice);
+        Assert.Equal(invoice.SerialNumber, vm.Invoice.SerialNumber);
         Assert.True(vm.IsEditMode);
         Assert.False(vm.IsReadOnly);
+    }
+
+    [Fact]
+    public void CancelEdit_ShouldRevertChanges()
+    {
+        var invoice = new Invoice { SerialNumber = "1" };
+        var vm = new InvoiceEditorViewModel(invoice, true);
+        vm.Invoice.SerialNumber = "2";
+
+        vm.CancelEdit();
+
+        Assert.Equal("1", vm.Invoice.SerialNumber);
     }
 }

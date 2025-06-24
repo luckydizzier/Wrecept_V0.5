@@ -81,4 +81,47 @@ public class MainWindowViewModelTests
 
         Assert.NotNull(vm.SelectedInvoice);
     }
+
+    [Fact]
+    public void MoveSelectionDown_ShouldNotMovePastEnd()
+    {
+        var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
+        var vm = new MainWindowViewModel(service);
+        vm.Invoices.Add(new Invoice { Id = Guid.NewGuid(), SerialNumber = "1" });
+        vm.SelectedInvoice = vm.Invoices[0];
+
+        var moved = vm.MoveSelectionDown();
+
+        Assert.False(moved);
+        Assert.Equal(vm.Invoices[0], vm.SelectedInvoice);
+    }
+
+    [Fact]
+    public void MoveSelectionUp_ShouldNotMoveBeforeStart()
+    {
+        var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
+        var vm = new MainWindowViewModel(service);
+        vm.Invoices.Add(new Invoice { Id = Guid.NewGuid(), SerialNumber = "1" });
+        vm.SelectedInvoice = vm.Invoices[0];
+
+        var moved = vm.MoveSelectionUp();
+
+        Assert.False(moved);
+        Assert.Equal(vm.Invoices[0], vm.SelectedInvoice);
+    }
+
+    [Fact]
+    public void RapidMoveSelectionUp_ShouldRemainAtTop()
+    {
+        var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
+        var vm = new MainWindowViewModel(service);
+        vm.Invoices.Add(new Invoice { Id = Guid.NewGuid(), SerialNumber = "1" });
+        vm.Invoices.Add(new Invoice { Id = Guid.NewGuid(), SerialNumber = "2" });
+        vm.SelectedInvoice = vm.Invoices[0];
+
+        for (int i = 0; i < 5; i++)
+            vm.MoveSelectionUp();
+
+        Assert.Equal(vm.Invoices[0], vm.SelectedInvoice);
+    }
 }

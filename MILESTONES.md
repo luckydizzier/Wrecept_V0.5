@@ -12,6 +12,7 @@
 - Integrate MVVM pattern with sample screens.
 - Keyboard navigation and theme support.
 - Invoice list navigation and creation flow.
+- UX failsafe navigation and visible database location.
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.
