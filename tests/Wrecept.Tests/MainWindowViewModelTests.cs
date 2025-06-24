@@ -1,0 +1,38 @@
+using System;
+using System.Threading.Tasks;
+using Wrecept.Core.Domain;
+using Wrecept.Core.Repositories;
+using Wrecept.Core.Services;
+using Wrecept.ViewModels;
+using Xunit;
+
+namespace Wrecept.Tests;
+
+public class MainWindowViewModelTests
+{
+    [Fact]
+    public async Task LoadInvoicesAsync_ShouldPopulateCollection()
+    {
+        var repo = new InMemoryInvoiceRepository();
+        await repo.AddAsync(new Invoice { Id = Guid.NewGuid(), SerialNumber = "1" });
+        var service = new DefaultInvoiceService(repo);
+        var vm = new MainWindowViewModel(service);
+
+        await vm.LoadInvoicesCommand.ExecuteAsync(null);
+
+        Assert.Single(vm.Invoices);
+    }
+
+    [Fact]
+    public async Task AddInvoiceCommand_ShouldAddInvoice()
+    {
+        var repo = new InMemoryInvoiceRepository();
+        var service = new DefaultInvoiceService(repo);
+        var vm = new MainWindowViewModel(service);
+
+        await vm.AddInvoiceCommand.ExecuteAsync(null);
+
+        Assert.Single(vm.Invoices);
+        Assert.Single(await service.GetAllAsync());
+    }
+}

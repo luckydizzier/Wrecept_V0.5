@@ -12,9 +12,25 @@
         <viewModels:MainWindowViewModel x:Key="MainWindowViewModel" />
     </Window.Resources>
     <Grid>
-        <StackPanel>
-            <TextBlock Text="{Binding Greeting}" Margin="10"/>
-            <Button Content="Köszönj" Command="{Binding ShowGreetingCommand}" TabIndex="0" Margin="10"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Greeting}" Margin="10" />
+        <DataGrid x:Name="InvoiceGrid"
+                  Grid.Row="1"
+                  ItemsSource="{Binding Invoices}"
+                  AutoGenerateColumns="False"
+                  TabIndex="0"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sorszám" Binding="{Binding SerialNumber}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Új számla" Command="{Binding AddInvoiceCommand}" Margin="0,0,5,0" />
+            <Button Content="Törlés" Command="{Binding DeleteInvoiceCommand}" CommandParameter="{Binding SelectedItem, ElementName=InvoiceGrid}" />
         </StackPanel>
     </Grid>
 </Window>
