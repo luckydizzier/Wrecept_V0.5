@@ -12,7 +12,8 @@
 - Integrate MVVM pattern with sample screens.
 - Keyboard navigation and theme support.
 - Invoice list navigation and creation flow.
-- UX failsafe navigation and visible database location.
+- Invoice editor redesign with summary tables.
+- UX failsafe navigation and visible database location. [Done]
 - Menu system baseline with keyboard access. [Menu System: Implemented baseline]
 
 ## M3.1: Persistence, Filters and Settings

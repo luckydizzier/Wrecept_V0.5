@@ -10,7 +10,8 @@
 - [ ] Implement plugin loader in Wrecept.Core.
 - [ ] Provide sample IPlugin implementation.
 - [x] Implement invoice list keyboard navigation and creation flow.
-- [ ] Implement UX failsafe logic for invoice navigation.
+- [x] Implement UX failsafe logic for invoice navigation.
+- [ ] Redesign invoice editor layout with summary tables and keyboard flow.
 - [ ] Expose database path helper and log location.
 - [x] Implement keyboard-navigable menu system.
 - [ ] Add filter dialogs for invoice list (date, supplier, product group, product).

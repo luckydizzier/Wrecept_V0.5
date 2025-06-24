@@ -18,3 +18,12 @@
 - Törzsek menü: törzsadat karbantartó nézet.
 - Listák menü: dátum, szállító, termékcsoport és termék szerinti keresés.
 - Súgó menü: súgóablak, névjegy, valamint kilépés.
+
+## Invoice Editor Focus Flow
+1. A nézet betöltésekor a számlalistán a legfrissebb sor aktív.
+2. Tab billentyűvel a fejlécmezőkön lehet végighaladni,
+   majd a tételsoron és az összesítő táblákon.
+3. `Ctrl+S` menti a módosításokat és visszaugrik a listára.
+4. `Esc` bármikor a menüsorra viszi a fókuszt; újabb `Esc` vissza a listára.
+5. Lista elején vagy végén történő navigációnál rövid hangjelzés
+   szólal meg és státusz üzenet jelenik meg.

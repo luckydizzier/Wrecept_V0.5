@@ -5,6 +5,7 @@ using Wrecept.Core.Domain;
 using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 using Wrecept.Services;
 using Wrecept.ViewModels;
+using Wrecept.Views;
 
 namespace Wrecept;
 
@@ -30,8 +31,9 @@ public partial class MainWindow : Window
 
         if (e.Key == Key.Enter && vm.SelectedInvoice is not null)
         {
-            var editorVm = new InvoiceEditorViewModel(vm.SelectedInvoice, false);
-            var view = new InvoiceEditorView { DataContext = editorVm, Owner = this };
+            var editorVm = new InvoiceEditorViewModel(vm.SelectedInvoice, false, WreceptAppContext.InvoiceService);
+            var view = new InvoiceView { DataContext = editorVm, Owner = this };
+            view.Loaded += (_, _) => editorVm.OnLoaded();
             view.ShowDialog();
             e.Handled = true;
         }
@@ -44,8 +46,9 @@ public partial class MainWindow : Window
             _confirmDialogOpen = false;
             if (create)
             {
-                var editorVm = new InvoiceEditorViewModel(new Invoice(), true);
-                var view = new InvoiceEditorView { DataContext = editorVm, Owner = this };
+                var editorVm = new InvoiceEditorViewModel(new Invoice(), true, WreceptAppContext.InvoiceService);
+                var view = new InvoiceView { DataContext = editorVm, Owner = this };
+                view.Loaded += (_, _) => editorVm.OnLoaded();
                 view.ShowDialog();
             }
             else
