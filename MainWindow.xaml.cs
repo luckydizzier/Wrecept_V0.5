@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 using Wrecept.Core.Domain;
-using Wrecept.Infrastructure;
+using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 using Wrecept.Services;
 using Wrecept.ViewModels;
 
@@ -32,7 +32,7 @@ public partial class MainWindow : Window
         }
         else if (e.Key == Key.Up && InvoiceGrid.SelectedIndex == 0)
         {
-            var dialogService = AppContext.DialogService;
+            var dialogService = WreceptAppContext.DialogService;
             var create = dialogService.ConfirmNewInvoice();
             e.Handled = true;
             if (create)
