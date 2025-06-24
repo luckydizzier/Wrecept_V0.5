@@ -29,6 +29,8 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 
 ## 🌐 Features
 
+![Képernyőkép](docs/img/invoice_view.png)
+
 - Offline-first, local-only execution
 - Fully keyboard-driven operation (F2, F5, F6, etc.)
 - Rapid invoice entry with dynamic row addition
@@ -40,6 +42,10 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - Validation and confirmation dialogs
 - Light/dark theme support
 - Planned: printing, VAT declaration generation
+
+### Gyorsbillentyűk
+- `Ctrl+S` – mentés és visszatérés a listához
+- `Esc` – menüsor fókusz / vissza a listára
 
 ---
 
