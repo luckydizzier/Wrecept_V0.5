@@ -73,42 +73,23 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - .NET SDK 8.0+
 - Git for Windows
 
+
 ### Clone and Run
 
 ```bash
 git clone https://github.com/luckydizzier/wrecept.git
 cd wrecept
-Open the solution file in Visual Studio:
-Wrecept.sln
-Hit F5 to build and run.
-Build Single Executable
-dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
-The output .exe can run independently of .NET installation.
-💼 Directory Structure
-wrecept/
-├── Wrecept.sln
-├── Models/              # Invoice, Item, Supplier, TaxRate, etc.
-├── ViewModels/          # MVVM logic per screen
-├── Views/               # XAML views and user controls
-├── Services/            # Business logic (InvoiceService, ExportService)
-├── Data/                # SQLite access via Dapper
-├── Resources/           # Themes, icons, localization
-├── Agents/              # AGENTS.md, task coordination
-├── docs/                # Documentation, changelogs
-└── TODO.md              # Task tracking
-🖱 Keyboard Shortcuts
-Navigate fields	ESC, ENTER
-📆 Project Status
-Area	Status
-Project setup	✅ Completed
-GitHub repo	✅ Linked
-README.md	✅ Done
-UI prototype	⏳ In progress
-Agents design	🔜 Next step
-🗂 Progress Logs
-Agent activities and milestone logs are maintained in:
-docs/progress/
-Each file is timestamped and agent-tagged.
-📜 License
-MIT License (to be finalized)
-“If you're typing, you're working.” — The Keyboard Master
+./setup.sh
+```
+
+### Testing
+
+Use `./setup.sh` to build and run tests. Manual execution is possible via:
+
+```bash
+dotnet test Wrecept.CoreOnly.sln
+```
+
+See [docs/dev_setup.md](docs/dev_setup.md) for full details.
+
+Licensed under the MIT License.
