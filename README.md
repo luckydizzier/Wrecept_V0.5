@@ -60,6 +60,7 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - **Loose coupling** between UI, services, and persistence
 - **Single responsibility per ViewModel and service**
 - **Constructor-based dependency injection**
+- **Central `AppContext` bootstraps services with in-memory repositories**
 - **Theme + i18n ready** via resource dictionaries
 
 ---
