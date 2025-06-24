@@ -44,6 +44,7 @@ public static class AppContext
         TaxRateService = new DefaultTaxRateService(taxRateRepo);
         UnitService = new DefaultUnitService(unitRepo);
         DialogService = new KeyboardDialogService();
+        NavigationService = new NavigationService();
 
         _services = new Dictionary<Type, object>
         {
@@ -55,7 +56,8 @@ public static class AppContext
             [typeof(IPaymentMethodService)] = PaymentMethodService,
             [typeof(ITaxRateService)] = TaxRateService,
             [typeof(IUnitService)] = UnitService,
-            [typeof(IKeyboardDialogService)] = DialogService
+            [typeof(IKeyboardDialogService)] = DialogService,
+            [typeof(INavigationService)] = NavigationService
         };
     }
 
@@ -68,6 +70,7 @@ public static class AppContext
     public static ITaxRateService TaxRateService { get; }
     public static IUnitService UnitService { get; }
     public static IKeyboardDialogService DialogService { get; }
+    public static INavigationService NavigationService { get; }
 
     public static T GetService<T>() where T : class
     {

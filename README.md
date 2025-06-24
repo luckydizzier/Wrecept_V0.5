@@ -93,4 +93,6 @@ dotnet test Wrecept.CoreOnly.sln
 
 See [docs/dev_setup.md](docs/dev_setup.md) for full details.
 
+Felhasználói útmutató: [docs/user_manual.md](docs/user_manual.md)
+
 Licensed under the MIT License.
