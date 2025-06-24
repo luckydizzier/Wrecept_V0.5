@@ -11,6 +11,7 @@ public static class AppContext
 {
     private static readonly Dictionary<Type, object> _services;
     public static string DatabasePath { get; }
+    public static string BaseDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
     static AppContext()
     {
