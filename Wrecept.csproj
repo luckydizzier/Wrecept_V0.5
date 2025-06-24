@@ -17,8 +17,5 @@
     <Compile Remove="tests\**\*.cs" />
     <Compile Remove="src/Wrecept.Core\**\*.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="src/ViewModels/**/*.cs" />
-  </ItemGroup>
 
 </Project>
