@@ -9,6 +9,16 @@ public partial class InvoiceEditorView : Window
         InitializeComponent();
     }
 
+    protected override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs e)
+    {
+        base.OnPreviewKeyDown(e);
+        if (e.Key == System.Windows.Input.Key.Escape)
+        {
+            Close();
+            e.Handled = true;
+        }
+    }
+
     private void OnClose(object sender, RoutedEventArgs e)
     {
         Close();

@@ -31,12 +31,21 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private Invoice? _selectedInvoice;
 
+    public void EnsureValidSelection()
+    {
+        if (SelectedInvoice is null && Invoices.Count > 0)
+        {
+            SelectedInvoice = Invoices[^1];
+        }
+    }
+
     [RelayCommand]
     public async Task LoadInvoicesAsync()
     {
         var result = await _invoiceService.GetAllAsync();
         Invoices = new ObservableCollection<Invoice>(result);
         SelectedInvoice = Invoices.FirstOrDefault();
+        EnsureValidSelection();
     }
 
     [RelayCommand]
@@ -45,6 +54,8 @@ public partial class MainWindowViewModel : ObservableObject
         var invoice = new Invoice { SerialNumber = $"INV-{Invoices.Count + 1}" };
         await _invoiceService.SaveAsync(invoice);
         Invoices.Add(invoice);
+        SelectedInvoice = invoice;
+        EnsureValidSelection();
     }
 
     [RelayCommand]
@@ -52,6 +63,11 @@ public partial class MainWindowViewModel : ObservableObject
     {
         await _invoiceService.DeleteAsync(invoice.Id);
         Invoices.Remove(invoice);
+        if (ReferenceEquals(SelectedInvoice, invoice))
+        {
+            SelectedInvoice = null;
+            EnsureValidSelection();
+        }
     }
 
     [RelayCommand]
