@@ -21,9 +21,11 @@
         <DataGrid x:Name="InvoiceGrid"
                   Grid.Row="1"
                   ItemsSource="{Binding Invoices}"
+                  SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
                   AutoGenerateColumns="False"
                   TabIndex="0"
-                  Margin="10">
+                  Margin="10"
+                  PreviewKeyDown="InvoiceGrid_OnPreviewKeyDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Sorszám" Binding="{Binding SerialNumber}" />
             </DataGrid.Columns>

@@ -8,6 +8,18 @@ public class InMemoryInvoiceRepository : IInvoiceRepository
 {
     private readonly ConcurrentDictionary<Guid, Invoice> _storage = new();
 
+    public InMemoryInvoiceRepository()
+    {
+    }
+
+    public InMemoryInvoiceRepository(IEnumerable<Invoice> seed)
+    {
+        foreach (var invoice in seed)
+        {
+            _storage[invoice.Id] = invoice;
+        }
+    }
+
     public Task AddAsync(Invoice entity)
     {
         _storage[entity.Id] = entity;
