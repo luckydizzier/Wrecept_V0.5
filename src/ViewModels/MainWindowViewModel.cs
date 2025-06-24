@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 using AppContext = Wrecept.Infrastructure.AppContext;
@@ -27,11 +28,15 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<Invoice> _invoices;
 
+    [ObservableProperty]
+    private Invoice? _selectedInvoice;
+
     [RelayCommand]
     public async Task LoadInvoicesAsync()
     {
         var result = await _invoiceService.GetAllAsync();
         Invoices = new ObservableCollection<Invoice>(result);
+        SelectedInvoice = Invoices.FirstOrDefault();
     }
 
     [RelayCommand]

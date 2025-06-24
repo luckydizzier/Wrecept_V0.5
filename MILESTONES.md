@@ -11,6 +11,7 @@
 ## M3: WPF UI Prototype
 - Integrate MVVM pattern with sample screens.
 - Keyboard navigation and theme support.
+- Invoice list navigation and creation flow.
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.

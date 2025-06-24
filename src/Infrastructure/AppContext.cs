@@ -1,7 +1,10 @@
 namespace Wrecept.Infrastructure;
 
+using System;
+using System.Collections.Generic;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 public static class AppContext
 {
@@ -9,7 +12,13 @@ public static class AppContext
 
     static AppContext()
     {
-        var invoiceRepo = new InMemoryInvoiceRepository();
+        var seedInvoices = new[]
+        {
+            new Wrecept.Core.Domain.Invoice { Id = Guid.NewGuid(), SerialNumber = "INV-001", IssueDate = DateOnly.FromDateTime(DateTime.Today) },
+            new Wrecept.Core.Domain.Invoice { Id = Guid.NewGuid(), SerialNumber = "INV-002", IssueDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-1)) }
+        };
+
+        var invoiceRepo = new InMemoryInvoiceRepository(seedInvoices);
         var invoiceItemRepo = new InMemoryInvoiceItemRepository();
         var productRepo = new InMemoryProductRepository();
         var productGroupRepo = new InMemoryProductGroupRepository();
@@ -26,6 +35,7 @@ public static class AppContext
         PaymentMethodService = new DefaultPaymentMethodService(paymentMethodRepo);
         TaxRateService = new DefaultTaxRateService(taxRateRepo);
         UnitService = new DefaultUnitService(unitRepo);
+        DialogService = new KeyboardDialogService();
 
         _services = new Dictionary<Type, object>
         {
@@ -36,7 +46,8 @@ public static class AppContext
             [typeof(ISupplierService)] = SupplierService,
             [typeof(IPaymentMethodService)] = PaymentMethodService,
             [typeof(ITaxRateService)] = TaxRateService,
-            [typeof(IUnitService)] = UnitService
+            [typeof(IUnitService)] = UnitService,
+            [typeof(IKeyboardDialogService)] = DialogService
         };
     }
 
@@ -48,6 +59,7 @@ public static class AppContext
     public static IPaymentMethodService PaymentMethodService { get; }
     public static ITaxRateService TaxRateService { get; }
     public static IUnitService UnitService { get; }
+    public static IKeyboardDialogService DialogService { get; }
 
     public static T GetService<T>() where T : class
     {
