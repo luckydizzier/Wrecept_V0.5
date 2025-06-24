@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
-using AppContext = Wrecept.Infrastructure.AppContext;
+using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 
 namespace Wrecept.ViewModels;
 
@@ -12,7 +12,7 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IInvoiceService _invoiceService;
 
-    public MainWindowViewModel() : this(AppContext.InvoiceService)
+    public MainWindowViewModel() : this(WreceptAppContext.InvoiceService)
     {
     }
 
