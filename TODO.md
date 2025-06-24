@@ -9,4 +9,4 @@
 - [ ] Ensure progress logs stored under docs/progress.
 - [ ] Implement plugin loader in Wrecept.Core.
 - [ ] Provide sample IPlugin implementation.
-- [ ] Implement invoice list keyboard navigation and creation flow.
+- [x] Implement invoice list keyboard navigation and creation flow.

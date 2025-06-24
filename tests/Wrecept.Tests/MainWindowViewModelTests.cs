@@ -35,4 +35,50 @@ public class MainWindowViewModelTests
         Assert.Single(vm.Invoices);
         Assert.Single(await service.GetAllAsync());
     }
+
+    [Fact]
+    public async Task DeleteInvoiceCommand_ShouldRemoveInvoiceAndMaintainSelection()
+    {
+        var repo = new InMemoryInvoiceRepository();
+        var service = new DefaultInvoiceService(repo);
+        var vm = new MainWindowViewModel(service);
+
+        await vm.AddInvoiceCommand.ExecuteAsync(null);
+        var invoice = vm.SelectedInvoice!;
+
+        await vm.DeleteInvoiceCommand.ExecuteAsync(invoice);
+
+        Assert.Empty(vm.Invoices);
+        Assert.Null(vm.SelectedInvoice);
+    }
+
+    [Fact]
+    public async Task DeleteInvoiceCommand_ShouldSelectLastRemainingInvoice()
+    {
+        var repo = new InMemoryInvoiceRepository();
+        var service = new DefaultInvoiceService(repo);
+        var vm = new MainWindowViewModel(service);
+
+        await vm.AddInvoiceCommand.ExecuteAsync(null);
+        await vm.AddInvoiceCommand.ExecuteAsync(null);
+        var first = vm.Invoices[0];
+
+        await vm.DeleteInvoiceCommand.ExecuteAsync(first);
+
+        Assert.Single(vm.Invoices);
+        Assert.Equal(vm.Invoices[0], vm.SelectedInvoice);
+    }
+
+    [Fact]
+    public void EnsureValidSelection_ShouldSelectLastWhenNull()
+    {
+        var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
+        var vm = new MainWindowViewModel(service);
+        vm.Invoices.Add(new Invoice { Id = Guid.NewGuid(), SerialNumber = "1" });
+
+        vm.SelectedInvoice = null;
+        vm.EnsureValidSelection();
+
+        Assert.NotNull(vm.SelectedInvoice);
+    }
 }
