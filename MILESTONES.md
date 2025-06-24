@@ -13,6 +13,7 @@
 - Keyboard navigation and theme support.
 - Invoice list navigation and creation flow.
 - UX failsafe navigation and visible database location.
+- Menu system baseline with keyboard access. [Menu System: Implemented baseline]
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.

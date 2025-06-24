@@ -11,3 +11,10 @@
 - Deleting a row selects the last remaining invoice if any.
 - When navigation is blocked a short message appears in the status bar.
 - Selection is clamped within the list after any change.
+
+## Menu System
+- Felső menüsor Alt billentyűvel aktiválható.
+- Számlák menü: kezelő nézet megnyitása és lista frissítése.
+- Törzsek menü: törzsadat karbantartó nézet.
+- Listák menü: dátum, szállító, termékcsoport és termék szerinti keresés.
+- Súgó menü: súgóablak, névjegy, valamint kilépés.

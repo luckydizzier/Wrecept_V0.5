@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 
 namespace Wrecept.ViewModels;
@@ -11,14 +12,16 @@ namespace Wrecept.ViewModels;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IInvoiceService _invoiceService;
+    private readonly INavigationService _navigationService;
 
-    public MainWindowViewModel() : this(WreceptAppContext.InvoiceService)
+    public MainWindowViewModel() : this(WreceptAppContext.InvoiceService, WreceptAppContext.NavigationService)
     {
     }
 
-    public MainWindowViewModel(IInvoiceService invoiceService)
+    public MainWindowViewModel(IInvoiceService invoiceService, INavigationService navigationService)
     {
         _invoiceService = invoiceService;
+        _navigationService = navigationService;
         _invoices = new ObservableCollection<Invoice>();
     }
 
@@ -109,6 +112,75 @@ public partial class MainWindowViewModel : ObservableObject
             SelectedInvoice = null;
             EnsureValidSelection();
         }
+    }
+
+    [RelayCommand]
+    private void OpenInvoiceListView()
+    {
+        _navigationService.ShowInvoiceListView();
+        StatusMessage = "Számlák kezelése";
+    }
+
+    [RelayCommand]
+    private async Task RefreshInvoiceDataAsync()
+    {
+        await LoadInvoicesAsync();
+        StatusMessage = "Számlák frissítve";
+    }
+
+    [RelayCommand]
+    private void OpenMasterDataView()
+    {
+        _navigationService.ShowMasterDataView();
+        StatusMessage = "Törzsadatok";
+    }
+
+    [RelayCommand]
+    private void FilterByDateView()
+    {
+        _navigationService.ShowFilterByDateView();
+        StatusMessage = "Dátum szűrő";
+    }
+
+    [RelayCommand]
+    private void FilterBySupplierView()
+    {
+        _navigationService.ShowFilterBySupplierView();
+        StatusMessage = "Szállító szűrő";
+    }
+
+    [RelayCommand]
+    private void FilterByProductGroupView()
+    {
+        _navigationService.ShowFilterByProductGroupView();
+        StatusMessage = "Termékcsoport szűrő";
+    }
+
+    [RelayCommand]
+    private void FilterByProductView()
+    {
+        _navigationService.ShowFilterByProductView();
+        StatusMessage = "Termék szűrő";
+    }
+
+    [RelayCommand]
+    private void OpenHelpView()
+    {
+        _navigationService.ShowHelpView();
+        StatusMessage = "Súgó";
+    }
+
+    [RelayCommand]
+    private void OpenAboutDialog()
+    {
+        _navigationService.ShowAboutDialog();
+        StatusMessage = "Névjegy";
+    }
+
+    [RelayCommand]
+    private void ExitApplication()
+    {
+        _navigationService.ExitApplication();
     }
 
     [RelayCommand]

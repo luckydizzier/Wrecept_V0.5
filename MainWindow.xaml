@@ -14,12 +14,34 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Greeting}" Margin="10" />
+        <Menu Grid.Row="0">
+            <MenuItem Header="_Számlák" InputGestureText="Alt+S">
+                <MenuItem Header="Számlák kezelése" Command="{Binding OpenInvoiceListViewCommand}" />
+                <MenuItem Header="Számlák aktualizálása" Command="{Binding RefreshInvoiceDataCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Törzsek" InputGestureText="Alt+T">
+                <MenuItem Header="Törzsadatok kezelése" Command="{Binding OpenMasterDataViewCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Listák" InputGestureText="Alt+L">
+                <MenuItem Header="Dátum alapú keresés" Command="{Binding FilterByDateViewCommand}" />
+                <MenuItem Header="Szállító alapú keresés" Command="{Binding FilterBySupplierViewCommand}" />
+                <MenuItem Header="Termékcsoport alapú keresés" Command="{Binding FilterByProductGroupViewCommand}" />
+                <MenuItem Header="Termék alapú keresés" Command="{Binding FilterByProductViewCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Súgó" InputGestureText="Alt+H">
+                <MenuItem Header="Súgó" Command="{Binding OpenHelpViewCommand}" />
+                <MenuItem Header="Névjegy" Command="{Binding OpenAboutDialogCommand}" />
+                <Separator />
+                <MenuItem Header="Kilépés" Command="{Binding ExitApplicationCommand}" />
+            </MenuItem>
+        </Menu>
+        <TextBlock Grid.Row="1" Text="{Binding Greeting}" Margin="10" />
         <DataGrid x:Name="InvoiceGrid"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   ItemsSource="{Binding Invoices}"
                   SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
                   AutoGenerateColumns="False"
@@ -30,7 +52,7 @@
                 <DataGridTextColumn Header="Sorszám" Binding="{Binding SerialNumber}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="2" Margin="10">
+        <Grid Grid.Row="3" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
