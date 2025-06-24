@@ -13,6 +13,7 @@
 - Keyboard navigation and theme support.
 
 ## M4: Plugin Framework
+- Implement plugin loader and example plugin.
 - Define extension points and loading mechanism.
 - Document plugin API.
 
