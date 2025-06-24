@@ -1,0 +1,9 @@
+# TODO
+
+- [ ] Add MIT License file.
+- [ ] Separate cross-platform core into new library project.
+- [ ] Add unit test project using xUnit.
+- [ ] Create setup.sh for build and test automation.
+- [ ] Document build and test procedure.
+- [ ] Define plugin architecture specification.
+- [ ] Ensure progress logs stored under docs/progress.
