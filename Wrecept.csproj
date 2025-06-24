@@ -9,9 +9,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="src/Wrecept.Core/Wrecept.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="db/schema_v1.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="tests\**\*.cs" />

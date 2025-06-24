@@ -80,6 +80,7 @@ Agents never become runtime components; they only read, create or modify reposit
 | `docs/**/*.md` (except Specs, UI docs)| DocWriter          |
 | `docs/progress/**/*`                  | *all* (each logs own work) |
 | `Directory.Build.props`, `.editorconfig` | Architect (with NEEDS_HUMAN_DECISION) |
+| `db/**/*.sql`                         | CodeGen-CSharp |
 
 > **Rule:** If a file path is missing here, the *first* agent that creates it becomes the owner and must update this table.
 
