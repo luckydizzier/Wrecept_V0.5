@@ -49,11 +49,11 @@ public class SqliteInvoiceRepository : IInvoiceRepository
         var rows = await conn.QueryAsync("SELECT Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes FROM Invoices WHERE SupplierId = @sid", new { sid = supplierId });
         return rows.Select(r => new Invoice
         {
-            Id = r.Id,
+            Id = Guid.Parse(r.Id.ToString()),
             SerialNumber = r.SerialNumber,
             IssueDate = DateOnly.Parse(r.IssueDate),
-            Supplier = new Supplier { Id = r.SupplierId, Name = string.Empty },
-            PaymentMethod = new PaymentMethod { Id = r.PaymentMethodId, Label = string.Empty },
+            Supplier = new Supplier { Id = Guid.Parse(r.SupplierId.ToString()), Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = Guid.Parse(r.PaymentMethodId.ToString()), Label = string.Empty },
             Notes = r.Notes ?? string.Empty
         }).ToList();
     }
@@ -68,11 +68,11 @@ public class SqliteInvoiceRepository : IInvoiceRepository
                                            WHERE p.ProductGroupId = @gid", new { gid = groupId });
         return rows.Select(r => new Invoice
         {
-            Id = r.Id,
+            Id = Guid.Parse(r.Id.ToString()),
             SerialNumber = r.SerialNumber,
             IssueDate = DateOnly.Parse(r.IssueDate),
-            Supplier = new Supplier { Id = r.SupplierId, Name = string.Empty },
-            PaymentMethod = new PaymentMethod { Id = r.PaymentMethodId, Label = string.Empty },
+            Supplier = new Supplier { Id = Guid.Parse(r.SupplierId.ToString()), Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = Guid.Parse(r.PaymentMethodId.ToString()), Label = string.Empty },
             Notes = r.Notes ?? string.Empty
         }).Distinct().ToList();
     }
@@ -86,11 +86,11 @@ public class SqliteInvoiceRepository : IInvoiceRepository
                                            WHERE it.ProductId = @pid", new { pid = productId });
         return rows.Select(r => new Invoice
         {
-            Id = r.Id,
+            Id = Guid.Parse(r.Id.ToString()),
             SerialNumber = r.SerialNumber,
             IssueDate = DateOnly.Parse(r.IssueDate),
-            Supplier = new Supplier { Id = r.SupplierId, Name = string.Empty },
-            PaymentMethod = new PaymentMethod { Id = r.PaymentMethodId, Label = string.Empty },
+            Supplier = new Supplier { Id = Guid.Parse(r.SupplierId.ToString()), Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = Guid.Parse(r.PaymentMethodId.ToString()), Label = string.Empty },
             Notes = r.Notes ?? string.Empty
         }).Distinct().ToList();
     }
@@ -101,11 +101,11 @@ public class SqliteInvoiceRepository : IInvoiceRepository
         var rows = await conn.QueryAsync("SELECT Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes FROM Invoices");
         return rows.Select(r => new Invoice
         {
-            Id = r.Id,
+            Id = Guid.Parse(r.Id.ToString()),
             SerialNumber = r.SerialNumber,
             IssueDate = DateOnly.Parse(r.IssueDate),
-            Supplier = new Supplier { Id = r.SupplierId, Name = string.Empty },
-            PaymentMethod = new PaymentMethod { Id = r.PaymentMethodId, Label = string.Empty },
+            Supplier = new Supplier { Id = Guid.Parse(r.SupplierId.ToString()), Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = Guid.Parse(r.PaymentMethodId.ToString()), Label = string.Empty },
             Notes = r.Notes ?? string.Empty
         }).ToList();
     }
@@ -117,11 +117,11 @@ public class SqliteInvoiceRepository : IInvoiceRepository
         if (row == null) return null;
         return new Invoice
         {
-            Id = row.Id,
+            Id = Guid.Parse(row.Id.ToString()),
             SerialNumber = row.SerialNumber,
             IssueDate = DateOnly.Parse(row.IssueDate),
-            Supplier = new Supplier { Id = row.SupplierId, Name = string.Empty },
-            PaymentMethod = new PaymentMethod { Id = row.PaymentMethodId, Label = string.Empty },
+            Supplier = new Supplier { Id = Guid.Parse(row.SupplierId.ToString()), Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = Guid.Parse(row.PaymentMethodId.ToString()), Label = string.Empty },
             Notes = row.Notes ?? string.Empty
         };
     }
