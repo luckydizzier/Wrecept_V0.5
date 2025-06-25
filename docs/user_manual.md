@@ -16,3 +16,8 @@ Az **Alt+T** menüben a Szállítók és Termékek ablakok érhetők el. Új rek
 
 ## Beállítások és Témák
 A **Beállítások** ablakban választható ki a Light vagy Dark téma. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.
+
+## Hibakezelés
+Ha az alkalmazás nem tudja elérni a SQLite adatbázist, hibaüzenet jelenik meg,
+majd a program memóriában fut tovább. A részletek az `errors.log` fájlban
+találhatók a `%LOCALAPPDATA%/Wrecept` könyvtárban.
