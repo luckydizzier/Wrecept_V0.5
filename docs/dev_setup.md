@@ -14,4 +14,5 @@
 - Ensure `dotnet` is available on the PATH.
 - On first run, give execution permission to the script: `chmod +x setup.sh`.
 - If tests fail, clear the `bin` and `obj` folders and rerun the script.
-- Ha a főablak nem jelenik meg indításkor, töröld a helyi adatbázist vagy futtasd `dotnet run Wrecept.csproj` parancssal, hogy lásd a naplókat.
+- Ha a főablak nem jelenik meg indításkor, futtasd `dotnet run Wrecept.csproj` parancsot.
+  A hibás `settings.json` fájl automatikusan ignorálásra kerül, az adatbázis törlése többnyire nem szükséges.

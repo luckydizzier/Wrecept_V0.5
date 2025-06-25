@@ -23,8 +23,17 @@ public static class SettingsService
     {
         if (!File.Exists(_path))
             return new Settings();
-        var json = File.ReadAllText(_path);
-        return JsonSerializer.Deserialize<Settings>(json) ?? new Settings();
+
+        try
+        {
+            var json = File.ReadAllText(_path);
+            return JsonSerializer.Deserialize<Settings>(json) ?? new Settings();
+        }
+        catch (Exception)
+        {
+            // return defaults on any parse or IO error
+            return new Settings();
+        }
     }
 
     public static void Save(Settings settings)
