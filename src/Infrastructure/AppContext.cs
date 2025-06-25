@@ -18,6 +18,7 @@ public static class AppContext
     public static string BaseDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
     public static Exception? LastError { get; private set; }
+    public static bool InputLocked { get; set; }
 
     public static bool Initialize()
     {

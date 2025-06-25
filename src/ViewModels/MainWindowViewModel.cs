@@ -10,7 +10,7 @@ using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 
 namespace Wrecept.ViewModels;
 
-public partial class MainWindowViewModel : ObservableObject
+public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
 {
     private readonly IInvoiceService _invoiceService;
     private readonly INavigationService _navigationService;
@@ -29,11 +29,21 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private string _greeting = "Üdvözlet";
 
-    [ObservableProperty]
     private ObservableCollection<Invoice> _invoices;
 
-    [ObservableProperty]
-    private Invoice? _selectedInvoice;
+    protected override IList<Invoice> Items => _invoices;
+
+    public ObservableCollection<Invoice> Invoices
+    {
+        get => _invoices;
+        private set => SetProperty(ref _invoices, value);
+    }
+
+    public Invoice? SelectedInvoice
+    {
+        get => SelectedItem;
+        set => SelectedItem = value;
+    }
 
     [ObservableProperty]
     private string _statusMessage = string.Empty;
@@ -90,7 +100,7 @@ public partial class MainWindowViewModel : ObservableObject
         var result = await _invoiceService.GetAllAsync();
         var ordered = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
         Invoices = new ObservableCollection<Invoice>(ordered);
-        SelectedInvoice = Invoices.FirstOrDefault();
+        SelectedInvoice = GetDefaultSelection();
         EnsureValidSelection();
     }
 
@@ -237,7 +247,7 @@ public partial class MainWindowViewModel : ObservableObject
         var result = await _invoiceService.GetByDateRange(from, to);
         var ordered = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
         Invoices = new ObservableCollection<Invoice>(ordered);
-        SelectedInvoice = Invoices.FirstOrDefault();
+        SelectedInvoice = GetDefaultSelection();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";
     }
@@ -249,7 +259,7 @@ public partial class MainWindowViewModel : ObservableObject
             : await _invoiceService.GetAllAsync();
         var orderedSupp = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
         Invoices = new ObservableCollection<Invoice>(orderedSupp);
-        SelectedInvoice = Invoices.FirstOrDefault();
+        SelectedInvoice = GetDefaultSelection();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";
     }
@@ -261,7 +271,7 @@ public partial class MainWindowViewModel : ObservableObject
             : await _invoiceService.GetAllAsync();
         var orderedGroup = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
         Invoices = new ObservableCollection<Invoice>(orderedGroup);
-        SelectedInvoice = Invoices.FirstOrDefault();
+        SelectedInvoice = GetDefaultSelection();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";
     }
@@ -273,7 +283,7 @@ public partial class MainWindowViewModel : ObservableObject
             : await _invoiceService.GetAllAsync();
         var orderedProd = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
         Invoices = new ObservableCollection<Invoice>(orderedProd);
-        SelectedInvoice = Invoices.FirstOrDefault();
+        SelectedInvoice = GetDefaultSelection();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";
     }

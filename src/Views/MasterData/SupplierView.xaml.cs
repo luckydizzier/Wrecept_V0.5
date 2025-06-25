@@ -13,6 +13,7 @@ public partial class SupplierView : Window
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
+        if (Infrastructure.AppContext.InputLocked) return;
         if (e.Key == Key.Escape)
         {
             DialogResult = false;
