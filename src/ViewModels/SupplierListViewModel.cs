@@ -35,6 +35,7 @@ public partial class SupplierListViewModel : ObservableObject
     {
         if (SelectedSupplier is null) return;
         await _service.SaveAsync(SelectedSupplier);
+        Infrastructure.AppContext.SetStatus("Beszállító mentve");
     }
 
     [RelayCommand]

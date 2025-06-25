@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Input;
+using Wrecept.Infrastructure;
 
 namespace Wrecept.Views.Filters;
 
@@ -16,6 +17,7 @@ public partial class SupplierFilterDialog : Window
         if (e.Key == Key.Escape)
         {
             DialogResult = false;
+            Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
         }
         else if (e.Key == Key.Enter)
         {

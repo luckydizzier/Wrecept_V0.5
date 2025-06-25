@@ -1,44 +1,41 @@
 using System.Text.Json;
+using System;
 using System.IO;
 
 namespace Wrecept.Infrastructure;
 
-public class Settings
-{
-    public string Theme { get; set; } = "Light";
-}
+using Wrecept.Services;
 
-public static class SettingsService
+public class JsonSettingsService : ISettingsService
 {
-    private static readonly string _path;
+    private readonly string _path;
 
-    static SettingsService()
+    public JsonSettingsService()
     {
         var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Wrecept");
         Directory.CreateDirectory(dir);
         _path = Path.Combine(dir, "settings.json");
     }
 
-    public static Settings Load()
+    public async Task<Settings> LoadAsync()
     {
         if (!File.Exists(_path))
             return new Settings();
-
         try
         {
-            var json = File.ReadAllText(_path);
-            return JsonSerializer.Deserialize<Settings>(json) ?? new Settings();
+            await using var stream = File.OpenRead(_path);
+            var settings = await JsonSerializer.DeserializeAsync<Settings>(stream);
+            return settings ?? new Settings();
         }
-        catch (Exception)
+        catch
         {
-            // return defaults on any parse or IO error
             return new Settings();
         }
     }
 
-    public static void Save(Settings settings)
+    public async Task SaveAsync(Settings settings)
     {
         var json = JsonSerializer.Serialize(settings);
-        File.WriteAllText(_path, json);
+        await File.WriteAllTextAsync(_path, json);
     }
 }

@@ -19,6 +19,7 @@ public partial class MainWindow : Window
 
         if (DataContext is ViewModels.MainWindowViewModel vm)
         {
+            WreceptAppContext.StatusMessageSetter = msg => vm.StatusMessage = msg;
             _ = vm.LoadInvoicesAsync();
         }
     }

@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <Button Content="Sor hozzáadása" Command="{Binding AddItemCommand}" Margin="0,0,10,0" />
-            <Button Content="Sor módosítása" Command="{Binding EditItemCommand}" Margin="0,0,10,0" />
-            <Button Content="Sor törlése" Command="{Binding DeleteItemCommand}" />
+            <Button Content="Sor hozzáadása" Command="{Binding AddItemCommand}" Margin="0,0,10,0" TabIndex="0" />
+            <Button Content="Sor módosítása" Command="{Binding EditItemCommand}" Margin="0,0,10,0" TabIndex="1" />
+            <Button Content="Sor törlése" Command="{Binding DeleteItemCommand}" TabIndex="2" />
         </StackPanel>
-        <DataGrid ItemsSource="{Binding Invoice.Items}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Invoice.Items}" AutoGenerateColumns="False" TabIndex="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Termék" Binding="{Binding Product.Name}" />
                 <DataGridTextColumn Header="Mennyiség" Binding="{Binding Quantity}" />

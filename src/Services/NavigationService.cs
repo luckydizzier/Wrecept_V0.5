@@ -27,7 +27,7 @@ public class NavigationService : INavigationService
 
     public void ShowSettingsView()
     {
-        var vm = new Wrecept.ViewModels.SettingsViewModel();
+        var vm = new Wrecept.ViewModels.SettingsViewModel(WreceptAppContext.SettingsService);
         var view = new Wrecept.Views.Settings.SettingsWindow { DataContext = vm };
         view.ShowDialog();
     }

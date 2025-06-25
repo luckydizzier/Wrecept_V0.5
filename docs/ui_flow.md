@@ -28,6 +28,11 @@
 ## Invoice Editor Focus Flow
 1. A nézet betöltésekor a számlalistán a legfrissebb sor aktív.
 2. A szerkesztő négy UserControl-ból áll: **InvoiceSidebar**, **InvoiceHeader**, **InvoiceItemsGrid** és **InvoiceSummary**. Mindegyik saját ViewModelen keresztül kommunikál a fő nézettel.
-3. Tab billentyűvel a fejlécmezőkön lehet végighaladni, majd a tételsoron és az összesítő táblákon.
-4. `Ctrl+S` menti a módosításokat, `Esc` visszalép a listához.
-5. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
+3. A Tab sorrend a következő:
+   1. Számlalistát tartalmazó Sidebar mezők
+   2. Header mezők (Szállító → Cím → Adószám → Számlaszám → Dátum → Fizetési mód → Számítás módja)
+   3. Tételgrid parancs gombok és lista
+   4. Összesítő tábla
+4. `Esc` bármelyik nézetben bezárja az ablakot és a státusz sorban megjelenik **"Fókusz: főmenü"**.
+5. `Ctrl+S` menti a módosításokat.
+6. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
