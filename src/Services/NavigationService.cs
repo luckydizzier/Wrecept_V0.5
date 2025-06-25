@@ -70,6 +70,12 @@ public class NavigationService : INavigationService
         MessageBox.Show("Wrecept – még nincs Névjegy", "Információ");
     }
 
+    public void ShowOnboardingOverlay()
+    {
+        var overlay = new Wrecept.Views.OnboardingOverlay { Owner = Application.Current.MainWindow };
+        overlay.ShowDialog();
+    }
+
     public void ExitApplication()
     {
         Application.Current.Shutdown();

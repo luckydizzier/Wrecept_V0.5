@@ -38,6 +38,14 @@ namespace Wrecept
             }
 
             base.OnStartup(e);
+
+            if (settings.ShowOnboarding)
+            {
+                var overlay = new Views.OnboardingOverlay { Owner = Current.MainWindow };
+                overlay.ShowDialog();
+                settings.ShowOnboarding = false;
+                _ = Infrastructure.AppContext.SettingsService.SaveAsync(settings);
+            }
         }
 
         private void SetupGlobalHandlers()

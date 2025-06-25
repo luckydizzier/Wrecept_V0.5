@@ -24,6 +24,20 @@ public class MainWindowViewModelTests
     }
 
     [Fact]
+    public async Task LoadInvoicesAsync_ShouldSelectLatestInvoice()
+    {
+        var repo = new InMemoryInvoiceRepository();
+        await repo.AddAsync(new Invoice { Id = Guid.NewGuid(), SerialNumber = "1", IssueDate = new DateOnly(2024,1,1) });
+        await repo.AddAsync(new Invoice { Id = Guid.NewGuid(), SerialNumber = "2", IssueDate = new DateOnly(2025,1,1) });
+        var service = new DefaultInvoiceService(repo);
+        var vm = new MainWindowViewModel(service);
+
+        await vm.LoadInvoicesCommand.ExecuteAsync(null);
+
+        Assert.Equal("2", vm.SelectedInvoice?.SerialNumber);
+    }
+
+    [Fact]
     public async Task AddInvoiceCommand_ShouldAddInvoice()
     {
         var repo = new InMemoryInvoiceRepository();

@@ -6,4 +6,5 @@ public class Settings
     public Guid? LastSupplierFilterId { get; set; }
     public double WindowWidth { get; set; } = 800;
     public double WindowHeight { get; set; } = 600;
+    public bool ShowOnboarding { get; set; } = true;
 }

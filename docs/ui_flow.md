@@ -1,7 +1,7 @@
 # UI Flow
 
 ## Invoice List
-- On startup the first invoice is selected automatically.
+- On startup the most recent invoice is selected automatically.
 - Arrow Up/Down moves the selection.
 - If the first row is selected and Up is pressed, a confirmation dialog appears asking to create a new invoice.
 - Enter on a row opens the invoice editor in read-only mode.
@@ -11,6 +11,7 @@
 - Deleting a row selects the last remaining invoice if any.
 - When navigation is blocked a short message appears in the status bar.
 - Selection is clamped within the list after any change.
+- Az első indításkor megjelenik egy billentyűs súgó, amely F1 segítségével később is előhozható.
 
 ## Menu System
 - Felső menüsor Alt billentyűvel aktiválható.
