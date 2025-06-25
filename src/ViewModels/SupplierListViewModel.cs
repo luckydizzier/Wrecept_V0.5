@@ -19,7 +19,10 @@ public partial class SupplierListViewModel : ObservableObject
     public SupplierListViewModel(ISupplierService service)
     {
         _service = service;
-        _suppliers = new ObservableCollection<Supplier>(_service.GetAllAsync().Result);
+        var items = _service.GetAllAsync().Result;
+        var ordered = items.OrderByDescending(s => s.Id);
+        _suppliers = new ObservableCollection<Supplier>(ordered);
+        _selectedSupplier = _suppliers.FirstOrDefault();
     }
 
     [RelayCommand]

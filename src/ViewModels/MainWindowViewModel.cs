@@ -88,7 +88,8 @@ public partial class MainWindowViewModel : ObservableObject
     public async Task LoadInvoicesAsync()
     {
         var result = await _invoiceService.GetAllAsync();
-        Invoices = new ObservableCollection<Invoice>(result);
+        var ordered = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
+        Invoices = new ObservableCollection<Invoice>(ordered);
         SelectedInvoice = Invoices.FirstOrDefault();
         EnsureValidSelection();
     }
@@ -207,6 +208,12 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void ShowOnboardingOverlay()
+    {
+        _navigationService.ShowOnboardingOverlay();
+    }
+
+    [RelayCommand]
     private void OpenSettingsView()
     {
         _navigationService.ShowSettingsView();
@@ -228,7 +235,8 @@ public partial class MainWindowViewModel : ObservableObject
     private async void ApplyDateFilter(DateOnly? from, DateOnly? to)
     {
         var result = await _invoiceService.GetByDateRange(from, to);
-        Invoices = new ObservableCollection<Invoice>(result);
+        var ordered = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
+        Invoices = new ObservableCollection<Invoice>(ordered);
         SelectedInvoice = Invoices.FirstOrDefault();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";
@@ -239,7 +247,8 @@ public partial class MainWindowViewModel : ObservableObject
         var result = supplierId.HasValue
             ? await _invoiceService.GetBySupplierId(supplierId.Value)
             : await _invoiceService.GetAllAsync();
-        Invoices = new ObservableCollection<Invoice>(result);
+        var orderedSupp = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
+        Invoices = new ObservableCollection<Invoice>(orderedSupp);
         SelectedInvoice = Invoices.FirstOrDefault();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";
@@ -250,7 +259,8 @@ public partial class MainWindowViewModel : ObservableObject
         var result = groupId.HasValue
             ? await _invoiceService.GetByProductGroupId(groupId.Value)
             : await _invoiceService.GetAllAsync();
-        Invoices = new ObservableCollection<Invoice>(result);
+        var orderedGroup = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
+        Invoices = new ObservableCollection<Invoice>(orderedGroup);
         SelectedInvoice = Invoices.FirstOrDefault();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";
@@ -261,7 +271,8 @@ public partial class MainWindowViewModel : ObservableObject
         var result = productId.HasValue
             ? await _invoiceService.GetByProductId(productId.Value)
             : await _invoiceService.GetAllAsync();
-        Invoices = new ObservableCollection<Invoice>(result);
+        var orderedProd = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
+        Invoices = new ObservableCollection<Invoice>(orderedProd);
         SelectedInvoice = Invoices.FirstOrDefault();
         EnsureValidSelection();
         StatusMessage = "Szűrő alkalmazva";

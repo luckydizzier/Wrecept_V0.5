@@ -1,0 +1,19 @@
+<Window x:Class="Wrecept.Views.OnboardingOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#80000000"
+        ShowInTaskbar="False"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner">
+    <Border Background="White" Opacity="0.9" Padding="20">
+        <StackPanel>
+            <TextBlock Text="Gyorsbillentyűk" FontWeight="Bold" Margin="0,0,0,10" />
+            <TextBlock Text="Fel/Le: navigáció" />
+            <TextBlock Text="Enter: megnyitás" />
+            <TextBlock Text="Esc: vissza vagy menü" />
+            <Button Content="Bezár" Click="OnClose" HorizontalAlignment="Right" Margin="0,10,0,0" />
+        </StackPanel>
+    </Border>
+</Window>

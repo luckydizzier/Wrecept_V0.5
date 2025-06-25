@@ -21,7 +21,10 @@ public partial class ProductListViewModel : ObservableObject
     public ProductListViewModel(IProductService service)
     {
         _service = service;
-        _products = new ObservableCollection<Product>(_service.GetAllAsync().Result);
+        var items = _service.GetAllAsync().Result;
+        var ordered = items.OrderByDescending(p => p.Id);
+        _products = new ObservableCollection<Product>(ordered);
+        _selectedProduct = _products.FirstOrDefault();
     }
 
     [RelayCommand]

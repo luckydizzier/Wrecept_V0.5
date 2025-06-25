@@ -11,6 +11,9 @@
     <Window.Resources>
         <viewModels:MainWindowViewModel x:Key="MainWindowViewModel" />
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding ShowOnboardingOverlayCommand}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -34,6 +37,7 @@
                 <MenuItem Header="Termék alapú keresés" Command="{Binding FilterByProductViewCommand}" />
             </MenuItem>
             <MenuItem Header="_Súgó" InputGestureText="Alt+H">
+                <MenuItem Header="Billentyűk" Command="{Binding ShowOnboardingOverlayCommand}" InputGestureText="F1" />
                 <MenuItem Header="Súgó" Command="{Binding OpenHelpViewCommand}" />
                 <MenuItem Header="Névjegy" Command="{Binding OpenAboutDialogCommand}" />
                 <MenuItem Header="Beállítások" Command="{Binding OpenSettingsViewCommand}" />

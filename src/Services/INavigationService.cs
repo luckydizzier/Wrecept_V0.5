@@ -14,5 +14,6 @@ public interface INavigationService
     void ShowFilterByProductView(Action<Guid?> applyFilter);
     void ShowHelpView();
     void ShowAboutDialog();
+    void ShowOnboardingOverlay();
     void ExitApplication();
 }
