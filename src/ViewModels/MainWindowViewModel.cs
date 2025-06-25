@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Wrecept.Core.Domain;
@@ -138,7 +139,7 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private void FilterByDateView()
     {
-        _navigationService.ShowFilterByDateView();
+        _navigationService.ShowFilterByDateView(ApplyDateFilter);
         StatusMessage = "Dátum szűrő";
     }
 
@@ -187,5 +188,13 @@ public partial class MainWindowViewModel : ObservableObject
     private void ShowGreeting()
     {
         // TODO: implement action
+    }
+
+    private async void ApplyDateFilter(DateOnly? from, DateOnly? to)
+    {
+        var result = await _invoiceService.GetByDateRange(from, to);
+        Invoices = new ObservableCollection<Invoice>(result);
+        SelectedInvoice = Invoices.FirstOrDefault();
+        EnsureValidSelection();
     }
 }

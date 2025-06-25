@@ -7,6 +7,7 @@ public interface IInvoiceService
 {
     Task<List<Invoice>> GetAllAsync();
     Task<Invoice?> GetByIdAsync(Guid id);
+    Task<List<Invoice>> GetByDateRange(DateOnly? from, DateOnly? to);
     Task SaveAsync(Invoice entity);
     Task DeleteAsync(Guid id);
 }
@@ -21,6 +22,13 @@ public class DefaultInvoiceService : IInvoiceService
     }
 
     public Task<List<Invoice>> GetAllAsync() => _repository.GetAllAsync();
+
+    public Task<List<Invoice>> GetByDateRange(DateOnly? from, DateOnly? to)
+    {
+        return _repository.FindAsync(i =>
+            (!from.HasValue || i.IssueDate >= from.Value) &&
+            (!to.HasValue || i.IssueDate <= to.Value));
+    }
 
     public Task<Invoice?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
 
