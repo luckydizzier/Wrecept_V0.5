@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 
 namespace Wrecept.Services;
 
