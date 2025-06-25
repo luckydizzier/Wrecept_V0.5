@@ -96,14 +96,21 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private async Task AddInvoiceAsync()
     {
-        var supplier = (await WreceptAppContext.SupplierService.GetAllAsync()).First();
-        var payment = (await WreceptAppContext.PaymentMethodService.GetAllAsync()).First();
+        var suppliers = await WreceptAppContext.SupplierService.GetAllAsync();
+        var payments = await WreceptAppContext.PaymentMethodService.GetAllAsync();
+
+        if (!suppliers.Any() || !payments.Any())
+        {
+            WreceptAppContext.SetStatus("Nincs rögzített szállító vagy fizetési mód.");
+            return;
+        }
+
         var invoice = new Invoice
         {
             SerialNumber = $"INV-{Invoices.Count + 1}",
             IssueDate = DateOnly.FromDateTime(DateTime.Today),
-            Supplier = supplier,
-            PaymentMethod = payment
+            Supplier = suppliers.First(),
+            PaymentMethod = payments.First()
         };
 
         await _invoiceService.SaveAsync(invoice);
