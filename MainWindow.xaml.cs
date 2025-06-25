@@ -26,6 +26,23 @@ public partial class MainWindow : Window
         }
     }
 
+    private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (Infrastructure.AppContext.InputLocked) return;
+
+        if (MenuBar.IsKeyboardFocusWithin && e.Key == Key.Escape)
+        {
+            Infrastructure.AppContext.InputLocked = true;
+            var confirm = WreceptAppContext.DialogService.ConfirmExit();
+            Infrastructure.AppContext.InputLocked = false;
+            e.Handled = true;
+            if (confirm)
+            {
+                WreceptAppContext.NavigationService.ExitApplication();
+            }
+        }
+    }
+
     private void InvoiceGrid_OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (Infrastructure.AppContext.InputLocked) return;

@@ -21,6 +21,7 @@
 - Törzsek menü: törzsadat karbantartó nézet.
 - Listák menü: dátum, szállító, termékcsoport és termék szerinti keresés.
 - Súgó menü: súgóablak, névjegy, valamint kilépés.
+- Aktív menüben az `Esc` kilépési megerősítést kér.
 
 ### Dátum szűrő dialógus
 1. A "Listák" menüben a **Dátum alapú keresés** pont választása megnyit egy kis ablakot két DatePicker mezővel.

@@ -23,3 +23,4 @@
 - [~] Remove screenshot placeholders (handled manually).
 - [x] Publish single-file executable
 - [x] Generate Windows installer with Inno Setup
+- [x] Confirm exit when pressing Esc in menu.
