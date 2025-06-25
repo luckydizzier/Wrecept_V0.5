@@ -16,9 +16,7 @@
     <ProjectReference Include="src/Wrecept.Core/Wrecept.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="db/schema_v1.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="db/schema_v1.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="tests\**\*.cs" />
