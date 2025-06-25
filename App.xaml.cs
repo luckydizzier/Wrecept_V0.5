@@ -18,7 +18,10 @@ namespace Wrecept
 
         public static void ApplyTheme(string theme)
         {
-            var dict = new ResourceDictionary { Source = new Uri($"src/Themes/{theme}.xaml", UriKind.Relative) };
+            var dict = new ResourceDictionary
+            {
+                Source = new Uri($"/Wrecept;component/Themes/{theme}.xaml", UriKind.Relative)
+            };
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(dict);
         }
