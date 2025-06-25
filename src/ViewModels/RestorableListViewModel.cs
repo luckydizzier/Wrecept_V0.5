@@ -12,6 +12,12 @@ public abstract partial class RestorableListViewModel<T> : ViewModelBase
     [ObservableProperty]
     private T? _selectedItem;
 
+    public void EnsureValidSelection()
+    {
+        if (SelectedItem is null && Items.Count > 0)
+            SelectedItem = Items[^1];
+    }
+
     public void RestoreSelection(Guid id)
     {
         var prop = typeof(T).GetProperty("Id");
