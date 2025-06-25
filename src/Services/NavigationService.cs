@@ -14,7 +14,11 @@ public class NavigationService : INavigationService
     public void ShowSupplierView()
     {
         var vm = new Wrecept.ViewModels.SupplierListViewModel(WreceptAppContext.SupplierService);
-        var view = new Wrecept.Views.MasterData.SupplierView { DataContext = vm };
+        var view = new Wrecept.Views.MasterData.SupplierView
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
         Infrastructure.AppContext.InputLocked = true;
         view.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
@@ -23,7 +27,11 @@ public class NavigationService : INavigationService
     public void ShowProductView()
     {
         var vm = new Wrecept.ViewModels.ProductListViewModel(WreceptAppContext.ProductService);
-        var view = new Wrecept.Views.MasterData.ProductView { DataContext = vm };
+        var view = new Wrecept.Views.MasterData.ProductView
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
         Infrastructure.AppContext.InputLocked = true;
         view.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
@@ -32,7 +40,11 @@ public class NavigationService : INavigationService
     public void ShowSettingsView()
     {
         var vm = new Wrecept.ViewModels.SettingsViewModel(WreceptAppContext.SettingsService);
-        var view = new Wrecept.Views.Settings.SettingsWindow { DataContext = vm };
+        var view = new Wrecept.Views.Settings.SettingsWindow
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
         Infrastructure.AppContext.InputLocked = true;
         view.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
@@ -41,7 +53,11 @@ public class NavigationService : INavigationService
     public void ShowFilterByDateView(Action<DateOnly?, DateOnly?> applyFilter)
     {
         var vm = new Wrecept.ViewModels.DateFilterViewModel(applyFilter);
-        var dlg = new Wrecept.Views.Filters.DateFilterDialog { DataContext = vm };
+        var dlg = new Wrecept.Views.Filters.DateFilterDialog
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
         Infrastructure.AppContext.InputLocked = true;
         dlg.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
@@ -50,7 +66,11 @@ public class NavigationService : INavigationService
     public void ShowFilterBySupplierView(Action<Guid?> applyFilter)
     {
         var vm = new Wrecept.ViewModels.SupplierFilterViewModel(applyFilter, WreceptAppContext.SupplierService);
-        var dlg = new Wrecept.Views.Filters.SupplierFilterDialog { DataContext = vm };
+        var dlg = new Wrecept.Views.Filters.SupplierFilterDialog
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
         Infrastructure.AppContext.InputLocked = true;
         dlg.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
@@ -59,7 +79,11 @@ public class NavigationService : INavigationService
     public void ShowFilterByProductGroupView(Action<Guid?> applyFilter)
     {
         var vm = new Wrecept.ViewModels.ProductGroupFilterViewModel(applyFilter, WreceptAppContext.ProductGroupService);
-        var dlg = new Wrecept.Views.Filters.ProductGroupFilterDialog { DataContext = vm };
+        var dlg = new Wrecept.Views.Filters.ProductGroupFilterDialog
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
         Infrastructure.AppContext.InputLocked = true;
         dlg.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
@@ -68,7 +92,11 @@ public class NavigationService : INavigationService
     public void ShowFilterByProductView(Action<Guid?> applyFilter)
     {
         var vm = new Wrecept.ViewModels.ProductFilterViewModel(applyFilter, WreceptAppContext.ProductService);
-        var dlg = new Wrecept.Views.Filters.ProductFilterDialog { DataContext = vm };
+        var dlg = new Wrecept.Views.Filters.ProductFilterDialog
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
         Infrastructure.AppContext.InputLocked = true;
         dlg.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;

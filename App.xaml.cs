@@ -64,9 +64,13 @@ namespace Wrecept
 
             base.OnStartup(e);
 
+            var mainWindow = new MainWindow();
+            MainWindow = mainWindow;
+            mainWindow.Show();
+
             if (settings.ShowOnboarding)
             {
-                var overlay = new Views.OnboardingOverlay { Owner = Current.MainWindow };
+                var overlay = new Views.OnboardingOverlay { Owner = mainWindow };
                 overlay.ShowDialog();
                 settings.ShowOnboarding = false;
                 _ = Infrastructure.AppContext.SettingsService.SaveAsync(settings);
