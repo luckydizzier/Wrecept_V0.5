@@ -33,3 +33,4 @@
 ## M5: Release Preparation
 - Build setup.sh automation script.
 - Publish single-file executable.
+- Generate Windows installer via Inno Setup.
