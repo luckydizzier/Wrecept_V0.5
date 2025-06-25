@@ -16,8 +16,6 @@ namespace Wrecept
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-
             SetupGlobalHandlers();
 
             var ok = Infrastructure.AppContext.Initialize();
@@ -38,6 +36,8 @@ namespace Wrecept
             {
                 ApplyTheme("Light");
             }
+
+            base.OnStartup(e);
         }
 
         private void SetupGlobalHandlers()
