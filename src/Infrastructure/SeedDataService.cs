@@ -53,8 +53,16 @@ public static class SeedDataService
         Guid productId = Guid.NewGuid();
         if (count == 0)
         {
-            await conn.ExecuteAsync("INSERT INTO Products (Id, Name, ProductGroupId, TaxRateId, DefaultUnitId) VALUES (@Id, @Name, @GroupId, @TaxId, @UnitId)",
-                new { Id = productId.ToString(), Name = "Teszt termék", GroupId = groupId, TaxId = vatId, UnitId = unitId }).ConfigureAwait(false);
+            await conn.ExecuteAsync(
+                "INSERT INTO Products (Id, Name, ProductGroupId, TaxRateId, DefaultUnitId) VALUES (@Id, @Name, @GroupId, @TaxId, @UnitId)",
+                new
+                {
+                    Id = productId.ToString(),
+                    Name = "Teszt termék",
+                    GroupId = groupId.ToString(),
+                    TaxId = vatId.ToString(),
+                    UnitId = unitId.ToString()
+                }).ConfigureAwait(false);
         }
         else
         {
@@ -77,8 +85,16 @@ public static class SeedDataService
         Guid supplierId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM Suppliers LIMIT 1").ConfigureAwait(false);
         if (count == 0)
         {
-            await conn.ExecuteAsync("INSERT INTO Invoices (Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes) VALUES (@Id, @Serial, @Date, @Sup, @Pay, '')",
-                new { Id = invoiceId.ToString(), Serial = "INV-001", Date = DateOnly.FromDateTime(DateTime.Today).ToString("yyyy-MM-dd"), Sup = supplierId, Pay = payId }).ConfigureAwait(false);
+            await conn.ExecuteAsync(
+                "INSERT INTO Invoices (Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes) VALUES (@Id, @Serial, @Date, @Sup, @Pay, '')",
+                new
+                {
+                    Id = invoiceId.ToString(),
+                    Serial = "INV-001",
+                    Date = DateOnly.FromDateTime(DateTime.Today).ToString("yyyy-MM-dd"),
+                    Sup = supplierId.ToString(),
+                    Pay = payId.ToString()
+                }).ConfigureAwait(false);
         }
         else
         {
@@ -88,8 +104,15 @@ public static class SeedDataService
         count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM InvoiceItems").ConfigureAwait(false);
         if (count == 0)
         {
-            await conn.ExecuteAsync("INSERT INTO InvoiceItems (Id, InvoiceId, ProductId, Quantity, UnitId, UnitPriceNet, VatRatePercent) VALUES (@Id, @InvId, @ProdId, 1, @UnitId, 100, 27)",
-                new { Id = Guid.NewGuid().ToString(), InvId = invoiceId, ProdId = productId, UnitId = unitId }).ConfigureAwait(false);
+            await conn.ExecuteAsync(
+                "INSERT INTO InvoiceItems (Id, InvoiceId, ProductId, Quantity, UnitId, UnitPriceNet, VatRatePercent) VALUES (@Id, @InvId, @ProdId, 1, @UnitId, 100, 27)",
+                new
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    InvId = invoiceId.ToString(),
+                    ProdId = productId.ToString(),
+                    UnitId = unitId.ToString()
+                }).ConfigureAwait(false);
         }
     }
 }
