@@ -16,7 +16,7 @@ public partial class InvoiceEditorView : Window
         {
             if (DataContext is ViewModels.InvoiceEditorViewModel vm)
             {
-                vm.CancelEdit();
+                vm.CancelByEsc();
             }
             Close();
             e.Handled = true;
@@ -28,6 +28,7 @@ public partial class InvoiceEditorView : Window
         if (DataContext is ViewModels.InvoiceEditorViewModel vm)
         {
             vm.CancelEdit();
+            vm.ExitRequested = true;
         }
         Close();
     }
