@@ -18,7 +18,7 @@ namespace Wrecept
             {
                 ApplyTheme(settings.Theme);
             }
-            catch (IOException)
+            catch
             {
                 ApplyTheme("Light");
             }
