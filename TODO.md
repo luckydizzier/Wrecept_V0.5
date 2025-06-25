@@ -19,4 +19,4 @@
 - [x] Replace in-memory repositories with SQLite implementation and seed demo data.
 - [x] Provide Settings window for theme selection saved to JSON.
 - [x] Document new features and database location.
-- [ ] Capture dark theme invoice screenshot and update README.
+- [~] Remove screenshot placeholders (handled manually).
