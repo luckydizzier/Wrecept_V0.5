@@ -79,6 +79,7 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - Visual Studio 2022 (Community or higher)
 - .NET SDK 8.0+
 - Git for Windows
+- Download `Wrecept-win-x64.exe` from Releases and run
 
 
 ### Clone and Run

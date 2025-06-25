@@ -7,3 +7,4 @@ dotnet restore "$SOLUTION"
 dotnet build "$SOLUTION" -c Release
 
 dotnet test "$SOLUTION"
+dotnet publish Wrecept.csproj -c Release -p:PublishProfile=Win64SelfContained

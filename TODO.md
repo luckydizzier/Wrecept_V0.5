@@ -21,3 +21,4 @@
 - [x] Provide Settings window for theme selection saved to JSON.
 - [x] Document new features and database location.
 - [~] Remove screenshot placeholders (handled manually).
+- [x] Publish single-file executable
