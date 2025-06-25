@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
-    <PackageReference Include="Dapper" Version="2.1.38" />
+    <PackageReference Include="Dapper" Version="2.1.42" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="src/Wrecept.Core/Wrecept.Core.csproj" />
@@ -21,6 +21,7 @@
   <ItemGroup>
     <Compile Remove="tests\**\*.cs" />
     <Compile Remove="src/Wrecept.Core\**\*.cs" />
+    <Compile Remove="src/Wrecept.Core.CoreLib\**\*.cs" />
   </ItemGroup>
 
 </Project>
