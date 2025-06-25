@@ -13,6 +13,7 @@
 - [x] Implement UX failsafe logic for invoice navigation.
 - [ ] Redesign invoice editor layout with summary tables and keyboard flow.
 - [ ] Expose database path helper and log location.
+- [ ] Add global exception handling and in-memory startup fallback.
 - [x] Implement keyboard-navigable menu system.
 - [x] Add filter dialogs for invoice list (date, supplier, product group, product).
 - [x] Implement CRUD views for Supplier and Product master data.
