@@ -21,6 +21,7 @@
 - Add filter dialogs for date, supplier, product group and product.
 - CRUD maintenance for suppliers and products.
 - Settings window for theme and preferences.
+- Specification drafted with agent task list.
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.
