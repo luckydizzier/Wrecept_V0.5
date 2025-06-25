@@ -90,6 +90,8 @@ cd wrecept
 ./setup.sh
 ```
 
+The executable will be created at `bin/Release/net8.0-windows/win-x64/publish/Wrecept.exe`.
+
 ### Testing
 
 Use `./setup.sh` to build and run tests. Manual execution is possible via:
