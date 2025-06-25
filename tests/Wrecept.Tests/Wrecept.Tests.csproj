@@ -23,9 +23,7 @@
     <ProjectReference Include="..\..\src\Wrecept.Core.CoreLib\Wrecept.Core.CoreLib.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\db\schema_v1.sql" Link="db\schema_v1.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="..\..\db\schema_v1.sql" Link="db\schema_v1.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\src\Infrastructure\GuidTypeHandler.cs" LinkBase="Infrastructure" />
