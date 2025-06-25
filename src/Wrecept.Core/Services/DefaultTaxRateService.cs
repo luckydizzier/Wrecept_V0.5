@@ -20,22 +20,28 @@ public class DefaultTaxRateService : ITaxRateService
         _repository = repository;
     }
 
-    public Task<List<TaxRate>> GetAllAsync() => _repository.GetAllAsync();
+    public Task<List<TaxRate>> GetAllAsync() =>
+        ServiceUtil.WrapAsync(_repository.GetAllAsync, "Failed to load tax rates.");
 
-    public Task<TaxRate?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
+    public Task<TaxRate?> GetByIdAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.GetByIdAsync(id), "Failed to load tax rate.");
 
     public async Task SaveAsync(TaxRate entity)
     {
-        if (entity.Id == Guid.Empty)
+        await ServiceUtil.WrapAsync(async () =>
         {
-            entity.Id = Guid.NewGuid();
-            await _repository.AddAsync(entity);
-        }
-        else
-        {
-            await _repository.UpdateAsync(entity);
-        }
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+                await _repository.AddAsync(entity);
+            }
+            else
+            {
+                await _repository.UpdateAsync(entity);
+            }
+        }, "Failed to save tax rate.");
     }
 
-    public Task DeleteAsync(Guid id) => _repository.DeleteAsync(id);
+    public Task DeleteAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.DeleteAsync(id), "Failed to delete tax rate.");
 }

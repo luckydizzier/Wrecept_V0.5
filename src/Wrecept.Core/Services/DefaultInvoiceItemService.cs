@@ -20,22 +20,28 @@ public class DefaultInvoiceItemService : IInvoiceItemService
         _repository = repository;
     }
 
-    public Task<List<InvoiceItem>> GetAllAsync() => _repository.GetAllAsync();
+    public Task<List<InvoiceItem>> GetAllAsync() =>
+        ServiceUtil.WrapAsync(_repository.GetAllAsync, "Failed to load invoice items.");
 
-    public Task<InvoiceItem?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
+    public Task<InvoiceItem?> GetByIdAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.GetByIdAsync(id), "Failed to load invoice item.");
 
     public async Task SaveAsync(InvoiceItem entity)
     {
-        if (entity.Id == Guid.Empty)
+        await ServiceUtil.WrapAsync(async () =>
         {
-            entity.Id = Guid.NewGuid();
-            await _repository.AddAsync(entity);
-        }
-        else
-        {
-            await _repository.UpdateAsync(entity);
-        }
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+                await _repository.AddAsync(entity);
+            }
+            else
+            {
+                await _repository.UpdateAsync(entity);
+            }
+        }, "Failed to save invoice item.");
     }
 
-    public Task DeleteAsync(Guid id) => _repository.DeleteAsync(id);
+    public Task DeleteAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.DeleteAsync(id), "Failed to delete invoice item.");
 }

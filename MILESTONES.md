@@ -23,7 +23,7 @@
 - Settings window for theme and preferences. [Done]
 - Specification drafted with agent task list. [Done]
 - Acceptance no longer requires screenshot inclusion.
-- Global error handling with log file and in-memory fallback.
+- Global error handling with log file and in-memory fallback. [Done]
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.

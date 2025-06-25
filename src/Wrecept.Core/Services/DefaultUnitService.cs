@@ -20,22 +20,28 @@ public class DefaultUnitService : IUnitService
         _repository = repository;
     }
 
-    public Task<List<Unit>> GetAllAsync() => _repository.GetAllAsync();
+    public Task<List<Unit>> GetAllAsync() =>
+        ServiceUtil.WrapAsync(_repository.GetAllAsync, "Failed to load units.");
 
-    public Task<Unit?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
+    public Task<Unit?> GetByIdAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.GetByIdAsync(id), "Failed to load unit.");
 
     public async Task SaveAsync(Unit entity)
     {
-        if (entity.Id == Guid.Empty)
+        await ServiceUtil.WrapAsync(async () =>
         {
-            entity.Id = Guid.NewGuid();
-            await _repository.AddAsync(entity);
-        }
-        else
-        {
-            await _repository.UpdateAsync(entity);
-        }
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+                await _repository.AddAsync(entity);
+            }
+            else
+            {
+                await _repository.UpdateAsync(entity);
+            }
+        }, "Failed to save unit.");
     }
 
-    public Task DeleteAsync(Guid id) => _repository.DeleteAsync(id);
+    public Task DeleteAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.DeleteAsync(id), "Failed to delete unit.");
 }

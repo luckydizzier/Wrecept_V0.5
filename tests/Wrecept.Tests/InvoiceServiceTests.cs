@@ -48,4 +48,28 @@ public class InvoiceServiceTests
 
         Assert.Empty(await repo.GetAllAsync());
     }
+
+
+    private class FailingRepo : IInvoiceRepository
+    {
+        public Task AddAsync(Invoice entity) => throw new InvalidOperationException("fail");
+        public Task DeleteAsync(Guid id) => throw new NotImplementedException();
+        public Task<List<Invoice>> FindAsync(System.Linq.Expressions.Expression<Func<Invoice, bool>> predicate) => throw new NotImplementedException();
+        public Task<List<Invoice>> GetAllAsync() => throw new NotImplementedException();
+        public Task<List<Invoice>> GetByProductGroupIdAsync(Guid groupId) => throw new NotImplementedException();
+        public Task<List<Invoice>> GetByProductIdAsync(Guid productId) => throw new NotImplementedException();
+        public Task<List<Invoice>> GetBySupplierIdAsync(Guid supplierId) => throw new NotImplementedException();
+        public Task<Invoice?> GetByIdAsync(Guid id) => throw new NotImplementedException();
+        public Task UpdateAsync(Invoice entity) => throw new NotImplementedException();
+    }
+
+    [Fact]
+    public async Task SaveAsync_ShouldWrapException_WhenRepositoryFails()
+    {
+        var repo = new FailingRepo();
+        var service = new DefaultInvoiceService(repo);
+        var invoice = new Invoice();
+
+        await Assert.ThrowsAsync<ServiceException>(() => service.SaveAsync(invoice));
+    }
 }

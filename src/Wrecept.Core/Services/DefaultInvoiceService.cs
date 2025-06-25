@@ -24,38 +24,49 @@ public class DefaultInvoiceService : IInvoiceService
         _repository = repository;
     }
 
-    public Task<List<Invoice>> GetAllAsync() => _repository.GetAllAsync();
+    public Task<List<Invoice>> GetAllAsync() =>
+        ServiceUtil.WrapAsync(_repository.GetAllAsync, "Failed to load invoices.");
 
     public Task<List<Invoice>> GetByDateRange(DateOnly? from, DateOnly? to)
     {
-        return _repository.FindAsync(i =>
-            (!from.HasValue || i.IssueDate >= from.Value) &&
-            (!to.HasValue || i.IssueDate <= to.Value));
+        return ServiceUtil.WrapAsync(() => _repository.FindAsync(i =>
+                (!from.HasValue || i.IssueDate >= from.Value) &&
+                (!to.HasValue || i.IssueDate <= to.Value)),
+            "Failed to filter invoices.");
     }
 
     public Task<List<Invoice>> GetBySupplierId(Guid supplierId) =>
-        _repository.GetBySupplierIdAsync(supplierId);
+        ServiceUtil.WrapAsync(() => _repository.GetBySupplierIdAsync(supplierId),
+            "Failed to query invoices by supplier.");
 
     public Task<List<Invoice>> GetByProductGroupId(Guid groupId) =>
-        _repository.GetByProductGroupIdAsync(groupId);
+        ServiceUtil.WrapAsync(() => _repository.GetByProductGroupIdAsync(groupId),
+            "Failed to query invoices by product group.");
 
     public Task<List<Invoice>> GetByProductId(Guid productId) =>
-        _repository.GetByProductIdAsync(productId);
+        ServiceUtil.WrapAsync(() => _repository.GetByProductIdAsync(productId),
+            "Failed to query invoices by product.");
 
-    public Task<Invoice?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
+    public Task<Invoice?> GetByIdAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.GetByIdAsync(id),
+            "Failed to load invoice.");
 
     public async Task SaveAsync(Invoice entity)
     {
-        if (entity.Id == Guid.Empty)
+        await ServiceUtil.WrapAsync(async () =>
         {
-            entity.Id = Guid.NewGuid();
-            await _repository.AddAsync(entity);
-        }
-        else
-        {
-            await _repository.UpdateAsync(entity);
-        }
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+                await _repository.AddAsync(entity);
+            }
+            else
+            {
+                await _repository.UpdateAsync(entity);
+            }
+        }, "Failed to save invoice.");
     }
 
-    public Task DeleteAsync(Guid id) => _repository.DeleteAsync(id);
+    public Task DeleteAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.DeleteAsync(id), "Failed to delete invoice.");
 }

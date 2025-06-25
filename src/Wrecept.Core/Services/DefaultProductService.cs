@@ -20,22 +20,28 @@ public class DefaultProductService : IProductService
         _repository = repository;
     }
 
-    public Task<List<Product>> GetAllAsync() => _repository.GetAllAsync();
+    public Task<List<Product>> GetAllAsync() =>
+        ServiceUtil.WrapAsync(_repository.GetAllAsync, "Failed to load products.");
 
-    public Task<Product?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
+    public Task<Product?> GetByIdAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.GetByIdAsync(id), "Failed to load product.");
 
     public async Task SaveAsync(Product entity)
     {
-        if (entity.Id == Guid.Empty)
+        await ServiceUtil.WrapAsync(async () =>
         {
-            entity.Id = Guid.NewGuid();
-            await _repository.AddAsync(entity);
-        }
-        else
-        {
-            await _repository.UpdateAsync(entity);
-        }
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+                await _repository.AddAsync(entity);
+            }
+            else
+            {
+                await _repository.UpdateAsync(entity);
+            }
+        }, "Failed to save product.");
     }
 
-    public Task DeleteAsync(Guid id) => _repository.DeleteAsync(id);
+    public Task DeleteAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.DeleteAsync(id), "Failed to delete product.");
 }
