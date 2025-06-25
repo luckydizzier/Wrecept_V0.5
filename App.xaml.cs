@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Windows;
 
 namespace Wrecept
@@ -13,7 +14,14 @@ namespace Wrecept
         {
             base.OnStartup(e);
             var settings = Infrastructure.SettingsService.Load();
-            ApplyTheme(settings.Theme);
+            try
+            {
+                ApplyTheme(settings.Theme);
+            }
+            catch (IOException)
+            {
+                ApplyTheme("Light");
+            }
         }
 
         public static void ApplyTheme(string theme)
