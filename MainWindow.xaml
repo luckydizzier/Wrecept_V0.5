@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wrecept"
-        xmlns:viewModels="clr-namespace:Wrecept.ViewModels"
+        xmlns:viewModels="clr-namespace:Wrecept.ViewModels;assembly=Wrecept"
         mc:Ignorable="d"
         Title="Főablak" Height="450" Width="800"
         DataContext="{DynamicResource MainWindowViewModel}"
