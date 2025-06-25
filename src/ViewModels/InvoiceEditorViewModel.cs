@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 
@@ -12,6 +13,11 @@ public partial class InvoiceEditorViewModel : ObservableObject
 {
     private readonly Invoice _original;
     private readonly IInvoiceService _invoiceService;
+
+    public InvoiceSidebarViewModel SidebarViewModel { get; }
+    public InvoiceHeaderViewModel HeaderViewModel { get; }
+    public InvoiceItemsViewModel ItemsViewModel { get; }
+    public InvoiceSummaryViewModel SummaryViewModel { get; }
 
     public ObservableCollection<VatSummary> VatSummaries { get; } = new();
     public GrandTotal GrandTotals { get; private set; } = new(0m, 0m);
@@ -40,6 +46,11 @@ public partial class InvoiceEditorViewModel : ObservableObject
         IsEditMode = isEditMode;
         SaveCommand = new AsyncRelayCommand(SaveAsync);
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
+
+        SidebarViewModel = new InvoiceSidebarViewModel(new ObservableCollection<Invoice>());
+        HeaderViewModel = new InvoiceHeaderViewModel(Invoice, Array.Empty<string>(), Array.Empty<string>());
+        ItemsViewModel = new InvoiceItemsViewModel(Invoice);
+        SummaryViewModel = new InvoiceSummaryViewModel(VatSummaries, GrandTotals);
     }
 
     public void CancelEdit()
@@ -90,3 +101,4 @@ public partial class InvoiceEditorViewModel : ObservableObject
         public string AmountText => string.Empty;
     }
 }
+
