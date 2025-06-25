@@ -22,18 +22,18 @@ public class SqliteProductRepository : IProductRepository
                                 VALUES (@Id, @Name, @GroupId, @TaxRateId, @DefaultUnitId);",
             new
             {
-                entity.Id,
+                Id = entity.Id.ToString(),
                 entity.Name,
-                GroupId = entity.Group.Id,
-                TaxRateId = entity.TaxRate.Id,
-                DefaultUnitId = entity.DefaultUnit.Id
+                GroupId = entity.Group.Id.ToString(),
+                TaxRateId = entity.TaxRate.Id.ToString(),
+                DefaultUnitId = entity.DefaultUnit.Id.ToString()
             });
     }
 
     public async Task DeleteAsync(Guid id)
     {
         await using var conn = _factory.CreateConnection();
-        await conn.ExecuteAsync("DELETE FROM Products WHERE Id = @id", new { id });
+        await conn.ExecuteAsync("DELETE FROM Products WHERE Id = @id", new { id = id.ToString() });
     }
 
     public async Task<List<Product>> FindAsync(Expression<Func<Product, bool>> predicate)
@@ -46,20 +46,28 @@ public class SqliteProductRepository : IProductRepository
     {
         await using var conn = _factory.CreateConnection();
         var rows = await conn.QueryAsync("SELECT Id, Name FROM Products");
-        return rows.Select(r => new Product { Id = r.Id, Name = r.Name, Group = new ProductGroup(), TaxRate = new TaxRate(), DefaultUnit = new Unit() }).ToList();
+        return rows.Select(r => new Product
+        {
+            Id = Guid.Parse(r.Id.ToString()),
+            Name = r.Name,
+            Group = new ProductGroup(),
+            TaxRate = new TaxRate(),
+            DefaultUnit = new Unit()
+        }).ToList();
     }
 
     public async Task<Product?> GetByIdAsync(Guid id)
     {
         await using var conn = _factory.CreateConnection();
-        var row = await conn.QuerySingleOrDefaultAsync("SELECT Id, Name FROM Products WHERE Id = @id", new { id });
+        var row = await conn.QuerySingleOrDefaultAsync("SELECT Id, Name FROM Products WHERE Id = @id", new { id = id.ToString() });
         if (row == null) return null;
-        return new Product { Id = row.Id, Name = row.Name, Group = new ProductGroup(), TaxRate = new TaxRate(), DefaultUnit = new Unit() };
+        return new Product { Id = Guid.Parse(row.Id.ToString()), Name = row.Name, Group = new ProductGroup(), TaxRate = new TaxRate(), DefaultUnit = new Unit() };
     }
 
     public async Task UpdateAsync(Product entity)
     {
         await using var conn = _factory.CreateConnection();
-        await conn.ExecuteAsync(@"UPDATE Products SET Name=@Name WHERE Id=@Id", new { entity.Id, entity.Name });
+        await conn.ExecuteAsync(@"UPDATE Products SET Name=@Name WHERE Id=@Id",
+            new { Id = entity.Id.ToString(), entity.Name });
     }
 }
