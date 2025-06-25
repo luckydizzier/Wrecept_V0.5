@@ -21,7 +21,7 @@
 - Számlák menü: kezelő nézet megnyitása és lista frissítése.
 - Törzsek menü: törzsadat karbantartó nézet.
 - Listák menü: dátum, szállító, termékcsoport és termék szerinti keresés.
-- Súgó menü: súgóablak, névjegy, valamint kilépés.
+- Súgó menü: súgóablak, névjegy, bővítmények és kilépés.
 - Aktív menüben az `Esc` kilépési megerősítést kér.
 
 ### Dátum szűrő dialógus

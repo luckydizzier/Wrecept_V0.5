@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core.CoreLib", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core", "src\Wrecept.Core\Wrecept.Core.csproj", "{D1A3AE8D-E20C-494B-B657-5C9CC8E162E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Plugin.Greeting", "src\Wrecept.Plugin.Greeting\Wrecept.Plugin.Greeting.csproj", "{05E28F95-9E10-4011-843F-312B6EA17384}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept", "Wrecept.csproj", "{4D9D5264-EA07-4104-9BDE-7F68BA258EB5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8C2A7BD7-BDB7-4474-A3F9-A21D25C19AAB}"
@@ -36,14 +38,19 @@ Global
                 {4D9D5264-EA07-4104-9BDE-7F68BA258EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
                 {4D9D5264-EA07-4104-9BDE-7F68BA258EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
                 {4D9D5264-EA07-4104-9BDE-7F68BA258EB5}.Release|Any CPU.Build.0 = Release|Any CPU
+                {05E28F95-9E10-4011-843F-312B6EA17384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {05E28F95-9E10-4011-843F-312B6EA17384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {05E28F95-9E10-4011-843F-312B6EA17384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {05E28F95-9E10-4011-843F-312B6EA17384}.Release|Any CPU.Build.0 = Release|Any CPU
                 {A806E339-743D-43A4-9B80-32FF006828AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A806E339-743D-43A4-9B80-32FF006828AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A806E339-743D-43A4-9B80-32FF006828AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A806E339-743D-43A4-9B80-32FF006828AE}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+                {A806E339-743D-43A4-9B80-32FF006828AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {A806E339-743D-43A4-9B80-32FF006828AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {A806E339-743D-43A4-9B80-32FF006828AE}.Release|Any CPU.Build.0 = Release|Any CPU
+        EndGlobalSection
         GlobalSection(NestedProjects) = preSolution
                 {AD337DCB-D850-4B56-A239-C811434F52D4} = {FEE47EDB-BCD4-4CDF-846A-30A4ABE46034}
                 {D1A3AE8D-E20C-494B-B657-5C9CC8E162E4} = {FEE47EDB-BCD4-4CDF-846A-30A4ABE46034}
+                {05E28F95-9E10-4011-843F-312B6EA17384} = {FEE47EDB-BCD4-4CDF-846A-30A4ABE46034}
                 {A806E339-743D-43A4-9B80-32FF006828AE} = {8C2A7BD7-BDB7-4474-A3F9-A21D25C19AAB}
         EndGlobalSection
 EndGlobal

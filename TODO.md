@@ -5,10 +5,10 @@
 - [ ] Add unit test project using xUnit.
 - [ ] Create setup.sh for build and test automation.
 - [ ] Document build and test procedure.
-- [ ] Define plugin architecture specification.
+- [x] Define plugin architecture specification.
 - [ ] Ensure progress logs stored under docs/progress.
 - [ ] Implement plugin loader in Wrecept.Core.
-- [ ] Provide sample IPlugin implementation.
+- [ ] Provide sample IMenuPlugin implementation.
 - [x] Implement invoice list keyboard navigation and creation flow.
 - [x] Implement UX failsafe logic for invoice navigation.
 - [ ] Redesign invoice editor layout with summary tables and keyboard flow.

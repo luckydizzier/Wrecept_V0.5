@@ -42,6 +42,14 @@
                 <MenuItem Header="Súgó" Command="{Binding OpenHelpViewCommand}" />
                 <MenuItem Header="Névjegy" Command="{Binding OpenAboutDialogCommand}" />
                 <MenuItem Header="Beállítások" Command="{Binding OpenSettingsViewCommand}" />
+                <MenuItem Header="_Bővítmények" ItemsSource="{Binding PluginMenuItems}">
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Header" Value="{Binding Header}" />
+                            <Setter Property="Command" Value="{Binding Command}" />
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                </MenuItem>
                 <Separator />
                 <MenuItem Header="Kilépés" Command="{Binding ExitApplicationCommand}" />
             </MenuItem>

@@ -8,6 +8,7 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - MVVM architecture with clear separation of logic and UI
 - SQLite database storage with local .db file
 - Modular service-agent coordination
+- Optional plugins loaded from the `Plugins` folder
 - Fully keyboard-navigable interface
 - Export capabilities for PDF, CSV, and Excel
 
@@ -89,6 +90,7 @@ iscc installer.iss
 ```
 
 The `publish/` folder will contain the self-contained `Wrecept.exe` and supporting files. The installer output `Output/WreceptInstaller.exe` can be distributed to end users.
+Plugins should be copied to a `Plugins` directory beside `Wrecept.exe`.
 
 
 ### Clone and Run
