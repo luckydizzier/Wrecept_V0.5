@@ -17,6 +17,7 @@
 - [x] Implement keyboard-navigable menu system.
 - [x] Add filter dialogs for invoice list (date, supplier, product group, product).
 - [x] Implement CRUD views for Supplier and Product master data.
+- [x] Refactor CRUD view models using RestorableListViewModel base.
 - [x] Replace in-memory repositories with SQLite implementation and seed demo data.
 - [x] Provide Settings window for theme selection saved to JSON.
 - [x] Document new features and database location.

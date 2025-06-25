@@ -33,6 +33,7 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
         var ordered = items.OrderByDescending(s => s.Id);
         _suppliers = new ObservableCollection<Supplier>(ordered);
         SelectedSupplier = GetDefaultSelection();
+        EnsureValidSelection();
     }
 
     [RelayCommand]
@@ -41,6 +42,7 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
         var supplier = new Supplier { Id = Guid.NewGuid(), Name = "" };
         _suppliers.Add(supplier);
         SelectedSupplier = supplier;
+        EnsureValidSelection();
     }
 
     [RelayCommand]
@@ -57,5 +59,7 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
         if (SelectedSupplier is null) return;
         await _service.DeleteAsync(SelectedSupplier.Id);
         _suppliers.Remove(SelectedSupplier);
+        SelectedSupplier = null;
+        EnsureValidSelection();
     }
 }

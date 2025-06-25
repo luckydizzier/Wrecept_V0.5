@@ -36,6 +36,7 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
         var ordered = items.OrderByDescending(p => p.Id);
         _products = new ObservableCollection<Product>(ordered);
         SelectedProduct = GetDefaultSelection();
+        EnsureValidSelection();
     }
 
     [RelayCommand]
@@ -54,6 +55,7 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
         };
         _products.Add(product);
         SelectedProduct = product;
+        EnsureValidSelection();
     }
 
     [RelayCommand]
@@ -70,5 +72,7 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
         if (SelectedProduct is null) return;
         await _service.DeleteAsync(SelectedProduct.Id);
         _products.Remove(SelectedProduct);
+        SelectedProduct = null;
+        EnsureValidSelection();
     }
 }

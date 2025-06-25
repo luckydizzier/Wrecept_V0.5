@@ -48,14 +48,6 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
     [ObservableProperty]
     private string _statusMessage = string.Empty;
 
-    public void EnsureValidSelection()
-    {
-        if (SelectedInvoice is null && Invoices.Count > 0)
-        {
-            SelectedInvoice = Invoices[^1];
-        }
-    }
-
     public bool MoveSelectionUp()
     {
         if (Invoices.Count == 0)
