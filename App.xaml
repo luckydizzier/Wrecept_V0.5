@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Wrecept;component/Themes/Light.xaml" />
+                <ResourceDictionary Source="/Wrecept;component/Resources/Strings.hu.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
