@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wrecept"
-        xmlns:viewModels="clr-namespace:Wrecept.ViewModels;assembly=Wrecept"
+        xmlns:vm="clr-namespace:Wrecept.ViewModels"
         mc:Ignorable="d"
         Title="Főablak" Height="450" Width="800"
         DataContext="{DynamicResource MainWindowViewModel}"
         PreviewKeyDown="MainWindow_OnPreviewKeyDown">
     <Window.Resources>
-        <viewModels:MainWindowViewModel x:Key="MainWindowViewModel" />
+        <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding ShowOnboardingOverlayCommand}" />
