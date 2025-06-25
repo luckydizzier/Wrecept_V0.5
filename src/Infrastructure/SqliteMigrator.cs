@@ -11,12 +11,12 @@ public static class SqliteMigrator
         var dir = Path.GetDirectoryName(dbPath) ?? string.Empty;
         Directory.CreateDirectory(dir);
         await using var connection = new SqliteConnection($"Data Source={dbPath}");
-        await connection.OpenAsync();
+        await connection.OpenAsync().ConfigureAwait(false);
 
         var schemaPath = Path.Combine(AppContext.BaseDirectory, "db", "schema_v1.sql");
-        var sql = await File.ReadAllTextAsync(schemaPath);
+        var sql = await File.ReadAllTextAsync(schemaPath).ConfigureAwait(false);
         await using var command = connection.CreateCommand();
         command.CommandText = sql;
-        await command.ExecuteNonQueryAsync();
+        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
     }
 }
