@@ -24,5 +24,9 @@
     <Compile Remove="tests\**\*.cs" />
     <Compile Remove="src/Wrecept.Core\**\*.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Include="src\Themes\Light.xaml" />
+    <Page Include="src\Themes\Dark.xaml" />
+  </ItemGroup>
 
 </Project>
