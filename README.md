@@ -41,6 +41,7 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - Local supplier/product master data
 - Validation and confirmation dialogs
 - Light/dark theme support
+- Settings mentés a %AppData%/Wrecept/settings.json fájlba
 - Planned: printing, VAT declaration generation
 
 ### Gyorsbillentyűk

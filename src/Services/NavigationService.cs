@@ -10,9 +10,25 @@ public class NavigationService : INavigationService
         MessageBox.Show("Számlák kezelése – még nincs megvalósítva", "Információ");
     }
 
-    public void ShowMasterDataView()
+    public void ShowSupplierView()
     {
-        MessageBox.Show("Törzsadatok kezelése – még nincs megvalósítva", "Információ");
+        var vm = new Wrecept.ViewModels.SupplierListViewModel(WreceptAppContext.SupplierService);
+        var view = new Wrecept.Views.MasterData.SupplierView { DataContext = vm };
+        view.ShowDialog();
+    }
+
+    public void ShowProductView()
+    {
+        var vm = new Wrecept.ViewModels.ProductListViewModel(WreceptAppContext.ProductService);
+        var view = new Wrecept.Views.MasterData.ProductView { DataContext = vm };
+        view.ShowDialog();
+    }
+
+    public void ShowSettingsView()
+    {
+        var vm = new Wrecept.ViewModels.SettingsViewModel();
+        var view = new Wrecept.Views.Settings.SettingsWindow { DataContext = vm };
+        view.ShowDialog();
     }
 
     public void ShowFilterByDateView(Action<DateOnly?, DateOnly?> applyFilter)
@@ -22,19 +38,25 @@ public class NavigationService : INavigationService
         dlg.ShowDialog();
     }
 
-    public void ShowFilterBySupplierView()
+    public void ShowFilterBySupplierView(Action<Guid?> applyFilter)
     {
-        MessageBox.Show("Szállító alapú keresés – még nincs megvalósítva", "Információ");
+        var vm = new Wrecept.ViewModels.SupplierFilterViewModel(applyFilter, WreceptAppContext.SupplierService);
+        var dlg = new Wrecept.Views.Filters.SupplierFilterDialog { DataContext = vm };
+        dlg.ShowDialog();
     }
 
-    public void ShowFilterByProductGroupView()
+    public void ShowFilterByProductGroupView(Action<Guid?> applyFilter)
     {
-        MessageBox.Show("Termékcsoport keresés – még nincs megvalósítva", "Információ");
+        var vm = new Wrecept.ViewModels.ProductGroupFilterViewModel(applyFilter, WreceptAppContext.ProductGroupService);
+        var dlg = new Wrecept.Views.Filters.ProductGroupFilterDialog { DataContext = vm };
+        dlg.ShowDialog();
     }
 
-    public void ShowFilterByProductView()
+    public void ShowFilterByProductView(Action<Guid?> applyFilter)
     {
-        MessageBox.Show("Termék keresés – még nincs megvalósítva", "Információ");
+        var vm = new Wrecept.ViewModels.ProductFilterViewModel(applyFilter, WreceptAppContext.ProductService);
+        var dlg = new Wrecept.Views.Filters.ProductFilterDialog { DataContext = vm };
+        dlg.ShowDialog();
     }
 
     public void ShowHelpView()

@@ -24,7 +24,8 @@
                 <MenuItem Header="Számlák aktualizálása" Command="{Binding RefreshInvoiceDataCommand}" />
             </MenuItem>
             <MenuItem Header="_Törzsek" InputGestureText="Alt+T">
-                <MenuItem Header="Törzsadatok kezelése" Command="{Binding OpenMasterDataViewCommand}" />
+                <MenuItem Header="Szállítók" Command="{Binding OpenSupplierViewCommand}" />
+                <MenuItem Header="Termékek" Command="{Binding OpenProductViewCommand}" />
             </MenuItem>
             <MenuItem Header="_Listák" InputGestureText="Alt+L">
                 <MenuItem Header="Dátum alapú keresés" Command="{Binding FilterByDateViewCommand}" />
@@ -35,6 +36,7 @@
             <MenuItem Header="_Súgó" InputGestureText="Alt+H">
                 <MenuItem Header="Súgó" Command="{Binding OpenHelpViewCommand}" />
                 <MenuItem Header="Névjegy" Command="{Binding OpenAboutDialogCommand}" />
+                <MenuItem Header="Beállítások" Command="{Binding OpenSettingsViewCommand}" />
                 <Separator />
                 <MenuItem Header="Kilépés" Command="{Binding ExitApplicationCommand}" />
             </MenuItem>

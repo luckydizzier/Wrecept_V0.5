@@ -43,6 +43,24 @@ public class InMemoryInvoiceRepository : IInvoiceRepository
         return Task.FromResult(_storage.Values.ToList());
     }
 
+    public Task<List<Invoice>> GetBySupplierIdAsync(Guid supplierId)
+    {
+        var result = _storage.Values.Where(i => i.Supplier.Id == supplierId).ToList();
+        return Task.FromResult(result);
+    }
+
+    public Task<List<Invoice>> GetByProductGroupIdAsync(Guid groupId)
+    {
+        var result = _storage.Values.Where(i => i.Items.Any(it => it.Product.Group.Id == groupId)).ToList();
+        return Task.FromResult(result);
+    }
+
+    public Task<List<Invoice>> GetByProductIdAsync(Guid productId)
+    {
+        var result = _storage.Values.Where(i => i.Items.Any(it => it.Product.Id == productId)).ToList();
+        return Task.FromResult(result);
+    }
+
     public Task<Invoice?> GetByIdAsync(Guid id)
     {
         _storage.TryGetValue(id, out var entity);

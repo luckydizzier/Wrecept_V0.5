@@ -130,10 +130,17 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void OpenMasterDataView()
+    private void OpenSupplierView()
     {
-        _navigationService.ShowMasterDataView();
-        StatusMessage = "Törzsadatok";
+        _navigationService.ShowSupplierView();
+        StatusMessage = "Szállítók";
+    }
+
+    [RelayCommand]
+    private void OpenProductView()
+    {
+        _navigationService.ShowProductView();
+        StatusMessage = "Termékek";
     }
 
     [RelayCommand]
@@ -146,21 +153,21 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private void FilterBySupplierView()
     {
-        _navigationService.ShowFilterBySupplierView();
+        _navigationService.ShowFilterBySupplierView(ApplySupplierFilter);
         StatusMessage = "Szállító szűrő";
     }
 
     [RelayCommand]
     private void FilterByProductGroupView()
     {
-        _navigationService.ShowFilterByProductGroupView();
+        _navigationService.ShowFilterByProductGroupView(ApplyProductGroupFilter);
         StatusMessage = "Termékcsoport szűrő";
     }
 
     [RelayCommand]
     private void FilterByProductView()
     {
-        _navigationService.ShowFilterByProductView();
+        _navigationService.ShowFilterByProductView(ApplyProductFilter);
         StatusMessage = "Termék szűrő";
     }
 
@@ -176,6 +183,13 @@ public partial class MainWindowViewModel : ObservableObject
     {
         _navigationService.ShowAboutDialog();
         StatusMessage = "Névjegy";
+    }
+
+    [RelayCommand]
+    private void OpenSettingsView()
+    {
+        _navigationService.ShowSettingsView();
+        StatusMessage = "Beállítások";
     }
 
     [RelayCommand]
@@ -196,5 +210,39 @@ public partial class MainWindowViewModel : ObservableObject
         Invoices = new ObservableCollection<Invoice>(result);
         SelectedInvoice = Invoices.FirstOrDefault();
         EnsureValidSelection();
+        StatusMessage = "Szűrő alkalmazva";
+    }
+
+    private async void ApplySupplierFilter(Guid? supplierId)
+    {
+        var result = supplierId.HasValue
+            ? await _invoiceService.GetBySupplierId(supplierId.Value)
+            : await _invoiceService.GetAllAsync();
+        Invoices = new ObservableCollection<Invoice>(result);
+        SelectedInvoice = Invoices.FirstOrDefault();
+        EnsureValidSelection();
+        StatusMessage = "Szűrő alkalmazva";
+    }
+
+    private async void ApplyProductGroupFilter(Guid? groupId)
+    {
+        var result = groupId.HasValue
+            ? await _invoiceService.GetByProductGroupId(groupId.Value)
+            : await _invoiceService.GetAllAsync();
+        Invoices = new ObservableCollection<Invoice>(result);
+        SelectedInvoice = Invoices.FirstOrDefault();
+        EnsureValidSelection();
+        StatusMessage = "Szűrő alkalmazva";
+    }
+
+    private async void ApplyProductFilter(Guid? productId)
+    {
+        var result = productId.HasValue
+            ? await _invoiceService.GetByProductId(productId.Value)
+            : await _invoiceService.GetAllAsync();
+        Invoices = new ObservableCollection<Invoice>(result);
+        SelectedInvoice = Invoices.FirstOrDefault();
+        EnsureValidSelection();
+        StatusMessage = "Szűrő alkalmazva";
     }
 }
