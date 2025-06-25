@@ -3,6 +3,7 @@ namespace Wrecept.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Dapper;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.Services;
@@ -20,6 +21,8 @@ public static class AppContext
         Directory.CreateDirectory(dir);
         DatabasePath = Path.Combine(dir, "wrecept.db");
         Console.WriteLine($"Database path: {DatabasePath}");
+
+        SqlMapper.AddTypeHandler(new GuidTypeHandler());
 
         SqliteMigrator.EnsureCreatedAsync(DatabasePath).GetAwaiter().GetResult();
         var connectionFactory = new SqliteConnectionFactory(DatabasePath);

@@ -20,7 +20,7 @@ public static class SeedDataService
         Guid groupId = Guid.NewGuid();
         if (count == 0)
         {
-            await conn.ExecuteAsync("INSERT INTO ProductGroups (Id, Name) VALUES (@Id, @Name)", new { Id = groupId, Name = "Általános" }).ConfigureAwait(false);
+            await conn.ExecuteAsync("INSERT INTO ProductGroups (Id, Name) VALUES (@Id, @Name)", new { Id = groupId.ToString(), Name = "Általános" }).ConfigureAwait(false);
         }
         else
         {
@@ -31,7 +31,7 @@ public static class SeedDataService
         Guid vatId = Guid.NewGuid();
         if (count == 0)
         {
-            await conn.ExecuteAsync("INSERT INTO TaxRates (Id, Label, Percentage) VALUES (@Id, @Label, @Percentage)", new { Id = vatId, Label = "ÁFA 27%", Percentage = 27 }).ConfigureAwait(false);
+            await conn.ExecuteAsync("INSERT INTO TaxRates (Id, Label, Percentage) VALUES (@Id, @Label, @Percentage)", new { Id = vatId.ToString(), Label = "ÁFA 27%", Percentage = 27 }).ConfigureAwait(false);
         }
         else
         {
@@ -42,7 +42,7 @@ public static class SeedDataService
         Guid unitId = Guid.NewGuid();
         if (count == 0)
         {
-            await conn.ExecuteAsync("INSERT INTO Units (Id, Name, Symbol) VALUES (@Id, @Name, @Symbol)", new { Id = unitId, Name = "darab", Symbol = "db" }).ConfigureAwait(false);
+            await conn.ExecuteAsync("INSERT INTO Units (Id, Name, Symbol) VALUES (@Id, @Name, @Symbol)", new { Id = unitId.ToString(), Name = "darab", Symbol = "db" }).ConfigureAwait(false);
         }
         else
         {
@@ -54,7 +54,7 @@ public static class SeedDataService
         if (count == 0)
         {
             await conn.ExecuteAsync("INSERT INTO Products (Id, Name, ProductGroupId, TaxRateId, DefaultUnitId) VALUES (@Id, @Name, @GroupId, @TaxId, @UnitId)",
-                new { Id = productId, Name = "Teszt termék", GroupId = groupId, TaxId = vatId, UnitId = unitId }).ConfigureAwait(false);
+                new { Id = productId.ToString(), Name = "Teszt termék", GroupId = groupId, TaxId = vatId, UnitId = unitId }).ConfigureAwait(false);
         }
         else
         {
@@ -65,7 +65,7 @@ public static class SeedDataService
         Guid payId = Guid.NewGuid();
         if (count == 0)
         {
-            await conn.ExecuteAsync("INSERT INTO PaymentMethods (Id, Label) VALUES (@Id, @Label)", new { Id = payId, Label = "Készpénz" }).ConfigureAwait(false);
+            await conn.ExecuteAsync("INSERT INTO PaymentMethods (Id, Label) VALUES (@Id, @Label)", new { Id = payId.ToString(), Label = "Készpénz" }).ConfigureAwait(false);
         }
         else
         {
@@ -78,7 +78,7 @@ public static class SeedDataService
         if (count == 0)
         {
             await conn.ExecuteAsync("INSERT INTO Invoices (Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes) VALUES (@Id, @Serial, @Date, @Sup, @Pay, '')",
-                new { Id = invoiceId, Serial = "INV-001", Date = DateOnly.FromDateTime(DateTime.Today).ToString("yyyy-MM-dd"), Sup = supplierId, Pay = payId }).ConfigureAwait(false);
+                new { Id = invoiceId.ToString(), Serial = "INV-001", Date = DateOnly.FromDateTime(DateTime.Today).ToString("yyyy-MM-dd"), Sup = supplierId, Pay = payId }).ConfigureAwait(false);
         }
         else
         {
@@ -89,7 +89,7 @@ public static class SeedDataService
         if (count == 0)
         {
             await conn.ExecuteAsync("INSERT INTO InvoiceItems (Id, InvoiceId, ProductId, Quantity, UnitId, UnitPriceNet, VatRatePercent) VALUES (@Id, @InvId, @ProdId, 1, @UnitId, 100, 27)",
-                new { Id = Guid.NewGuid(), InvId = invoiceId, ProdId = productId, UnitId = unitId }).ConfigureAwait(false);
+                new { Id = Guid.NewGuid().ToString(), InvId = invoiceId, ProdId = productId, UnitId = unitId }).ConfigureAwait(false);
         }
     }
 }
