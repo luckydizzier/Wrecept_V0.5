@@ -24,6 +24,7 @@
 - Specification drafted with agent task list. [Done]
 - Acceptance no longer requires screenshot inclusion.
 - Global error handling with log file and in-memory fallback. [Done]
+- Enhanced SQLite error handling for locked or corrupt database.
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.

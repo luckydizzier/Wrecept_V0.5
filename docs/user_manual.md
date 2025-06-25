@@ -20,5 +20,7 @@ A **Beállítások** ablakban választható ki a Light vagy Dark téma. A beáll
 
 ## Hibakezelés
 Ha az alkalmazás nem tudja elérni a SQLite adatbázist, hibaüzenet jelenik meg,
-majd a program memóriában fut tovább. A részletek az `errors.log` fájlban
-találhatók a `%LOCALAPPDATA%/Wrecept` könyvtárban.
+majd a program memóriában fut tovább. Zárolt fájl esetén a program kéri a másik
+példány bezárását. Sérült adatbázisnál felajánlja az új, üres fájl létrehozását,
+a régit `.bak` kiterjesztéssel megőrzi. Hiányzó fájl automatikusan létrejön. A
+részletek az `errors.log` fájlban találhatók a `%LOCALAPPDATA%/Wrecept` mappában.
