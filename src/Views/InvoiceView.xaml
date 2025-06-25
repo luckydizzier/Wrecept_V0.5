@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <!-- Sidebar -->
         <StackPanel Grid.Column="0" Margin="10" >
-            <TextBox x:Name="SearchBox" x:Uid="Search" PlaceholderText="Keresés számlaszám, dátum…" Margin="0,0,0,10" />
+            <TextBox x:Name="SearchBox" x:Uid="Search" Margin="0,0,0,10" />
             <DatePicker x:Name="FromDate" Margin="0,0,0,5" />
             <DatePicker x:Name="ToDate" Margin="0,0,0,10" />
             <ComboBox x:Name="SupplierFilter" Margin="0,0,0,10" />
