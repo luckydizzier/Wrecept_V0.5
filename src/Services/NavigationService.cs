@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 
 namespace Wrecept.Services;
@@ -14,9 +15,11 @@ public class NavigationService : INavigationService
         MessageBox.Show("Törzsadatok kezelése – még nincs megvalósítva", "Információ");
     }
 
-    public void ShowFilterByDateView()
+    public void ShowFilterByDateView(Action<DateOnly?, DateOnly?> applyFilter)
     {
-        MessageBox.Show("Dátum alapú keresés – még nincs megvalósítva", "Információ");
+        var vm = new Wrecept.ViewModels.DateFilterViewModel(applyFilter);
+        var dlg = new Wrecept.Views.Filters.DateFilterDialog { DataContext = vm };
+        dlg.ShowDialog();
     }
 
     public void ShowFilterBySupplierView()

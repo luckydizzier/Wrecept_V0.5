@@ -19,6 +19,15 @@
 - Listák menü: dátum, szállító, termékcsoport és termék szerinti keresés.
 - Súgó menü: súgóablak, névjegy, valamint kilépés.
 
+### Dátum szűrő dialógus
+1. A "Listák" menüben a **Dátum alapú keresés** pont választása megnyit egy kis
+   ablakot két DatePicker mezővel.
+2. A "Kezdő dátum" és "Záró dátum" mezők Tab sorrendben elérhetők, Enterrel
+   aktiválható a **Szűrés** gomb.
+3. `Esc` bármikor bezárja a dialógust változtatás nélkül.
+4. A Szűrés gomb a kiválasztott tartomány alapján frissíti a számlalistát és a
+   fókuszt visszaadja a főablaknak.
+
 ## Invoice Editor Focus Flow
 1. A nézet betöltésekor a számlalistán a legfrissebb sor aktív.
 2. Tab billentyűvel a fejlécmezőkön lehet végighaladni,

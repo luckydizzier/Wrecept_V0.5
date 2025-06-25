@@ -1,0 +1,26 @@
+<Window x:Class="Wrecept.Views.Filters.DateFilterDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Dátum szűrő" Height="150" Width="300"
+        WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
+        KeyDown="Window_KeyDown">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Kezdő dátum" Margin="0,0,5,5"/>
+        <DatePicker Grid.Row="0" Grid.Column="1" SelectedDate="{Binding FromDate}" TabIndex="0"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Záró dátum" Margin="0,5,5,5"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding ToDate}" TabIndex="1"/>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Szűrés" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="0,0,5,0" />
+            <Button Content="Mégse" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+        </StackPanel>
+    </Grid>
+</Window>
