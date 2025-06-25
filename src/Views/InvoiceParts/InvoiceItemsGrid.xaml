@@ -1,0 +1,23 @@
+<UserControl x:Class="Wrecept.Views.InvoiceParts.InvoiceItemsGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Sor hozzáadása" Command="{Binding AddItemCommand}" Margin="0,0,10,0" />
+            <Button Content="Sor módosítása" Command="{Binding EditItemCommand}" Margin="0,0,10,0" />
+            <Button Content="Sor törlése" Command="{Binding DeleteItemCommand}" />
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding Invoice.Items}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Termék" Binding="{Binding Product.Name}" />
+                <DataGridTextColumn Header="Mennyiség" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Egység" Binding="{Binding Unit.Name}" />
+                <DataGridTextColumn Header="Egységár" Binding="{Binding UnitPriceNet}" />
+                <DataGridTextColumn Header="ÁFA %" Binding="{Binding VatRatePercent}" />
+                <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" />
+                <DataGridTextColumn Header="ÁFA" Binding="{Binding Vat}" />
+                <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

@@ -20,19 +20,14 @@
 - Súgó menü: súgóablak, névjegy, valamint kilépés.
 
 ### Dátum szűrő dialógus
-1. A "Listák" menüben a **Dátum alapú keresés** pont választása megnyit egy kis
-   ablakot két DatePicker mezővel.
-2. A "Kezdő dátum" és "Záró dátum" mezők Tab sorrendben elérhetők, Enterrel
-   aktiválható a **Szűrés** gomb.
+1. A "Listák" menüben a **Dátum alapú keresés** pont választása megnyit egy kis ablakot két DatePicker mezővel.
+2. A "Kezdő dátum" és "Záró dátum" mezők Tab sorrendben elérhetők, Enterrel aktiválható a **Szűrés** gomb.
 3. `Esc` bármikor bezárja a dialógust változtatás nélkül.
-4. A Szűrés gomb a kiválasztott tartomány alapján frissíti a számlalistát és a
-   fókuszt visszaadja a főablaknak.
+4. A Szűrés gomb a kiválasztott tartomány alapján frissíti a számlalistát és a fókuszt visszaadja a főablaknak.
 
 ## Invoice Editor Focus Flow
 1. A nézet betöltésekor a számlalistán a legfrissebb sor aktív.
-2. Tab billentyűvel a fejlécmezőkön lehet végighaladni,
-   majd a tételsoron és az összesítő táblákon.
-3. `Ctrl+S` menti a módosításokat és visszaugrik a listára.
-4. `Esc` bármikor a menüsorra viszi a fókuszt; újabb `Esc` vissza a listára.
-5. Lista elején vagy végén történő navigációnál rövid hangjelzés
-   szólal meg és státusz üzenet jelenik meg.
+2. A szerkesztő négy UserControl-ból áll: **InvoiceSidebar**, **InvoiceHeader**, **InvoiceItemsGrid** és **InvoiceSummary**. Mindegyik saját ViewModelen keresztül kommunikál a fő nézettel.
+3. Tab billentyűvel a fejlécmezőkön lehet végighaladni, majd a tételsoron és az összesítő táblákon.
+4. `Ctrl+S` menti a módosításokat, `Esc` visszalép a listához.
+5. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
