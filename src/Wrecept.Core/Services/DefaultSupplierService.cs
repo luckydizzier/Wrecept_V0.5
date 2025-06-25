@@ -20,22 +20,28 @@ public class DefaultSupplierService : ISupplierService
         _repository = repository;
     }
 
-    public Task<List<Supplier>> GetAllAsync() => _repository.GetAllAsync();
+    public Task<List<Supplier>> GetAllAsync() =>
+        ServiceUtil.WrapAsync(_repository.GetAllAsync, "Failed to load suppliers.");
 
-    public Task<Supplier?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
+    public Task<Supplier?> GetByIdAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.GetByIdAsync(id), "Failed to load supplier.");
 
     public async Task SaveAsync(Supplier entity)
     {
-        if (entity.Id == Guid.Empty)
+        await ServiceUtil.WrapAsync(async () =>
         {
-            entity.Id = Guid.NewGuid();
-            await _repository.AddAsync(entity);
-        }
-        else
-        {
-            await _repository.UpdateAsync(entity);
-        }
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+                await _repository.AddAsync(entity);
+            }
+            else
+            {
+                await _repository.UpdateAsync(entity);
+            }
+        }, "Failed to save supplier.");
     }
 
-    public Task DeleteAsync(Guid id) => _repository.DeleteAsync(id);
+    public Task DeleteAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.DeleteAsync(id), "Failed to delete supplier.");
 }

@@ -20,22 +20,28 @@ public class DefaultPaymentMethodService : IPaymentMethodService
         _repository = repository;
     }
 
-    public Task<List<PaymentMethod>> GetAllAsync() => _repository.GetAllAsync();
+    public Task<List<PaymentMethod>> GetAllAsync() =>
+        ServiceUtil.WrapAsync(_repository.GetAllAsync, "Failed to load payment methods.");
 
-    public Task<PaymentMethod?> GetByIdAsync(Guid id) => _repository.GetByIdAsync(id);
+    public Task<PaymentMethod?> GetByIdAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.GetByIdAsync(id), "Failed to load payment method.");
 
     public async Task SaveAsync(PaymentMethod entity)
     {
-        if (entity.Id == Guid.Empty)
+        await ServiceUtil.WrapAsync(async () =>
         {
-            entity.Id = Guid.NewGuid();
-            await _repository.AddAsync(entity);
-        }
-        else
-        {
-            await _repository.UpdateAsync(entity);
-        }
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+                await _repository.AddAsync(entity);
+            }
+            else
+            {
+                await _repository.UpdateAsync(entity);
+            }
+        }, "Failed to save payment method.");
     }
 
-    public Task DeleteAsync(Guid id) => _repository.DeleteAsync(id);
+    public Task DeleteAsync(Guid id) =>
+        ServiceUtil.WrapAsync(() => _repository.DeleteAsync(id), "Failed to delete payment method.");
 }
