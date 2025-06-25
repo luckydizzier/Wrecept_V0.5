@@ -16,7 +16,7 @@ public partial class SettingsViewModel : ObservableObject
     public SettingsViewModel(ISettingsService service)
     {
         _service = service;
-        var settings = _service.LoadAsync().Result;
+        var settings = _service.LoadAsync().GetAwaiter().GetResult();
         _theme = settings.Theme;
     }
 

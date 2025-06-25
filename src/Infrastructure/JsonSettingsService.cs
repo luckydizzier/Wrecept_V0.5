@@ -24,7 +24,7 @@ public class JsonSettingsService : ISettingsService
         try
         {
             await using var stream = File.OpenRead(_path);
-            var settings = await JsonSerializer.DeserializeAsync<Settings>(stream);
+            var settings = await JsonSerializer.DeserializeAsync<Settings>(stream).ConfigureAwait(false);
             return settings ?? new Settings();
         }
         catch
@@ -36,6 +36,6 @@ public class JsonSettingsService : ISettingsService
     public async Task SaveAsync(Settings settings)
     {
         var json = JsonSerializer.Serialize(settings);
-        await File.WriteAllTextAsync(_path, json);
+        await File.WriteAllTextAsync(_path, json).ConfigureAwait(false);
     }
 }
