@@ -17,11 +17,11 @@
 - Menu system baseline with keyboard access. [Menu System: Implemented baseline]
 
 ## M3.1: Persistence, Filters and Settings
-- Switch to SQLite repositories with schema migration.
-- Add filter dialogs for date, supplier, product group and product.
-- CRUD maintenance for suppliers and products.
-- Settings window for theme and preferences.
-- Specification drafted with agent task list.
+- Switch to SQLite repositories with schema migration. [Done]
+- Add filter dialogs for date, supplier, product group and product. [Done]
+- CRUD maintenance for suppliers and products. [Done]
+- Settings window for theme and preferences. [Done]
+- Specification drafted with agent task list. [Done]
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.

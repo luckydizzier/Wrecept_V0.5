@@ -1,0 +1,47 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
+using Wrecept.Core.Domain;
+using Wrecept.Core.Services;
+
+namespace Wrecept.ViewModels;
+
+public partial class SupplierListViewModel : ObservableObject
+{
+    private readonly ISupplierService _service;
+
+    [ObservableProperty]
+    private ObservableCollection<Supplier> _suppliers = new();
+
+    [ObservableProperty]
+    private Supplier? _selectedSupplier;
+
+    public SupplierListViewModel(ISupplierService service)
+    {
+        _service = service;
+        _suppliers = new ObservableCollection<Supplier>(_service.GetAllAsync().Result);
+    }
+
+    [RelayCommand]
+    private void Add()
+    {
+        var supplier = new Supplier { Id = Guid.NewGuid(), Name = "" };
+        _suppliers.Add(supplier);
+        SelectedSupplier = supplier;
+    }
+
+    [RelayCommand]
+    private async Task SaveAsync()
+    {
+        if (SelectedSupplier is null) return;
+        await _service.SaveAsync(SelectedSupplier);
+    }
+
+    [RelayCommand]
+    private async Task DeleteAsync()
+    {
+        if (SelectedSupplier is null) return;
+        await _service.DeleteAsync(SelectedSupplier.Id);
+        _suppliers.Remove(SelectedSupplier);
+    }
+}

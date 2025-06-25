@@ -74,6 +74,9 @@ Agents never become runtime components; they only read, create or modify reposit
 | `src/**/*.cs` (non-UI)                | CodeGen-CSharp     |
 | `src/**/*.xaml`                       | CodeGen-XAML       |
 | `src/**/*ViewModel.cs`                | CodeGen-CSharp     |
+| `src/Views/Filters/*`                 | CodeGen-XAML       |
+| `src/Views/MasterData/*`              | CodeGen-XAML       |
+| `src/Views/Settings/*`                | CodeGen-XAML       |
 | `tests/**/*.cs`                       | TestWriter         |
 | `Specs/**/*.md`                       | Architect          |
 | `docs/ui_flow.md`, `docs/themes.md`   | ux_agent           |

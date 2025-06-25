@@ -8,6 +8,7 @@
 ## Initial Setup
 1. Clone the repository.
 2. Run `./setup.sh` to restore, build and test the solution.
+3. A helyi SQLite adatbázis a `%LOCALAPPDATA%/Wrecept/wrecept.db` útvonalon jön létre.
 
 ## Troubleshooting
 - Ensure `dotnet` is available on the PATH.

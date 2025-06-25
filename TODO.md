@@ -14,9 +14,9 @@
 - [ ] Redesign invoice editor layout with summary tables and keyboard flow.
 - [ ] Expose database path helper and log location.
 - [x] Implement keyboard-navigable menu system.
-- [ ] Add filter dialogs for invoice list (date, supplier, product group, product).
-- [ ] Implement CRUD views for Supplier and Product master data.
-- [ ] Replace in-memory repositories with SQLite implementation and seed demo data.
-- [ ] Provide Settings window for theme selection saved to JSON.
-- [ ] Document new features and database location.
+- [x] Add filter dialogs for invoice list (date, supplier, product group, product).
+- [x] Implement CRUD views for Supplier and Product master data.
+- [x] Replace in-memory repositories with SQLite implementation and seed demo data.
+- [x] Provide Settings window for theme selection saved to JSON.
+- [x] Document new features and database location.
 - [ ] Capture dark theme invoice screenshot and update README.

@@ -43,6 +43,58 @@ public class SqliteInvoiceRepository : IInvoiceRepository
         return all.AsQueryable().Where(predicate).ToList();
     }
 
+    public async Task<List<Invoice>> GetBySupplierIdAsync(Guid supplierId)
+    {
+        await using var conn = _factory.CreateConnection();
+        var rows = await conn.QueryAsync("SELECT Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes FROM Invoices WHERE SupplierId = @sid", new { sid = supplierId });
+        return rows.Select(r => new Invoice
+        {
+            Id = r.Id,
+            SerialNumber = r.SerialNumber,
+            IssueDate = DateOnly.Parse(r.IssueDate),
+            Supplier = new Supplier { Id = r.SupplierId, Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = r.PaymentMethodId, Label = string.Empty },
+            Notes = r.Notes ?? string.Empty
+        }).ToList();
+    }
+
+    public async Task<List<Invoice>> GetByProductGroupIdAsync(Guid groupId)
+    {
+        await using var conn = _factory.CreateConnection();
+        var rows = await conn.QueryAsync(@"SELECT i.Id, i.SerialNumber, i.IssueDate, i.SupplierId, i.PaymentMethodId, i.Notes
+                                           FROM Invoices i
+                                           JOIN InvoiceItems it ON i.Id = it.InvoiceId
+                                           JOIN Products p ON it.ProductId = p.Id
+                                           WHERE p.ProductGroupId = @gid", new { gid = groupId });
+        return rows.Select(r => new Invoice
+        {
+            Id = r.Id,
+            SerialNumber = r.SerialNumber,
+            IssueDate = DateOnly.Parse(r.IssueDate),
+            Supplier = new Supplier { Id = r.SupplierId, Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = r.PaymentMethodId, Label = string.Empty },
+            Notes = r.Notes ?? string.Empty
+        }).Distinct().ToList();
+    }
+
+    public async Task<List<Invoice>> GetByProductIdAsync(Guid productId)
+    {
+        await using var conn = _factory.CreateConnection();
+        var rows = await conn.QueryAsync(@"SELECT i.Id, i.SerialNumber, i.IssueDate, i.SupplierId, i.PaymentMethodId, i.Notes
+                                           FROM Invoices i
+                                           JOIN InvoiceItems it ON i.Id = it.InvoiceId
+                                           WHERE it.ProductId = @pid", new { pid = productId });
+        return rows.Select(r => new Invoice
+        {
+            Id = r.Id,
+            SerialNumber = r.SerialNumber,
+            IssueDate = DateOnly.Parse(r.IssueDate),
+            Supplier = new Supplier { Id = r.SupplierId, Name = string.Empty },
+            PaymentMethod = new PaymentMethod { Id = r.PaymentMethodId, Label = string.Empty },
+            Notes = r.Notes ?? string.Empty
+        }).Distinct().ToList();
+    }
+
     public async Task<List<Invoice>> GetAllAsync()
     {
         await using var conn = _factory.CreateConnection();
