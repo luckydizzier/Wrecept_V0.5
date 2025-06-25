@@ -21,17 +21,15 @@ public static class AppContext
         DatabasePath = Path.Combine(dir, "wrecept.db");
         Console.WriteLine($"Database path: {DatabasePath}");
 
-        var seedInvoices = new[]
-        {
-            new Wrecept.Core.Domain.Invoice { Id = Guid.NewGuid(), SerialNumber = "INV-001", IssueDate = DateOnly.FromDateTime(DateTime.Today) },
-            new Wrecept.Core.Domain.Invoice { Id = Guid.NewGuid(), SerialNumber = "INV-002", IssueDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-1)) }
-        };
+        SqliteMigrator.EnsureCreatedAsync(DatabasePath).GetAwaiter().GetResult();
+        var connectionFactory = new SqliteConnectionFactory(DatabasePath);
+        SeedDataService.SeedAsync(connectionFactory).GetAwaiter().GetResult();
 
-        var invoiceRepo = new InMemoryInvoiceRepository(seedInvoices);
+        var invoiceRepo = new SqliteInvoiceRepository(connectionFactory);
         var invoiceItemRepo = new InMemoryInvoiceItemRepository();
-        var productRepo = new InMemoryProductRepository();
+        var productRepo = new SqliteProductRepository(connectionFactory);
         var productGroupRepo = new InMemoryProductGroupRepository();
-        var supplierRepo = new InMemorySupplierRepository();
+        var supplierRepo = new SqliteSupplierRepository(connectionFactory);
         var paymentMethodRepo = new InMemoryPaymentMethodRepository();
         var taxRateRepo = new InMemoryTaxRateRepository();
         var unitRepo = new InMemoryUnitRepository();
