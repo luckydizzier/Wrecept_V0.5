@@ -14,6 +14,7 @@ namespace Wrecept
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Infrastructure.AppContext.Initialize();
             var settings = Infrastructure.AppContext.SettingsService.LoadAsync().GetAwaiter().GetResult();
             try
             {
