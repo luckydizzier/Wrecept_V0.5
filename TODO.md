@@ -14,6 +14,7 @@
 - [ ] Redesign invoice editor layout with summary tables and keyboard flow.
 - [ ] Expose database path helper and log location.
 - [x] Add global exception handling and in-memory startup fallback.
+- [ ] Enhance SQLite error handling (locked file, corruption recovery, missing file).
 - [x] Implement keyboard-navigable menu system.
 - [x] Add filter dialogs for invoice list (date, supplier, product group, product).
 - [x] Implement CRUD views for Supplier and Product master data.

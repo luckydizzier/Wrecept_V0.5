@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using Microsoft.Data.Sqlite;
 using Wrecept.Infrastructure;
 using Xunit;
 
@@ -55,6 +56,35 @@ public class AppContextInitializeTests : IDisposable
 
         Assert.False(ok);
         Assert.NotNull(AppContext.LastError);
+    }
+
+    [Fact]
+    public void TryRecoverDatabase_ShouldRecreate_WhenCorrupt()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        var dbDir = Path.Combine(dir, "Wrecept");
+        Directory.CreateDirectory(dbDir);
+        File.WriteAllText(Path.Combine(dbDir, "wrecept.db"), "bad");
+        Environment.SetEnvironmentVariable("LOCALAPPDATA", dir);
+
+        var ok = AppContext.Initialize();
+        Assert.False(ok);
+
+        var recovered = AppContext.TryRecoverDatabase();
+        Assert.True(recovered);
+        Assert.True(File.Exists(Path.Combine(dbDir, "wrecept.db")));
+    }
+
+    [Fact]
+    public void IsDatabaseCorrupt_ShouldDetectErrorCodes()
+    {
+        var corrupt = new SqliteException("c", 11);
+        var notadb = new SqliteException("c", 26);
+        var other = new SqliteException("c", 5);
+
+        Assert.True(AppContext.IsDatabaseCorrupt(corrupt));
+        Assert.True(AppContext.IsDatabaseCorrupt(notadb));
+        Assert.False(AppContext.IsDatabaseCorrupt(other));
     }
 }
 

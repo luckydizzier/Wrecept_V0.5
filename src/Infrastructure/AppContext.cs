@@ -55,6 +55,36 @@ public static class AppContext
         }
     }
 
+    public static bool TryRecoverDatabase()
+    {
+        var backup = DatabasePath + ".bak";
+        try
+        {
+            if (File.Exists(DatabasePath))
+            {
+                File.Copy(DatabasePath, backup, true);
+                File.Delete(DatabasePath);
+            }
+            SqliteMigrator.EnsureCreatedAsync(DatabasePath).GetAwaiter().GetResult();
+            var factory = new SqliteConnectionFactory(DatabasePath);
+            SeedDataService.SeedAsync(factory).GetAwaiter().GetResult();
+            SetupSqliteServices(factory);
+            LastError = null;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Recovery failed: {ex.Message}");
+            LastError = ex;
+            SetupInMemoryServices();
+            return false;
+        }
+    }
+
+    public static bool IsDatabaseLocked(SqliteException ex) => ex.SqliteErrorCode is 5 or 6;
+
+    public static bool IsDatabaseCorrupt(SqliteException ex) => ex.SqliteErrorCode is 11 or 26;
+
     public static IInvoiceService InvoiceService { get; private set; } = null!;
     public static IInvoiceItemService InvoiceItemService { get; private set; } = null!;
     public static IProductService ProductService { get; private set; } = null!;

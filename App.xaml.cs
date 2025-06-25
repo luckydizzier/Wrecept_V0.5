@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using Microsoft.Data.Sqlite;
 using Wrecept.Infrastructure;
 
 namespace Wrecept
@@ -19,12 +20,36 @@ namespace Wrecept
             SetupGlobalHandlers();
 
             var ok = Infrastructure.AppContext.Initialize();
-            if (!ok && Infrastructure.AppContext.LastError is not null)
+            if (!ok && Infrastructure.AppContext.LastError is SqliteException se)
             {
-                LogException(Infrastructure.AppContext.LastError);
-                MessageBox.Show(
-                    "A SQLite adatbázis nem elérhető, az adatok nem kerülnek mentésre.",
-                    "Indítási hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                LogException(se);
+                if (Infrastructure.AppContext.IsDatabaseLocked(se))
+                {
+                    MessageBox.Show(
+                        "A SQLite adatbázis zárolt. Zárd be a másik példányt vagy fájlt.",
+                        "Adatbázis zárolva", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (Infrastructure.AppContext.IsDatabaseCorrupt(se))
+                {
+                    var dialog = new KeyboardConfirmDialog(
+                        "Adatbázis sérült. Újra legyen létrehozva? (I: Igen, N: Nem)");
+                    if (dialog.ShowDialog() == true && Infrastructure.AppContext.TryRecoverDatabase())
+                    {
+                        ok = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "A SQLite adatbázis nem elérhető, az adatok nem kerülnek mentésre.",
+                            "Indítási hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "A SQLite adatbázis nem elérhető, az adatok nem kerülnek mentésre.",
+                        "Indítási hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
 
             var settings = Infrastructure.AppContext.SettingsService.LoadAsync().GetAwaiter().GetResult();
