@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Wrecept.Infrastructure;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 
@@ -23,9 +25,19 @@ public partial class ProductListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void Add()
+    private async Task AddAsync()
     {
-        var product = new Product { Id = Guid.NewGuid(), Name = string.Empty, Group = new ProductGroup(), TaxRate = new TaxRate(), DefaultUnit = new Unit() };
+        var group = (await Infrastructure.AppContext.ProductGroupService.GetAllAsync()).First();
+        var tax = (await Infrastructure.AppContext.TaxRateService.GetAllAsync()).First();
+        var unit = (await Infrastructure.AppContext.UnitService.GetAllAsync()).First();
+        var product = new Product
+        {
+            Id = Guid.NewGuid(),
+            Name = string.Empty,
+            Group = group,
+            TaxRate = tax,
+            DefaultUnit = unit
+        };
         _products.Add(product);
         SelectedProduct = product;
     }

@@ -39,11 +39,11 @@ public static class AppContext
             var invoiceRepo = new SqliteInvoiceRepository(connectionFactory);
             var invoiceItemRepo = new InMemoryInvoiceItemRepository();
             var productRepo = new SqliteProductRepository(connectionFactory);
-            var productGroupRepo = new InMemoryProductGroupRepository();
+            var productGroupRepo = new SqliteProductGroupRepository(connectionFactory);
             var supplierRepo = new SqliteSupplierRepository(connectionFactory);
-            var paymentMethodRepo = new InMemoryPaymentMethodRepository();
-            var taxRateRepo = new InMemoryTaxRateRepository();
-            var unitRepo = new InMemoryUnitRepository();
+            var paymentMethodRepo = new SqlitePaymentMethodRepository(connectionFactory);
+            var taxRateRepo = new SqliteTaxRateRepository(connectionFactory);
+            var unitRepo = new SqliteUnitRepository(connectionFactory);
 
             InvoiceService = new DefaultInvoiceService(invoiceRepo);
             InvoiceItemService = new DefaultInvoiceItemService(invoiceItemRepo);

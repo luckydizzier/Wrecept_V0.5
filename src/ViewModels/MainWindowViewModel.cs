@@ -96,7 +96,16 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private async Task AddInvoiceAsync()
     {
-        var invoice = new Invoice { SerialNumber = $"INV-{Invoices.Count + 1}" };
+        var supplier = (await WreceptAppContext.SupplierService.GetAllAsync()).First();
+        var payment = (await WreceptAppContext.PaymentMethodService.GetAllAsync()).First();
+        var invoice = new Invoice
+        {
+            SerialNumber = $"INV-{Invoices.Count + 1}",
+            IssueDate = DateOnly.FromDateTime(DateTime.Today),
+            Supplier = supplier,
+            PaymentMethod = payment
+        };
+
         await _invoiceService.SaveAsync(invoice);
         Invoices.Add(invoice);
         SelectedInvoice = invoice;
