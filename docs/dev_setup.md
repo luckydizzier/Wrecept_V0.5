@@ -8,16 +8,15 @@
 ## Initial Setup
 1. Clone the repository.
 2. Run `./setup.sh` to restore, build and test the solution.
-3. A helyi SQLite adatbázis a `%LOCALAPPDATA%/Wrecept/wrecept.db` útvonalon jön létre.
-   A létrehozáshoz szükséges `schema_v1.sql` az alkalmazásba van beágyazva, így
-   külön fájl másolása nem szükséges.
+3. The local SQLite database is created at `%LOCALAPPDATA%/Wrecept/wrecept.db`.
+   The required `schema_v1.sql` is embedded so no extra file is needed.
 
 ## Troubleshooting
 - Ensure `dotnet` is available on the PATH.
 - On first run, give execution permission to the script: `chmod +x setup.sh`.
 - If tests fail, clear the `bin` and `obj` folders and rerun the script.
-- Ha a főablak nem jelenik meg indításkor, ellenőrizd az `errors.log` fájlt a
-  `%LOCALAPPDATA%/Wrecept` mappában. A hibás `settings.json` automatikusan
-  ignorálásra kerül, az adatbázis törlése általában nem szükséges.
-- Indítási hiba esetén a program `errors.log` fájlba naplóz a `%LOCALAPPDATA%/Wrecept` mappában, 
-  és memóriában folytatja a működést.
+- If the main window doesn't appear on startup, check `errors.log` under
+  `%LOCALAPPDATA%/Wrecept`. An invalid `settings.json` is ignored automatically;
+  deleting the database is rarely necessary.
+- On startup errors the application logs to `errors.log` in `%LOCALAPPDATA%/Wrecept`
+  and continues running in memory.

@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Data.Sqlite;
@@ -62,6 +63,15 @@ namespace Wrecept
                 ApplyTheme("Light");
             }
 
+            try
+            {
+                ApplyLanguage(settings.Language);
+            }
+            catch
+            {
+                ApplyLanguage("hu");
+            }
+
             base.OnStartup(e);
 
             var mainWindow = new MainWindow();
@@ -114,8 +124,26 @@ namespace Wrecept
             {
                 Source = new Uri($"/Wrecept;component/Themes/{theme}.xaml", UriKind.Relative)
             };
-            Application.Current.Resources.MergedDictionaries.Clear();
-            Application.Current.Resources.MergedDictionaries.Add(dict);
+
+            var dictionaries = Application.Current.Resources.MergedDictionaries;
+            var existing = dictionaries.FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("/Themes/"));
+            if (existing != null)
+                dictionaries.Remove(existing);
+            dictionaries.Add(dict);
+        }
+
+        public static void ApplyLanguage(string language)
+        {
+            var dict = new ResourceDictionary
+            {
+                Source = new Uri($"/Wrecept;component/Resources/Strings.{language}.xaml", UriKind.Relative)
+            };
+
+            var dictionaries = Application.Current.Resources.MergedDictionaries;
+            var existing = dictionaries.FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("/Resources/Strings."));
+            if (existing != null)
+                dictionaries.Remove(existing);
+            dictionaries.Add(dict);
         }
     }
 

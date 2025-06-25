@@ -10,7 +10,6 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - Modular service-agent coordination
 - Optional plugins loaded from the `Plugins` folder
 - Fully keyboard-navigable interface
-- Export capabilities for PDF, CSV, and Excel
 
 ---
 
@@ -37,11 +36,10 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - Searchable and filterable invoice list
 - VAT breakdown by percentage and totalization
 - Configurable themes and defaults
-- Export to PDF, XLSX, and CSV
 - Local supplier/product master data
 - Validation and confirmation dialogs
 - Light/dark theme support
-- Settings mentés a %AppData%/Wrecept/settings.json fájlba
+ - Settings saved to %AppData%/Wrecept/settings.json
 - Planned: printing, VAT declaration generation
 
 ### Gyorsbillentyűk
@@ -57,6 +55,7 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - Keyboard macro sequences for power users
 - Advanced validation framework
 - Plugin-based agent extension system
+- Export to PDF, XLSX, and CSV
 
 ---
 
@@ -112,7 +111,9 @@ dotnet test Wrecept.CoreOnly.sln
 ```
 
 See [docs/dev_setup.md](docs/dev_setup.md) for full details.
+Teljes magyar útmutató: [docs/dev_setup_hu.md](docs/dev_setup_hu.md)
 
-Felhasználói útmutató: [docs/user_manual.md](docs/user_manual.md)
+Felhasználói útmutató (HU): [docs/user_manual.md](docs/user_manual.md)
+User manual (EN): [docs/user_manual_en.md](docs/user_manual_en.md)
 
 Licensed under the MIT License.

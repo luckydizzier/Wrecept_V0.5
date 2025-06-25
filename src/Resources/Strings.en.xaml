@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="Settings_Title">Settings</sys:String>
+    <sys:String x:Key="Theme_Label">Theme</sys:String>
+    <sys:String x:Key="Save_Button">Save</sys:String>
+    <sys:String x:Key="Cancel_Button">Cancel</sys:String>
+    <sys:String x:Key="Language_Label">Language</sys:String>
+    <sys:String x:Key="DateFilter_Title">Date Filter</sys:String>
+    <sys:String x:Key="StartDate_Label">Start Date</sys:String>
+    <sys:String x:Key="EndDate_Label">End Date</sys:String>
+    <sys:String x:Key="Filter_Button">Filter</sys:String>
+</ResourceDictionary>
