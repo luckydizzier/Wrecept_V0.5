@@ -108,9 +108,27 @@ public partial class MainWindow : Window
             }
             e.Handled = true;
         }
+        else if (e.Key == Key.PageDown)
+        {
+            if (!vm.MovePageDown())
+            {
+                SystemSounds.Beep.Play();
+                vm.StatusMessage = "Lista vége";
+            }
+            e.Handled = true;
+        }
         else if (e.Key == Key.Up)
         {
             if (!vm.MoveSelectionUp())
+            {
+                SystemSounds.Beep.Play();
+                vm.StatusMessage = "Lista teteje";
+            }
+            e.Handled = true;
+        }
+        else if (e.Key == Key.PageUp)
+        {
+            if (!vm.MovePageUp())
             {
                 SystemSounds.Beep.Play();
                 vm.StatusMessage = "Lista teteje";

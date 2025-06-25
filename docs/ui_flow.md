@@ -3,11 +3,12 @@
 ## Invoice List
 - On startup the most recent invoice is selected automatically.
 - Arrow Up/Down moves the selection.
+- PgUp/PgDn mozgatja a kijelölést egy oldalnyit.
 - If the first row is selected and Up is pressed, a confirmation dialog appears asking to create a new invoice.
 - Enter on a row opens the invoice editor in read-only mode.
 - Confirming creation opens the editor in edit mode with empty data.
 - Escape closes the editor or dismisses the confirmation.
-- Repeated Up or Down at the edges plays a beep and keeps the current row.
+- Repeated Up/Down or Page keys at the edges play a beep and keep the current row.
 - Deleting a row selects the last remaining invoice if any.
 - When navigation is blocked a short message appears in the status bar.
 - Selection is clamped within the list after any change.
