@@ -25,6 +25,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public IAsyncRelayCommand SaveCommand { get; }
     public IRelayCommand ExitToListCommand { get; }
     public bool ExitRequested { get; private set; }
+    public bool ExitedByEsc { get; private set; }
     [ObservableProperty]
     private Invoice _invoice;
 
@@ -63,10 +64,18 @@ public partial class InvoiceEditorViewModel : ObservableObject
         };
     }
 
+    public void CancelByEsc()
+    {
+        CancelEdit();
+        ExitedByEsc = true;
+        ExitRequested = true;
+    }
+
     public async Task SaveAsync()
     {
         await _invoiceService.SaveAsync(Invoice);
         ExitRequested = true;
+        ExitedByEsc = false;
     }
 
     public void OnLoaded()
