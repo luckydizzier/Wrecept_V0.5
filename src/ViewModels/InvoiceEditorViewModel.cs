@@ -14,7 +14,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private readonly IInvoiceService _invoiceService;
 
     public ObservableCollection<VatSummary> VatSummaries { get; } = new();
-    public GrandTotal GrandTotals { get; private set; } = new();
+    public GrandTotal GrandTotals { get; private set; } = new(0m, 0m);
 
     public IAsyncRelayCommand SaveCommand { get; }
     public IRelayCommand ExitToListCommand { get; }
