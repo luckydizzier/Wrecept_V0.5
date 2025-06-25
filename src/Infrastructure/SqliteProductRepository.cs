@@ -45,29 +45,45 @@ public class SqliteProductRepository : IProductRepository
     public async Task<List<Product>> GetAllAsync()
     {
         await using var conn = _factory.CreateConnection();
-        var rows = await conn.QueryAsync("SELECT Id, Name FROM Products");
+        var rows = await conn.QueryAsync(@"SELECT Id, Name, ProductGroupId, TaxRateId, DefaultUnitId
+                                         FROM Products");
         return rows.Select(r => new Product
         {
             Id = Guid.Parse(r.Id.ToString()),
             Name = r.Name,
-            Group = new ProductGroup(),
-            TaxRate = new TaxRate(),
-            DefaultUnit = new Unit()
+            Group = new ProductGroup { Id = Guid.Parse(r.ProductGroupId.ToString()), Name = string.Empty },
+            TaxRate = new TaxRate { Id = Guid.Parse(r.TaxRateId.ToString()), Label = string.Empty, Percentage = 0 },
+            DefaultUnit = new Unit { Id = Guid.Parse(r.DefaultUnitId.ToString()), Name = string.Empty, Symbol = string.Empty }
         }).ToList();
     }
 
     public async Task<Product?> GetByIdAsync(Guid id)
     {
         await using var conn = _factory.CreateConnection();
-        var row = await conn.QuerySingleOrDefaultAsync("SELECT Id, Name FROM Products WHERE Id = @id", new { id = id.ToString() });
+        var row = await conn.QuerySingleOrDefaultAsync(@"SELECT Id, Name, ProductGroupId, TaxRateId, DefaultUnitId
+                                                     FROM Products WHERE Id = @id", new { id = id.ToString() });
         if (row == null) return null;
-        return new Product { Id = Guid.Parse(row.Id.ToString()), Name = row.Name, Group = new ProductGroup(), TaxRate = new TaxRate(), DefaultUnit = new Unit() };
+        return new Product
+        {
+            Id = Guid.Parse(row.Id.ToString()),
+            Name = row.Name,
+            Group = new ProductGroup { Id = Guid.Parse(row.ProductGroupId.ToString()), Name = string.Empty },
+            TaxRate = new TaxRate { Id = Guid.Parse(row.TaxRateId.ToString()), Label = string.Empty, Percentage = 0 },
+            DefaultUnit = new Unit { Id = Guid.Parse(row.DefaultUnitId.ToString()), Name = string.Empty, Symbol = string.Empty }
+        };
     }
 
     public async Task UpdateAsync(Product entity)
     {
         await using var conn = _factory.CreateConnection();
-        await conn.ExecuteAsync(@"UPDATE Products SET Name=@Name WHERE Id=@Id",
-            new { Id = entity.Id.ToString(), entity.Name });
+        await conn.ExecuteAsync(@"UPDATE Products SET Name=@Name, ProductGroupId=@GroupId, TaxRateId=@TaxRateId, DefaultUnitId=@DefaultUnitId WHERE Id=@Id",
+            new
+            {
+                Id = entity.Id.ToString(),
+                entity.Name,
+                GroupId = entity.Group.Id.ToString(),
+                TaxRateId = entity.TaxRate.Id.ToString(),
+                DefaultUnitId = entity.DefaultUnit.Id.ToString()
+            });
     }
 }
