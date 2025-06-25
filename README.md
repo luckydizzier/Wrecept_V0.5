@@ -81,6 +81,15 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 - Git for Windows
 - Download `Wrecept-win-x64.exe` from Releases and run
 
+### Installation
+
+```bash
+./publish.sh
+iscc installer.iss
+```
+
+The `publish/` folder will contain the self-contained `Wrecept.exe` and supporting files. The installer output `Output/WreceptInstaller.exe` can be distributed to end users.
+
 
 ### Clone and Run
 

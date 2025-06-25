@@ -22,3 +22,4 @@
 - [x] Document new features and database location.
 - [~] Remove screenshot placeholders (handled manually).
 - [x] Publish single-file executable
+- [x] Generate Windows installer with Inno Setup
