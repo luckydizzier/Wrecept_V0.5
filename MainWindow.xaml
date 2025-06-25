@@ -21,7 +21,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+        <Menu x:Name="MenuBar" Grid.Row="0">
             <MenuItem Header="_Számlák" InputGestureText="Alt+S">
                 <MenuItem Header="Számlák kezelése" Command="{Binding OpenInvoiceListViewCommand}" />
                 <MenuItem Header="Számlák aktualizálása" Command="{Binding RefreshInvoiceDataCommand}" />

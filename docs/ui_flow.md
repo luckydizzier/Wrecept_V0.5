@@ -11,6 +11,8 @@
 - Deleting a row selects the last remaining invoice if any.
 - When navigation is blocked a short message appears in the status bar.
 - Selection is clamped within the list after any change.
+- Üres lista esetén a státuszsorban "Nincs tétel - F2: új hozzáadás" jelenik meg, és a Enter billentyű nem nyit meg semmit.
+- Esc kétszeri lenyomására a fókusz a főmenüre kerül.
 - Az első indításkor megjelenik egy billentyűs súgó, amely F1 segítségével később is előhozható.
 
 ## Menu System

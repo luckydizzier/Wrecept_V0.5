@@ -6,15 +6,25 @@ using Wrecept.Core.Services;
 
 namespace Wrecept.ViewModels;
 
-public partial class SupplierListViewModel : ObservableObject
+public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
 {
     private readonly ISupplierService _service;
 
-    [ObservableProperty]
     private ObservableCollection<Supplier> _suppliers = new();
 
-    [ObservableProperty]
-    private Supplier? _selectedSupplier;
+    protected override IList<Supplier> Items => _suppliers;
+
+    public ObservableCollection<Supplier> Suppliers
+    {
+        get => _suppliers;
+        private set => SetProperty(ref _suppliers, value);
+    }
+
+    public Supplier? SelectedSupplier
+    {
+        get => SelectedItem;
+        set => SelectedItem = value;
+    }
 
     public SupplierListViewModel(ISupplierService service)
     {
@@ -22,7 +32,7 @@ public partial class SupplierListViewModel : ObservableObject
         var items = _service.GetAllAsync().Result;
         var ordered = items.OrderByDescending(s => s.Id);
         _suppliers = new ObservableCollection<Supplier>(ordered);
-        _selectedSupplier = _suppliers.FirstOrDefault();
+        SelectedSupplier = GetDefaultSelection();
     }
 
     [RelayCommand]

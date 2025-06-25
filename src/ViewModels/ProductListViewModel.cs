@@ -8,15 +8,26 @@ using Wrecept.Core.Services;
 
 namespace Wrecept.ViewModels;
 
-public partial class ProductListViewModel : ObservableObject
+public partial class ProductListViewModel : RestorableListViewModel<Product>
 {
     private readonly IProductService _service;
 
-    [ObservableProperty]
     private ObservableCollection<Product> _products = new();
 
-    [ObservableProperty]
-    private Product? _selectedProduct;
+
+    protected override IList<Product> Items => _products;
+
+    public ObservableCollection<Product> Products
+    {
+        get => _products;
+        private set => SetProperty(ref _products, value);
+    }
+
+    public Product? SelectedProduct
+    {
+        get => SelectedItem;
+        set => SelectedItem = value;
+    }
 
     public ProductListViewModel(IProductService service)
     {
@@ -24,7 +35,7 @@ public partial class ProductListViewModel : ObservableObject
         var items = _service.GetAllAsync().Result;
         var ordered = items.OrderByDescending(p => p.Id);
         _products = new ObservableCollection<Product>(ordered);
-        _selectedProduct = _products.FirstOrDefault();
+        SelectedProduct = GetDefaultSelection();
     }
 
     [RelayCommand]
