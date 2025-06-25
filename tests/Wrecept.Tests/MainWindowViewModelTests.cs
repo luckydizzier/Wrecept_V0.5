@@ -70,6 +70,17 @@ public class MainWindowViewModelTests
     }
 
     [Fact]
+    public void DeleteInvoiceCommand_ShouldNotExecuteWithNull()
+    {
+        var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
+        var vm = new MainWindowViewModel(service);
+
+        var canExecute = vm.DeleteInvoiceCommand.CanExecute(null);
+
+        Assert.False(canExecute);
+    }
+
+    [Fact]
     public void EnsureValidSelection_ShouldSelectLastWhenNull()
     {
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());

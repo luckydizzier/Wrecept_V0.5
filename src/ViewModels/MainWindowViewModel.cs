@@ -119,9 +119,14 @@ public partial class MainWindowViewModel : ObservableObject
         EnsureValidSelection();
     }
 
-    [RelayCommand]
-    private async Task DeleteInvoiceAsync(Invoice invoice)
+    private bool CanDeleteInvoice(Invoice? invoice) => invoice is not null;
+
+    [RelayCommand(CanExecute = nameof(CanDeleteInvoice))]
+    private async Task DeleteInvoiceAsync(Invoice? invoice)
     {
+        if (invoice is null)
+            return;
+
         await _invoiceService.DeleteAsync(invoice.Id);
         Invoices.Remove(invoice);
         if (ReferenceEquals(SelectedInvoice, invoice))
