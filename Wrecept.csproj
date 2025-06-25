@@ -23,5 +23,13 @@
     <Compile Remove="src/Wrecept.Core\**\*.cs" />
     <Compile Remove="src/Wrecept.Core.CoreLib\**\*.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Update="src/Themes/Light.xaml">
+      <Link>Themes/Light.xaml</Link>
+    </Page>
+    <Page Update="src/Themes/Dark.xaml">
+      <Link>Themes/Dark.xaml</Link>
+    </Page>
+  </ItemGroup>
 
 </Project>
