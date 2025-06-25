@@ -14,7 +14,7 @@
                 <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,0,0" TabIndex="1">
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,0,0" KeyboardNavigation.TabIndex="1">
             <TextBlock Text="Nettó összesen:"/>
             <TextBlock Text="{Binding GrandTotals.Net}" FontSize="16" Foreground="Yellow"/>
             <TextBlock Text="ÁFA összesen:"/>
