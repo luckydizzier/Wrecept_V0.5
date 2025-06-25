@@ -22,6 +22,7 @@
 - CRUD maintenance for suppliers and products. [Done]
 - Settings window for theme and preferences. [Done]
 - Specification drafted with agent task list. [Done]
+- Acceptance no longer requires screenshot inclusion.
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin.
