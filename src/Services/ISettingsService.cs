@@ -1,3 +1,5 @@
+using Wrecept.Infrastructure;
+
 namespace Wrecept.Services;
 
 public interface ISettingsService
