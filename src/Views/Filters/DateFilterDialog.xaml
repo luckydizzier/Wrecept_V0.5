@@ -19,8 +19,8 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Záró dátum" Margin="0,5,5,5"/>
         <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding ToDate}" TabIndex="1"/>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="Szűrés" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="0,0,5,0" />
-            <Button Content="Mégse" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+            <Button Content="Szűrés" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="0,0,5,0" TabIndex="2" />
+            <Button Content="Mégse" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="3" />
         </StackPanel>
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Input;
+using Wrecept.Infrastructure;
 
 namespace Wrecept.Views.MasterData;
 
@@ -15,6 +16,7 @@ public partial class SupplierView : Window
         if (e.Key == Key.Escape)
         {
             DialogResult = false;
+            Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
         }
         else if (e.Key == Key.Insert)
         {

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FEE47EDB-BCD4-4CDF-846A-30A4ABE46034}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core.CoreLib", "src\Wrecept.Core.CoreLib\Wrecept.Core.CoreLib.csproj", "{AD337DCB-D850-4B56-A239-C811434F52D4}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept.Core", "src\Wrecept.Core\Wrecept.Core.csproj", "{D1A3AE8D-E20C-494B-B657-5C9CC8E162E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrecept", "Wrecept.csproj", "{4D9D5264-EA07-4104-9BDE-7F68BA258EB5}"
@@ -24,8 +26,12 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D1A3AE8D-E20C-494B-B657-5C9CC8E162E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1A3AE8D-E20C-494B-B657-5C9CC8E162E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1A3AE8D-E20C-494B-B657-5C9CC8E162E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {D1A3AE8D-E20C-494B-B657-5C9CC8E162E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
                 {D1A3AE8D-E20C-494B-B657-5C9CC8E162E4}.Release|Any CPU.Build.0 = Release|Any CPU
+                {AD337DCB-D850-4B56-A239-C811434F52D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {AD337DCB-D850-4B56-A239-C811434F52D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {AD337DCB-D850-4B56-A239-C811434F52D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {AD337DCB-D850-4B56-A239-C811434F52D4}.Release|Any CPU.Build.0 = Release|Any CPU
                 {4D9D5264-EA07-4104-9BDE-7F68BA258EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
                 {4D9D5264-EA07-4104-9BDE-7F68BA258EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
                 {4D9D5264-EA07-4104-9BDE-7F68BA258EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,8 +41,9 @@ Global
 		{A806E339-743D-43A4-9B80-32FF006828AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A806E339-743D-43A4-9B80-32FF006828AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D1A3AE8D-E20C-494B-B657-5C9CC8E162E4} = {FEE47EDB-BCD4-4CDF-846A-30A4ABE46034}
-		{A806E339-743D-43A4-9B80-32FF006828AE} = {8C2A7BD7-BDB7-4474-A3F9-A21D25C19AAB}
-	EndGlobalSection
+        GlobalSection(NestedProjects) = preSolution
+                {AD337DCB-D850-4B56-A239-C811434F52D4} = {FEE47EDB-BCD4-4CDF-846A-30A4ABE46034}
+                {D1A3AE8D-E20C-494B-B657-5C9CC8E162E4} = {FEE47EDB-BCD4-4CDF-846A-30A4ABE46034}
+                {A806E339-743D-43A4-9B80-32FF006828AE} = {8C2A7BD7-BDB7-4474-A3F9-A21D25C19AAB}
+        EndGlobalSection
 EndGlobal

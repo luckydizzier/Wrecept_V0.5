@@ -2,6 +2,7 @@
 using System.Data;
 using System.IO;
 using System.Windows;
+using Wrecept.Infrastructure;
 
 namespace Wrecept
 {
@@ -13,7 +14,7 @@ namespace Wrecept
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var settings = Infrastructure.SettingsService.Load();
+            var settings = Infrastructure.AppContext.SettingsService.LoadAsync().GetAwaiter().GetResult();
             try
             {
                 ApplyTheme(settings.Theme);

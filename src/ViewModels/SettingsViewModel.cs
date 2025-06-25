@@ -1,25 +1,29 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Wrecept.Infrastructure;
+using Wrecept.Services;
 using Wrecept;
 
 namespace Wrecept.ViewModels;
 
 public partial class SettingsViewModel : ObservableObject
 {
+    private readonly ISettingsService _service;
+
     [ObservableProperty]
     private string _theme = "Light";
 
-    public SettingsViewModel()
+    public SettingsViewModel(ISettingsService service)
     {
-        var settings = SettingsService.Load();
+        _service = service;
+        var settings = _service.LoadAsync().Result;
         _theme = settings.Theme;
     }
 
     [RelayCommand]
-    private void Save(object window)
+    private async Task SaveAsync(object window)
     {
-        SettingsService.Save(new Settings { Theme = Theme });
+        await _service.SaveAsync(new Settings { Theme = Theme });
         App.ApplyTheme(Theme);
         if (window is System.Windows.Window w)
             w.DialogResult = true;

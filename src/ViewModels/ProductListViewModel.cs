@@ -35,6 +35,7 @@ public partial class ProductListViewModel : ObservableObject
     {
         if (SelectedProduct is null) return;
         await _service.SaveAsync(SelectedProduct);
+        Infrastructure.AppContext.SetStatus("Termék mentve");
     }
 
     [RelayCommand]

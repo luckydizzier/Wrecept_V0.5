@@ -13,3 +13,6 @@ Az **Alt+L** menüben választható ki a Dátum, Szállító, Termékcsoport vag
 
 ## Törzsadat karbantartás
 Az **Alt+T** menüben a Szállítók és Termékek ablakok érhetők el. Új rekord az **Insert**, módosítás mentése az **F2**, törlés a **Del** billentyűvel végezhető.
+
+## Beállítások és Témák
+A **Beállítások** ablakban választható ki a Light vagy Dark téma. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.

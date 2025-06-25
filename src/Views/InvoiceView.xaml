@@ -13,7 +13,8 @@
 
     <DockPanel>
         <views:InvoiceSidebar DockPanel.Dock="Left"
-                              DataContext="{Binding SidebarViewModel}" />
+                              DataContext="{Binding SidebarViewModel}"
+                              TabIndex="0" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -21,11 +22,14 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <views:InvoiceHeader Margin="10"
-                                 DataContext="{Binding HeaderViewModel}" />
+                                 DataContext="{Binding HeaderViewModel}"
+                                 TabIndex="1" />
             <views:InvoiceItemsGrid Grid.Row="1" Margin="10"
-                                    DataContext="{Binding ItemsViewModel}" />
+                                    DataContext="{Binding ItemsViewModel}"
+                                    TabIndex="2" />
             <views:InvoiceSummary Grid.Row="2" Margin="10"
-                                  DataContext="{Binding SummaryViewModel}" />
+                                  DataContext="{Binding SummaryViewModel}"
+                                  TabIndex="3" />
         </Grid>
     </DockPanel>
 </Window>

@@ -7,6 +7,7 @@ using Dapper;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.Services;
+using Wrecept.Infrastructure;
 
 public static class AppContext
 {
@@ -47,6 +48,7 @@ public static class AppContext
         UnitService = new DefaultUnitService(unitRepo);
         DialogService = new KeyboardDialogService();
         NavigationService = new NavigationService();
+        SettingsService = new JsonSettingsService();
 
         _services = new Dictionary<Type, object>
         {
@@ -59,7 +61,8 @@ public static class AppContext
             [typeof(ITaxRateService)] = TaxRateService,
             [typeof(IUnitService)] = UnitService,
             [typeof(IKeyboardDialogService)] = DialogService,
-            [typeof(INavigationService)] = NavigationService
+            [typeof(INavigationService)] = NavigationService,
+            [typeof(ISettingsService)] = SettingsService
         };
     }
 
@@ -73,6 +76,10 @@ public static class AppContext
     public static IUnitService UnitService { get; }
     public static IKeyboardDialogService DialogService { get; }
     public static INavigationService NavigationService { get; }
+    public static ISettingsService SettingsService { get; }
+    public static Action<string>? StatusMessageSetter { get; set; }
+
+    public static void SetStatus(string message) => StatusMessageSetter?.Invoke(message);
 
     public static T GetService<T>() where T : class
     {
