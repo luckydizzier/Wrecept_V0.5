@@ -6,6 +6,8 @@ using System.Linq;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 using Wrecept.Services;
+using Wrecept.Core.Plugins;
+using System.Collections.Generic;
 using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 
 namespace Wrecept.ViewModels;
@@ -15,19 +17,25 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
     private readonly IInvoiceService _invoiceService;
     private readonly INavigationService _navigationService;
 
-    public MainWindowViewModel() : this(WreceptAppContext.InvoiceService, WreceptAppContext.NavigationService)
+    public MainWindowViewModel() : this(WreceptAppContext.InvoiceService, WreceptAppContext.NavigationService, WreceptAppContext.MenuPlugins)
     {
     }
 
-    public MainWindowViewModel(IInvoiceService invoiceService, INavigationService navigationService)
+    public MainWindowViewModel(IInvoiceService invoiceService, INavigationService navigationService, IEnumerable<IMenuPlugin>? plugins = null)
     {
         _invoiceService = invoiceService;
         _navigationService = navigationService;
         _invoices = new ObservableCollection<Invoice>();
+        PluginMenuItems = new ObservableCollection<PluginMenuItemViewModel>();
+        plugins ??= Enumerable.Empty<IMenuPlugin>();
+        foreach (var plugin in plugins)
+            PluginMenuItems.Add(new PluginMenuItemViewModel(plugin));
     }
 
     [ObservableProperty]
     private string _greeting = "Üdvözlet";
+
+    public ObservableCollection<PluginMenuItemViewModel> PluginMenuItems { get; }
 
     private ObservableCollection<Invoice> _invoices;
 

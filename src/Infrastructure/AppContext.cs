@@ -8,6 +8,7 @@ using Microsoft.Data.Sqlite;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.Services;
+using Wrecept.Core.Plugins;
 using Wrecept.Infrastructure;
 
 public static class AppContext
@@ -96,6 +97,8 @@ public static class AppContext
     public static IKeyboardDialogService DialogService { get; private set; } = null!;
     public static INavigationService NavigationService { get; private set; } = null!;
     public static ISettingsService SettingsService { get; private set; } = null!;
+    private static readonly List<IMenuPlugin> _menuPlugins = new();
+    public static IReadOnlyList<IMenuPlugin> MenuPlugins => _menuPlugins;
     public static Action<string>? StatusMessageSetter { get; set; }
 
     public static void SetStatus(string message) => StatusMessageSetter?.Invoke(message);
@@ -119,6 +122,8 @@ public static class AppContext
 
         RegisterServices(invoiceRepo, invoiceItemRepo, productRepo, productGroupRepo,
             supplierRepo, paymentMethodRepo, taxRateRepo, unitRepo);
+
+        LoadMenuPlugins();
     }
 
     private static void SetupInMemoryServices()
@@ -134,6 +139,8 @@ public static class AppContext
 
         RegisterServices(invoiceRepo, invoiceItemRepo, productRepo, productGroupRepo,
             supplierRepo, paymentMethodRepo, taxRateRepo, unitRepo);
+
+        LoadMenuPlugins();
     }
 
     private static void RegisterServices(
@@ -169,5 +176,11 @@ public static class AppContext
         _services[typeof(IKeyboardDialogService)] = DialogService;
         _services[typeof(INavigationService)] = NavigationService;
         _services[typeof(ISettingsService)] = SettingsService;
+    }
+
+    private static void LoadMenuPlugins()
+    {
+        _menuPlugins.Clear();
+        _menuPlugins.AddRange(PluginLoader.LoadPlugins());
     }
 }
