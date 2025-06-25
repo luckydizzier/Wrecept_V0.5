@@ -47,4 +47,60 @@ public class RestorableListViewModelTests
 
         Assert.Equal(b, vm.SelectedInvoice);
     }
+
+    [Fact]
+    public void MovePageDown_ShouldAdvanceByPageSize()
+    {
+        var vm = new DummyVm();
+        for (int i = 0; i < 15; i++)
+            vm.List.Add(new Invoice { Id = Guid.NewGuid() });
+        vm.SelectedInvoice = vm.List[0];
+
+        var moved = vm.MovePageDown(10);
+
+        Assert.True(moved);
+        Assert.Equal(vm.List[10], vm.SelectedInvoice);
+    }
+
+    [Fact]
+    public void MovePageUp_ShouldRetreatByPageSize()
+    {
+        var vm = new DummyVm();
+        for (int i = 0; i < 15; i++)
+            vm.List.Add(new Invoice { Id = Guid.NewGuid() });
+        vm.SelectedInvoice = vm.List[14];
+
+        var moved = vm.MovePageUp(10);
+
+        Assert.True(moved);
+        Assert.Equal(vm.List[4], vm.SelectedInvoice);
+    }
+
+    [Fact]
+    public void MovePageDown_ShouldNotMovePastEnd()
+    {
+        var vm = new DummyVm();
+        for (int i = 0; i < 5; i++)
+            vm.List.Add(new Invoice { Id = Guid.NewGuid() });
+        vm.SelectedInvoice = vm.List[4];
+
+        var moved = vm.MovePageDown(10);
+
+        Assert.False(moved);
+        Assert.Equal(vm.List[4], vm.SelectedInvoice);
+    }
+
+    [Fact]
+    public void MovePageUp_ShouldNotMoveBeforeStart()
+    {
+        var vm = new DummyVm();
+        for (int i = 0; i < 5; i++)
+            vm.List.Add(new Invoice { Id = Guid.NewGuid() });
+        vm.SelectedInvoice = vm.List[0];
+
+        var moved = vm.MovePageUp(10);
+
+        Assert.False(moved);
+        Assert.Equal(vm.List[0], vm.SelectedInvoice);
+    }
 }
