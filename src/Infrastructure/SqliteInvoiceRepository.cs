@@ -22,11 +22,11 @@ public class SqliteInvoiceRepository : IInvoiceRepository
                                 VALUES (@Id, @SerialNumber, @IssueDate, @SupplierId, @PaymentMethodId, @Notes);",
             new
             {
-                entity.Id,
+                Id = entity.Id.ToString(),
                 entity.SerialNumber,
                 IssueDate = entity.IssueDate.ToString("yyyy-MM-dd"),
-                SupplierId = entity.Supplier.Id,
-                PaymentMethodId = entity.PaymentMethod.Id,
+                SupplierId = entity.Supplier.Id.ToString(),
+                PaymentMethodId = entity.PaymentMethod.Id.ToString(),
                 entity.Notes
             });
     }
@@ -34,7 +34,7 @@ public class SqliteInvoiceRepository : IInvoiceRepository
     public async Task DeleteAsync(Guid id)
     {
         await using var conn = _factory.CreateConnection();
-        await conn.ExecuteAsync("DELETE FROM Invoices WHERE Id = @id", new { id });
+        await conn.ExecuteAsync("DELETE FROM Invoices WHERE Id = @id", new { id = id.ToString() });
     }
 
     public async Task<List<Invoice>> FindAsync(Expression<Func<Invoice, bool>> predicate)
@@ -46,7 +46,7 @@ public class SqliteInvoiceRepository : IInvoiceRepository
     public async Task<List<Invoice>> GetBySupplierIdAsync(Guid supplierId)
     {
         await using var conn = _factory.CreateConnection();
-        var rows = await conn.QueryAsync("SELECT Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes FROM Invoices WHERE SupplierId = @sid", new { sid = supplierId });
+        var rows = await conn.QueryAsync("SELECT Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes FROM Invoices WHERE SupplierId = @sid", new { sid = supplierId.ToString() });
         return rows.Select(r => new Invoice
         {
             Id = Guid.Parse(r.Id.ToString()),
@@ -65,7 +65,7 @@ public class SqliteInvoiceRepository : IInvoiceRepository
                                            FROM Invoices i
                                            JOIN InvoiceItems it ON i.Id = it.InvoiceId
                                            JOIN Products p ON it.ProductId = p.Id
-                                           WHERE p.ProductGroupId = @gid", new { gid = groupId });
+                                           WHERE p.ProductGroupId = @gid", new { gid = groupId.ToString() });
         return rows.Select(r => new Invoice
         {
             Id = Guid.Parse(r.Id.ToString()),
@@ -83,7 +83,7 @@ public class SqliteInvoiceRepository : IInvoiceRepository
         var rows = await conn.QueryAsync(@"SELECT i.Id, i.SerialNumber, i.IssueDate, i.SupplierId, i.PaymentMethodId, i.Notes
                                            FROM Invoices i
                                            JOIN InvoiceItems it ON i.Id = it.InvoiceId
-                                           WHERE it.ProductId = @pid", new { pid = productId });
+                                           WHERE it.ProductId = @pid", new { pid = productId.ToString() });
         return rows.Select(r => new Invoice
         {
             Id = Guid.Parse(r.Id.ToString()),
@@ -113,7 +113,7 @@ public class SqliteInvoiceRepository : IInvoiceRepository
     public async Task<Invoice?> GetByIdAsync(Guid id)
     {
         await using var conn = _factory.CreateConnection();
-        var row = await conn.QuerySingleOrDefaultAsync("SELECT Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes FROM Invoices WHERE Id = @id", new { id });
+        var row = await conn.QuerySingleOrDefaultAsync("SELECT Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes FROM Invoices WHERE Id = @id", new { id = id.ToString() });
         if (row == null) return null;
         return new Invoice
         {
@@ -132,11 +132,11 @@ public class SqliteInvoiceRepository : IInvoiceRepository
         await conn.ExecuteAsync(@"UPDATE Invoices SET SerialNumber=@SerialNumber, IssueDate=@IssueDate, SupplierId=@SupplierId, PaymentMethodId=@PaymentMethodId, Notes=@Notes WHERE Id=@Id",
             new
             {
-                entity.Id,
+                Id = entity.Id.ToString(),
                 entity.SerialNumber,
                 IssueDate = entity.IssueDate.ToString("yyyy-MM-dd"),
-                SupplierId = entity.Supplier.Id,
-                PaymentMethodId = entity.PaymentMethod.Id,
+                SupplierId = entity.Supplier.Id.ToString(),
+                PaymentMethodId = entity.PaymentMethod.Id.ToString(),
                 entity.Notes
             });
     }
