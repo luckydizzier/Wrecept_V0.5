@@ -22,3 +22,5 @@
   deleting the database is rarely necessary.
 - On startup errors the application logs to `errors.log` in `%LOCALAPPDATA%/Wrecept`
   and continues running in memory.
+- Settings save or invoice export failures are also logged here with a friendly
+  message shown to the user.

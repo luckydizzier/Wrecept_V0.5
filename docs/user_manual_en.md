@@ -27,3 +27,4 @@ Commands from optional plugins appear under **Help → Plugins**. Copy plugin as
 
 ## Error Handling
 If the SQLite database is unavailable, an error message is shown and the application continues in memory. For a locked file, close the other instance. If the database is corrupted, a new empty file is offered and the old one is kept with `.bak` extension. Missing files are created automatically. See `errors.log` under `%LOCALAPPDATA%/Wrecept` for details.
+Saving settings or exporting an invoice may fail due to file permissions; such errors are logged to the same file and reported with a friendly message.

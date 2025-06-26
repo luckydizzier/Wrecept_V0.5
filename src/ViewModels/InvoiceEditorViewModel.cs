@@ -145,8 +145,27 @@ public partial class InvoiceEditorViewModel : ObservableObject
         if (dlg.ShowDialog() == true)
         {
             var json = System.Text.Json.JsonSerializer.Serialize(Invoice);
-            System.IO.File.WriteAllText(dlg.FileName, json);
+            try
+            {
+                System.IO.File.WriteAllText(dlg.FileName, json);
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                System.Windows.MessageBox.Show(
+                    "A számla exportálása nem sikerült. Részletek az errors.log-ban.",
+                    "Export hiba", System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+            }
         }
+    }
+
+    private static void LogError(Exception ex)
+    {
+        var dir = Infrastructure.AppDirectories.GetWritableAppDataDirectory();
+        var logPath = System.IO.Path.Combine(dir, "errors.log");
+        var line = $"{System.DateTime.UtcNow:o} | {ex}\n";
+        System.IO.File.AppendAllText(logPath, line);
     }
 
     public void OnLoaded()

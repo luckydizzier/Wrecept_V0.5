@@ -44,3 +44,4 @@ majd a program memóriában fut tovább. Zárolt fájl esetén a program kéri a
 példány bezárását. Sérült adatbázisnál felajánlja az új, üres fájl létrehozását,
 a régit `.bak` kiterjesztéssel megőrzi. Hiányzó fájl automatikusan létrejön. A
 részletek az `errors.log` fájlban találhatók a `%LOCALAPPDATA%/Wrecept` mappában.
+Sikertelen beállításmentés vagy számlaexport esetén a hiba ugyanide kerül, és egy üzenet tájékoztat.

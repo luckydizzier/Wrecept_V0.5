@@ -35,6 +35,25 @@ public class JsonSettingsService : ISettingsService
     public async Task SaveAsync(Settings settings)
     {
         var json = JsonSerializer.Serialize(settings);
-        await File.WriteAllTextAsync(_path, json).ConfigureAwait(false);
+        try
+        {
+            await File.WriteAllTextAsync(_path, json).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            LogError(ex);
+            System.Windows.MessageBox.Show(
+                "A beállítások mentése nem sikerült. Részletek az errors.log-ban.",
+                "Mentési hiba", System.Windows.MessageBoxButton.OK,
+                System.Windows.MessageBoxImage.Error);
+        }
+    }
+
+    private static void LogError(Exception ex)
+    {
+        var dir = AppDirectories.GetWritableAppDataDirectory();
+        var logPath = Path.Combine(dir, "errors.log");
+        var line = $"{DateTime.UtcNow:o} | {ex}\n";
+        File.AppendAllText(logPath, line);
     }
 }
