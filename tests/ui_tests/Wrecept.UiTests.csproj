@@ -59,5 +59,6 @@
     <Compile Include="..\..\src\ViewModels\InvoiceSummaryViewModel.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\InlineCreatorViewModel.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\InlineProductCreatorViewModel.cs" LinkBase="ViewModels" />
+    <Compile Include="..\..\src\ViewModels\InlineSupplierCreatorViewModel.cs" LinkBase="ViewModels" />
   </ItemGroup>
 </Project>
