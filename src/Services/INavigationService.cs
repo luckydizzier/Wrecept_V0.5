@@ -1,17 +1,18 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Wrecept.Services;
 
 public interface INavigationService
 {
-    void ShowInvoiceListView();
+    Task ShowInvoiceListViewAsync();
     void ShowSupplierView();
     void ShowProductView();
     void ShowSettingsView();
-    void ShowFilterByDateView(Action<DateOnly?, DateOnly?> applyFilter);
-    void ShowFilterBySupplierView(Action<Guid?> applyFilter);
-    void ShowFilterByProductGroupView(Action<Guid?> applyFilter);
-    void ShowFilterByProductView(Action<Guid?> applyFilter);
+    void ShowFilterByDateView(Func<DateOnly?, DateOnly?, Task> applyFilter);
+    void ShowFilterBySupplierView(Func<Guid?, Task> applyFilter);
+    void ShowFilterByProductGroupView(Func<Guid?, Task> applyFilter);
+    void ShowFilterByProductView(Func<Guid?, Task> applyFilter);
     void ShowHelpView();
     void ShowAboutDialog();
     void ShowOnboardingOverlay();

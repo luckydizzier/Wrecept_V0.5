@@ -12,18 +12,18 @@ public partial class InvoiceHeader : UserControl
         Loaded += (_, _) => SupplierNameBox.Focus();
     }
 
-    private void SupplierNameBox_OnKeyDown(object sender, KeyEventArgs e)
+    private async void SupplierNameBox_OnKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is InvoiceHeaderViewModel vm)
         {
             if ((e.Key == Key.F2 || (e.Key == Key.L && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))))
             {
-                vm.OpenSupplierLookupAsync().GetAwaiter().GetResult();
+                await vm.OpenSupplierLookupAsync();
                 e.Handled = true;
             }
             else if (e.Key == Key.Enter)
             {
-                if (vm.TryOpenSupplierCreator())
+                if (await vm.TryOpenSupplierCreatorAsync())
                     e.Handled = true;
             }
         }

@@ -34,13 +34,14 @@ public class InvoiceHeaderViewModel : ObservableObject
         CalculationModes = calculationModes;
     }
 
-    public bool TryOpenSupplierCreator()
+    public async Task<bool> TryOpenSupplierCreatorAsync()
     {
         var name = Invoice.Supplier.Name.Trim();
         if (string.IsNullOrWhiteSpace(name))
             return false;
 
-        var existing = _supplierService.GetAllAsync().Result
+        var existingList = await _supplierService.GetAllAsync();
+        var existing = existingList
             .Any(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (existing)
             return false;

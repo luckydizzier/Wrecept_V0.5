@@ -2,6 +2,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 
@@ -9,7 +11,7 @@ namespace Wrecept.ViewModels;
 
 public partial class ProductGroupFilterViewModel : ObservableObject
 {
-    private readonly Action<Guid?> _apply;
+    private readonly Func<Guid?, Task> _apply;
     private readonly IProductGroupService _service;
 
     [ObservableProperty]
@@ -18,17 +20,23 @@ public partial class ProductGroupFilterViewModel : ObservableObject
     [ObservableProperty]
     private ProductGroup? _selectedGroup;
 
-    public ProductGroupFilterViewModel(Action<Guid?> apply, IProductGroupService service)
+    public ProductGroupFilterViewModel(Func<Guid?, Task> apply, IProductGroupService service)
     {
         _apply = apply;
         _service = service;
-        _groups = _service.GetAllAsync().Result;
+        _ = LoadGroupsAsync();
+    }
+
+    private async Task LoadGroupsAsync()
+    {
+        Groups = await _service.GetAllAsync();
+        SelectedGroup = Groups.FirstOrDefault();
     }
 
     [RelayCommand]
-    private void Apply(object window)
+    private async Task ApplyAsync(object window)
     {
-        _apply(SelectedGroup?.Id);
+        await _apply(SelectedGroup?.Id);
         if (window is System.Windows.Window w)
             w.DialogResult = true;
     }

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Wrecept.Infrastructure;
 using Wrecept.Services;
 using Wrecept;
+using System.Threading.Tasks;
 
 namespace Wrecept.ViewModels;
 
@@ -20,9 +21,14 @@ public partial class SettingsViewModel : ObservableObject
     public SettingsViewModel(ISettingsService service)
     {
         _service = service;
-        var settings = _service.LoadAsync().GetAwaiter().GetResult();
-        _theme = settings.Theme;
-        _language = settings.Language;
+        _ = LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var settings = await _service.LoadAsync();
+        Theme = settings.Theme;
+        Language = settings.Language;
     }
 
     [RelayCommand]

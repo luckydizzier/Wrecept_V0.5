@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Wrecept.Infrastructure;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
@@ -32,9 +33,14 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
     public ProductListViewModel(IProductService service)
     {
         _service = service;
-        var items = _service.GetAllAsync().Result;
+        _ = LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var items = await _service.GetAllAsync();
         var ordered = items.OrderByDescending(p => p.Id);
-        _products = new ObservableCollection<Product>(ordered);
+        Products = new ObservableCollection<Product>(ordered);
         SelectedProduct = GetDefaultSelection();
         EnsureValidSelection();
     }

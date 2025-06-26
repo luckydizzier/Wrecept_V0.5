@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 
@@ -29,9 +31,14 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
     public SupplierListViewModel(ISupplierService service)
     {
         _service = service;
-        var items = _service.GetAllAsync().Result;
+        _ = LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        var items = await _service.GetAllAsync();
         var ordered = items.OrderByDescending(s => s.Id);
-        _suppliers = new ObservableCollection<Supplier>(ordered);
+        Suppliers = new ObservableCollection<Supplier>(ordered);
         SelectedSupplier = GetDefaultSelection();
         EnsureValidSelection();
     }
