@@ -5,7 +5,7 @@
 - **Alt+T** – Törzsek menü megnyitása
 - **Alt+L** – Listák menü megnyitása
 - **Alt+H** – Súgó menü megnyitása
-- **F1** – Billentyűs útmutató megjelenítése
+- **F1** – Billentyűs útmutató (Súgó → Billentyűk)
 - **F2** vagy **Ctrl+L** – törzsadat kereső felugró ablak
 - **PgUp/PgDn** – lista lapozása
 
@@ -33,10 +33,10 @@ Az egyes bővítmények saját párbeszédet vagy műveletet indíthatnak.
 Részletesebb ismertetés: [plugin_command_bar.md](plugin_command_bar.md).
 
 ## Súgó és Névjegy
-Az **Alt+H** menüben érhető el a Súgó és a Névjegy ablak. A Súgó ablak röviden összefoglalja a dokumentáció helyét, míg a Névjegy a program verzióját mutatja. Mindkét ablak az Esc billentyűvel zárható.
+Az **Alt+H** menüben található a **Billentyűk** pont (F1), a Súgó és a Névjegy ablak. A Billentyűk ablak felsorolja a legfontosabb gyorsbillentyűket. A Súgó röviden összefoglalja a dokumentáció helyét, míg a Névjegy a program verzióját mutatja. Mindhárom ablak az Esc billentyűvel zárható.
 
 ## Beállítások és Témák
-A **Beállítások** ablakban választható ki a Light vagy Dark téma, illetve a felület nyelve. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.
+Az **Alt+H → Beállítások** menüpont nyitja meg a konfigurációs ablakot, ahol a Light vagy Dark téma és az alkalmazás nyelve választható ki. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.
 
 ## Hibakezelés
 Ha az alkalmazás nem tudja elérni a SQLite adatbázist, hibaüzenet jelenik meg,
