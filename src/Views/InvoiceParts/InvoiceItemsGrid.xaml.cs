@@ -22,25 +22,25 @@ public partial class InvoiceItemsGrid : UserControl
         }
     }
 
-    private void ItemsGrid_OnKeyDown(object sender, KeyEventArgs e)
+    private async void ItemsGrid_OnKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is InvoiceItemsViewModel vm)
         {
             if ((e.Key == Key.F2 || (e.Key == Key.L && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))) && ItemsGrid.SelectedIndex == 0)
             {
                 if (ItemsGrid.CurrentColumn.DisplayIndex == 0)
-                    vm.OpenProductLookupAsync().GetAwaiter().GetResult();
+                    await vm.OpenProductLookupAsync();
                 else if (ItemsGrid.CurrentColumn.DisplayIndex == 2)
-                    vm.OpenUnitLookupAsync().GetAwaiter().GetResult();
+                    await vm.OpenUnitLookupAsync();
                 else if (ItemsGrid.CurrentColumn.DisplayIndex == 4)
-                    vm.OpenTaxRateLookupAsync().GetAwaiter().GetResult();
+                    await vm.OpenTaxRateLookupAsync();
                 e.Handled = true;
                 return;
             }
 
             if (e.Key == Key.Enter && ItemsGrid.SelectedIndex == 0 && ItemsGrid.CurrentColumn.DisplayIndex == 0)
             {
-                if (vm.TryOpenProductCreator())
+                if (await vm.TryOpenProductCreatorAsync())
                 {
                     e.Handled = true;
                     return;

@@ -74,13 +74,14 @@ public partial class InvoiceItemsViewModel : ObservableObject
         OnPropertyChanged(nameof(Rows));
     }
 
-    public bool TryOpenProductCreator()
+    public async Task<bool> TryOpenProductCreatorAsync()
     {
         var name = Entry.ProductName.Trim();
         if (string.IsNullOrWhiteSpace(name))
             return false;
 
-        var existing = _productService.GetAllAsync().Result
+        var existingList = await _productService.GetAllAsync();
+        var existing = existingList
             .Any(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (existing)
             return false;

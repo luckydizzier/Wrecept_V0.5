@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 using Wrecept.Services;
@@ -148,9 +149,9 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
     }
 
     [RelayCommand]
-    private void OpenInvoiceListView()
+    private async Task OpenInvoiceListViewAsync()
     {
-        _navigationService.ShowInvoiceListView();
+        await _navigationService.ShowInvoiceListViewAsync();
         StatusMessage = "Számlák kezelése";
     }
 
@@ -178,28 +179,28 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
     [RelayCommand]
     private void FilterByDateView()
     {
-        _navigationService.ShowFilterByDateView(ApplyDateFilter);
+        _navigationService.ShowFilterByDateView(ApplyDateFilterAsync);
         StatusMessage = "Dátum szűrő";
     }
 
     [RelayCommand]
     private void FilterBySupplierView()
     {
-        _navigationService.ShowFilterBySupplierView(ApplySupplierFilter);
+        _navigationService.ShowFilterBySupplierView(ApplySupplierFilterAsync);
         StatusMessage = "Szállító szűrő";
     }
 
     [RelayCommand]
     private void FilterByProductGroupView()
     {
-        _navigationService.ShowFilterByProductGroupView(ApplyProductGroupFilter);
+        _navigationService.ShowFilterByProductGroupView(ApplyProductGroupFilterAsync);
         StatusMessage = "Termékcsoport szűrő";
     }
 
     [RelayCommand]
     private void FilterByProductView()
     {
-        _navigationService.ShowFilterByProductView(ApplyProductFilter);
+        _navigationService.ShowFilterByProductView(ApplyProductFilterAsync);
         StatusMessage = "Termék szűrő";
     }
 
@@ -242,7 +243,7 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
         System.Windows.MessageBox.Show(Greeting, "Köszöntés");
     }
 
-    private async void ApplyDateFilter(DateOnly? from, DateOnly? to)
+    private async Task ApplyDateFilterAsync(DateOnly? from, DateOnly? to)
     {
         var result = await _invoiceService.GetByDateRange(from, to);
         var ordered = result.OrderByDescending(i => i.IssueDate).ThenByDescending(i => i.Id);
@@ -252,7 +253,7 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
         StatusMessage = "Szűrő alkalmazva";
     }
 
-    private async void ApplySupplierFilter(Guid? supplierId)
+    private async Task ApplySupplierFilterAsync(Guid? supplierId)
     {
         var result = supplierId.HasValue
             ? await _invoiceService.GetBySupplierId(supplierId.Value)
@@ -264,7 +265,7 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
         StatusMessage = "Szűrő alkalmazva";
     }
 
-    private async void ApplyProductGroupFilter(Guid? groupId)
+    private async Task ApplyProductGroupFilterAsync(Guid? groupId)
     {
         var result = groupId.HasValue
             ? await _invoiceService.GetByProductGroupId(groupId.Value)
@@ -276,7 +277,7 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
         StatusMessage = "Szűrő alkalmazva";
     }
 
-    private async void ApplyProductFilter(Guid? productId)
+    private async Task ApplyProductFilterAsync(Guid? productId)
     {
         var result = productId.HasValue
             ? await _invoiceService.GetByProductId(productId.Value)

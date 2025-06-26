@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using System.Threading.Tasks;
 using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 
 namespace Wrecept.Services;
@@ -7,9 +8,9 @@ namespace Wrecept.Services;
 public class NavigationService : INavigationService
 {
     protected virtual void ShowDialog(Window view) => view.ShowDialog();
-    public void ShowInvoiceListView()
+    public async Task ShowInvoiceListViewAsync()
     {
-        var invoices = WreceptAppContext.InvoiceService.GetAllAsync().Result;
+        var invoices = await WreceptAppContext.InvoiceService.GetAllAsync();
         var list = new System.Collections.ObjectModel.ObservableCollection<Wrecept.Core.Domain.Invoice>(invoices);
         var current = list.FirstOrDefault() ?? new Wrecept.Core.Domain.Invoice();
         var vm = new Wrecept.ViewModels.InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
@@ -63,7 +64,7 @@ public class NavigationService : INavigationService
         Infrastructure.AppContext.InputLocked = false;
     }
 
-    public void ShowFilterByDateView(Action<DateOnly?, DateOnly?> applyFilter)
+    public void ShowFilterByDateView(Func<DateOnly?, DateOnly?, Task> applyFilter)
     {
         var vm = new Wrecept.ViewModels.DateFilterViewModel(applyFilter);
         var dlg = new Wrecept.Views.Filters.DateFilterDialog
@@ -76,7 +77,7 @@ public class NavigationService : INavigationService
         Infrastructure.AppContext.InputLocked = false;
     }
 
-    public void ShowFilterBySupplierView(Action<Guid?> applyFilter)
+    public void ShowFilterBySupplierView(Func<Guid?, Task> applyFilter)
     {
         var vm = new Wrecept.ViewModels.SupplierFilterViewModel(applyFilter, WreceptAppContext.SupplierService);
         var dlg = new Wrecept.Views.Filters.SupplierFilterDialog
@@ -89,7 +90,7 @@ public class NavigationService : INavigationService
         Infrastructure.AppContext.InputLocked = false;
     }
 
-    public void ShowFilterByProductGroupView(Action<Guid?> applyFilter)
+    public void ShowFilterByProductGroupView(Func<Guid?, Task> applyFilter)
     {
         var vm = new Wrecept.ViewModels.ProductGroupFilterViewModel(applyFilter, WreceptAppContext.ProductGroupService);
         var dlg = new Wrecept.Views.Filters.ProductGroupFilterDialog
@@ -102,7 +103,7 @@ public class NavigationService : INavigationService
         Infrastructure.AppContext.InputLocked = false;
     }
 
-    public void ShowFilterByProductView(Action<Guid?> applyFilter)
+    public void ShowFilterByProductView(Func<Guid?, Task> applyFilter)
     {
         var vm = new Wrecept.ViewModels.ProductFilterViewModel(applyFilter, WreceptAppContext.ProductService);
         var dlg = new Wrecept.Views.Filters.ProductFilterDialog

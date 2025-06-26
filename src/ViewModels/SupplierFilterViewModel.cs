@@ -2,6 +2,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 
@@ -9,7 +11,7 @@ namespace Wrecept.ViewModels;
 
 public partial class SupplierFilterViewModel : ObservableObject
 {
-    private readonly Action<Guid?> _apply;
+    private readonly Func<Guid?, Task> _apply;
     private readonly ISupplierService _service;
 
     [ObservableProperty]
@@ -18,17 +20,23 @@ public partial class SupplierFilterViewModel : ObservableObject
     [ObservableProperty]
     private Supplier? _selectedSupplier;
 
-    public SupplierFilterViewModel(Action<Guid?> apply, ISupplierService service)
+    public SupplierFilterViewModel(Func<Guid?, Task> apply, ISupplierService service)
     {
         _apply = apply;
         _service = service;
-        _suppliers = _service.GetAllAsync().Result;
+        _ = LoadSuppliersAsync();
+    }
+
+    private async Task LoadSuppliersAsync()
+    {
+        Suppliers = await _service.GetAllAsync();
+        SelectedSupplier = Suppliers.FirstOrDefault();
     }
 
     [RelayCommand]
-    private void Apply(object window)
+    private async Task ApplyAsync(object window)
     {
-        _apply(SelectedSupplier?.Id);
+        await _apply(SelectedSupplier?.Id);
         if (window is System.Windows.Window w)
             w.DialogResult = true;
     }

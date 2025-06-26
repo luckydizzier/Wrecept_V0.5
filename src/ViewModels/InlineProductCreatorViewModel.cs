@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Wrecept.ViewModels;
 
@@ -47,13 +49,17 @@ public partial class InlineProductCreatorViewModel : InlineCreatorViewModel<Prod
         _unitService = unitService;
         _taxService = taxService;
         _name = name;
+        _ = LoadLookupDataAsync();
+    }
 
-        _groups = _groupService.GetAllAsync().Result;
-        _units = _unitService.GetAllAsync().Result;
-        _taxRates = _taxService.GetAllAsync().Result;
-        _selectedGroup = _groups.FirstOrDefault();
-        _selectedUnit = _units.FirstOrDefault();
-        _selectedTaxRate = _taxRates.FirstOrDefault();
+    private async Task LoadLookupDataAsync()
+    {
+        Groups = await _groupService.GetAllAsync();
+        Units = await _unitService.GetAllAsync();
+        TaxRates = await _taxService.GetAllAsync();
+        SelectedGroup = Groups.FirstOrDefault();
+        SelectedUnit = Units.FirstOrDefault();
+        SelectedTaxRate = TaxRates.FirstOrDefault();
     }
 
     protected override async Task<Product> CreateEntityAsync()

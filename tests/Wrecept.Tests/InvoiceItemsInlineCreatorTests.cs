@@ -2,13 +2,14 @@ using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 using Wrecept.ViewModels;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace Wrecept.Tests;
 
 public class InvoiceItemsInlineCreatorTests
 {
     [Fact]
-    public void TryOpenProductCreator_ShouldReturnTrue_WhenNameMissing()
+    public async Task TryOpenProductCreator_ShouldReturnTrue_WhenNameMissing()
     {
         var invoice = new Invoice();
         var repo = new Wrecept.Core.Repositories.InMemoryProductRepository();
@@ -20,7 +21,7 @@ public class InvoiceItemsInlineCreatorTests
 
         vm.Entry.ProductName = "NewProd";
 
-        var opened = vm.TryOpenProductCreator();
+        var opened = await vm.TryOpenProductCreatorAsync();
 
         Assert.True(opened);
         Assert.NotNull(vm.ProductCreator);
