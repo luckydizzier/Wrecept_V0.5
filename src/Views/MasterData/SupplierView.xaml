@@ -9,7 +9,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" AutoGenerateColumns="False" TabIndex="0">
+        <DataGrid ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" AutoGenerateColumns="False" CanUserAddRows="False" TabIndex="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{DynamicResource Name_Header}" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="{DynamicResource Address_Header}" Binding="{Binding Address}" Width="*" />
