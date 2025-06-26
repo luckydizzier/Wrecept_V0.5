@@ -1,6 +1,7 @@
 # Fejlesztői környezet beállítása
 
 ## Szükséges eszközök
+- Windows 10 vagy újabb (a buildhez Windows Desktop SDK szükséges)
 - .NET SDK 8.0 vagy újabb
 - SQLite parancssori eszközök
 - Bash shell a `setup.sh` futtatásához
