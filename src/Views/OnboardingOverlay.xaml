@@ -9,12 +9,12 @@
         WindowStartupLocation="CenterOwner">
     <Border Background="White" Opacity="0.9" Padding="{DynamicResource SpacingLarge}">
         <StackPanel>
-            <TextBlock Text="Gyorsbillentyűk" FontWeight="Bold" Margin="{DynamicResource MarginBottomMedium}" FontSize="{DynamicResource BaseFontSize}" />
-            <TextBlock Text="Fel/Le: navigáció" FontSize="{DynamicResource BaseFontSize}" />
-            <TextBlock Text="Enter: megnyitás" FontSize="{DynamicResource BaseFontSize}" />
-            <TextBlock Text="Esc: vissza vagy menü" FontSize="{DynamicResource BaseFontSize}" />
-            <TextBlock Text="F1: súgó" FontSize="{DynamicResource BaseFontSize}" />
-            <Button Content="Bezár" Click="OnClose" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}" TabIndex="0" IsDefault="True" FontSize="{DynamicResource BaseFontSize}" />
+            <TextBlock Text="{DynamicResource Shortcuts_Title}" FontWeight="Bold" Margin="{DynamicResource MarginBottomMedium}" FontSize="{DynamicResource BaseFontSize}" />
+            <TextBlock Text="{DynamicResource Shortcut_Navigate}" FontSize="{DynamicResource BaseFontSize}" />
+            <TextBlock Text="{DynamicResource Shortcut_Open}" FontSize="{DynamicResource BaseFontSize}" />
+            <TextBlock Text="{DynamicResource Shortcut_Back}" FontSize="{DynamicResource BaseFontSize}" />
+            <TextBlock Text="{DynamicResource Shortcut_Help}" FontSize="{DynamicResource BaseFontSize}" />
+            <Button x:Uid="CloseSimple_Button" Content="{DynamicResource CloseSimple_Button}" Click="OnClose" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}" TabIndex="0" IsDefault="True" FontSize="{DynamicResource BaseFontSize}" />
         </StackPanel>
     </Border>
 </Window>

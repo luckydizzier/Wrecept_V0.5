@@ -5,7 +5,7 @@
     <StackPanel Orientation="Horizontal" Margin="{DynamicResource SpacingSmall}">
         <TextBox Text="{Binding Name}" Width="120" Margin="0,0,5,0"/>
         <TextBox Text="{Binding TaxId}" Width="120" Margin="0,0,5,0"/>
-        <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,5,0"/>
-        <Button Content="Mégse" Command="{Binding CancelCommand}"/>
+        <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" Margin="0,0,5,0"/>
+        <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}"/>
     </StackPanel>
 </UserControl>

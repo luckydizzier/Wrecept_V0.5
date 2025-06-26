@@ -7,7 +7,7 @@
         <ComboBox ItemsSource="{Binding Units}" SelectedItem="{Binding SelectedUnit}" Width="80" Margin="0,0,5,0"/>
         <TextBox Text="{Binding UnitPriceNet}" Width="80" Margin="0,0,5,0"/>
         <ComboBox ItemsSource="{Binding TaxRates}" SelectedItem="{Binding SelectedTaxRate}" Width="60" Margin="0,0,5,0"/>
-        <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,5,0"/>
-        <Button Content="Mégse" Command="{Binding CancelCommand}"/>
+        <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" Margin="0,0,5,0"/>
+        <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}"/>
     </StackPanel>
 </UserControl>

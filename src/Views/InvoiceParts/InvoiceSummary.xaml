@@ -8,18 +8,18 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="VatGrid" Grid.Column="0" ItemsSource="{Binding VatSummaries}" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" RowHeight="26" TabIndex="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ÁFA %" Binding="{Binding Rate}" />
-                <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" />
-                <DataGridTextColumn Header="ÁFA" Binding="{Binding Vat}" />
-                <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" />
+                <DataGridTextColumn Header="{DynamicResource VatRate_Header}" Binding="{Binding Rate}" />
+                <DataGridTextColumn Header="{DynamicResource Net_Header}" Binding="{Binding Net}" />
+                <DataGridTextColumn Header="{DynamicResource Vat_Header}" Binding="{Binding Vat}" />
+                <DataGridTextColumn Header="{DynamicResource Gross_Header}" Binding="{Binding Gross}" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Orientation="Vertical" KeyboardNavigation.TabIndex="1" Margin="{DynamicResource MarginLeftLarge}">
-            <TextBlock Text="Nettó összesen:"/>
+            <TextBlock Text="{DynamicResource NetTotal_Label}"/>
             <TextBlock Text="{Binding GrandTotals.Net}" FontSize="{DynamicResource BaseFontSize}" Foreground="Yellow"/>
-            <TextBlock Text="ÁFA összesen:"/>
+            <TextBlock Text="{DynamicResource VatTotal_Label}"/>
             <TextBlock Text="{Binding GrandTotals.Vat}" FontSize="{DynamicResource BaseFontSize}" Foreground="Yellow"/>
-            <TextBlock Text="Bruttó összesen:"/>
+            <TextBlock Text="{DynamicResource GrossTotal_Label}"/>
             <TextBlock Text="{Binding GrandTotals.Gross}" FontSize="{DynamicResource BaseFontSize}" Foreground="Yellow"/>
             <TextBlock Text="{Binding GrandTotals.AmountText}" FontSize="{DynamicResource BaseFontSize}"/>
         </StackPanel>

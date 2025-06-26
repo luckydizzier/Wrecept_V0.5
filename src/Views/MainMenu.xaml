@@ -7,26 +7,26 @@
         <!-- inherits DataContext from usage -->
     </UserControl.Resources>
     <Menu x:Name="MenuBar">
-        <MenuItem Header="_Számlák" InputGestureText="Alt+S">
-            <MenuItem Header="Számlák kezelése" Command="{Binding OpenInvoiceListViewCommand}" />
-            <MenuItem Header="Számlák aktualizálása" Command="{Binding RefreshInvoiceDataCommand}" />
+        <MenuItem Header="{DynamicResource Menu_Invoices}" InputGestureText="Alt+S">
+            <MenuItem Header="{DynamicResource Menu_ManageInvoices}" Command="{Binding OpenInvoiceListViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_RefreshInvoices}" Command="{Binding RefreshInvoiceDataCommand}" />
         </MenuItem>
-        <MenuItem Header="_Törzsek" InputGestureText="Alt+T">
-            <MenuItem Header="Szállítók" Command="{Binding OpenSupplierViewCommand}" />
-            <MenuItem Header="Termékek" Command="{Binding OpenProductViewCommand}" />
+        <MenuItem Header="{DynamicResource Menu_Masters}" InputGestureText="Alt+T">
+            <MenuItem Header="{DynamicResource Menu_Suppliers}" Command="{Binding OpenSupplierViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_Products}" Command="{Binding OpenProductViewCommand}" />
         </MenuItem>
-        <MenuItem Header="_Listák" InputGestureText="Alt+L">
-            <MenuItem Header="Dátum alapú keresés" Command="{Binding FilterByDateViewCommand}" />
-            <MenuItem Header="Szállító alapú keresés" Command="{Binding FilterBySupplierViewCommand}" />
-            <MenuItem Header="Termékcsoport alapú keresés" Command="{Binding FilterByProductGroupViewCommand}" />
-            <MenuItem Header="Termék alapú keresés" Command="{Binding FilterByProductViewCommand}" />
+        <MenuItem Header="{DynamicResource Menu_Lists}" InputGestureText="Alt+L">
+            <MenuItem Header="{DynamicResource Menu_FilterByDate}" Command="{Binding FilterByDateViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_FilterBySupplier}" Command="{Binding FilterBySupplierViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_FilterByProductGroup}" Command="{Binding FilterByProductGroupViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_FilterByProduct}" Command="{Binding FilterByProductViewCommand}" />
         </MenuItem>
-        <MenuItem Header="_Súgó" InputGestureText="Alt+H">
-            <MenuItem Header="Billentyűk" Command="{Binding ShowOnboardingOverlayCommand}" InputGestureText="F1" />
-            <MenuItem Header="Súgó" Command="{Binding OpenHelpViewCommand}" />
-            <MenuItem Header="Névjegy" Command="{Binding OpenAboutDialogCommand}" />
-            <MenuItem Header="Beállítások" Command="{Binding OpenSettingsViewCommand}" />
-            <MenuItem Header="_Bővítmények" ItemsSource="{Binding PluginMenuItems}">
+        <MenuItem Header="{DynamicResource Menu_Help}" InputGestureText="Alt+H">
+            <MenuItem Header="{DynamicResource Menu_Keys}" Command="{Binding ShowOnboardingOverlayCommand}" InputGestureText="F1" />
+            <MenuItem Header="{DynamicResource Menu_HelpWindow}" Command="{Binding OpenHelpViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_About}" Command="{Binding OpenAboutDialogCommand}" />
+            <MenuItem Header="{DynamicResource Menu_Settings}" Command="{Binding OpenSettingsViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_Plugins}" ItemsSource="{Binding PluginMenuItems}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
                         <Setter Property="Header" Value="{Binding Header}" />
@@ -35,7 +35,7 @@
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
             <Separator />
-            <MenuItem Header="Kilépés" Command="{Binding ExitApplicationCommand}" />
+            <MenuItem Header="{DynamicResource Menu_Exit}" Command="{Binding ExitApplicationCommand}" />
         </MenuItem>
     </Menu>
 </UserControl>

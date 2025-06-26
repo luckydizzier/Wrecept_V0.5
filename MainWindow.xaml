@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Wrecept.ViewModels"
         xmlns:views="clr-namespace:Wrecept.Views"
         mc:Ignorable="d"
-        Title="Főablak" WindowStartupLocation="CenterScreen" Height="450" Width="800"
+        Title="{DynamicResource MainWindow_Title}" WindowStartupLocation="CenterScreen" Height="450" Width="800"
         DataContext="{DynamicResource MainWindowViewModel}"
         PreviewKeyDown="MainWindow_OnPreviewKeyDown">
     <Window.InputBindings>
@@ -31,7 +31,7 @@
                   Margin="10"
                   PreviewKeyDown="InvoiceGrid_OnPreviewKeyDown">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Sorszám" Binding="{Binding SerialNumber}" />
+                <DataGridTextColumn Header="{DynamicResource Sequence_Header}" Binding="{Binding SerialNumber}" />
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="3" Margin="10">
@@ -41,8 +41,8 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding StatusMessage}" VerticalAlignment="Center" />
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Új számla" Command="{Binding AddInvoiceCommand}" Margin="0,0,5,0" />
-                <Button Content="Törlés" Command="{Binding DeleteInvoiceCommand}" CommandParameter="{Binding SelectedInvoice}" />
+                <Button x:Uid="NewInvoice_Button" Content="{DynamicResource NewInvoice_Button}" Command="{Binding AddInvoiceCommand}" Margin="0,0,5,0" />
+                <Button x:Uid="Delete_Button" Content="{DynamicResource Delete_Button}" Command="{Binding DeleteInvoiceCommand}" CommandParameter="{Binding SelectedInvoice}" />
             </StackPanel>
         </Grid>
     </Grid>
