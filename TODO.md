@@ -40,4 +40,4 @@
 - [x] Provide initialization logic in InvoiceHeader, InvoiceSidebar, InvoiceItemsGrid, InvoiceSummary views
 - [x] Add unit tests for NavigationService dialogs
 
-- [ ] Implement keyboard-triggered lookup dialogs (F2 or Ctrl+L) for master data fields (product, supplier, product group, unit, tax rate)
+- [x] Implement keyboard-triggered lookup dialogs (F2 or Ctrl+L) for master data fields (product, supplier, product group, unit, tax rate)
