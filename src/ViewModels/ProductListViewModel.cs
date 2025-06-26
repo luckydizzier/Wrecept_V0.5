@@ -48,17 +48,25 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
     [RelayCommand]
     private async Task AddAsync()
     {
-        var group = (await Infrastructure.AppContext.ProductGroupService.GetAllAsync()).First();
-        var tax = (await Infrastructure.AppContext.TaxRateService.GetAllAsync()).First();
-        var unit = (await Infrastructure.AppContext.UnitService.GetAllAsync()).First();
+        var groups = await Infrastructure.AppContext.ProductGroupService.GetAllAsync();
+        var taxes = await Infrastructure.AppContext.TaxRateService.GetAllAsync();
+        var units = await Infrastructure.AppContext.UnitService.GetAllAsync();
+
+        if (!groups.Any() || !taxes.Any() || !units.Any())
+        {
+            Infrastructure.AppContext.SetStatus("Nincs rögzített termékcsoport, adókulcs vagy mértékegység.");
+            return;
+        }
+
         var product = new Product
         {
             Id = Guid.NewGuid(),
             Name = string.Empty,
-            Group = group,
-            TaxRate = tax,
-            DefaultUnit = unit
+            Group = groups.First(),
+            TaxRate = taxes.First(),
+            DefaultUnit = units.First()
         };
+
         _products.Add(product);
         SelectedProduct = product;
         EnsureValidSelection();
