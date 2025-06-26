@@ -5,6 +5,6 @@
     <StackPanel Margin="{DynamicResource SpacingLarge}">
         <TextBlock Text="Wrecept" FontWeight="Bold" FontSize="{DynamicResource BaseFontSize}" />
         <TextBlock Text="Verzió 1.0" Margin="0,5,0,0" />
-        <Button Content="OK" Click="OnClose" HorizontalAlignment="Right" Margin="0,{DynamicResource SpacingMedium},0,0" Width="80"/>
+        <Button Content="OK" Click="OnClose" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopMedium}" Width="80"/>
     </StackPanel>
 </Window>
