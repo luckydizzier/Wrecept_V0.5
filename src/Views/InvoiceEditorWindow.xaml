@@ -12,6 +12,20 @@
     </Window.InputBindings>
 
     <DockPanel>
+        <Menu DockPanel.Dock="Top" x:Name="MenuBar">
+            <MenuItem Header="_Számlák" InputGestureText="Alt+S" />
+            <MenuItem Header="_Törzsek" InputGestureText="Alt+T" />
+            <MenuItem Header="_Listák" InputGestureText="Alt+L" />
+            <MenuItem Header="_Súgó" InputGestureText="Alt+H" />
+        </Menu>
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,5,0" />
+            <Button Content="Nyomtatás" Command="{Binding PrintCommand}" Margin="0,0,5,0" />
+            <Button Content="Export" Command="{Binding ExportCommand}" Margin="0,0,5,0" />
+            <Button Content="Bezárás" Command="{Binding ExitToListCommand}" />
+        </StackPanel>
+
         <ip:InvoiceSidebar DockPanel.Dock="Left"
                               DataContext="{Binding SidebarViewModel}"
                               TabIndex="0" />

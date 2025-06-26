@@ -8,6 +8,9 @@ public partial class InvoiceItemRowViewModel : ObservableObject
     public bool IsPlaceholder { get; init; }
 
     [ObservableProperty]
+    private bool _hasError;
+
+    [ObservableProperty]
     private string _productName = string.Empty;
 
     [ObservableProperty]
@@ -56,5 +59,12 @@ public partial class InvoiceItemRowViewModel : ObservableObject
         UnitName = string.Empty;
         UnitPriceNet = 0m;
         VatRatePercent = 0m;
+        HasError = false;
+    }
+
+    public bool Validate()
+    {
+        HasError = string.IsNullOrWhiteSpace(ProductName) || Quantity <= 0 || string.IsNullOrWhiteSpace(UnitName);
+        return !HasError;
     }
 }
