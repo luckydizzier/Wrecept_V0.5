@@ -40,7 +40,7 @@
    3. Tételgrid első sora szerkeszthető; Enter a legutolsó mezőn sorba illeszti az adatokat, Esc törli a bevitelt
    4. Összesítő tábla
 4. `Esc` bármelyik nézetben bezárja az ablakot. Ha Esc-cel történik a zárás, a főablakban a következő Esc már a főmenüre teszi a fókuszt, és ekkor jelenik meg a státuszsorban **"Fókusz: főmenü"**.
-5. `Ctrl+S` menti a módosításokat.
+5. `Ctrl+S` menti a módosításokat és bezárja az ablakot.
 6. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
 7. A felső menüsor navigációs célú (pl. Törzsek, Listák), az alsó eszköztár akcióorientált: **Mentés**, **Nyomtatás**, **Bezárás**, **Export**.
 8. A tételgrid mellett egy ➕ gomb helyezkedik el, amely az `AddItemCommand`-hez van kötve.
