@@ -50,7 +50,7 @@ public partial class MainWindow : Window
 
         if (vm.Invoices.Count == 0)
         {
-            SystemSounds.Beep.Play();
+            Infrastructure.AppContext.FeedbackService.Error();
             vm.StatusMessage = "Nincs tétel - F2: új hozzáadás";
             e.Handled = true;
             return;
@@ -89,6 +89,7 @@ public partial class MainWindow : Window
             Infrastructure.AppContext.InputLocked = false;
             if (create)
             {
+                Infrastructure.AppContext.FeedbackService.Accept();
                 Infrastructure.AppContext.InputLocked = true;
                 var editorVm = new InvoiceEditorViewModel(new Invoice(), true, WreceptAppContext.InvoiceService);
                 var view = new InvoiceEditorWindow { DataContext = editorVm, Owner = this };
@@ -99,7 +100,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                SystemSounds.Beep.Play();
+                Infrastructure.AppContext.FeedbackService.Reject();
                 vm.StatusMessage = "Lista teteje";
             }
         }
@@ -107,7 +108,7 @@ public partial class MainWindow : Window
         {
             if (!vm.MoveSelectionDown())
             {
-                SystemSounds.Beep.Play();
+                Infrastructure.AppContext.FeedbackService.Error();
                 vm.StatusMessage = "Lista vége";
             }
             e.Handled = true;
@@ -116,7 +117,7 @@ public partial class MainWindow : Window
         {
             if (!vm.MovePageDown())
             {
-                SystemSounds.Beep.Play();
+                Infrastructure.AppContext.FeedbackService.Error();
                 vm.StatusMessage = "Lista vége";
             }
             e.Handled = true;
@@ -125,7 +126,7 @@ public partial class MainWindow : Window
         {
             if (!vm.MoveSelectionUp())
             {
-                SystemSounds.Beep.Play();
+                Infrastructure.AppContext.FeedbackService.Error();
                 vm.StatusMessage = "Lista teteje";
             }
             e.Handled = true;
@@ -134,7 +135,7 @@ public partial class MainWindow : Window
         {
             if (!vm.MovePageUp())
             {
-                SystemSounds.Beep.Play();
+                Infrastructure.AppContext.FeedbackService.Error();
                 vm.StatusMessage = "Lista teteje";
             }
             e.Handled = true;

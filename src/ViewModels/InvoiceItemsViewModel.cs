@@ -62,15 +62,23 @@ public partial class InvoiceItemsViewModel : ObservableObject
         AddItemCommand = new RelayCommand(AddItem);
     }
 
+    public bool LastAddSuccess { get; private set; }
+
     private void AddItem()
     {
         if (!Entry.Validate())
+        {
+            LastAddSuccess = false;
+            Infrastructure.AppContext.FeedbackService.Error();
             return;
+        }
 
         var model = Entry.ToModel();
         Invoice.Items.Add(model);
         Rows.Add(new InvoiceItemRowViewModel(model));
         Entry.Clear();
+        LastAddSuccess = true;
+        Infrastructure.AppContext.FeedbackService.Accept();
         OnPropertyChanged(nameof(Rows));
     }
 

@@ -27,3 +27,6 @@ A `HungarianNumberConverter` osztály a pénzösszegek szöveges kiírását vé
 
 ## Input Locking
 Az `Infrastructure.AppContext.InputLocked` jelző megakadályozza a párbeszédablakok közbeni billentyűfeldolgozást. A `NavigationService` `InputLockScope` osztállyal vezérli ezt, amely `IDisposable`-ként automatikusan visszaállítja a jelzőt kivétel esetén is.
+
+## Feedback Service
+A new `IFeedbackService` centralises sound cues. The default `FeedbackService` plays short beep patterns (startup, exit, accept, reject, error) via `Console.Beep`. `VisualFeedback` helpers flash controls in warning, error or success colours. The service is registered in `AppContext` for global access.

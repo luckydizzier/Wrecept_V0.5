@@ -68,3 +68,6 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Cancel placeholder row entry with Esc [Done]
 - Close Help and About windows with Esc [Done]
 - F1 overlay closes with Esc [Done]
+
+## M7.2: Feedback System
+- Unified audio and visual cues for actions and validation

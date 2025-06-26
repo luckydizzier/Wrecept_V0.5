@@ -9,6 +9,8 @@
     <Color x:Key="TableHeaderColor">#F0E68C</Color>
     <Color x:Key="TableRowHighlight">#FFFACD</Color>
     <Color x:Key="ErrorColor">#FF5555</Color>
+    <Color x:Key="SuccessColor">#5CB85C</Color>
+    <Color x:Key="FlashWarningColor">#FFF79A</Color>
 
     <!-- Brushes -->
     <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource BackgroundColor}" />
@@ -16,6 +18,8 @@
     <SolidColorBrush x:Key="ControlForeground" Color="{StaticResource TextColor}" />
     <SolidColorBrush x:Key="ButtonHoverBrush" Color="{StaticResource ButtonHoverColor}" />
     <SolidColorBrush x:Key="TableHeaderBrush" Color="{StaticResource TableHeaderColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+    <SolidColorBrush x:Key="FlashWarningBrush" Color="{StaticResource FlashWarningColor}" />
     <SolidColorBrush x:Key="TableRowHighlightBrush" Color="{StaticResource TableRowHighlight}" />
     <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
 
@@ -54,6 +58,13 @@
     <Style TargetType="TextBox">
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="2x" AutoReverse="True">
+                            <ColorAnimation Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" To="{DynamicResource FlashWarningColor}" Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
                 <Setter Property="BorderBrush" Value="{DynamicResource ErrorBrush}" />
                 <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
             </Trigger>

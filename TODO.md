@@ -50,3 +50,4 @@
 - [x] Launch application with main invoice list window
 - [x] Cancel placeholder row entry with Escape in InvoiceItemsGrid
 - [x] Close Help, About and F1 overlay windows with Escape
+- [ ] Implement unified audio and visual feedback system
