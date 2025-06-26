@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Wrecept;
+namespace Wrecept.Views.Dialogs;
 
 public partial class KeyboardConfirmDialog : Window
 {

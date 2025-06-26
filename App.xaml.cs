@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using Microsoft.Data.Sqlite;
 using Wrecept.Infrastructure;
 using Wrecept.Core.Domain;
+using Wrecept.Views.Dialogs;
 
 namespace Wrecept
 {
