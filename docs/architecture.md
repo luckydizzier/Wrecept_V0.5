@@ -18,3 +18,6 @@ Az `InvoiceItemsGrid` speciális esete, amikor a beírt terméknév még nem lé
 Ilyenkor egy újrahasználható **InlineCreator** jelenik meg soron belül, ahol a
 kiegészítő mezőket Enterrel menthetjük, Esc kilép. A komponens ViewModelje
 generikus, így később beszállító vagy fizetési mód rögzítésére is alkalmazható.
+
+## Hungarian Number Converter
+A `HungarianNumberConverter` osztály a pénzösszegek szöveges kiírását végzi. A `GrandTotal.AmountText` ezen keresztül adja vissza a számla végösszegét magyarul.

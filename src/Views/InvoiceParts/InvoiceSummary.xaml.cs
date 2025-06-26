@@ -7,5 +7,6 @@ public partial class InvoiceSummary : UserControl
     public InvoiceSummary()
     {
         InitializeComponent();
+        Loaded += (_, _) => VatGrid.Focus();
     }
 }

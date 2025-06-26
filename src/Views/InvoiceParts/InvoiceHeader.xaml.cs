@@ -7,5 +7,6 @@ public partial class InvoiceHeader : UserControl
     public InvoiceHeader()
     {
         InitializeComponent();
+        Loaded += (_, _) => SupplierNameBox.Focus();
     }
 }
