@@ -1,28 +1,5 @@
 # UI Flow
 
-## Invoice List
-
-## Feedback Cues
-- Indításkor a "tu ta ti" hangjelzés szólal meg.
-- Kilépéskor "ti ta tu" hangot hallunk.
-- Elfogadott műveletnél "ta ti" hang és zöld felvillanás jelzi a sikert.
-- Elutasításkor "ti ta" hang, hibánál "tu tu" hang szól.
-- Hibás bevitelkor a mező háttérszíne sárga vagy vörös színben kétszer felvillan.
-- On startup the most recent invoice is selected automatically.
-- Arrow Up/Down moves the selection.
-- PgUp/PgDn mozgatja a kijelölést egy oldalnyit.
-- If the first row is selected and Up is pressed, a confirmation dialog appears asking to create a new invoice.
-- Enter on a row opens the invoice editor in read-only mode.
-- Confirming creation opens the editor in edit mode with empty data.
-- Escape closes the editor or dismisses the confirmation. Ha a szerkesztő Esc billentyűvel záródik be, a következő Esc már a főmenüre helyezi a fókuszt.
-- Repeated Up/Down or Page keys at the edges play a beep and keep the current row.
-- Deleting a row selects the last remaining invoice if any.
-- When navigation is blocked a short message appears in the status bar.
-- Selection is clamped within the list after any change.
-- A szerkesztő bezárásakor a korábban kijelölt számla marad aktív.
-- Üres lista esetén a státuszsorban "Nincs tétel - F2: új hozzáadás" jelenik meg, és a Enter billentyű nem nyit meg semmit.
-- Az első indításkor megjelenik egy billentyűs súgó, amely F1 segítségével később is előhozható.
-- A súgó ablak Tab sorrendben bejárható és Enterrel zárható.
 
 ## Menu System
 - Felső menüsor Alt billentyűvel aktiválható.

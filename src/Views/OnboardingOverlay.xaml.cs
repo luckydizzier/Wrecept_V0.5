@@ -1,9 +1,9 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Wrecept.Views;
 
-public partial class OnboardingOverlay : Window
+public partial class OnboardingOverlay : UserControl
 {
     public OnboardingOverlay()
     {
@@ -14,12 +14,12 @@ public partial class OnboardingOverlay : Window
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = true;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 
     private void OnClose(object sender, RoutedEventArgs e)
     {
-        DialogResult = true;
+        Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 }

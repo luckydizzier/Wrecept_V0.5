@@ -32,20 +32,18 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task SaveAsync(object window)
+    private async Task SaveAsync()
     {
         await _service.SaveAsync(new Settings { Theme = Theme, Language = Language });
         App.ApplyTheme(Theme);
         App.ApplyLanguage(Language);
-        if (window is System.Windows.Window w)
-            w.DialogResult = true;
+        Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 
 
     [RelayCommand]
-    private void Cancel(object window)
+    private void Cancel()
     {
-        if (window is System.Windows.Window w)
-            w.DialogResult = false;
+        Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 }

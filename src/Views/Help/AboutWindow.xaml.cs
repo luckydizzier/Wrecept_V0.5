@@ -1,9 +1,9 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Wrecept.Views.Help;
 
-public partial class AboutWindow : Window
+public partial class AboutWindow : UserControl
 {
     public AboutWindow()
     {
@@ -14,12 +14,12 @@ public partial class AboutWindow : Window
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = true;
+            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 
     private void OnClose(object sender, RoutedEventArgs e)
     {
-        DialogResult = true;
+        Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 }

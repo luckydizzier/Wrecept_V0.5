@@ -1,8 +1,6 @@
-<Window x:Class="Wrecept.Views.Settings.SettingsWindow"
+<UserControl x:Class="Wrecept.Views.Settings.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource Settings_Title}" Height="220" Width="300"
-        WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
         KeyDown="Window_KeyDown">
     <StackPanel Margin="{DynamicResource SpacingLarge}">
         <TextBlock x:Uid="Theme_Label" Text="{DynamicResource Theme_Label}" Margin="{DynamicResource MarginBottomSmall}" />
@@ -16,8 +14,8 @@
             <ComboBoxItem Content="en" />
         </ComboBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">
-            <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" IsDefault="True" />
-            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="3" IsCancel="True" />
+            <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" IsDefault="True" />
+            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" TabIndex="3" IsCancel="True" />
         </StackPanel>
     </StackPanel>
-</Window>
+</UserControl>

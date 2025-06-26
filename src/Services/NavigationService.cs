@@ -1,159 +1,111 @@
-using System;
-using System.Windows;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using WreceptAppContext = Wrecept.Infrastructure.AppContext;
+using System.Windows.Controls;
+using Wrecept.Core.Domain;
+using Wrecept.Infrastructure;
+using Wrecept.ViewModels;
 
 namespace Wrecept.Services;
 
 public class NavigationService : INavigationService
 {
-    protected virtual void ShowDialog(Window view) => view.ShowDialog();
+    private MainWindowViewModel? _host;
+
+    public void SetHost(MainWindowViewModel host) => _host = host;
+
+    private void Show(UserControl view)
+    {
+        if (_host is not null)
+            _host.CurrentView = view;
+    }
+
     public async Task ShowInvoiceListViewAsync()
     {
-        var invoices = await WreceptAppContext.InvoiceService.GetAllAsync();
-        var list = new System.Collections.ObjectModel.ObservableCollection<Wrecept.Core.Domain.Invoice>(invoices);
-        var current = list.FirstOrDefault() ?? new Wrecept.Core.Domain.Invoice();
-        var vm = new Wrecept.ViewModels.InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
-        var view = new Wrecept.Views.InvoiceEditorWindow
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
+        var invoices = await AppContext.InvoiceService.GetAllAsync();
+        var list = new ObservableCollection<Invoice>(invoices);
+        var current = list.FirstOrDefault() ?? new Invoice();
+        var vm = new InvoiceEditorViewModel(current, false, AppContext.InvoiceService, list);
+        var view = new Views.InvoiceEditorWindow { DataContext = vm };
         view.Loaded += (_, _) => vm.OnLoaded();
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(view);
-        }
+        Show(view);
     }
 
     public void ShowSupplierView()
     {
-        var vm = new Wrecept.ViewModels.SupplierListViewModel(WreceptAppContext.SupplierService);
-        var view = new Wrecept.Views.MasterData.SupplierView
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(view);
-        }
+        var vm = new SupplierListViewModel(AppContext.SupplierService);
+        var view = new Views.MasterData.SupplierView { DataContext = vm };
+        Show(view);
     }
 
     public void ShowProductView()
     {
-        var vm = new Wrecept.ViewModels.ProductListViewModel(WreceptAppContext.ProductService);
-        var view = new Wrecept.Views.MasterData.ProductView
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(view);
-        }
+        var vm = new ProductListViewModel(AppContext.ProductService);
+        var view = new Views.MasterData.ProductView { DataContext = vm };
+        Show(view);
     }
 
     public void ShowSettingsView()
     {
-        var vm = new Wrecept.ViewModels.SettingsViewModel(WreceptAppContext.SettingsService);
-        var view = new Wrecept.Views.Settings.SettingsWindow
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(view);
-        }
+        var vm = new SettingsViewModel(AppContext.SettingsService);
+        var view = new Views.Settings.SettingsWindow { DataContext = vm };
+        Show(view);
     }
 
-    public void ShowFilterByDateView(Func<DateOnly?, DateOnly?, Task> applyFilter)
+    public void ShowFilterByDateView()
     {
-        var vm = new Wrecept.ViewModels.DateFilterViewModel(applyFilter);
-        var dlg = new Wrecept.Views.Filters.DateFilterDialog
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(dlg);
-        }
+        var vm = new DateFilterViewModel(async (_, _) => { });
+        var dlg = new Views.Filters.DateFilterDialog { DataContext = vm };
+        Show(dlg);
     }
 
-    public void ShowFilterBySupplierView(Func<Guid?, Task> applyFilter)
+    public void ShowFilterBySupplierView()
     {
-        var vm = new Wrecept.ViewModels.SupplierFilterViewModel(applyFilter, WreceptAppContext.SupplierService);
-        var dlg = new Wrecept.Views.Filters.SupplierFilterDialog
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(dlg);
-        }
+        var vm = new SupplierFilterViewModel(async _ => { }, AppContext.SupplierService);
+        var dlg = new Views.Filters.SupplierFilterDialog { DataContext = vm };
+        Show(dlg);
     }
 
-    public void ShowFilterByProductGroupView(Func<Guid?, Task> applyFilter)
+    public void ShowFilterByProductGroupView()
     {
-        var vm = new Wrecept.ViewModels.ProductGroupFilterViewModel(applyFilter, WreceptAppContext.ProductGroupService);
-        var dlg = new Wrecept.Views.Filters.ProductGroupFilterDialog
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(dlg);
-        }
+        var vm = new ProductGroupFilterViewModel(async _ => { }, AppContext.ProductGroupService);
+        var dlg = new Views.Filters.ProductGroupFilterDialog { DataContext = vm };
+        Show(dlg);
     }
 
-    public void ShowFilterByProductView(Func<Guid?, Task> applyFilter)
+    public void ShowFilterByProductView()
     {
-        var vm = new Wrecept.ViewModels.ProductFilterViewModel(applyFilter, WreceptAppContext.ProductService);
-        var dlg = new Wrecept.Views.Filters.ProductFilterDialog
-        {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
-        };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(dlg);
-        }
+        var vm = new ProductFilterViewModel(async _ => { }, AppContext.ProductService);
+        var dlg = new Views.Filters.ProductFilterDialog { DataContext = vm };
+        Show(dlg);
     }
 
     public void ShowHelpView()
     {
-        var view = new Wrecept.Views.Help.HelpWindow { Owner = Application.Current.MainWindow };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(view);
-        }
+        var view = new Views.Help.HelpWindow();
+        Show(view);
     }
 
     public void ShowAboutDialog()
     {
-        var view = new Wrecept.Views.Help.AboutWindow { Owner = Application.Current.MainWindow };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(view);
-        }
+        var view = new Views.Help.AboutWindow();
+        Show(view);
     }
 
     public void ShowOnboardingOverlay()
     {
-        var overlay = new Wrecept.Views.OnboardingOverlay { Owner = Application.Current.MainWindow };
-        using (new Infrastructure.InputLockScope())
-        {
-            ShowDialog(overlay);
-        }
+        var overlay = new Views.OnboardingOverlay();
+        Show(overlay);
+    }
+
+    public void CloseCurrentView()
+    {
+        if (_host is not null)
+            _host.CurrentView = null;
     }
 
     public void ExitApplication()
     {
-        Infrastructure.AppContext.FeedbackService.Exit();
-        Application.Current.Shutdown();
+        AppContext.FeedbackService.Exit();
+        System.Windows.Application.Current.Shutdown();
     }
 }

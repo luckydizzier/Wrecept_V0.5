@@ -1,10 +1,10 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.Infrastructure;
 
 namespace Wrecept.Views.MasterData;
 
-public partial class ProductView : Window
+public partial class ProductView : UserControl
 {
     public ProductView()
     {
@@ -16,8 +16,7 @@ public partial class ProductView : Window
         if (Infrastructure.AppContext.InputLocked) return;
         if (e.Key == Key.Escape)
         {
-            DialogResult = false;
-            Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
         else if (e.Key == Key.Insert)
         {
