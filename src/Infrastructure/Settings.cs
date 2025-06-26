@@ -8,4 +8,5 @@ public class Settings
     public double WindowWidth { get; set; } = 800;
     public double WindowHeight { get; set; } = 600;
     public bool ShowOnboarding { get; set; } = true;
+    public int FontScale { get; set; } = 0;
 }

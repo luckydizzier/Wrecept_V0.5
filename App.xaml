@@ -1,14 +1,19 @@
 <Application x:Class="Wrecept.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Wrecept"
-             xmlns:vm="clr-namespace:Wrecept.ViewModels">
+            xmlns:local="clr-namespace:Wrecept"
+            xmlns:vm="clr-namespace:Wrecept.ViewModels"
+            xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Wrecept;component/Themes/Light.xaml" />
                 <ResourceDictionary Source="/Wrecept;component/Resources/Strings.hu.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <sys:Double x:Key="BaseFontSize">14</sys:Double>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+            </Style>
             <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
         </ResourceDictionary>
     </Application.Resources>

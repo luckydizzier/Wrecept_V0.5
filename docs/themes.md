@@ -2,6 +2,8 @@
 
 A Wrecept két beépített témát tartalmaz: **Light** és **Dark**. A `src/Themes` mappában lévő XAML szótárak határozzák meg az alkalmazás összes színét és alap stílusát. Az `App.ApplyTheme()` metódus tölti be a felhasználó által kiválasztott szótárat.
 
+Az alap betűméret a `BaseFontSize` dinamikus erőforrásban van meghatározva, értéke 14 + `FontScale`.
+
 A beállítás a `%LOCALAPPDATA%/Wrecept/settings.json` fájlban tárolódik. Hibás vagy hiányzó fájl esetén a program a `Light` témát használja.
 
 ## Színkulcsok

@@ -31,3 +31,5 @@
 - [x] Generate Windows installer with Inno Setup
 - [x] Confirm exit when pressing Esc in menu.
 - [x] Support PgUp/PgDn navigation for long lists.
+
+- [ ] Implement global font scaling option.

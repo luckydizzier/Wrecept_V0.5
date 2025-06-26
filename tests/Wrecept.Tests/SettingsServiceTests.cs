@@ -43,5 +43,17 @@ public class SettingsServiceTests : IDisposable
 
         Assert.NotNull(settings);
     }
+
+    [Fact]
+    public async Task SaveAsync_ShouldPersistFontScale()
+    {
+        var service = new JsonSettingsService();
+        var input = new Settings { FontScale = 3 };
+
+        await service.SaveAsync(input);
+        var result = await service.LoadAsync();
+
+        Assert.Equal(3, result.FontScale);
+    }
 }
 
