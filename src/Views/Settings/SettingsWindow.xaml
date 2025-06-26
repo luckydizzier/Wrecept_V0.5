@@ -25,7 +25,11 @@
         <StackPanel Orientation="Horizontal" Margin="0,{DynamicResource SpacingLarge},0,0">
             <TextBlock x:Uid="Font_Label" Text="{DynamicResource Font_Label}" VerticalAlignment="Center" Margin="0,0,10,0" />
             <Slider x:Uid="Font_Slider" Minimum="-5" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Width="120" Value="{Binding FontScale, Mode=TwoWay}" ToolTip="{DynamicResource Font_Tooltip}" />
-            <Button x:Uid="Font_Reset" Content="{DynamicResource Reset_Button}" Command="{Binding ResetFontScaleCommand}" Margin="{DynamicResource SpacingMedium},0,0,0" />
+            <Button x:Uid="Font_Reset" Content="{DynamicResource Reset_Button}" Command="{Binding ResetFontScaleCommand}">
+                <Button.Margin>
+                    <Thickness Left="{DynamicResource SpacingMedium}" Top="0" Right="0" Bottom="0" />
+                </Button.Margin>
+            </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,{DynamicResource SpacingLarge},0,0">
             <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" />
