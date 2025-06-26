@@ -102,7 +102,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         {
             ItemsViewModel.Rows.Add(new InvoiceItemRowViewModel(item));
         }
-        HeaderViewModel.PropertyChanged?.Invoke(HeaderViewModel, new System.ComponentModel.PropertyChangedEventArgs(nameof(HeaderViewModel.Invoice)));
+        HeaderViewModel.NotifyInvoiceChanged();
         UpdateSummaries();
     }
 

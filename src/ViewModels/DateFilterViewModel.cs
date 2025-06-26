@@ -1,12 +1,13 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Threading.Tasks;
 
 namespace Wrecept.ViewModels;
 
 public partial class DateFilterViewModel : ObservableObject
 {
-    private readonly Action<DateOnly?, DateOnly?> _applyFilter;
+    private readonly Func<DateOnly?, DateOnly?, Task> _applyFilter;
 
     [ObservableProperty]
     private DateOnly? _fromDate;
@@ -14,15 +15,15 @@ public partial class DateFilterViewModel : ObservableObject
     [ObservableProperty]
     private DateOnly? _toDate;
 
-    public DateFilterViewModel(Action<DateOnly?, DateOnly?> applyFilter)
+    public DateFilterViewModel(Func<DateOnly?, DateOnly?, Task> applyFilter)
     {
         _applyFilter = applyFilter;
     }
 
     [RelayCommand]
-    private void Apply(object window)
+    private async Task ApplyAsync(object window)
     {
-        _applyFilter(FromDate, ToDate);
+        await _applyFilter(FromDate, ToDate);
         if (window is System.Windows.Window w)
             w.DialogResult = true;
     }
