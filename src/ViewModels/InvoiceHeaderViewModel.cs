@@ -10,28 +10,40 @@ using System.Windows;
 
 namespace Wrecept.ViewModels;
 
-public class InvoiceHeaderViewModel : ObservableObject
+public partial class InvoiceHeaderViewModel : ObservableObject
 {
     public Invoice Invoice { get; }
-    public IEnumerable<string> PaymentMethods { get; }
-    public IEnumerable<string> CalculationModes { get; }
+
+    [ObservableProperty]
+    private List<PaymentMethod> _paymentMethods = new();
+
+    public IReadOnlyList<CalculationMode> CalculationModes { get; }
+
     public InlineSupplierCreatorViewModel? SupplierCreator { get; private set; }
 
     private readonly ISupplierService _supplierService;
     private readonly ILookupDialogPresenter _lookupPresenter;
+    private readonly IPaymentMethodService _paymentMethodService;
 
     public InvoiceHeaderViewModel(
         Invoice invoice,
-        IEnumerable<string> paymentMethods,
-        IEnumerable<string> calculationModes,
+        IPaymentMethodService paymentMethodService,
         ISupplierService supplierService,
         ILookupDialogPresenter lookupPresenter)
     {
         _supplierService = supplierService;
         _lookupPresenter = lookupPresenter;
+        _paymentMethodService = paymentMethodService;
         Invoice = invoice;
-        PaymentMethods = paymentMethods;
-        CalculationModes = calculationModes;
+        CalculationModes = new[] { CalculationMode.Net, CalculationMode.Gross };
+        _ = LoadPaymentMethodsAsync();
+    }
+
+    private async Task LoadPaymentMethodsAsync()
+    {
+        PaymentMethods = await _paymentMethodService.GetAllAsync();
+        if (Invoice.PaymentMethod == null && PaymentMethods.Count > 0)
+            Invoice.PaymentMethod = PaymentMethods[0];
     }
 
     public async Task<bool> TryOpenSupplierCreatorAsync()

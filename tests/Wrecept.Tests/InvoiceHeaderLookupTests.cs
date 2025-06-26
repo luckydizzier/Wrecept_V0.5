@@ -30,8 +30,11 @@ public class InvoiceHeaderLookupTests
             Result = true,
             Selected = new LookupItem<Supplier>(new Supplier { Name = "Teszt" }, "Teszt")
         };
+        var pmRepo = new Core.Repositories.InMemoryPaymentMethodRepository();
+        var pmService = new DefaultPaymentMethodService(pmRepo);
+        await pmService.SaveAsync(new PaymentMethod { Label = "Cash" });
         var invoice = new Invoice { Supplier = new Supplier() };
-        var vm = new InvoiceHeaderViewModel(invoice, new[] { "" }, new[] { "" }, service, presenter);
+        var vm = new InvoiceHeaderViewModel(invoice, pmService, service, presenter);
 
         await vm.OpenSupplierLookupAsync();
 

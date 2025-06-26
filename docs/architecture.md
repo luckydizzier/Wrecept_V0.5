@@ -9,6 +9,9 @@ Wrecept használata során a legfontosabb entitások az alábbiak:
 - **Unit** – mennyiségi egységek megnevezése.
 - **PaymentMethod** és **TaxRate** – fizetési és ÁFA adatok.
 
+A fizetési módok listáját az `IPaymentMethodService` tölti be futásidőben, és az
+`InvoiceHeaderViewModel` automatikusan frissíti a ComboBox adatait.
+
 Ezek a típusok a `Wrecept.Core.CoreLib` projekt `Domain` mappájában
 `record class` formában találhatók. A szolgáltatások és tárolók ezekre
 épülnek, így a modell egy helyen, bővíthetően karbantartható.
