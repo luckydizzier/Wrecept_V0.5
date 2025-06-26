@@ -53,14 +53,14 @@ public class InvoiceServiceTests
     private class FailingRepo : IInvoiceRepository
     {
         public Task AddAsync(Invoice entity) => throw new InvalidOperationException("fail");
-        public Task DeleteAsync(Guid id) => throw new NotImplementedException();
-        public Task<List<Invoice>> FindAsync(System.Linq.Expressions.Expression<Func<Invoice, bool>> predicate) => throw new NotImplementedException();
-        public Task<List<Invoice>> GetAllAsync() => throw new NotImplementedException();
-        public Task<List<Invoice>> GetByProductGroupIdAsync(Guid groupId) => throw new NotImplementedException();
-        public Task<List<Invoice>> GetByProductIdAsync(Guid productId) => throw new NotImplementedException();
-        public Task<List<Invoice>> GetBySupplierIdAsync(Guid supplierId) => throw new NotImplementedException();
-        public Task<Invoice?> GetByIdAsync(Guid id) => throw new NotImplementedException();
-        public Task UpdateAsync(Invoice entity) => throw new NotImplementedException();
+        public Task DeleteAsync(Guid id) => Task.CompletedTask;
+        public Task<List<Invoice>> FindAsync(System.Linq.Expressions.Expression<Func<Invoice, bool>> predicate) => Task.FromResult(new List<Invoice>());
+        public Task<List<Invoice>> GetAllAsync() => Task.FromResult(new List<Invoice>());
+        public Task<List<Invoice>> GetByProductGroupIdAsync(Guid groupId) => Task.FromResult(new List<Invoice>());
+        public Task<List<Invoice>> GetByProductIdAsync(Guid productId) => Task.FromResult(new List<Invoice>());
+        public Task<List<Invoice>> GetBySupplierIdAsync(Guid supplierId) => Task.FromResult(new List<Invoice>());
+        public Task<Invoice?> GetByIdAsync(Guid id) => Task.FromResult<Invoice?>(null);
+        public Task UpdateAsync(Invoice entity) => Task.CompletedTask;
     }
 
     [Fact]

@@ -33,4 +33,4 @@
 - [x] Support PgUp/PgDn navigation for long lists.
 
 - [x] Implement global font scaling option.
-- [ ] Implement inline creator component for missing master data.
+- [x] Implement inline creator component for missing master data.

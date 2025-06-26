@@ -1,0 +1,10 @@
+<Window x:Class="Wrecept.Views.Help.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Súgó" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+    <ScrollViewer Margin="{DynamicResource SpacingLarge}">
+        <TextBlock TextWrapping="Wrap" Width="400">
+            A felhasználói kézikönyv a docs/user_manual.md fájlban található. A F1 billentyűvel előhívható billentyűs súgó az OnboardingOverlay ablakban jelenik meg.
+        </TextBlock>
+    </ScrollViewer>
+</Window>
