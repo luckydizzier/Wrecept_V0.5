@@ -5,7 +5,7 @@
 - **Alt+T** – Open Master Data menu
 - **Alt+L** – Open Lists menu
 - **Alt+H** – Open Help menu
-- **F1** – Show keyboard help
+- **F1** – Show keyboard help (Help → Keyboard)
 - **PgUp/PgDn** – page through lists
 
 Use the arrow keys and Enter to navigate menu items. The Exit item closes the application.
@@ -16,8 +16,11 @@ Select Date, Supplier, Product Group or Product filters from **Alt+L**. Press En
 ## Master Data Maintenance
 In **Alt+T** choose Suppliers or Products. **Insert** adds a new record, **F2** saves changes, **Del** deletes the selected entry.
 
+## Help and About
+The **Alt+H** menu provides access to **Keyboard** (F1), the user manual and the **About** dialog. All of these windows close with Esc.
+
 ## Settings and Themes
-Choose Light or Dark theme in the **Settings** window. Settings are automatically saved to `%LOCALAPPDATA%/Wrecept/settings.json` on exit and restored next launch.
+Open **Help → Settings** to choose Light or Dark theme and the application language. Settings are automatically saved to `%LOCALAPPDATA%/Wrecept/settings.json` on exit and restored next launch.
 
 ## Plugins
 Commands from optional plugins appear under **Help → Plugins**. Copy plugin assemblies to a `Plugins` folder beside `Wrecept.exe`. Further info: [plugin_command_bar.md](plugin_command_bar.md).
