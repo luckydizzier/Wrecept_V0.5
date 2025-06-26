@@ -35,7 +35,7 @@
 1. A nézet betöltésekor a számlalistán a legfrissebb sor aktív.
 2. A szerkesztő négy UserControl-ból áll: **InvoiceSidebar**, **InvoiceHeader**, **InvoiceItemsGrid** és **InvoiceSummary**. Mindegyik saját ViewModelen keresztül kommunikál a fő nézettel.
 3. A Tab sorrend a következő:
-   1. Számlalistát tartalmazó Sidebar mezők – kereső és dátummezők azonnal szűrik a listát
+   1. Számlalistát tartalmazó Sidebar mezők – kereső és dátummezők azonnal szűrik a listát; a táblázat nem enged új sor felvételt
    2. Header mezők (Szállító → Cím → Adószám → Számlaszám → Dátum → Fizetési mód → Számítás módja)
    3. Tételgrid első sora szerkeszthető; Enter a legutolsó mezőn sorba illeszti az adatokat, Esc törli a bevitelt
    4. Összesítő tábla
