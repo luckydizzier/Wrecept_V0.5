@@ -40,7 +40,7 @@
 3. A Tab sorrend a következő:
    1. Számlalistát tartalmazó Sidebar mezők
    2. Header mezők (Szállító → Cím → Adószám → Számlaszám → Dátum → Fizetési mód → Számítás módja)
-   3. Tételgrid parancs gombok és lista
+   3. Tételgrid első sora szerkeszthető; Enter a legutolsó mezőn sorba illeszti az adatokat, Esc törli a bevitelt
    4. Összesítő tábla
 4. `Esc` bármelyik nézetben bezárja az ablakot és a státusz sorban megjelenik **"Fókusz: főmenü"**.
 5. `Ctrl+S` menti a módosításokat.
