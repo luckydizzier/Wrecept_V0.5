@@ -19,6 +19,7 @@
     <Compile Remove="InvoiceEditorViewModelTests.cs" />
     <Compile Remove="MainWindowMenuTests.cs" />
     <Compile Remove="ThemeLoadTests.cs" />
+    <Compile Remove="MainWindowPluginTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wrecept.Core\Wrecept.Core.csproj" />

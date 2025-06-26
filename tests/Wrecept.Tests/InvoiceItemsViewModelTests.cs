@@ -36,4 +36,15 @@ public class InvoiceItemsViewModelTests
         Assert.Empty(invoice.Items);
         Assert.Single(vm.Rows);
     }
+
+    [Fact]
+    public void Validate_ShouldSetHasErrorFlag()
+    {
+        var row = new InvoiceItemRowViewModel();
+
+        var valid = row.Validate();
+
+        Assert.False(valid);
+        Assert.True(row.HasError);
+    }
 }

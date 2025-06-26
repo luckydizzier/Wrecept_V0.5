@@ -11,7 +11,8 @@
                   SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
                   AutoGenerateColumns="False"
                   Height="300"
-                  TabIndex="4">
+                  TabIndex="4"
+                  PreviewKeyDown="InvoiceList_OnPreviewKeyDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Számlaszám" Binding="{Binding SerialNumber}" />
                 <DataGridTextColumn Header="Dátum" Binding="{Binding IssueDate}" />

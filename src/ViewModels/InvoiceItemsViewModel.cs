@@ -28,7 +28,7 @@ public partial class InvoiceItemsViewModel : ObservableObject
 
     private void AddItem()
     {
-        if (string.IsNullOrWhiteSpace(Entry.ProductName) || Entry.Quantity <= 0)
+        if (!Entry.Validate())
             return;
 
         var model = Entry.ToModel();

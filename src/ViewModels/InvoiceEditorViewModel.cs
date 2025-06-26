@@ -23,6 +23,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public GrandTotal GrandTotals { get; private set; } = new(0m, 0m);
 
     public IAsyncRelayCommand SaveCommand { get; }
+    public IRelayCommand PrintCommand { get; }
+    public IRelayCommand ExportCommand { get; }
     public IRelayCommand ExitToListCommand { get; }
     public bool ExitRequested { get; private set; }
     public bool ExitedByEsc { get; private set; }
@@ -46,6 +48,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
         };
         IsEditMode = isEditMode;
         SaveCommand = new AsyncRelayCommand(SaveAsync);
+        PrintCommand = new RelayCommand(() => { /* későbbi implementáció */ });
+        ExportCommand = new RelayCommand(() => { /* későbbi implementáció */ });
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
 
         SidebarViewModel = new InvoiceSidebarViewModel(invoices ?? new ObservableCollection<Invoice>());
