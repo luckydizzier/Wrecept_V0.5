@@ -19,6 +19,9 @@ Az **Alt+T** menüben a Szállítók és Termékek ablakok érhetők el. Új rek
 ## Beállítások és Témák
 A **Beállítások** ablakban választható ki a Light vagy Dark téma. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.
 
+## Számlaszerkesztés műveletei
+Az editor ablakának alján található eszköztáron a következő gombok érhetők el: **Mentés**, **Nyomtatás**, **Export** és **Bezárás**. Mentés `Ctrl+S`-sel is végrehajtható. Exportáláskor választható CSV, Excel vagy PDF formátum.
+
 ## Hibakezelés
 Ha az alkalmazás nem tudja elérni a SQLite adatbázist, hibaüzenet jelenik meg,
 majd a program memóriában fut tovább. Zárolt fájl esetén a program kéri a másik

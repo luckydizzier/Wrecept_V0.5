@@ -1,13 +1,14 @@
 <UserControl x:Class="Wrecept.Views.InvoiceParts.InvoiceItemsGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <DataGrid x:Name="ItemsGrid"
-              ItemsSource="{Binding Rows}"
-              AutoGenerateColumns="False"
-              CanUserAddRows="False"
-              TabIndex="0"
-              Loaded="ItemsGrid_OnLoaded"
-              KeyDown="ItemsGrid_OnKeyDown">
+    <StackPanel>
+        <DataGrid x:Name="ItemsGrid"
+                  ItemsSource="{Binding Rows}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  TabIndex="0"
+                  Loaded="ItemsGrid_OnLoaded"
+                  KeyDown="ItemsGrid_OnKeyDown">
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Style.Triggers>
@@ -26,6 +27,21 @@
             <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" IsReadOnly="True" />
             <DataGridTextColumn Header="ÁFA" Binding="{Binding Vat}" IsReadOnly="True" />
             <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" IsReadOnly="True" />
+            <DataGridTemplateColumn Width="Auto">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="➕"
+                                Command="{Binding DataContext.AddItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                TabIndex="-1" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
         </DataGrid.Columns>
-    </DataGrid>
+        </DataGrid>
+        <Button Content="Tétel hozzáadása"
+                Command="{Binding AddItemCommand}"
+                HorizontalAlignment="Left"
+                Margin="0,5,0,0"
+                TabIndex="1" />
+    </StackPanel>
 </UserControl>

@@ -11,7 +11,8 @@
 - [x] Provide sample IMenuPlugin implementation.
 - [x] Implement invoice list keyboard navigation and creation flow.
 - [x] Implement UX failsafe logic for invoice navigation.
-- [ ] Redesign invoice editor layout with summary tables and keyboard flow.
+- [ ] Add command bar and menu to InvoiceEditorWindow
+- [ ] Refine invoice editor layout with summary tables and keyboard flow.
 - [x] Expose database path helper and log location.
 - [x] Add global exception handling and in-memory startup fallback.
 - [ ] Enhance SQLite error handling (locked file, corruption recovery, missing file).

@@ -38,10 +38,13 @@
 1. A nézet betöltésekor a számlalistán a legfrissebb sor aktív.
 2. A szerkesztő négy UserControl-ból áll: **InvoiceSidebar**, **InvoiceHeader**, **InvoiceItemsGrid** és **InvoiceSummary**. Mindegyik saját ViewModelen keresztül kommunikál a fő nézettel.
 3. A Tab sorrend a következő:
-   1. Számlalistát tartalmazó Sidebar mezők
-   2. Header mezők (Szállító → Cím → Adószám → Számlaszám → Dátum → Fizetési mód → Számítás módja)
-   3. Tételgrid első sora szerkeszthető; Enter a legutolsó mezőn sorba illeszti az adatokat, Esc törli a bevitelt
-   4. Összesítő tábla
+   1. Felső menüsor
+   2. Számlalistát tartalmazó Sidebar mezők
+   3. Header mezők (Szállító → Cím → Adószám → Számlaszám → Dátum → Fizetési mód → Számítás módja)
+   4. Tételgrid első sora szerkeszthető; Enter a legutolsó mezőn sorba illeszti az adatokat, Esc törli a bevitelt. A grid alatt **Tétel hozzáadása** gomb is aktiválja a műveletet.
+   5. Összesítő tábla
+   6. Alsó eszköztár (Mentés, Nyomtatás, Export, Bezárás)
 4. `Esc` bármelyik nézetben bezárja az ablakot és a státusz sorban megjelenik **"Fókusz: főmenü"**.
-5. `Ctrl+S` menti a módosításokat.
-6. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
+5. `Ctrl+S` menti a módosításokat. Nyomtatás és Export dedikált gombbal vagy menüponttal érhető el.
+6. A számlalistában az első sor fölé lépve a program megkérdezi: "Új számlát szeretne kezdeni?".
+7. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
