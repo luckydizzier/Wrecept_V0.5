@@ -29,6 +29,8 @@
     <Compile Remove="tests\**\*.cs" />
     <Compile Remove="src/Wrecept.Core\**\*.cs" />
     <Compile Remove="src/Wrecept.Core.CoreLib\**\*.cs" />
+    <Compile Remove="src/Wrecept.Plugin.Greeting\**\*.cs" />
+    <Page Remove="src/Wrecept.Plugin.Greeting\**\*.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="src/Themes/Light.xaml">
