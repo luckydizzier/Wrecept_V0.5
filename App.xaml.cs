@@ -89,9 +89,7 @@ namespace Wrecept
 
         private void SetupGlobalHandlers()
         {
-            var appData = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
-            var dir = Path.Combine(appData, "Wrecept");
-            Directory.CreateDirectory(dir);
+            var dir = Infrastructure.AppDirectories.GetWritableAppDataDirectory();
             _logPath = Path.Combine(dir, "errors.log");
 
             DispatcherUnhandledException += OnDispatcherUnhandledException;

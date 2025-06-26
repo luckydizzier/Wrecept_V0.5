@@ -9,6 +9,7 @@
 1. Klónozd a repót.
 2. Futtasd a `./setup.sh` scriptet a megoldás visszaállításához, buildeléséhez és teszteléséhez.
 3. A helyi SQLite adatbázis a `%LOCALAPPDATA%/Wrecept/wrecept.db` útvonalon jön létre.
+   Ha a `%LOCALAPPDATA%` nem elérhető, a futtatható állomány mappáját használjuk.
    A szükséges `schema_v1.sql` az alkalmazásba van beágyazva, ezért külön fájlra nincs szükség.
 
 ## Hibakeresés
