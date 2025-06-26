@@ -119,7 +119,7 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
 
         var invoice = new Invoice
         {
-            SerialNumber = $"INV-{Invoices.Count + 1}",
+            SerialNumber = await GenerateNextSerialAsync(),
             IssueDate = DateOnly.FromDateTime(DateTime.Today),
             Supplier = suppliers.First(),
             PaymentMethod = payments.First()
@@ -129,6 +129,21 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
         Invoices.Add(invoice);
         SelectedInvoice = invoice;
         EnsureValidSelection();
+    }
+
+    private async Task<string> GenerateNextSerialAsync()
+    {
+        var all = await _invoiceService.GetAllAsync();
+        var max = 0;
+        foreach (var inv in all)
+        {
+            if (inv.SerialNumber.StartsWith("INV-") &&
+                int.TryParse(inv.SerialNumber.AsSpan(4), out var num) && num > max)
+            {
+                max = num;
+            }
+        }
+        return $"INV-{(max + 1):D3}";
     }
 
     private bool CanDeleteInvoice(Invoice? invoice) => invoice is not null;

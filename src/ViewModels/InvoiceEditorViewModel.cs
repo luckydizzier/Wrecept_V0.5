@@ -77,12 +77,33 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     public void CancelEdit()
     {
-        Invoice = new Invoice
+        Invoice.Id = _original.Id;
+        Invoice.SerialNumber = _original.SerialNumber;
+        Invoice.IssueDate = _original.IssueDate;
+        Invoice.Supplier = _original.Supplier;
+        Invoice.PaymentMethod = _original.PaymentMethod;
+        Invoice.Notes = _original.Notes;
+        Invoice.Items.Clear();
+        foreach (var item in _original.Items)
         {
-            Id = _original.Id,
-            SerialNumber = _original.SerialNumber,
-            IssueDate = _original.IssueDate
-        };
+            Invoice.Items.Add(new InvoiceItem
+            {
+                Id = item.Id,
+                Product = item.Product,
+                Quantity = item.Quantity,
+                Unit = item.Unit,
+                UnitPriceNet = item.UnitPriceNet,
+                VatRatePercent = item.VatRatePercent
+            });
+        }
+        ItemsViewModel.Rows.Clear();
+        ItemsViewModel.Rows.Add(ItemsViewModel.Entry);
+        foreach (var item in Invoice.Items)
+        {
+            ItemsViewModel.Rows.Add(new InvoiceItemRowViewModel(item));
+        }
+        HeaderViewModel.PropertyChanged?.Invoke(HeaderViewModel, new System.ComponentModel.PropertyChangedEventArgs(nameof(HeaderViewModel.Invoice)));
+        UpdateSummaries();
     }
 
     public void CancelByEsc()

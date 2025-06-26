@@ -11,7 +11,12 @@ public class InvoiceEditorViewModelTests
     [Fact]
     public void Constructor_ShouldSetProperties()
     {
-        var invoice = new Invoice { SerialNumber = "1" };
+        var invoice = new Invoice
+        {
+            SerialNumber = "1",
+            Supplier = new Supplier { Id = Guid.NewGuid(), Name = "A" },
+            PaymentMethod = new PaymentMethod { Id = Guid.NewGuid(), Name = "C" }
+        };
 
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
         var vm = new InvoiceEditorViewModel(invoice, true, service);
@@ -29,10 +34,14 @@ public class InvoiceEditorViewModelTests
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
         var vm = new InvoiceEditorViewModel(invoice, true, service);
         vm.Invoice.SerialNumber = "2";
+        vm.Invoice.Supplier = new Supplier { Id = Guid.NewGuid(), Name = "B" };
+        vm.Invoice.PaymentMethod = new PaymentMethod { Id = Guid.NewGuid(), Name = "D" };
 
         vm.CancelEdit();
 
         Assert.Equal("1", vm.Invoice.SerialNumber);
+        Assert.Equal("A", vm.Invoice.Supplier.Name);
+        Assert.Equal("C", vm.Invoice.PaymentMethod.Name);
     }
 
     [Fact]
