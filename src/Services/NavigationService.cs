@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Wrecept.Core.Domain;
-using Wrecept.Infrastructure;
+using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 using Wrecept.ViewModels;
 
 namespace Wrecept.Services;
@@ -21,10 +21,10 @@ public class NavigationService : INavigationService
 
     public async Task ShowInvoiceListViewAsync()
     {
-        var invoices = await AppContext.InvoiceService.GetAllAsync();
+        var invoices = await WreceptAppContext.InvoiceService.GetAllAsync();
         var list = new ObservableCollection<Invoice>(invoices);
         var current = list.FirstOrDefault() ?? new Invoice();
-        var vm = new InvoiceEditorViewModel(current, false, AppContext.InvoiceService, list);
+        var vm = new InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
         var view = new Views.InvoiceEditorWindow { DataContext = vm };
         view.Loaded += (_, _) => vm.OnLoaded();
         Show(view);
@@ -32,21 +32,21 @@ public class NavigationService : INavigationService
 
     public void ShowSupplierView()
     {
-        var vm = new SupplierListViewModel(AppContext.SupplierService);
+        var vm = new SupplierListViewModel(WreceptAppContext.SupplierService);
         var view = new Views.MasterData.SupplierView { DataContext = vm };
         Show(view);
     }
 
     public void ShowProductView()
     {
-        var vm = new ProductListViewModel(AppContext.ProductService);
+        var vm = new ProductListViewModel(WreceptAppContext.ProductService);
         var view = new Views.MasterData.ProductView { DataContext = vm };
         Show(view);
     }
 
     public void ShowSettingsView()
     {
-        var vm = new SettingsViewModel(AppContext.SettingsService);
+        var vm = new SettingsViewModel(WreceptAppContext.SettingsService);
         var view = new Views.Settings.SettingsWindow { DataContext = vm };
         Show(view);
     }
@@ -60,21 +60,21 @@ public class NavigationService : INavigationService
 
     public void ShowFilterBySupplierView()
     {
-        var vm = new SupplierFilterViewModel(async _ => { }, AppContext.SupplierService);
+        var vm = new SupplierFilterViewModel(async _ => { }, WreceptAppContext.SupplierService);
         var dlg = new Views.Filters.SupplierFilterDialog { DataContext = vm };
         Show(dlg);
     }
 
     public void ShowFilterByProductGroupView()
     {
-        var vm = new ProductGroupFilterViewModel(async _ => { }, AppContext.ProductGroupService);
+        var vm = new ProductGroupFilterViewModel(async _ => { }, WreceptAppContext.ProductGroupService);
         var dlg = new Views.Filters.ProductGroupFilterDialog { DataContext = vm };
         Show(dlg);
     }
 
     public void ShowFilterByProductView()
     {
-        var vm = new ProductFilterViewModel(async _ => { }, AppContext.ProductService);
+        var vm = new ProductFilterViewModel(async _ => { }, WreceptAppContext.ProductService);
         var dlg = new Views.Filters.ProductFilterDialog { DataContext = vm };
         Show(dlg);
     }
@@ -105,7 +105,7 @@ public class NavigationService : INavigationService
 
     public void ExitApplication()
     {
-        AppContext.FeedbackService.Exit();
+        WreceptAppContext.FeedbackService.Exit();
         System.Windows.Application.Current.Shutdown();
     }
 }

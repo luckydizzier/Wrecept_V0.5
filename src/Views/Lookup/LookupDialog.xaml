@@ -11,8 +11,8 @@
         <TextBox x:Name="SearchBox" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" ToolTip="{DynamicResource Search_Tooltip}" Margin="0,0,0,5" />
         <ListBox Grid.Row="1" ItemsSource="{Binding Results}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="Display"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,0">
-            <Button x:Uid="OK_Button" Content="{DynamicResource OK_Button}" Command="{Binding ConfirmCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="0,0,5,0" />
-            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+            <Button x:Uid="OK_Button" Content="{DynamicResource OK_Button}" Command="{Binding ConfirmCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="0,0,5,0" />
+            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" />
         </StackPanel>
     </Grid>
 </UserControl>

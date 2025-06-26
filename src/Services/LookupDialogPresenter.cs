@@ -7,11 +7,16 @@ public class LookupDialogPresenter : ILookupDialogPresenter
 {
     public bool? ShowDialog<T>(ViewModels.LookupDialogViewModel<T> vm)
     {
-        var dlg = new LookupDialog
+        var control = new LookupDialog { DataContext = vm };
+        var window = new Window
         {
-            DataContext = vm,
-            Owner = Application.Current.MainWindow
+            Content = control,
+            Owner = Application.Current.MainWindow,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            WindowStyle = WindowStyle.ToolWindow,
+            SizeToContent = SizeToContent.WidthAndHeight,
+            Title = "Keresés"
         };
-        return dlg.ShowDialog();
+        return window.ShowDialog();
     }
 }
