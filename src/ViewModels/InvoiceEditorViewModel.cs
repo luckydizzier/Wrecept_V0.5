@@ -58,7 +58,11 @@ public partial class InvoiceEditorViewModel : ObservableObject
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
 
         SidebarViewModel = new InvoiceSidebarViewModel(invoices ?? new ObservableCollection<Invoice>());
-        HeaderViewModel = new InvoiceHeaderViewModel(Invoice, Array.Empty<string>(), Array.Empty<string>());
+        HeaderViewModel = new InvoiceHeaderViewModel(
+            Invoice,
+            Array.Empty<string>(),
+            Array.Empty<string>(),
+            Infrastructure.AppContext.SupplierService);
         ItemsViewModel = new InvoiceItemsViewModel(Invoice);
         SummaryViewModel = new InvoiceSummaryViewModel(VatSummaries, GrandTotals);
     }
@@ -145,7 +149,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public record GrandTotal(decimal Net, decimal Vat)
     {
         public decimal Gross => Net + Vat;
-        public string AmountText => string.Empty;
+        public string AmountText =>
+            Wrecept.Core.Utilities.HungarianNumberConverter.ToText(Gross);
     }
 }
 

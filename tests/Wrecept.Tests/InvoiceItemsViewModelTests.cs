@@ -23,6 +23,8 @@ public class InvoiceItemsViewModelTests
         Assert.Single(invoice.Items);
         Assert.Equal(string.Empty, vm.Entry.ProductName);
         Assert.Equal(2, vm.Rows.Count);
+        Assert.True(vm.Entry.IsPlaceholder);
+        Assert.False(vm.Rows[1].IsPlaceholder);
     }
 
     [Fact]

@@ -34,3 +34,8 @@
 
 - [x] Implement global font scaling option.
 - [x] Implement inline creator component for missing master data.
+- [ ] Extend InlineCreator for Supplier creation
+- [ ] Implement GrandTotal.AmountText using HungarianNumberConverter
+- [ ] Finalize InvoiceItemsViewModel placeholder row logic
+- [ ] Provide initialization logic in InvoiceHeader, InvoiceSidebar, InvoiceItemsGrid, InvoiceSummary views
+- [ ] Add unit tests for NavigationService dialogs

@@ -17,6 +17,8 @@ Az **Alt+L** menüben választható ki a Dátum, Szállító, Termékcsoport vag
 Az **Alt+T** menüben a Szállítók és Termékek ablakok érhetők el. Új rekord az **Insert**, módosítás mentése az **F2**, törlés a **Del** billentyűvel végezhető.
 
 ## Számlatételek kezelése
+A végösszeg alatt megjelenik az összeg szöveges formában is,
+amit a HungarianNumberConverter számít ki.
 A tételek alatti **Hozzáadás** gomb (vagy Enter az utolsó mezőben) rögzíti az új sort.
 Ha kötelező mező hiányzik, a sor piros háttérrel jelzi a hibát.
 Ha a termék neve nincs a törzsben, Enterrel megnyílik egy sor alatti gyors űrlap,

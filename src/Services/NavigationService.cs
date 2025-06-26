@@ -6,6 +6,7 @@ namespace Wrecept.Services;
 
 public class NavigationService : INavigationService
 {
+    protected virtual void ShowDialog(Window view) => view.ShowDialog();
     public void ShowInvoiceListView()
     {
         var invoices = WreceptAppContext.InvoiceService.GetAllAsync().Result;
@@ -19,7 +20,7 @@ public class NavigationService : INavigationService
         };
         view.Loaded += (_, _) => vm.OnLoaded();
         Infrastructure.AppContext.InputLocked = true;
-        view.ShowDialog();
+        ShowDialog(view);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -32,7 +33,7 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         Infrastructure.AppContext.InputLocked = true;
-        view.ShowDialog();
+        ShowDialog(view);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -45,7 +46,7 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         Infrastructure.AppContext.InputLocked = true;
-        view.ShowDialog();
+        ShowDialog(view);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -58,7 +59,7 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         Infrastructure.AppContext.InputLocked = true;
-        view.ShowDialog();
+        ShowDialog(view);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -71,7 +72,7 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         Infrastructure.AppContext.InputLocked = true;
-        dlg.ShowDialog();
+        ShowDialog(dlg);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -84,7 +85,7 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         Infrastructure.AppContext.InputLocked = true;
-        dlg.ShowDialog();
+        ShowDialog(dlg);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -97,7 +98,7 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         Infrastructure.AppContext.InputLocked = true;
-        dlg.ShowDialog();
+        ShowDialog(dlg);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -110,7 +111,7 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         Infrastructure.AppContext.InputLocked = true;
-        dlg.ShowDialog();
+        ShowDialog(dlg);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -118,7 +119,7 @@ public class NavigationService : INavigationService
     {
         var view = new Wrecept.Views.Help.HelpWindow { Owner = Application.Current.MainWindow };
         Infrastructure.AppContext.InputLocked = true;
-        view.ShowDialog();
+        ShowDialog(view);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -126,7 +127,7 @@ public class NavigationService : INavigationService
     {
         var view = new Wrecept.Views.Help.AboutWindow { Owner = Application.Current.MainWindow };
         Infrastructure.AppContext.InputLocked = true;
-        view.ShowDialog();
+        ShowDialog(view);
         Infrastructure.AppContext.InputLocked = false;
     }
 
@@ -134,7 +135,7 @@ public class NavigationService : INavigationService
     {
         var overlay = new Wrecept.Views.OnboardingOverlay { Owner = Application.Current.MainWindow };
         Infrastructure.AppContext.InputLocked = true;
-        overlay.ShowDialog();
+        ShowDialog(overlay);
         Infrastructure.AppContext.InputLocked = false;
     }
 
