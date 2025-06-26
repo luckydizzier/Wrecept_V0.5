@@ -27,8 +27,8 @@
 
 ### Dátum szűrő dialógus
 1. A "Listák" menüben a **Dátum alapú keresés** pont választása megnyit egy kis ablakot két DatePicker mezővel.
-2. A "Kezdő dátum" és "Záró dátum" mezők Tab sorrendben elérhetők, Enterrel aktiválható a **Szűrés** gomb.
-3. `Esc` bármikor bezárja a dialógust változtatás nélkül.
+2. A "Kezdő dátum" és "Záró dátum" mezők Tab sorrendben elérhetők, Enter bármelyik mezőn aktiválja a **Szűrés** gombot.
+3. `Esc` bármikor bezárja a dialógust változtatás nélkül a **Mégse** gombon keresztül.
 4. A Szűrés gomb a kiválasztott tartomány alapján frissíti a számlalistát és a fókuszt visszaadja a főablaknak.
 
 ## Invoice Editor Focus Flow

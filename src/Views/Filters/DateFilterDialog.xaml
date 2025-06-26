@@ -19,8 +19,8 @@
         <TextBlock x:Uid="EndDate_Label" Grid.Row="1" Grid.Column="0" Text="{DynamicResource EndDate_Label}" Margin="{DynamicResource MarginTopSmallRightSmallBottomSmall}"/>
         <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding ToDate}" TabIndex="1"/>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">
-            <Button x:Uid="Filter_Button" Content="{DynamicResource Filter_Button}" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" />
-            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="3" />
+            <Button x:Uid="Filter_Button" Content="{DynamicResource Filter_Button}" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" IsDefault="True" />
+            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="3" IsCancel="True" />
         </StackPanel>
     </Grid>
 </Window>
