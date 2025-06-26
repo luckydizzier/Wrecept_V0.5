@@ -34,8 +34,8 @@
 
 - [ ] **Removed:** global font scaling option dropped due to WPF limitations.
 - [x] Implement inline creator component for missing master data.
-- [ ] Extend InlineCreator for Supplier creation
-- [ ] Implement GrandTotal.AmountText using HungarianNumberConverter
-- [ ] Finalize InvoiceItemsViewModel placeholder row logic
-- [ ] Provide initialization logic in InvoiceHeader, InvoiceSidebar, InvoiceItemsGrid, InvoiceSummary views
-- [ ] Add unit tests for NavigationService dialogs
+- [x] Extend InlineCreator for Supplier creation
+- [x] Implement GrandTotal.AmountText using HungarianNumberConverter
+- [x] Finalize InvoiceItemsViewModel placeholder row logic
+- [x] Provide initialization logic in InvoiceHeader, InvoiceSidebar, InvoiceItemsGrid, InvoiceSummary views
+- [x] Add unit tests for NavigationService dialogs

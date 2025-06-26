@@ -46,7 +46,7 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Inline creator component for quick product entry. [Done]
 
 ## M6: Post Release Cleanup
-- Extend InlineCreator for Supplier master data.
-- Implement Hungarian number-to-text conversion for invoice totals.
-- Finalize placeholder row logic and invoice part initialization.
-- Add unit tests for NavigationService dialogs.
+- Extend InlineCreator for Supplier master data. [Done]
+- Implement Hungarian number-to-text conversion for invoice totals. [Done]
+- Finalize placeholder row logic and invoice part initialization. [Done]
+- Add unit tests for NavigationService dialogs. [Done]
