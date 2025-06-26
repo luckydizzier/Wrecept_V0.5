@@ -5,13 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wrecept"
         xmlns:vm="clr-namespace:Wrecept.ViewModels"
+        xmlns:views="clr-namespace:Wrecept.Views"
         mc:Ignorable="d"
         Title="Főablak" WindowStartupLocation="CenterScreen" Height="450" Width="800"
         DataContext="{DynamicResource MainWindowViewModel}"
         PreviewKeyDown="MainWindow_OnPreviewKeyDown">
-    <Window.Resources>
-        <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
-    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding ShowOnboardingOverlayCommand}" />
     </Window.InputBindings>
@@ -22,38 +20,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Menu x:Name="MenuBar" Grid.Row="0">
-            <MenuItem Header="_Számlák" InputGestureText="Alt+S">
-                <MenuItem Header="Számlák kezelése" Command="{Binding OpenInvoiceListViewCommand}" />
-                <MenuItem Header="Számlák aktualizálása" Command="{Binding RefreshInvoiceDataCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Törzsek" InputGestureText="Alt+T">
-                <MenuItem Header="Szállítók" Command="{Binding OpenSupplierViewCommand}" />
-                <MenuItem Header="Termékek" Command="{Binding OpenProductViewCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Listák" InputGestureText="Alt+L">
-                <MenuItem Header="Dátum alapú keresés" Command="{Binding FilterByDateViewCommand}" />
-                <MenuItem Header="Szállító alapú keresés" Command="{Binding FilterBySupplierViewCommand}" />
-                <MenuItem Header="Termékcsoport alapú keresés" Command="{Binding FilterByProductGroupViewCommand}" />
-                <MenuItem Header="Termék alapú keresés" Command="{Binding FilterByProductViewCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Súgó" InputGestureText="Alt+H">
-                <MenuItem Header="Billentyűk" Command="{Binding ShowOnboardingOverlayCommand}" InputGestureText="F1" />
-                <MenuItem Header="Súgó" Command="{Binding OpenHelpViewCommand}" />
-                <MenuItem Header="Névjegy" Command="{Binding OpenAboutDialogCommand}" />
-                <MenuItem Header="Beállítások" Command="{Binding OpenSettingsViewCommand}" />
-                <MenuItem Header="_Bővítmények" ItemsSource="{Binding PluginMenuItems}">
-                    <MenuItem.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Header" Value="{Binding Header}" />
-                            <Setter Property="Command" Value="{Binding Command}" />
-                        </Style>
-                    </MenuItem.ItemContainerStyle>
-                </MenuItem>
-                <Separator />
-                <MenuItem Header="Kilépés" Command="{Binding ExitApplicationCommand}" />
-            </MenuItem>
-        </Menu>
+        <views:MainMenu x:Name="MenuBar" Grid.Row="0" />
         <TextBlock Grid.Row="1" Text="{Binding Greeting}" Margin="10" />
         <DataGrid x:Name="InvoiceGrid"
                   Grid.Row="2"

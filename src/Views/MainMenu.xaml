@@ -1,0 +1,41 @@
+<UserControl x:Class="Wrecept.Views.MainMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Wrecept.ViewModels"
+             x:Name="Root">
+    <UserControl.Resources>
+        <!-- inherits DataContext from usage -->
+    </UserControl.Resources>
+    <Menu x:Name="MenuBar">
+        <MenuItem Header="_Számlák" InputGestureText="Alt+S">
+            <MenuItem Header="Számlák kezelése" Command="{Binding OpenInvoiceListViewCommand}" />
+            <MenuItem Header="Számlák aktualizálása" Command="{Binding RefreshInvoiceDataCommand}" />
+        </MenuItem>
+        <MenuItem Header="_Törzsek" InputGestureText="Alt+T">
+            <MenuItem Header="Szállítók" Command="{Binding OpenSupplierViewCommand}" />
+            <MenuItem Header="Termékek" Command="{Binding OpenProductViewCommand}" />
+        </MenuItem>
+        <MenuItem Header="_Listák" InputGestureText="Alt+L">
+            <MenuItem Header="Dátum alapú keresés" Command="{Binding FilterByDateViewCommand}" />
+            <MenuItem Header="Szállító alapú keresés" Command="{Binding FilterBySupplierViewCommand}" />
+            <MenuItem Header="Termékcsoport alapú keresés" Command="{Binding FilterByProductGroupViewCommand}" />
+            <MenuItem Header="Termék alapú keresés" Command="{Binding FilterByProductViewCommand}" />
+        </MenuItem>
+        <MenuItem Header="_Súgó" InputGestureText="Alt+H">
+            <MenuItem Header="Billentyűk" Command="{Binding ShowOnboardingOverlayCommand}" InputGestureText="F1" />
+            <MenuItem Header="Súgó" Command="{Binding OpenHelpViewCommand}" />
+            <MenuItem Header="Névjegy" Command="{Binding OpenAboutDialogCommand}" />
+            <MenuItem Header="Beállítások" Command="{Binding OpenSettingsViewCommand}" />
+            <MenuItem Header="_Bővítmények" ItemsSource="{Binding PluginMenuItems}">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Header}" />
+                        <Setter Property="Command" Value="{Binding Command}" />
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Kilépés" Command="{Binding ExitApplicationCommand}" />
+        </MenuItem>
+    </Menu>
+</UserControl>

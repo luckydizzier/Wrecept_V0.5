@@ -1,13 +1,15 @@
-﻿<Application x:Class="Wrecept.App"
+<Application x:Class="Wrecept.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Wrecept">
+             xmlns:local="clr-namespace:Wrecept"
+             xmlns:vm="clr-namespace:Wrecept.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Wrecept;component/Themes/Light.xaml" />
                 <ResourceDictionary Source="/Wrecept;component/Resources/Strings.hu.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
