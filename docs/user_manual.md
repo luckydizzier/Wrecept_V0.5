@@ -37,6 +37,7 @@ Az **Alt+H** menüben található a **Billentyűk** pont (F1), a Súgó és a N�
 
 ## Beállítások és Témák
 Az **Alt+H → Beállítások** menüpont nyitja meg a konfigurációs ablakot, ahol a Light vagy Dark téma és az alkalmazás nyelve választható ki. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.
+Enter bármelyik mezőn azonnal érvényesíti a változtatásokat, Esc pedig megszakítja a műveletet.
 
 ## Hibakezelés
 Ha az alkalmazás nem tudja elérni a SQLite adatbázist, hibaüzenet jelenik meg,

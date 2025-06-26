@@ -16,8 +16,8 @@
             <ComboBoxItem Content="en" />
         </ComboBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">
-            <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" />
-            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="3" />
+            <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" IsDefault="True" />
+            <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="3" IsCancel="True" />
         </StackPanel>
     </StackPanel>
 </Window>

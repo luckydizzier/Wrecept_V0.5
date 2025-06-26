@@ -46,3 +46,4 @@
 - [x] Prevent placeholder selection when invoice list filter is empty
 - [x] Disable row addition in master data grids
 - [x] Handle IO errors when saving settings and exporting invoices
+- [x] Set default/cancel button behaviour for filter and settings dialogs
