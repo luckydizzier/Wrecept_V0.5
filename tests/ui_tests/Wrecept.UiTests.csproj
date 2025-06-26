@@ -5,6 +5,8 @@
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit" Version="2.5.1" />
@@ -29,37 +31,5 @@
   <ItemGroup>
     <EmbeddedResource Include="..\..\db\schema_v1.sql" Link="db\schema_v1.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\src\Infrastructure\GuidTypeHandler.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\..\src\Infrastructure\SqliteConnectionFactory.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\..\src\Infrastructure\SqliteMigrator.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\..\src\Infrastructure\SeedDataService.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\..\src\Infrastructure\SqliteInvoiceRepository.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\AppContext.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\AppDirectories.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\SqlitePaymentMethodRepository.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\SqliteProductGroupRepository.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\SqliteProductRepository.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\SqliteSupplierRepository.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\SqliteTaxRateRepository.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\SqliteUnitRepository.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\JsonSettingsService.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Infrastructure\\Settings.cs" LinkBase="Infrastructure" />
-    <Compile Include="..\\..\\src\\Services\\IKeyboardDialogService.cs" LinkBase="Services" />
-    <Compile Include="..\\..\\src\\Services\\KeyboardDialogService.cs" LinkBase="Services" />
-    <Compile Include="..\\..\\src\\Services\\INavigationService.cs" LinkBase="Services" />
-    <Compile Include="..\\..\\src\\Services\\NavigationService.cs" LinkBase="Services" />
-    <Compile Include="..\\..\\src\\Services\\ISettingsService.cs" LinkBase="Services" />
-    <Compile Include="..\..\src\ViewModels\ViewModelBase.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\RestorableListViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InvoiceEditorViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InvoiceSidebarViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InvoiceHeaderViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InvoiceItemsViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InvoiceItemRowViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InvoiceSummaryViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InlineCreatorViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InlineProductCreatorViewModel.cs" LinkBase="ViewModels" />
-    <Compile Include="..\..\src\ViewModels\InlineSupplierCreatorViewModel.cs" LinkBase="ViewModels" />
-  </ItemGroup>
+  <!-- Source files are included via project references; linking is no longer required. -->
 </Project>
