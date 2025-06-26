@@ -5,8 +5,8 @@
 - Add MIT license and initial documentation.
 
 ## M2: Cross-Platform Core
-- Create a .NET Standard library for business logic.
-- Ensure unit test coverage for core services.
+- Create a .NET Standard library for business logic. [Done]
+- Ensure unit test coverage for core services. [Done]
 
 ## M3: WPF UI Prototype
 - Integrate MVVM pattern with sample screens.
@@ -28,11 +28,11 @@
 - Enhanced SQLite error handling for locked or corrupt database.
 
 ## M4: Plugin Framework
-- Implement plugin loader and example plugin.
-- Define extension points and loading mechanism.
-- Document plugin API.
+- Implement plugin loader and example plugin. [Done]
+- Define extension points and loading mechanism. [Done]
+- Document plugin API. [Done]
 
 ## M5: Release Preparation
-- Build setup.sh automation script.
-- Publish single-file executable.
-- Generate Windows installer via Inno Setup.
+- Build setup.sh automation script. [Done]
+- Publish single-file executable. [Done]
+- Generate Windows installer via Inno Setup. [Done]
