@@ -10,7 +10,14 @@
             <ComboBoxItem Content="Light" />
             <ComboBoxItem Content="Dark" />
         </ComboBox>
-        <TextBlock x:Uid="Language_Label" Text="{DynamicResource Language_Label}" Margin="{DynamicResource SpacingMedium},{DynamicResource SpacingMedium},0,{DynamicResource SpacingSmall}" />
+        <TextBlock x:Uid="Language_Label" Text="{DynamicResource Language_Label}">
+            <TextBlock.Margin>
+                <Thickness Left="{DynamicResource SpacingMedium}"
+                           Top="{DynamicResource SpacingMedium}"
+                           Right="0"
+                           Bottom="{DynamicResource SpacingSmall}" />
+            </TextBlock.Margin>
+        </TextBlock>
         <ComboBox x:Uid="Language_Combo" SelectedValue="{Binding Language}" SelectedValuePath="Content" TabIndex="1">
             <ComboBoxItem Content="hu" />
             <ComboBoxItem Content="en" />
