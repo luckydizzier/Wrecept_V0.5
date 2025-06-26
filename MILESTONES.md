@@ -27,6 +27,9 @@
 - Acceptance no longer requires screenshot inclusion.
 - Global error handling with log file and in-memory fallback. [Done]
 - Enhanced SQLite error handling for locked or corrupt database.
+  - Message when the DB file is locked.
+  - Automatic recovery on corruption with `.bak` backup.
+  - Missing file recreated on startup.
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin. [Done]

@@ -86,5 +86,16 @@ public class AppContextInitializeTests : IDisposable
         Assert.True(AppContext.IsDatabaseCorrupt(notadb));
         Assert.False(AppContext.IsDatabaseCorrupt(other));
     }
-}
 
+    [Fact]
+    public void IsDatabaseLocked_ShouldDetectErrorCodes()
+    {
+        var locked1 = new SqliteException("locked", 5);
+        var locked2 = new SqliteException("busy", 6);
+        var other = new SqliteException("ok", 1);
+
+        Assert.True(AppContext.IsDatabaseLocked(locked1));
+        Assert.True(AppContext.IsDatabaseLocked(locked2));
+        Assert.False(AppContext.IsDatabaseLocked(other));
+    }
+}
