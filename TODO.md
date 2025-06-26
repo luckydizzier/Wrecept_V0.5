@@ -39,3 +39,5 @@
 - [x] Finalize InvoiceItemsViewModel placeholder row logic
 - [x] Provide initialization logic in InvoiceHeader, InvoiceSidebar, InvoiceItemsGrid, InvoiceSummary views
 - [x] Add unit tests for NavigationService dialogs
+
+- [ ] Implement lookup dialogs for master data fields (product, supplier, product group, unit)
