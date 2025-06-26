@@ -1,6 +1,7 @@
 # Development Setup
 
 ## Required Tools
+- Windows 10 or later (build and tests require the Windows Desktop SDK)
 - .NET SDK 8.0 or newer
 - SQLite command-line tools
 - Bash shell (for `setup.sh`)
