@@ -45,6 +45,6 @@
 4. `Esc` bármelyik nézetben bezárja az ablakot és a státusz sorban megjelenik **"Fókusz: főmenü"**.
 5. `Ctrl+S` menti a módosításokat.
 6. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
-7. Az ablak felső részén a főmenü jelenik meg, alul pedig egy funkciósor a következő gombokkal: **Mentés**, **Nyomtatás**, **Bezárás**, **Export**.
+7. A felső menüsor navigációs célú (pl. Törzsek, Listák), az alsó eszköztár akcióorientált: **Mentés**, **Nyomtatás**, **Bezárás**, **Export**.
 8. A tételgrid mellett egy ➕ gomb helyezkedik el, amely az `AddItemCommand`-hez van kötve.
 9. Az új sor csak akkor kerül mentésre, ha minden mező kitöltött; hibás mező piros háttérrel jelölve.
