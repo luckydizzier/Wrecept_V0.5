@@ -50,3 +50,7 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Implement Hungarian number-to-text conversion for invoice totals. [Done]
 - Finalize placeholder row logic and invoice part initialization. [Done]
 - Add unit tests for NavigationService dialogs. [Done]
+## M7: Entity Lookup Integration
+- Lookup dialogs accessible from name fields (Product, Supplier, Product Group, Unit).
+- Keyboard navigation with F3, Enter and Esc.
+- Documentation and tests for new feature.
