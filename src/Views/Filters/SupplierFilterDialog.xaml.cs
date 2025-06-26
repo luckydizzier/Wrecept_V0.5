@@ -1,10 +1,11 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.Infrastructure;
 
 namespace Wrecept.Views.Filters;
 
-public partial class SupplierFilterDialog : Window
+public partial class SupplierFilterDialog : UserControl
 {
     public SupplierFilterDialog()
     {
@@ -16,12 +17,12 @@ public partial class SupplierFilterDialog : Window
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = false;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
             Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
         }
         else if (e.Key == Key.Enter)
         {
-            DialogResult = true;
+            // Enter handled by default button
         }
     }
 }

@@ -1,8 +1,6 @@
-<Window x:Class="Wrecept.Views.Lookup.LookupDialog"
+<UserControl x:Class="Wrecept.Views.Lookup.LookupDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource LookupDialog_Title}" Height="400" Width="300"
-        WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
         KeyDown="Window_KeyDown">
     <Grid Margin="{DynamicResource SpacingLarge}">
         <Grid.RowDefinitions>
@@ -17,4 +15,4 @@
             <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>

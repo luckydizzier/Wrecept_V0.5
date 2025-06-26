@@ -1,12 +1,6 @@
-<Window x:Class="Wrecept.Views.OnboardingOverlay"
+<UserControl x:Class="Wrecept.Views.OnboardingOverlay"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="#80000000"
-        ShowInTaskbar="False"
-        SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterOwner"
         KeyDown="Window_OnKeyDown">
     <Border Background="White" Opacity="0.9" Padding="{DynamicResource SpacingLarge}">
         <StackPanel>
@@ -18,4 +12,4 @@
             <Button x:Uid="CloseSimple_Button" Content="{DynamicResource CloseSimple_Button}" Click="OnClose" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}" TabIndex="0" IsDefault="True" FontSize="{DynamicResource BaseFontSize}" />
         </StackPanel>
     </Border>
-</Window>
+</UserControl>
