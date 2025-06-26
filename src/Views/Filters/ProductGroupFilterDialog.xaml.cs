@@ -16,12 +16,12 @@ public partial class ProductGroupFilterDialog : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = false;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
             Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
         }
         else if (e.Key == Key.Enter)
         {
-            DialogResult = true;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 }

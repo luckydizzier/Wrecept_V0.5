@@ -84,8 +84,19 @@ namespace Wrecept
 
             if (settings.ShowOnboarding)
             {
-                var overlay = new Views.OnboardingOverlay { Owner = mainWindow };
-                overlay.ShowDialog();
+                var overlay = new Views.OnboardingOverlay();
+                var window = new Window
+                {
+                    Content = overlay,
+                    Owner = mainWindow,
+                    WindowStyle = WindowStyle.None,
+                    AllowsTransparency = true,
+                    Background = System.Windows.Media.Brushes.Transparent,
+                    ShowInTaskbar = false,
+                    SizeToContent = SizeToContent.WidthAndHeight,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                window.ShowDialog();
                 settings.ShowOnboarding = false;
                 _ = Infrastructure.AppContext.SettingsService.SaveAsync(settings);
             }

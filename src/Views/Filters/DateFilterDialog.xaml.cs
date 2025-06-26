@@ -16,7 +16,7 @@ public partial class DateFilterDialog : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = false;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
             Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
         }
     }
