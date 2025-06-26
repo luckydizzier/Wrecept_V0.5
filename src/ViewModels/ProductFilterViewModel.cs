@@ -34,17 +34,15 @@ public partial class ProductFilterViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task ApplyAsync(object window)
+    private async Task ApplyAsync()
     {
         await _apply(SelectedProduct?.Id);
-        if (window is System.Windows.Window w)
-            w.DialogResult = true;
+        Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 
     [RelayCommand]
-    private void Cancel(object window)
+    private void Cancel()
     {
-        if (window is System.Windows.Window w)
-            w.DialogResult = false;
+        Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 }

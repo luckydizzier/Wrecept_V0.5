@@ -1,10 +1,11 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.Infrastructure;
 
 namespace Wrecept.Views.Filters;
 
-public partial class DateFilterDialog : Window
+public partial class DateFilterDialog : UserControl
 {
     public DateFilterDialog()
     {
@@ -16,7 +17,7 @@ public partial class DateFilterDialog : Window
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = false;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
             Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
         }
     }

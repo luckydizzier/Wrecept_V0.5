@@ -1,10 +1,10 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.Infrastructure;
 
 namespace Wrecept.Views.Settings;
 
-public partial class SettingsWindow : Window
+public partial class SettingsWindow : UserControl
 {
     public SettingsWindow()
     {
@@ -16,8 +16,7 @@ public partial class SettingsWindow : Window
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = false;
-            Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 }

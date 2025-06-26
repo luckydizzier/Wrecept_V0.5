@@ -1,9 +1,9 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Wrecept.Views.Lookup;
 
-public partial class LookupDialog : Window
+public partial class LookupDialog : UserControl
 {
     public LookupDialog()
     {
@@ -15,12 +15,11 @@ public partial class LookupDialog : Window
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = false;
-            Wrecept.Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
+            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
         else if (e.Key == Key.Enter)
         {
-            DialogResult = true;
+            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 }
