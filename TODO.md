@@ -16,9 +16,9 @@
 - [x] Validate item entry and provide explicit "Hozzáadás" button.
 - [x] Expose database path helper and log location.
 - [x] Add global exception handling and in-memory startup fallback.
-- [ ] Detect locked SQLite file and display clear error message.
-- [ ] Offer recovery when database file is corrupt, creating a backup.
-- [ ] Create a new database automatically when the file is missing.
+- [x] Detect locked SQLite file and display clear error message.
+- [x] Offer recovery when database file is corrupt, creating a backup.
+- [x] Create a new database automatically when the file is missing.
 - [x] Implement keyboard-navigable menu system.
 - [x] Add filter dialogs for invoice list (date, supplier, product group, product).
 - [x] Implement CRUD views for Supplier and Product master data.

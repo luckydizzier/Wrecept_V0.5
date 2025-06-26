@@ -17,3 +17,10 @@ The application currently falls back to in-memory repositories when the SQLite d
 1. **CodeGen-CSharp** – Extend `AppContext` with recovery helpers and error-code checks. Update `App.xaml.cs` to ask the user on corruption.
 2. **TestWriter** – Unit tests covering corrupt file detection and recovery.
 3. **DocWriter** – Document the new behaviour in `user_manual.md`.
+
+## Implementation Summary
+- `AppContext.Initialize()` now creates the database file when missing and reports any `SqliteException`.
+- `AppContext.IsDatabaseLocked` recognises error codes 5 and 6.
+- `AppContext.IsDatabaseCorrupt` recognises error codes 11 and 26 and triggers `.bak` recovery via `TryRecoverDatabase()`.
+- `App.xaml.cs` displays a friendly warning for locked files and offers recovery for corrupt ones.
+- Documentation references the domain model overview in `docs/architecture.md` for clarity.

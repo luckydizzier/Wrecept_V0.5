@@ -23,6 +23,7 @@ Ha kötelező mező hiányzik, a sor piros háttérrel jelzi a hibát.
 ## Bővítmények menü
 A **Súgó → Bővítmények** alatt jelennek meg a `Plugins` mappából betöltött modulok.
 Az egyes bővítmények saját párbeszédet vagy műveletet indíthatnak.
+Részletesebb ismertetés: [plugin_command_bar.md](plugin_command_bar.md).
 
 ## Beállítások és Témák
 A **Beállítások** ablakban választható ki a Light vagy Dark téma. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.

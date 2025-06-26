@@ -47,4 +47,21 @@ public class InvoiceItemsViewModelTests
         Assert.False(valid);
         Assert.True(row.HasError);
     }
+
+    [Fact]
+    public void Validate_ShouldFail_WhenUnitPriceZero()
+    {
+        var row = new InvoiceItemRowViewModel
+        {
+            ProductName = "Test",
+            Quantity = 1,
+            UnitName = "db",
+            UnitPriceNet = 0m
+        };
+
+        var valid = row.Validate();
+
+        Assert.False(valid);
+        Assert.True(row.HasError);
+    }
 }

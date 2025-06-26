@@ -14,6 +14,18 @@
 
     <DockPanel>
         <views:MainMenu DockPanel.Dock="Top" x:Name="MenuBar" DataContext="{DynamicResource MainWindowViewModel}" />
+        <Border DockPanel.Dock="Top" Background="{DynamicResource ErrorBrush}" Padding="5" Visibility="Collapsed">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDatabaseAvailable}" Value="False">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <TextBlock Text="Adatbázis hiba - a módosítások nem kerülnek mentésre." Foreground="White" />
+        </Border>
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,5,0" />
