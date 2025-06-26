@@ -24,15 +24,27 @@ public partial class InvoiceItemsGrid : UserControl
 
     private void ItemsGrid_OnKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter && ItemsGrid.SelectedIndex == 0 && ItemsGrid.CurrentColumn.DisplayIndex == 4)
+        if (DataContext is InvoiceItemsViewModel vm)
         {
-            if (DataContext is InvoiceItemsViewModel vm && vm.AddItemCommand.CanExecute(null))
+            if (e.Key == Key.Enter && ItemsGrid.SelectedIndex == 0 && ItemsGrid.CurrentColumn.DisplayIndex == 0)
             {
-                vm.AddItemCommand.Execute(null);
-                ItemsGrid.SelectedIndex = 0;
-                ItemsGrid.CurrentCell = new DataGridCellInfo(ItemsGrid.Items[0], ItemsGrid.Columns[0]);
-                ItemsGrid.BeginEdit();
-                e.Handled = true;
+                if (vm.TryOpenProductCreator())
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+
+            if (e.Key == Key.Enter && ItemsGrid.SelectedIndex == 0 && ItemsGrid.CurrentColumn.DisplayIndex == 4)
+            {
+                if (vm.AddItemCommand.CanExecute(null))
+                {
+                    vm.AddItemCommand.Execute(null);
+                    ItemsGrid.SelectedIndex = 0;
+                    ItemsGrid.CurrentCell = new DataGridCellInfo(ItemsGrid.Items[0], ItemsGrid.Columns[0]);
+                    ItemsGrid.BeginEdit();
+                    e.Handled = true;
+                }
             }
         }
     }

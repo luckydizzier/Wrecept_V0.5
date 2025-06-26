@@ -1,6 +1,7 @@
 <UserControl x:Class="Wrecept.Views.InvoiceParts.InvoiceItemsGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:inline="clr-namespace:Wrecept.Views.Inline">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -14,11 +15,27 @@
               RowHeight="{DynamicResource RowHeight}"
               Loaded="ItemsGrid_OnLoaded"
               KeyDown="ItemsGrid_OnKeyDown">
+        <DataGrid.Style>
+            <Style TargetType="DataGrid">
+                <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ProductCreator}" Value="{x:Null}">
+                        <Setter Property="RowDetailsVisibilityMode" Value="Collapsed" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.Style>
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <inline:InlineProductCreator DataContext="{Binding DataContext.ProductCreator, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsPlaceholder}" Value="True">
                         <Setter Property="Background" Value="{DynamicResource TableRowHighlightBrush}" />
+                        <Setter Property="FontStyle" Value="Italic" />
                     </DataTrigger>
                     <DataTrigger Binding="{Binding HasError}" Value="True">
                         <Setter Property="Background" Value="{DynamicResource ErrorBrush}" />

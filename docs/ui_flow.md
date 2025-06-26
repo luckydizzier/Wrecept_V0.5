@@ -48,3 +48,7 @@
 7. A felső menüsor navigációs célú (pl. Törzsek, Listák), az alsó eszköztár akcióorientált: **Mentés**, **Nyomtatás**, **Bezárás**, **Export**.
 8. A tételgrid mellett egy ➕ gomb helyezkedik el, amely az `AddItemCommand`-hez van kötve.
 9. Az új sor csak akkor kerül mentésre, ha minden mező kitöltött; hibás mező piros háttérrel jelölve.
+10. Ha a termék neve ismeretlen és Entert nyomunk, a sor alatt megjelenik egy inline űrlap.
+    - A formon Termékcsoport, Mértékegység, Egységár és ÁFA adható meg.
+    - Enter menti, Escape elveti; siker esetén a termék bekerül a listába és kiválasztódik.
+    - A tervezett sor dőlt betűvel (ghost row) látszik.

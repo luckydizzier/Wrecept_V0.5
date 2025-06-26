@@ -12,3 +12,9 @@ Wrecept használata során a legfontosabb entitások az alábbiak:
 Ezek a típusok a `Wrecept.Core.CoreLib` projekt `Domain` mappájában
 `record class` formában találhatók. A szolgáltatások és tárolók ezekre
 épülnek, így a modell egy helyen, bővíthetően karbantartható.
+
+## InlineCreator komponens
+Az `InvoiceItemsGrid` speciális esete, amikor a beírt terméknév még nem létezik.
+Ilyenkor egy újrahasználható **InlineCreator** jelenik meg soron belül, ahol a
+kiegészítő mezőket Enterrel menthetjük, Esc kilép. A komponens ViewModelje
+generikus, így később beszállító vagy fizetési mód rögzítésére is alkalmazható.
