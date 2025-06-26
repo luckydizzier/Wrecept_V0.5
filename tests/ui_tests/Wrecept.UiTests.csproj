@@ -33,6 +33,21 @@
     <Compile Include="..\..\src\Infrastructure\SqliteMigrator.cs" LinkBase="Infrastructure" />
     <Compile Include="..\..\src\Infrastructure\SeedDataService.cs" LinkBase="Infrastructure" />
     <Compile Include="..\..\src\Infrastructure\SqliteInvoiceRepository.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\AppContext.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\AppDirectories.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\SqlitePaymentMethodRepository.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\SqliteProductGroupRepository.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\SqliteProductRepository.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\SqliteSupplierRepository.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\SqliteTaxRateRepository.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\SqliteUnitRepository.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\JsonSettingsService.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Infrastructure\\Settings.cs" LinkBase="Infrastructure" />
+    <Compile Include="..\\..\\src\\Services\\IKeyboardDialogService.cs" LinkBase="Services" />
+    <Compile Include="..\\..\\src\\Services\\KeyboardDialogService.cs" LinkBase="Services" />
+    <Compile Include="..\\..\\src\\Services\\INavigationService.cs" LinkBase="Services" />
+    <Compile Include="..\\..\\src\\Services\\NavigationService.cs" LinkBase="Services" />
+    <Compile Include="..\\..\\src\\Services\\ISettingsService.cs" LinkBase="Services" />
     <Compile Include="..\..\src\ViewModels\ViewModelBase.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\RestorableListViewModel.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\InvoiceEditorViewModel.cs" LinkBase="ViewModels" />
