@@ -1,18 +1,18 @@
 # TODO
 
 - [x] Add MIT License file.
-- [ ] Separate cross-platform core into new library project.
-- [ ] Add unit test project using xUnit.
-- [ ] Create setup.sh for build and test automation.
-- [ ] Document build and test procedure.
+- [x] Separate cross-platform core into new library project.
+- [x] Add unit test project using xUnit.
+- [x] Create setup.sh for build and test automation.
+- [x] Document build and test procedure.
 - [x] Define plugin architecture specification.
-- [ ] Ensure progress logs stored under docs/progress.
-- [ ] Implement plugin loader in Wrecept.Core.
-- [ ] Provide sample IMenuPlugin implementation.
+- [x] Ensure progress logs stored under docs/progress.
+- [x] Implement plugin loader in Wrecept.Core.
+- [x] Provide sample IMenuPlugin implementation.
 - [x] Implement invoice list keyboard navigation and creation flow.
 - [x] Implement UX failsafe logic for invoice navigation.
 - [ ] Redesign invoice editor layout with summary tables and keyboard flow.
-- [ ] Expose database path helper and log location.
+- [x] Expose database path helper and log location.
 - [x] Add global exception handling and in-memory startup fallback.
 - [ ] Enhance SQLite error handling (locked file, corruption recovery, missing file).
 - [x] Implement keyboard-navigable menu system.
