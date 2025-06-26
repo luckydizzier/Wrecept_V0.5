@@ -5,16 +5,18 @@ namespace Wrecept.Services;
 
 public interface INavigationService
 {
+    void SetHost(ViewModels.MainWindowViewModel host);
     Task ShowInvoiceListViewAsync();
     void ShowSupplierView();
     void ShowProductView();
     void ShowSettingsView();
-    void ShowFilterByDateView(Func<DateOnly?, DateOnly?, Task> applyFilter);
-    void ShowFilterBySupplierView(Func<Guid?, Task> applyFilter);
-    void ShowFilterByProductGroupView(Func<Guid?, Task> applyFilter);
-    void ShowFilterByProductView(Func<Guid?, Task> applyFilter);
+    void ShowFilterByDateView();
+    void ShowFilterBySupplierView();
+    void ShowFilterByProductGroupView();
+    void ShowFilterByProductView();
     void ShowHelpView();
     void ShowAboutDialog();
     void ShowOnboardingOverlay();
+    void CloseCurrentView();
     void ExitApplication();
 }

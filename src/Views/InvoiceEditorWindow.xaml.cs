@@ -1,8 +1,8 @@
 namespace Wrecept.Views;
 
-using System.Windows;
+using System.Windows.Controls;
 
-public partial class InvoiceEditorWindow : Window
+public partial class InvoiceEditorWindow : UserControl
 {
     public InvoiceEditorWindow()
     {
@@ -29,7 +29,7 @@ public partial class InvoiceEditorWindow : Window
             e.PropertyName == nameof(ViewModels.InvoiceEditorViewModel.ExitRequested) &&
             vm.ExitRequested)
         {
-            Close();
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 }

@@ -18,32 +18,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <views:MainMenu x:Name="MenuBar" Grid.Row="0" />
         <TextBlock Grid.Row="1" Text="{Binding Greeting}" Margin="10" />
-        <DataGrid x:Name="InvoiceGrid"
-                  Grid.Row="2"
-                  ItemsSource="{Binding Invoices}"
-                  SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
-                  AutoGenerateColumns="False"
-                  TabIndex="0"
-                  Margin="10"
-                  PreviewKeyDown="InvoiceGrid_OnPreviewKeyDown">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{DynamicResource Sequence_Header}" Binding="{Binding SerialNumber}" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Grid Grid.Row="3" Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding StatusMessage}" VerticalAlignment="Center" />
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Uid="NewInvoice_Button" Content="{DynamicResource NewInvoice_Button}" Command="{Binding AddInvoiceCommand}" Margin="0,0,5,0" />
-                <Button x:Uid="Delete_Button" Content="{DynamicResource Delete_Button}" Command="{Binding DeleteInvoiceCommand}" CommandParameter="{Binding SelectedInvoice}" />
-            </StackPanel>
-        </Grid>
+        <ContentControl Grid.Row="2" Content="{Binding CurrentView}" />
     </Grid>
 </Window>

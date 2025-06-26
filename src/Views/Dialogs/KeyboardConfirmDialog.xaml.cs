@@ -1,9 +1,9 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Wrecept.Views.Dialogs;
 
-public partial class KeyboardConfirmDialog : Window
+public partial class KeyboardConfirmDialog : UserControl
 {
     public KeyboardConfirmDialog(string message = "Create new invoice? (I: Yes, N or Esc: No)")
     {
@@ -17,11 +17,11 @@ public partial class KeyboardConfirmDialog : Window
         base.OnPreviewKeyDown(e);
         if (e.Key == Key.I || e.Key == Key.Enter)
         {
-            DialogResult = true;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
         else if (e.Key == Key.N || e.Key == Key.Escape)
         {
-            DialogResult = false;
+            Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 }

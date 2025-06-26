@@ -21,17 +21,15 @@ public partial class DateFilterViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task ApplyAsync(object window)
+    private async Task ApplyAsync()
     {
         await _applyFilter(FromDate, ToDate);
-        if (window is System.Windows.Window w)
-            w.DialogResult = true;
+        Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 
     [RelayCommand]
-    private void Cancel(object window)
+    private void Cancel()
     {
-        if (window is System.Windows.Window w)
-            w.DialogResult = false;
+        Infrastructure.AppContext.NavigationService.CloseCurrentView();
     }
 }
