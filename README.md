@@ -115,5 +115,6 @@ Teljes magyar útmutató: [docs/dev_setup_hu.md](docs/dev_setup_hu.md)
 
 Felhasználói útmutató (HU): [docs/user_manual.md](docs/user_manual.md)
 User manual (EN): [docs/user_manual_en.md](docs/user_manual_en.md)
+Plugin API: [docs/plugin_api.md](docs/plugin_api.md) – menü bővítmények létrehozása és telepítése
 
 Licensed under the MIT License.
