@@ -1,9 +1,9 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Wrecept.Views.Help;
 
-public partial class HelpWindow : Window
+public partial class HelpWindow : UserControl
 {
     public HelpWindow()
     {
@@ -14,7 +14,7 @@ public partial class HelpWindow : Window
     {
         if (e.Key == Key.Escape)
         {
-            DialogResult = true;
+            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
     }
 }
