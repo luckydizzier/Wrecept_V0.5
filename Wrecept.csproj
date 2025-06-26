@@ -45,6 +45,9 @@
     <Page Update="src/Resources/Strings.en.xaml">
       <Link>Resources/Strings.en.xaml</Link>
     </Page>
+    <Page Update="src/Views/Dialogs/KeyboardConfirmDialog.xaml">
+      <Link>Dialogs/KeyboardConfirmDialog.xaml</Link>
+    </Page>
   </ItemGroup>
 
 </Project>
