@@ -32,6 +32,7 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 
 - Offline-first, local-only execution
 - Fully keyboard-driven operation (F2, F5, F6, etc.)
+- Lookup dialogs (F2 vagy Ctrl+L) for termék, szállító, mértékegység és ÁFA kulcs
 - Rapid invoice entry with dynamic row addition
 - Searchable and filterable invoice list
 - VAT breakdown by percentage and totalization

@@ -95,6 +95,7 @@ public static class AppContext
     public static ITaxRateService TaxRateService { get; private set; } = null!;
     public static IUnitService UnitService { get; private set; } = null!;
     public static IKeyboardDialogService DialogService { get; private set; } = null!;
+    public static ILookupDialogPresenter LookupPresenter { get; private set; } = null!;
     public static INavigationService NavigationService { get; private set; } = null!;
     public static ISettingsService SettingsService { get; private set; } = null!;
     private static readonly List<IMenuPlugin> _menuPlugins = new();
@@ -162,6 +163,7 @@ public static class AppContext
         TaxRateService = new DefaultTaxRateService(taxRateRepo);
         UnitService = new DefaultUnitService(unitRepo);
         DialogService = new KeyboardDialogService();
+        LookupPresenter = new LookupDialogPresenter();
         NavigationService = new NavigationService();
         SettingsService = new JsonSettingsService();
 
@@ -174,6 +176,7 @@ public static class AppContext
         _services[typeof(ITaxRateService)] = TaxRateService;
         _services[typeof(IUnitService)] = UnitService;
         _services[typeof(IKeyboardDialogService)] = DialogService;
+        _services[typeof(ILookupDialogPresenter)] = LookupPresenter;
         _services[typeof(INavigationService)] = NavigationService;
         _services[typeof(ISettingsService)] = SettingsService;
     }

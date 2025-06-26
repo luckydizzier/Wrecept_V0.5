@@ -62,8 +62,15 @@ public partial class InvoiceEditorViewModel : ObservableObject
             Invoice,
             Array.Empty<string>(),
             Array.Empty<string>(),
-            Infrastructure.AppContext.SupplierService);
-        ItemsViewModel = new InvoiceItemsViewModel(Invoice);
+            Infrastructure.AppContext.SupplierService,
+            Infrastructure.AppContext.LookupPresenter);
+        ItemsViewModel = new InvoiceItemsViewModel(
+            Invoice,
+            Infrastructure.AppContext.ProductService,
+            Infrastructure.AppContext.ProductGroupService,
+            Infrastructure.AppContext.UnitService,
+            Infrastructure.AppContext.TaxRateService,
+            Infrastructure.AppContext.LookupPresenter);
         SummaryViewModel = new InvoiceSummaryViewModel(VatSummaries, GrandTotals);
     }
 

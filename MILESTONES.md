@@ -51,6 +51,6 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Finalize placeholder row logic and invoice part initialization. [Done]
 - Add unit tests for NavigationService dialogs. [Done]
 ## M7: Entity Lookup Integration
-- Lookup dialogs accessible from name fields (Product, Supplier, Product Group, Unit).
-- Keyboard navigation with F3, Enter and Esc.
+- Lookup dialogs accessible from name fields (Product, Supplier, Product Group, Unit, TaxRate).
+- Keyboard navigation with F2 or Ctrl+L, Enter to select, Esc to cancel.
 - Documentation and tests for new feature.

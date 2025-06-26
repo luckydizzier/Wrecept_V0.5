@@ -1,6 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Views.Lookup;
+using Wrecept.Services;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Wrecept.ViewModels;
 
@@ -12,14 +18,17 @@ public class InvoiceHeaderViewModel : ObservableObject
     public InlineSupplierCreatorViewModel? SupplierCreator { get; private set; }
 
     private readonly ISupplierService _supplierService;
+    private readonly ILookupDialogPresenter _lookupPresenter;
 
     public InvoiceHeaderViewModel(
         Invoice invoice,
         IEnumerable<string> paymentMethods,
         IEnumerable<string> calculationModes,
-        ISupplierService supplierService)
+        ISupplierService supplierService,
+        ILookupDialogPresenter lookupPresenter)
     {
         _supplierService = supplierService;
+        _lookupPresenter = lookupPresenter;
         Invoice = invoice;
         PaymentMethods = paymentMethods;
         CalculationModes = calculationModes;
@@ -54,5 +63,24 @@ public class InvoiceHeaderViewModel : ObservableObject
     {
         SupplierCreator = null;
         OnPropertyChanged(nameof(SupplierCreator));
+    }
+
+    public async Task<bool> OpenSupplierLookupAsync()
+    {
+        async Task<List<Supplier>> Search(string term)
+        {
+            var all = await _supplierService.GetAllAsync();
+            return all.Where(s => s.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        var vm = new LookupDialogViewModel<Supplier>(Search, s => s.Name);
+        var result = _lookupPresenter.ShowDialog(vm);
+        if (result == true && vm.SelectedItem != null)
+        {
+            Invoice.Supplier = vm.SelectedItem.Value;
+            OnPropertyChanged(nameof(Invoice));
+            return true;
+        }
+        return false;
     }
 }

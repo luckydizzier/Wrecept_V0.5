@@ -26,6 +26,18 @@ public partial class InvoiceItemsGrid : UserControl
     {
         if (DataContext is InvoiceItemsViewModel vm)
         {
+            if ((e.Key == Key.F2 || (e.Key == Key.L && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))) && ItemsGrid.SelectedIndex == 0)
+            {
+                if (ItemsGrid.CurrentColumn.DisplayIndex == 0)
+                    vm.OpenProductLookupAsync().GetAwaiter().GetResult();
+                else if (ItemsGrid.CurrentColumn.DisplayIndex == 2)
+                    vm.OpenUnitLookupAsync().GetAwaiter().GetResult();
+                else if (ItemsGrid.CurrentColumn.DisplayIndex == 4)
+                    vm.OpenTaxRateLookupAsync().GetAwaiter().GetResult();
+                e.Handled = true;
+                return;
+            }
+
             if (e.Key == Key.Enter && ItemsGrid.SelectedIndex == 0 && ItemsGrid.CurrentColumn.DisplayIndex == 0)
             {
                 if (vm.TryOpenProductCreator())

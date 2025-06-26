@@ -5,12 +5,12 @@ Current input fields for referencing related entities (e.g. product name, suppli
 
 ## Objectives
 - Provide a lookup dialog that lists existing entities and allows searching by name.
-- Invoke the lookup from any name field such as Product, Supplier, Product Group and Unit.
+- Invoke the lookup from any name field such as Product, Supplier, Product Group, Unit and TaxRate.
 - Selection fills the field and keeps focus within the editing context.
 - Seamlessly integrate with the inline creator for new entries.
 
 ## Constraints
-- Keyboard-only navigation: open via `F3`, navigate with arrows, confirm with `Enter`, cancel with `Esc`.
+- Keyboard-only navigation: open via `F2` or `Ctrl+L`, navigate with arrows, confirm with `Enter`, cancel with `Esc`.
 - Reuse existing services for data retrieval; no additional persistence layer.
 - UI text must remain Hungarian.
 

@@ -44,11 +44,29 @@
             </Style>
         </DataGrid.RowStyle>
         <DataGrid.Columns>
-            <DataGridTextColumn Header="Termék" Binding="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}" />
+            <DataGridTextColumn Header="Termék" Binding="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}">
+                <DataGridTextColumn.EditingElementStyle>
+                    <Style TargetType="TextBox">
+                        <Setter Property="ToolTip" Value="F2 vagy Ctrl+L: keresés" />
+                    </Style>
+                </DataGridTextColumn.EditingElementStyle>
+            </DataGridTextColumn>
             <DataGridTextColumn Header="Mennyiség" Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
-            <DataGridTextColumn Header="Egység" Binding="{Binding UnitName, UpdateSourceTrigger=PropertyChanged}" />
+            <DataGridTextColumn Header="Egység" Binding="{Binding UnitName, UpdateSourceTrigger=PropertyChanged}">
+                <DataGridTextColumn.EditingElementStyle>
+                    <Style TargetType="TextBox">
+                        <Setter Property="ToolTip" Value="F2 vagy Ctrl+L: keresés" />
+                    </Style>
+                </DataGridTextColumn.EditingElementStyle>
+            </DataGridTextColumn>
             <DataGridTextColumn Header="Egységár" Binding="{Binding UnitPriceNet, UpdateSourceTrigger=PropertyChanged}" />
-            <DataGridTextColumn Header="ÁFA %" Binding="{Binding VatRatePercent, UpdateSourceTrigger=PropertyChanged}" />
+            <DataGridTextColumn Header="ÁFA %" Binding="{Binding VatRatePercent, UpdateSourceTrigger=PropertyChanged}">
+                <DataGridTextColumn.EditingElementStyle>
+                    <Style TargetType="TextBox">
+                        <Setter Property="ToolTip" Value="F2 vagy Ctrl+L: keresés" />
+                    </Style>
+                </DataGridTextColumn.EditingElementStyle>
+            </DataGridTextColumn>
             <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" IsReadOnly="True" />
             <DataGridTextColumn Header="ÁFA" Binding="{Binding Vat}" IsReadOnly="True" />
             <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" IsReadOnly="True" />

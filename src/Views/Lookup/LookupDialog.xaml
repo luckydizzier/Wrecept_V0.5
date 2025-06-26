@@ -1,0 +1,20 @@
+<Window x:Class="Wrecept.Views.Lookup.LookupDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Keresés" Height="400" Width="300"
+        WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
+        KeyDown="Window_KeyDown">
+    <Grid Margin="{DynamicResource SpacingLarge}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBox x:Name="SearchBox" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Keresés" Margin="0,0,0,5" />
+        <ListBox Grid.Row="1" ItemsSource="{Binding Results}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="Display"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,0">
+            <Button Content="OK" Command="{Binding ConfirmCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="0,0,5,0" />
+            <Button Content="Mégse" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -14,10 +14,18 @@ public partial class InvoiceHeader : UserControl
 
     private void SupplierNameBox_OnKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter && DataContext is InvoiceHeaderViewModel vm)
+        if (DataContext is InvoiceHeaderViewModel vm)
         {
-            if (vm.TryOpenSupplierCreator())
+            if ((e.Key == Key.F2 || (e.Key == Key.L && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))))
+            {
+                vm.OpenSupplierLookupAsync().GetAwaiter().GetResult();
                 e.Handled = true;
+            }
+            else if (e.Key == Key.Enter)
+            {
+                if (vm.TryOpenSupplierCreator())
+                    e.Handled = true;
+            }
         }
     }
 }
