@@ -30,6 +30,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public IRelayCommand PrintCommand { get; }
     public IRelayCommand ExportCommand { get; }
     public IRelayCommand ExitToListCommand { get; }
+    public IRelayCommand CancelByEscCommand { get; }
     public bool ExitRequested { get; private set; }
     public bool ExitedByEsc { get; private set; }
     [ObservableProperty]
@@ -56,6 +57,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         PrintCommand = new RelayCommand(PrintInvoice);
         ExportCommand = new RelayCommand(ExportInvoice);
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
+        CancelByEscCommand = new RelayCommand(CancelByEsc);
 
         SidebarViewModel = new InvoiceSidebarViewModel(
             invoices ?? new ObservableCollection<Invoice>(),

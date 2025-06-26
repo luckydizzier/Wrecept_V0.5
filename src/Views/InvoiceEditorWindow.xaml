@@ -9,7 +9,7 @@
         Width="1000" Height="650">
     <Window.InputBindings>
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}" />
-        <KeyBinding Key="Escape" Command="{Binding ExitToListCommand}" />
+        <KeyBinding Key="Escape" Command="{Binding CancelByEscCommand}" />
     </Window.InputBindings>
 
     <DockPanel>
