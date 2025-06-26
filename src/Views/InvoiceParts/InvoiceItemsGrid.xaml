@@ -32,6 +32,6 @@
             <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" IsReadOnly="True" />
         </DataGrid.Columns>
         </DataGrid>
-        <Button Content="➕" Command="{Binding AddItemCommand}" HorizontalAlignment="Right" Margin="0,5,0,0" />
+        <Button Content="Hozzáadás" Command="{Binding AddItemCommand}" HorizontalAlignment="Right" Margin="0,5,0,0" TabIndex="1" />
     </StackPanel>
 </UserControl>

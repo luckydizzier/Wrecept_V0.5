@@ -13,11 +13,17 @@ public partial class InvoiceItemRowViewModel : ObservableObject
     [ObservableProperty]
     private string _productName = string.Empty;
 
+    partial void OnProductNameChanged(string value) => AutoValidate();
+
     [ObservableProperty]
     private decimal _quantity;
 
+    partial void OnQuantityChanged(decimal value) => AutoValidate();
+
     [ObservableProperty]
     private string _unitName = string.Empty;
+
+    partial void OnUnitNameChanged(string value) => AutoValidate();
 
     [ObservableProperty]
     private decimal _unitPriceNet;
@@ -51,6 +57,12 @@ public partial class InvoiceItemRowViewModel : ObservableObject
         UnitPriceNet = UnitPriceNet,
         VatRatePercent = VatRatePercent
     };
+
+    private void AutoValidate()
+    {
+        if (IsPlaceholder)
+            Validate();
+    }
 
     public void Clear()
     {

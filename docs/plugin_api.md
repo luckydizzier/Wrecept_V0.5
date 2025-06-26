@@ -27,3 +27,7 @@ The plugin class must have a parameterless constructor. It may show dialogs or p
 On the next start the loader discovers the new plugin and adds its menu item automatically.
 
 A minimal example is provided in `src/Wrecept.Plugin.Greeting`.
+
+## Upcoming Extensions
+Later milestones may introduce new interfaces for list or toolbar plugins.
+These will follow the same discovery rules and live under the `Wrecept.Core.Plugins` namespace.

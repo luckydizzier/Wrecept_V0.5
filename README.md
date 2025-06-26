@@ -112,6 +112,8 @@ dotnet test Wrecept.CoreOnly.sln
 
 See [docs/dev_setup.md](docs/dev_setup.md) for full details.
 Teljes magyar útmutató: [docs/dev_setup_hu.md](docs/dev_setup_hu.md)
+Áttekintő architektúra: [docs/architecture.md](docs/architecture.md)
+Témák kezelése: [docs/themes.md](docs/themes.md)
 
 Felhasználói útmutató (HU): [docs/user_manual.md](docs/user_manual.md)
 User manual (EN): [docs/user_manual_en.md](docs/user_manual_en.md)
