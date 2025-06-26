@@ -52,3 +52,4 @@
     - A formon Termékcsoport, Mértékegység, Egységár és ÁFA adható meg.
     - Enter menti, Escape elveti; siker esetén a termék bekerül a listába és kiválasztódik.
     - A tervezett sor dőlt betűvel (ghost row) látszik.
+11. F2 vagy Ctrl+L bármely név vagy egység mezőben kereső párbeszédet nyit.

@@ -6,6 +6,7 @@
 - **Alt+L** – Listák menü megnyitása
 - **Alt+H** – Súgó menü megnyitása
 - **F1** – Billentyűs útmutató megjelenítése
+- **F2** vagy **Ctrl+L** – törzsadat kereső felugró ablak
 - **PgUp/PgDn** – lista lapozása
 
 A menüpontokban a szokásos nyíl- és Enter billentyűkkel lehet navigálni. A Kilépés pont az alkalmazás bezárását végzi.
@@ -24,6 +25,7 @@ Ha kötelező mező hiányzik, a sor piros háttérrel jelzi a hibát.
 Ha a termék neve nincs a törzsben, Enterrel megnyílik egy sor alatti gyors űrlap,
 ahol megadhatjuk a hiányzó adatokat. A Mentés gomb (vagy Enter) azonnal
 felveszi a terméket és kitölti a tételmezőt; Esc bezárja a formot.
+F2 vagy Ctrl+L megnyitja a kereső dialógust, ahol a meglévő termékek, egységek vagy ÁFA kulcsok között válogathatunk.
 
 ## Bővítmények menü
 A **Súgó → Bővítmények** alatt jelennek meg a `Plugins` mappából betöltött modulok.
