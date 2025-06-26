@@ -36,7 +36,17 @@ public partial class InvoiceHeaderViewModel : ObservableObject
         _paymentMethodService = paymentMethodService;
         Invoice = invoice;
         CalculationModes = new[] { CalculationMode.Net, CalculationMode.Gross };
-        _ = LoadPaymentMethodsAsync();
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await LoadPaymentMethodsAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Infrastructure.AppContext.SetStatus(ex.Message);
+            }
+        });
     }
 
     private async Task LoadPaymentMethodsAsync()

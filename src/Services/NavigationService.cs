@@ -20,9 +20,10 @@ public class NavigationService : INavigationService
             Owner = Application.Current.MainWindow
         };
         view.Loaded += (_, _) => vm.OnLoaded();
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(view);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(view);
+        }
     }
 
     public void ShowSupplierView()
@@ -33,9 +34,10 @@ public class NavigationService : INavigationService
             DataContext = vm,
             Owner = Application.Current.MainWindow
         };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(view);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(view);
+        }
     }
 
     public void ShowProductView()
@@ -46,9 +48,10 @@ public class NavigationService : INavigationService
             DataContext = vm,
             Owner = Application.Current.MainWindow
         };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(view);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(view);
+        }
     }
 
     public void ShowSettingsView()
@@ -59,9 +62,10 @@ public class NavigationService : INavigationService
             DataContext = vm,
             Owner = Application.Current.MainWindow
         };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(view);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(view);
+        }
     }
 
     public void ShowFilterByDateView(Func<DateOnly?, DateOnly?, Task> applyFilter)
@@ -72,9 +76,10 @@ public class NavigationService : INavigationService
             DataContext = vm,
             Owner = Application.Current.MainWindow
         };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(dlg);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(dlg);
+        }
     }
 
     public void ShowFilterBySupplierView(Func<Guid?, Task> applyFilter)
@@ -85,9 +90,10 @@ public class NavigationService : INavigationService
             DataContext = vm,
             Owner = Application.Current.MainWindow
         };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(dlg);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(dlg);
+        }
     }
 
     public void ShowFilterByProductGroupView(Func<Guid?, Task> applyFilter)
@@ -98,9 +104,10 @@ public class NavigationService : INavigationService
             DataContext = vm,
             Owner = Application.Current.MainWindow
         };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(dlg);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(dlg);
+        }
     }
 
     public void ShowFilterByProductView(Func<Guid?, Task> applyFilter)
@@ -111,33 +118,37 @@ public class NavigationService : INavigationService
             DataContext = vm,
             Owner = Application.Current.MainWindow
         };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(dlg);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(dlg);
+        }
     }
 
     public void ShowHelpView()
     {
         var view = new Wrecept.Views.Help.HelpWindow { Owner = Application.Current.MainWindow };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(view);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(view);
+        }
     }
 
     public void ShowAboutDialog()
     {
         var view = new Wrecept.Views.Help.AboutWindow { Owner = Application.Current.MainWindow };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(view);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(view);
+        }
     }
 
     public void ShowOnboardingOverlay()
     {
         var overlay = new Wrecept.Views.OnboardingOverlay { Owner = Application.Current.MainWindow };
-        Infrastructure.AppContext.InputLocked = true;
-        ShowDialog(overlay);
-        Infrastructure.AppContext.InputLocked = false;
+        using (new Infrastructure.InputLockScope())
+        {
+            ShowDialog(overlay);
+        }
     }
 
     public void ExitApplication()

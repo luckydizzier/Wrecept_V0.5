@@ -54,3 +54,9 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Lookup dialogs accessible from name fields (Product, Supplier, Product Group, Unit, TaxRate).
 - Keyboard navigation with F2 or Ctrl+L, Enter to select, Esc to cancel.
 - Documentation and tests for new feature.
+
+## M7.1: Polishing
+- CancelEdit restores supplier and payment method
+- Async loading wrapped with error handling
+- Input lock management via IDisposable scope
+- Unique invoice numbering independent of list count

@@ -39,3 +39,7 @@
 - [x] Add unit tests for NavigationService dialogs
 
 - [x] Implement keyboard-triggered lookup dialogs (F2 or Ctrl+L) for master data fields (product, supplier, product group, unit, tax rate)
+- [x] Fix InvoiceEditorViewModel.CancelEdit to restore all fields
+- [x] Wrap async payment method load in InvoiceHeaderViewModel with error handling
+- [x] Introduce InputLockScope to manage AppContext.InputLocked
+- [x] Generate unique invoice serial numbers

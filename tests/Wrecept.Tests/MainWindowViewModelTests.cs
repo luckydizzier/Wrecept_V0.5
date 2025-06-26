@@ -48,6 +48,21 @@ public class MainWindowViewModelTests
 
         Assert.Single(vm.Invoices);
         Assert.Single(await service.GetAllAsync());
+        Assert.Equal("INV-001", vm.Invoices[0].SerialNumber);
+    }
+
+    [Fact]
+    public async Task AddInvoiceCommand_ShouldGenerateSequentialSerials()
+    {
+        var repo = new InMemoryInvoiceRepository();
+        var service = new DefaultInvoiceService(repo);
+        var vm = new MainWindowViewModel(service);
+
+        await vm.AddInvoiceCommand.ExecuteAsync(null);
+        await vm.AddInvoiceCommand.ExecuteAsync(null);
+
+        Assert.Equal("INV-001", vm.Invoices[0].SerialNumber);
+        Assert.Equal("INV-002", vm.Invoices[1].SerialNumber);
     }
 
     [Fact]
