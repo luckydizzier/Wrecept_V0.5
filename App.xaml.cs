@@ -3,12 +3,10 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Data.Sqlite;
 using Wrecept.Infrastructure;
-using Wrecept.Core.Domain;
 using Wrecept.Views.Dialogs;
 
 namespace Wrecept
@@ -79,11 +77,7 @@ namespace Wrecept
 
             base.OnStartup(e);
 
-            var invoices = Infrastructure.AppContext.InvoiceService.GetAllAsync().GetAwaiter().GetResult();
-            var list = new ObservableCollection<Invoice>(invoices);
-            var current = list.FirstOrDefault() ?? new Invoice();
-            var editorVm = new ViewModels.InvoiceEditorViewModel(current, false, Infrastructure.AppContext.InvoiceService, list);
-            var mainWindow = new Views.InvoiceEditorWindow { DataContext = editorVm };
+            var mainWindow = new MainWindow();
             MainWindow = mainWindow;
             mainWindow.Show();
 

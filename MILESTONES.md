@@ -12,6 +12,7 @@
 - Integrate MVVM pattern with sample screens.
 - Keyboard navigation and theme support.
 - Invoice list navigation and creation flow.
+- Startup opens main invoice list window. [Done]
 - Long list paging with PgUp/PgDn support. [Done]
 - Invoice editor redesign with summary tables. [Done]
 - Toolbar with Save/Print/Export actions and restored main menu. [Done]
