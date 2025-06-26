@@ -48,3 +48,5 @@
 - [x] Handle IO errors when saving settings and exporting invoices
 - [x] Set default/cancel button behaviour for filter and settings dialogs
 - [x] Launch application with main invoice list window
+- [x] Cancel placeholder row entry with Escape in InvoiceItemsGrid
+- [x] Close Help, About and F1 overlay windows with Escape

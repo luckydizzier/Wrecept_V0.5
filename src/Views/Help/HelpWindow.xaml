@@ -1,7 +1,8 @@
 <Window x:Class="Wrecept.Views.Help.HelpWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource Help_Title}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+        Title="{DynamicResource Help_Title}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner"
+        KeyDown="Window_OnKeyDown">
     <ScrollViewer Margin="{DynamicResource SpacingLarge}">
         <TextBlock x:Uid="Help_Text" TextWrapping="Wrap" Width="400" Text="{DynamicResource Help_Text}" />
     </ScrollViewer>

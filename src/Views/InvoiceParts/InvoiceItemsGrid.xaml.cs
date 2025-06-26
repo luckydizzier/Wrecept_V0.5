@@ -58,6 +58,14 @@ public partial class InvoiceItemsGrid : UserControl
                     e.Handled = true;
                 }
             }
+
+            if (e.Key == Key.Escape && ItemsGrid.SelectedIndex == 0)
+            {
+                vm.Entry.Clear();
+                ItemsGrid.CurrentCell = new DataGridCellInfo(ItemsGrid.Items[0], ItemsGrid.Columns[0]);
+                ItemsGrid.BeginEdit();
+                e.Handled = true;
+            }
         }
     }
 }

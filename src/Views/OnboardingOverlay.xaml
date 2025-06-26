@@ -6,7 +6,8 @@
         Background="#80000000"
         ShowInTaskbar="False"
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        KeyDown="Window_OnKeyDown">
     <Border Background="White" Opacity="0.9" Padding="{DynamicResource SpacingLarge}">
         <StackPanel>
             <TextBlock Text="{DynamicResource Shortcuts_Title}" FontWeight="Bold" Margin="{DynamicResource MarginBottomMedium}" FontSize="{DynamicResource BaseFontSize}" />
