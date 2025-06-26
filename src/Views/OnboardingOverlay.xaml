@@ -9,12 +9,12 @@
         WindowStartupLocation="CenterOwner">
     <Border Background="White" Opacity="0.9" Padding="{DynamicResource SpacingLarge}">
         <StackPanel>
-            <TextBlock Text="Gyorsbillentyűk" FontWeight="Bold" Margin="0,0,0,{DynamicResource SpacingMedium}" FontSize="{DynamicResource BaseFontSize}" />
+            <TextBlock Text="Gyorsbillentyűk" FontWeight="Bold" Margin="{DynamicResource MarginBottomMedium}" FontSize="{DynamicResource BaseFontSize}" />
             <TextBlock Text="Fel/Le: navigáció" FontSize="{DynamicResource BaseFontSize}" />
             <TextBlock Text="Enter: megnyitás" FontSize="{DynamicResource BaseFontSize}" />
             <TextBlock Text="Esc: vissza vagy menü" FontSize="{DynamicResource BaseFontSize}" />
             <TextBlock Text="F1: súgó" FontSize="{DynamicResource BaseFontSize}" />
-            <Button Content="Bezár" Click="OnClose" HorizontalAlignment="Right" Margin="0,{DynamicResource SpacingLarge},0,0" TabIndex="0" IsDefault="True" FontSize="{DynamicResource BaseFontSize}" />
+            <Button Content="Bezár" Click="OnClose" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}" TabIndex="0" IsDefault="True" FontSize="{DynamicResource BaseFontSize}" />
         </StackPanel>
     </Border>
 </Window>

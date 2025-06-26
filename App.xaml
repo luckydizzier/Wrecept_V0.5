@@ -14,6 +14,19 @@
             <Thickness x:Key="SpacingSmall">4</Thickness>
             <Thickness x:Key="SpacingMedium">8</Thickness>
             <Thickness x:Key="SpacingLarge">12</Thickness>
+            <!-- Derived Margins for dynamic spacing -->
+            <Thickness x:Key="MarginBottomSmall">0,0,0,4</Thickness>
+            <Thickness x:Key="MarginBottomMedium">0,0,0,8</Thickness>
+            <Thickness x:Key="MarginBottomLarge">0,0,0,12</Thickness>
+            <Thickness x:Key="MarginTopMedium">0,8,0,0</Thickness>
+            <Thickness x:Key="MarginTopLarge">0,12,0,0</Thickness>
+            <Thickness x:Key="MarginVerticalSmall">0,4,0,4</Thickness>
+            <Thickness x:Key="MarginRightMediumBottomSmall">0,0,8,4</Thickness>
+            <Thickness x:Key="MarginRightSmallBottomSmall">0,0,4,4</Thickness>
+            <Thickness x:Key="MarginTopSmallRightSmallBottomSmall">0,4,4,4</Thickness>
+            <Thickness x:Key="MarginLeftLarge">12,0,0,0</Thickness>
+            <Thickness x:Key="MarginLeftMedium">8,0,0,0</Thickness>
+            <Thickness x:Key="MarginLeftMediumTopMediumBottomSmall">8,8,0,4</Thickness>
             <sys:Double x:Key="IconSize">16</sys:Double>
             <sys:Double x:Key="RowHeight">26</sys:Double>
             <Style TargetType="TextBlock">

@@ -10,7 +10,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListBox ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" TabIndex="0"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,{DynamicResource SpacingLarge},0,0">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">
             <Button Content="Szűrés" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="1" />
             <Button Content="Mégse" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="2" />
         </StackPanel>

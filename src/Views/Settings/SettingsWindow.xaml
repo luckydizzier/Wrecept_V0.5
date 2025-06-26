@@ -5,33 +5,22 @@
         WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
         KeyDown="Window_KeyDown">
     <StackPanel Margin="{DynamicResource SpacingLarge}">
-        <TextBlock x:Uid="Theme_Label" Text="{DynamicResource Theme_Label}" Margin="0,0,0,{DynamicResource SpacingSmall}" />
+        <TextBlock x:Uid="Theme_Label" Text="{DynamicResource Theme_Label}" Margin="{DynamicResource MarginBottomSmall}" />
         <ComboBox x:Uid="Theme_Combo" SelectedValue="{Binding Theme}" SelectedValuePath="Content" TabIndex="0">
             <ComboBoxItem Content="Light" />
             <ComboBoxItem Content="Dark" />
         </ComboBox>
-        <TextBlock x:Uid="Language_Label" Text="{DynamicResource Language_Label}">
-            <TextBlock.Margin>
-                <Thickness Left="{DynamicResource SpacingMedium}"
-                           Top="{DynamicResource SpacingMedium}"
-                           Right="0"
-                           Bottom="{DynamicResource SpacingSmall}" />
-            </TextBlock.Margin>
-        </TextBlock>
+        <TextBlock x:Uid="Language_Label" Text="{DynamicResource Language_Label}" Margin="{DynamicResource MarginLeftMediumTopMediumBottomSmall}" />
         <ComboBox x:Uid="Language_Combo" SelectedValue="{Binding Language}" SelectedValuePath="Content" TabIndex="1">
             <ComboBoxItem Content="hu" />
             <ComboBoxItem Content="en" />
         </ComboBox>
-        <StackPanel Orientation="Horizontal" Margin="0,{DynamicResource SpacingLarge},0,0">
+        <StackPanel Orientation="Horizontal" Margin="{DynamicResource MarginTopLarge}">
             <TextBlock x:Uid="Font_Label" Text="{DynamicResource Font_Label}" VerticalAlignment="Center" Margin="0,0,10,0" />
             <Slider x:Uid="Font_Slider" Minimum="-5" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Width="120" Value="{Binding FontScale, Mode=TwoWay}" ToolTip="{DynamicResource Font_Tooltip}" />
-            <Button x:Uid="Font_Reset" Content="{DynamicResource Reset_Button}" Command="{Binding ResetFontScaleCommand}">
-                <Button.Margin>
-                    <Thickness Left="{DynamicResource SpacingMedium}" Top="0" Right="0" Bottom="0" />
-                </Button.Margin>
-            </Button>
+            <Button x:Uid="Font_Reset" Content="{DynamicResource Reset_Button}" Command="{Binding ResetFontScaleCommand}" Margin="{DynamicResource MarginLeftMedium}" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,{DynamicResource SpacingLarge},0,0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">
             <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="2" />
             <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="3" />
         </StackPanel>
