@@ -26,13 +26,11 @@
 - [x] Replace in-memory repositories with SQLite implementation and seed demo data.
 - [x] Provide Settings window for theme selection saved to JSON.
 - [x] Document new features and database location.
-- [~] Remove screenshot placeholders (handled manually).
 - [x] Publish single-file executable
 - [x] Generate Windows installer with Inno Setup
 - [x] Confirm exit when pressing Esc in menu.
 - [x] Support PgUp/PgDn navigation for long lists.
 
-- [ ] **Removed:** global font scaling option dropped due to WPF limitations.
 - [x] Implement inline creator component for missing master data.
 - [x] Extend InlineCreator for Supplier creation
 - [x] Implement GrandTotal.AmountText using HungarianNumberConverter
