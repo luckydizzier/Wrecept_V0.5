@@ -106,4 +106,9 @@ public partial class InvoiceHeaderViewModel : ObservableObject
         }
         return false;
     }
+
+    public void NotifyInvoiceChanged()
+    {
+        OnPropertyChanged(nameof(Invoice));
+    }
 }
