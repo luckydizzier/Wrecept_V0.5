@@ -13,10 +13,13 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top" x:Name="MenuBar">
-            <MenuItem Header="_Számlák" InputGestureText="Alt+S" />
-            <MenuItem Header="_Törzsek" InputGestureText="Alt+T" />
-            <MenuItem Header="_Listák" InputGestureText="Alt+L" />
-            <MenuItem Header="_Súgó" InputGestureText="Alt+H" />
+            <MenuItem Header="_Fájl" InputGestureText="Alt+F">
+                <MenuItem Header="Mentés" Command="{Binding SaveCommand}" InputGestureText="Ctrl+S" />
+                <MenuItem Header="Nyomtatás" Command="{Binding PrintCommand}" />
+                <MenuItem Header="Export" Command="{Binding ExportCommand}" />
+                <Separator />
+                <MenuItem Header="Bezárás" Command="{Binding ExitToListCommand}" InputGestureText="Esc" />
+            </MenuItem>
         </Menu>
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">

@@ -14,7 +14,7 @@
 - Invoice list navigation and creation flow.
 - Long list paging with PgUp/PgDn support. [Done]
 - Invoice editor redesign with summary tables. [Done]
-- Toolbar with Save/Print/Export actions and restored main menu.
+- Toolbar with Save/Print/Export actions and restored main menu. [Done]
 - UX failsafe navigation and visible database location. [Done]
 - Menu system baseline with keyboard access. [Menu System: Implemented baseline]
 
