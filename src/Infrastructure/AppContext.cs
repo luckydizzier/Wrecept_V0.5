@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using Dapper;
 using Microsoft.Data.Sqlite;
+using Wrecept.Services;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.Services;
@@ -95,6 +96,7 @@ public static class AppContext
     public static ITaxRateService TaxRateService { get; private set; } = null!;
     public static IUnitService UnitService { get; private set; } = null!;
     public static IKeyboardDialogService DialogService { get; private set; } = null!;
+    public static IFeedbackService FeedbackService { get; private set; } = null!;
     public static ILookupDialogPresenter LookupPresenter { get; private set; } = null!;
     public static INavigationService NavigationService { get; private set; } = null!;
     public static ISettingsService SettingsService { get; private set; } = null!;
@@ -168,12 +170,14 @@ public static class AppContext
         SettingsService = new JsonSettingsService();
 
         _services[typeof(IInvoiceService)] = InvoiceService;
+        FeedbackService = new FeedbackService();
         _services[typeof(IInvoiceItemService)] = InvoiceItemService;
         _services[typeof(IProductService)] = ProductService;
         _services[typeof(IProductGroupService)] = ProductGroupService;
         _services[typeof(ISupplierService)] = SupplierService;
         _services[typeof(IPaymentMethodService)] = PaymentMethodService;
         _services[typeof(ITaxRateService)] = TaxRateService;
+        _services[typeof(IFeedbackService)] = FeedbackService;
         _services[typeof(IUnitService)] = UnitService;
         _services[typeof(IKeyboardDialogService)] = DialogService;
         _services[typeof(ILookupDialogPresenter)] = LookupPresenter;

@@ -1,6 +1,13 @@
 # UI Flow
 
 ## Invoice List
+
+## Feedback Cues
+- Indításkor a "tu ta ti" hangjelzés szólal meg.
+- Kilépéskor "ti ta tu" hangot hallunk.
+- Elfogadott műveletnél "ta ti" hang és zöld felvillanás jelzi a sikert.
+- Elutasításkor "ti ta" hang, hibánál "tu tu" hang szól.
+- Hibás bevitelkor a mező háttérszíne sárga vagy vörös színben kétszer felvillan.
 - On startup the most recent invoice is selected automatically.
 - Arrow Up/Down moves the selection.
 - PgUp/PgDn mozgatja a kijelölést egy oldalnyit.

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.ViewModels;
 
+using Wrecept.Services;
 namespace Wrecept.Views.InvoiceParts;
 
 public partial class InvoiceItemsGrid : UserControl
@@ -52,6 +53,10 @@ public partial class InvoiceItemsGrid : UserControl
                 if (vm.AddItemCommand.CanExecute(null))
                 {
                     vm.AddItemCommand.Execute(null);
+                    if (vm.LastAddSuccess)
+                        VisualFeedback.FlashSuccess(ItemsGrid);
+                    else
+                        VisualFeedback.FlashError(ItemsGrid);
                     ItemsGrid.SelectedIndex = 0;
                     ItemsGrid.CurrentCell = new DataGridCellInfo(ItemsGrid.Items[0], ItemsGrid.Columns[0]);
                     ItemsGrid.BeginEdit();

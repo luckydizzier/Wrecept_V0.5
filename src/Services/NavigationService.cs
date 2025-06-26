@@ -153,6 +153,7 @@ public class NavigationService : INavigationService
 
     public void ExitApplication()
     {
+        Infrastructure.AppContext.FeedbackService.Exit();
         Application.Current.Shutdown();
     }
 }

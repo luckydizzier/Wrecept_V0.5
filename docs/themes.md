@@ -15,6 +15,8 @@ A beállítás a `%LOCALAPPDATA%/Wrecept/settings.json` fájlban tárolódik. Hi
 - `TableHeaderColor` – táblázat fejlécek
 - `TableRowHighlight` – váltakozó sorok háttérszíne
 - `ErrorColor` – hibás mezők kerete
+- `SuccessColor` – művelet sikeres vizuális visszajelzése
+- `FlashWarningColor` – helytelen bevitel felvillanó színe
 
 A funkciógombok alapszíne minden témában egységes: Light alatt `#E0E0E0`, Dark alatt `#3A3A3A`.
 
