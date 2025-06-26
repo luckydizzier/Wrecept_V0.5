@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wrecept"
         xmlns:vm="clr-namespace:Wrecept.ViewModels"
         mc:Ignorable="d"
-        Title="Főablak" Height="450" Width="800"
+        Title="Főablak" WindowStartupLocation="CenterScreen" Height="450" Width="800"
         DataContext="{DynamicResource MainWindowViewModel}"
         PreviewKeyDown="MainWindow_OnPreviewKeyDown">
     <Window.Resources>

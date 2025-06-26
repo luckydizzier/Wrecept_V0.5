@@ -69,7 +69,7 @@ public partial class MainWindow : Window
             _lastEnter = now;
             Infrastructure.AppContext.InputLocked = true;
             var editorVm = new InvoiceEditorViewModel(vm.SelectedInvoice, false, WreceptAppContext.InvoiceService);
-            var view = new InvoiceView { DataContext = editorVm, Owner = this };
+            var view = new InvoiceEditorWindow { DataContext = editorVm, Owner = this };
             view.Loaded += (_, _) => editorVm.OnLoaded();
             var id = vm.SelectedInvoice.Id;
             view.ShowDialog();
@@ -91,7 +91,7 @@ public partial class MainWindow : Window
             {
                 Infrastructure.AppContext.InputLocked = true;
                 var editorVm = new InvoiceEditorViewModel(new Invoice(), true, WreceptAppContext.InvoiceService);
-                var view = new InvoiceView { DataContext = editorVm, Owner = this };
+                var view = new InvoiceEditorWindow { DataContext = editorVm, Owner = this };
                 view.Loaded += (_, _) => editorVm.OnLoaded();
                 view.ShowDialog();
                 _escOnce = editorVm.ExitedByEsc;
