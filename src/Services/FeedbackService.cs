@@ -13,11 +13,11 @@ public class FeedbackService : IFeedbackService
         _beep = beep;
     }
 
-    public void Startup() => Play(600, 800, 1000);
-    public void Exit() => Play(1000, 800, 600);
-    public void Accept() => Play(800, 1000);
-    public void Reject() => Play(1000, 800);
-    public void Error() => Play(500, 500);
+    public void Startup() => Play(300, 600, 1200);
+    public void Exit() => Play(1200, 600, 300);
+    public void Accept() => Play(600, 1200);
+    public void Reject() => Play(1200, 600);
+    public void Error() => Play(400, 400);
 
     private void Play(params int[] freqs)
     {
@@ -25,7 +25,7 @@ public class FeedbackService : IFeedbackService
         {
             try
             {
-                _beep(f, 150);
+                _beep(f, 100);
             }
             catch
             {
