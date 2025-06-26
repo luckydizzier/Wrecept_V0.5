@@ -8,7 +8,19 @@ public class NavigationService : INavigationService
 {
     public void ShowInvoiceListView()
     {
-        MessageBox.Show("Számlák kezelése – még nincs megvalósítva", "Információ");
+        var invoices = WreceptAppContext.InvoiceService.GetAllAsync().Result;
+        var list = new System.Collections.ObjectModel.ObservableCollection<Wrecept.Core.Domain.Invoice>(invoices);
+        var current = list.FirstOrDefault() ?? new Wrecept.Core.Domain.Invoice();
+        var vm = new Wrecept.ViewModels.InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
+        var view = new Wrecept.Views.InvoiceEditorWindow
+        {
+            DataContext = vm,
+            Owner = Application.Current.MainWindow
+        };
+        view.Loaded += (_, _) => vm.OnLoaded();
+        Infrastructure.AppContext.InputLocked = true;
+        view.ShowDialog();
+        Infrastructure.AppContext.InputLocked = false;
     }
 
     public void ShowSupplierView()
@@ -104,15 +116,17 @@ public class NavigationService : INavigationService
 
     public void ShowHelpView()
     {
+        var view = new Wrecept.Views.Help.HelpWindow { Owner = Application.Current.MainWindow };
         Infrastructure.AppContext.InputLocked = true;
-        MessageBox.Show("Súgó – még nincs megvalósítva", "Információ");
+        view.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
     }
 
     public void ShowAboutDialog()
     {
+        var view = new Wrecept.Views.Help.AboutWindow { Owner = Application.Current.MainWindow };
         Infrastructure.AppContext.InputLocked = true;
-        MessageBox.Show("Wrecept – még nincs Névjegy", "Információ");
+        view.ShowDialog();
         Infrastructure.AppContext.InputLocked = false;
     }
 

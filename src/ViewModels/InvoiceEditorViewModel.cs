@@ -4,6 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using Microsoft.Win32;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 
@@ -49,8 +53,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
         };
         IsEditMode = isEditMode;
         SaveCommand = new AsyncRelayCommand(SaveAsync);
-        PrintCommand = new RelayCommand(() => { /* későbbi implementáció */ });
-        ExportCommand = new RelayCommand(() => { /* későbbi implementáció */ });
+        PrintCommand = new RelayCommand(PrintInvoice);
+        ExportCommand = new RelayCommand(ExportInvoice);
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
 
         SidebarViewModel = new InvoiceSidebarViewModel(invoices ?? new ObservableCollection<Invoice>());
@@ -81,6 +85,35 @@ public partial class InvoiceEditorViewModel : ObservableObject
         await _invoiceService.SaveAsync(Invoice);
         ExitRequested = true;
         ExitedByEsc = false;
+    }
+
+    private void PrintInvoice()
+    {
+        var dlg = new System.Windows.Controls.PrintDialog();
+        var doc = new System.Windows.Documents.FlowDocument(new System.Windows.Documents.Paragraph(new System.Windows.Documents.Run($"Számla: {Invoice.SerialNumber}")))
+        {
+            PageHeight = dlg.PrintableAreaHeight,
+            PageWidth = dlg.PrintableAreaWidth
+        };
+        doc.ColumnWidth = dlg.PrintableAreaWidth;
+        if (dlg.ShowDialog() == true)
+        {
+            dlg.PrintDocument(((System.Windows.Documents.IDocumentPaginatorSource)doc).DocumentPaginator, "Invoice");
+        }
+    }
+
+    private void ExportInvoice()
+    {
+        var dlg = new Microsoft.Win32.SaveFileDialog
+        {
+            Filter = "JSON (*.json)|*.json",
+            FileName = $"invoice_{Invoice.SerialNumber}.json"
+        };
+        if (dlg.ShowDialog() == true)
+        {
+            var json = System.Text.Json.JsonSerializer.Serialize(Invoice);
+            System.IO.File.WriteAllText(dlg.FileName, json);
+        }
     }
 
     public void OnLoaded()

@@ -239,7 +239,7 @@ public partial class MainWindowViewModel : RestorableListViewModel<Invoice>
     [RelayCommand]
     private void ShowGreeting()
     {
-        // TODO: implement action
+        System.Windows.MessageBox.Show(Greeting, "Köszöntés");
     }
 
     private async void ApplyDateFilter(DateOnly? from, DateOnly? to)

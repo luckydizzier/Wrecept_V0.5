@@ -43,4 +43,4 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Publish single-file executable. [Done]
 - Generate Windows installer via Inno Setup. [Done]
 - Global font scale setting. [Done]
-- Inline creator component for quick product entry.
+- Inline creator component for quick product entry. [Done]
