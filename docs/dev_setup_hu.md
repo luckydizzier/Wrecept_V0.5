@@ -19,3 +19,4 @@
 - Ha a tesztek hibával leállnak, töröld a `bin` és `obj` mappákat és futtasd újra a scriptet.
 - Ha indításkor nem jelenik meg a főablak, nézd meg az `errors.log` fájlt a `%LOCALAPPDATA%/Wrecept` mappában. A hibás `settings.json` automatikusan ignorálásra kerül, az adatbázis törlése általában nem szükséges.
 - Indítási hiba esetén a program az `errors.log` fájlba naplóz és memóriában folytatja a működést.
+- A beállítások mentése vagy a számla exportálása sikertelen lehet fájlengedély probléma esetén; a hiba szintén ide naplózódik és üzenet jelzi.
