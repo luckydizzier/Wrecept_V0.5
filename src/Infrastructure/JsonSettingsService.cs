@@ -12,8 +12,7 @@ public class JsonSettingsService : ISettingsService
 
     public JsonSettingsService()
     {
-        var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Wrecept");
-        Directory.CreateDirectory(dir);
+        var dir = AppDirectories.GetWritableAppDataDirectory();
         _path = Path.Combine(dir, "settings.json");
     }
 

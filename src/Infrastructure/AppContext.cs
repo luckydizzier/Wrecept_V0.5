@@ -26,9 +26,7 @@ public static class AppContext
         if (_initialized)
             return LastError is null;
 
-        var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        var dir = Path.Combine(appData, "Wrecept");
-        Directory.CreateDirectory(dir);
+        var dir = AppDirectories.GetWritableAppDataDirectory();
         DatabasePath = Path.Combine(dir, "wrecept.db");
         Console.WriteLine($"Database path: {DatabasePath}");
 
