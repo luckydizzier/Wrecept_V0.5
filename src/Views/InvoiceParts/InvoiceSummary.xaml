@@ -6,7 +6,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" ItemsSource="{Binding VatSummaries}" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" TabIndex="0">
+        <DataGrid Grid.Column="0" ItemsSource="{Binding VatSummaries}" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" RowHeight="{DynamicResource RowHeight}" TabIndex="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ÁFA %" Binding="{Binding Rate}" />
                 <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" />
@@ -14,14 +14,14 @@
                 <DataGridTextColumn Header="Bruttó" Binding="{Binding Gross}" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,0,0" KeyboardNavigation.TabIndex="1">
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="{DynamicResource SpacingLarge},0,0,0" KeyboardNavigation.TabIndex="1">
             <TextBlock Text="Nettó összesen:"/>
-            <TextBlock Text="{Binding GrandTotals.Net}" FontSize="16" Foreground="Yellow"/>
+            <TextBlock Text="{Binding GrandTotals.Net}" FontSize="{DynamicResource BaseFontSize}" Foreground="Yellow"/>
             <TextBlock Text="ÁFA összesen:"/>
-            <TextBlock Text="{Binding GrandTotals.Vat}" FontSize="16" Foreground="Yellow"/>
+            <TextBlock Text="{Binding GrandTotals.Vat}" FontSize="{DynamicResource BaseFontSize}" Foreground="Yellow"/>
             <TextBlock Text="Bruttó összesen:"/>
-            <TextBlock Text="{Binding GrandTotals.Gross}" FontSize="16" Foreground="Yellow"/>
-            <TextBlock Text="{Binding GrandTotals.AmountText}" FontSize="12"/>
+            <TextBlock Text="{Binding GrandTotals.Gross}" FontSize="{DynamicResource BaseFontSize}" Foreground="Yellow"/>
+            <TextBlock Text="{Binding GrandTotals.AmountText}" FontSize="{DynamicResource BaseFontSize}"/>
         </StackPanel>
     </Grid>
 </UserControl>
