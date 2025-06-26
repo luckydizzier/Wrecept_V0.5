@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Wrecept.Core\Wrecept.Core.csproj" />
     <ProjectReference Include="..\..\src\Wrecept.Core.CoreLib\Wrecept.Core.CoreLib.csproj" />
+    <ProjectReference Include="..\..\Wrecept.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\db\schema_v1.sql" Link="db\schema_v1.sql" />
