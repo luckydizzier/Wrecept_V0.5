@@ -57,11 +57,12 @@ public partial class InvoiceEditorViewModel : ObservableObject
         ExportCommand = new RelayCommand(ExportInvoice);
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
 
-        SidebarViewModel = new InvoiceSidebarViewModel(invoices ?? new ObservableCollection<Invoice>());
+        SidebarViewModel = new InvoiceSidebarViewModel(
+            invoices ?? new ObservableCollection<Invoice>(),
+            Infrastructure.AppContext.SupplierService);
         HeaderViewModel = new InvoiceHeaderViewModel(
             Invoice,
-            Array.Empty<string>(),
-            Array.Empty<string>(),
+            Infrastructure.AppContext.PaymentMethodService,
             Infrastructure.AppContext.SupplierService,
             Infrastructure.AppContext.LookupPresenter);
         ItemsViewModel = new InvoiceItemsViewModel(

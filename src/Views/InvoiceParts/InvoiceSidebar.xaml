@@ -2,10 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel Margin="{DynamicResource SpacingLarge}">
-        <TextBox x:Uid="Search" x:Name="SearchBox" Margin="{DynamicResource MarginBottomLarge}" TabIndex="0" />
-        <DatePicker x:Name="FromDate" Margin="{DynamicResource MarginBottomSmall}" TabIndex="1" />
-        <DatePicker x:Name="ToDate" Margin="{DynamicResource MarginBottomLarge}" TabIndex="2" />
-        <ComboBox x:Name="SupplierFilter" Margin="{DynamicResource MarginBottomLarge}" TabIndex="3" />
+        <TextBox x:Uid="Search" x:Name="SearchBox" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="{DynamicResource MarginBottomLarge}" TabIndex="0" />
+        <DatePicker x:Name="FromDate" SelectedDate="{Binding FromDate}" Margin="{DynamicResource MarginBottomSmall}" TabIndex="1" />
+        <DatePicker x:Name="ToDate" SelectedDate="{Binding ToDate}" Margin="{DynamicResource MarginBottomLarge}" TabIndex="2" />
+        <ComboBox x:Name="SupplierFilter" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" DisplayMemberPath="Name" Margin="{DynamicResource MarginBottomLarge}" TabIndex="3" />
         <DataGrid x:Name="InvoiceList"
                   ItemsSource="{Binding Invoices}"
                   SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
