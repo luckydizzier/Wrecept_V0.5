@@ -39,6 +39,7 @@
     <Compile Include="..\..\src\ViewModels\InvoiceSidebarViewModel.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\InvoiceHeaderViewModel.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\InvoiceItemsViewModel.cs" LinkBase="ViewModels" />
+    <Compile Include="..\..\src\ViewModels\InvoiceItemRowViewModel.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\InvoiceSummaryViewModel.cs" LinkBase="ViewModels" />
   </ItemGroup>
 </Project>
