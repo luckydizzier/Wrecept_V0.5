@@ -4,14 +4,14 @@
         Title="Szállító szűrő" Height="300" Width="300"
         WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
         KeyDown="Window_KeyDown">
-    <Grid Margin="10">
+    <Grid Margin="{DynamicResource SpacingLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListBox ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" TabIndex="0"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="Szűrés" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="0,0,5,0" TabIndex="1" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,{DynamicResource SpacingLarge},0,0">
+            <Button Content="Szűrés" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="{DynamicResource SpacingSmall}" TabIndex="1" />
             <Button Content="Mégse" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" TabIndex="2" />
         </StackPanel>
     </Grid>

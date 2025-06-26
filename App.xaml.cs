@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -154,7 +155,14 @@ namespace Wrecept
 
         public static void ApplyFontScale(int scale)
         {
-            Application.Current.Resources["BaseFontSize"] = 14 + scale;
+            var baseSize = 14 + scale;
+            if (baseSize < 8) baseSize = 8;
+            Application.Current.Resources["BaseFontSize"] = baseSize;
+            Application.Current.Resources["SpacingSmall"] = new Thickness(Math.Max(2, 4 + scale));
+            Application.Current.Resources["SpacingMedium"] = new Thickness(Math.Max(4, 8 + scale));
+            Application.Current.Resources["SpacingLarge"] = new Thickness(Math.Max(6, 12 + scale));
+            Application.Current.Resources["IconSize"] = Math.Max(12, 16 + scale);
+            Application.Current.Resources["RowHeight"] = Math.Max(18, 26 + scale);
         }
     }
 

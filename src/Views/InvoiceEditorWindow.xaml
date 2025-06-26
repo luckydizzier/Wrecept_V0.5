@@ -14,7 +14,7 @@
 
     <DockPanel>
         <views:MainMenu DockPanel.Dock="Top" x:Name="MenuBar" DataContext="{DynamicResource MainWindowViewModel}" />
-        <Border DockPanel.Dock="Top" Background="{DynamicResource ErrorBrush}" Padding="5" Visibility="Collapsed">
+        <Border DockPanel.Dock="Top" Background="{DynamicResource ErrorBrush}" Padding="{DynamicResource SpacingMedium}" Visibility="Collapsed">
             <Border.Style>
                 <Style TargetType="Border">
                     <Style.Triggers>
@@ -27,10 +27,10 @@
             <TextBlock Text="Adatbázis hiba - a módosítások nem kerülnek mentésre." Foreground="White" />
         </Border>
 
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="0,0,5,0" />
-            <Button Content="Nyomtatás" Command="{Binding PrintCommand}" Margin="0,0,5,0" />
-            <Button Content="Export" Command="{Binding ExportCommand}" Margin="0,0,5,0" />
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource SpacingLarge}">
+            <Button Content="Mentés" Command="{Binding SaveCommand}" Margin="{DynamicResource SpacingSmall}" />
+            <Button Content="Nyomtatás" Command="{Binding PrintCommand}" Margin="{DynamicResource SpacingSmall}" />
+            <Button Content="Export" Command="{Binding ExportCommand}" Margin="{DynamicResource SpacingSmall}" />
             <Button Content="Bezárás" Command="{Binding ExitToListCommand}" />
         </StackPanel>
 
@@ -43,13 +43,13 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ip:InvoiceHeader Margin="10"
+            <ip:InvoiceHeader Margin="{DynamicResource SpacingLarge}"
                                  DataContext="{Binding HeaderViewModel}"
                                  TabIndex="1" />
-            <ip:InvoiceItemsGrid Grid.Row="1" Margin="10"
+            <ip:InvoiceItemsGrid Grid.Row="1" Margin="{DynamicResource SpacingLarge}"
                                     DataContext="{Binding ItemsViewModel}"
                                     TabIndex="2" />
-            <ip:InvoiceSummary Grid.Row="2" Margin="10"
+            <ip:InvoiceSummary Grid.Row="2" Margin="{DynamicResource SpacingLarge}"
                                   DataContext="{Binding SummaryViewModel}"
                                   TabIndex="3" />
         </Grid>

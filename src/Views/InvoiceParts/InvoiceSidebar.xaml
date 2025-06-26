@@ -1,16 +1,17 @@
 <UserControl x:Class="Wrecept.Views.InvoiceParts.InvoiceSidebar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StackPanel Margin="10">
-        <TextBox x:Uid="Search" x:Name="SearchBox" Margin="0,0,0,10" TabIndex="0" />
-        <DatePicker x:Name="FromDate" Margin="0,0,0,5" TabIndex="1" />
-        <DatePicker x:Name="ToDate" Margin="0,0,0,10" TabIndex="2" />
-        <ComboBox x:Name="SupplierFilter" Margin="0,0,0,10" TabIndex="3" />
+    <StackPanel Margin="{DynamicResource SpacingLarge}">
+        <TextBox x:Uid="Search" x:Name="SearchBox" Margin="0,0,0,{DynamicResource SpacingLarge}" TabIndex="0" />
+        <DatePicker x:Name="FromDate" Margin="0,0,0,{DynamicResource SpacingSmall}" TabIndex="1" />
+        <DatePicker x:Name="ToDate" Margin="0,0,0,{DynamicResource SpacingLarge}" TabIndex="2" />
+        <ComboBox x:Name="SupplierFilter" Margin="0,0,0,{DynamicResource SpacingLarge}" TabIndex="3" />
         <DataGrid x:Name="InvoiceList"
                   ItemsSource="{Binding Invoices}"
                   SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
                   AutoGenerateColumns="False"
                   Height="300"
+                  RowHeight="{DynamicResource RowHeight}"
                   TabIndex="4"
                   PreviewKeyDown="InvoiceList_OnPreviewKeyDown">
             <DataGrid.Columns>

@@ -45,6 +45,20 @@ public class SettingsServiceTests : IDisposable
     }
 
     [Fact]
+    public async Task LoadAsync_ShouldReturnDefaultValues_WhenJsonInvalid()
+    {
+        var path = Path.Combine(_tempDir, "Wrecept", "settings.json");
+        await File.WriteAllTextAsync(path, "{ invalid }");
+        var service = new JsonSettingsService();
+
+        var settings = await service.LoadAsync();
+
+        Assert.Equal("Light", settings.Theme);
+        Assert.Equal("hu", settings.Language);
+        Assert.Equal(0, settings.FontScale);
+    }
+
+    [Fact]
     public async Task SaveAsync_ShouldPersistFontScale()
     {
         var service = new JsonSettingsService();

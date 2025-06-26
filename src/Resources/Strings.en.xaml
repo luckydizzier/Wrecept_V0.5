@@ -11,6 +11,6 @@
     <sys:String x:Key="EndDate_Label">End Date</sys:String>
     <sys:String x:Key="Filter_Button">Filter</sys:String>
     <sys:String x:Key="Font_Label">Font scale</sys:String>
-    <sys:String x:Key="Font_Tooltip">Scale the font size for better readability across all UI elements.</sys:String>
+    <sys:String x:Key="Font_Tooltip">Scale the font size for better readability across all UI elements. See F1 help for keyboard shortcuts.</sys:String>
     <sys:String x:Key="Reset_Button">Reset</sys:String>
 </ResourceDictionary>

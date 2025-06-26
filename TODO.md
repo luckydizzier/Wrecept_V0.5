@@ -32,4 +32,4 @@
 - [x] Confirm exit when pressing Esc in menu.
 - [x] Support PgUp/PgDn navigation for long lists.
 
-- [ ] Implement global font scaling option.
+- [x] Implement global font scaling option.

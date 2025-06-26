@@ -1,0 +1,8 @@
+<Window x:Class="Wrecept.Plugin.Greeting.GreetingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Plugin" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+    <Grid Margin="{DynamicResource SpacingLarge}">
+        <TextBlock Text="Helló a bővítményből!" FontSize="{DynamicResource BaseFontSize}" />
+    </Grid>
+</Window>

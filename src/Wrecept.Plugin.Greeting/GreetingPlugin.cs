@@ -9,6 +9,7 @@ public class GreetingPlugin : IMenuPlugin
 
     public void Execute()
     {
-        MessageBox.Show("Helló a bővítményből!", "Plugin");
+        var win = new GreetingWindow { Owner = Application.Current.MainWindow };
+        win.ShowDialog();
     }
 }

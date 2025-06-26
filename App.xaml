@@ -11,6 +11,11 @@
                 <ResourceDictionary Source="/Wrecept;component/Resources/Strings.hu.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <sys:Double x:Key="BaseFontSize">14</sys:Double>
+            <Thickness x:Key="SpacingSmall">4</Thickness>
+            <Thickness x:Key="SpacingMedium">8</Thickness>
+            <Thickness x:Key="SpacingLarge">12</Thickness>
+            <sys:Double x:Key="IconSize">16</sys:Double>
+            <sys:Double x:Key="RowHeight">26</sys:Double>
             <Style TargetType="TextBlock">
                 <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
             </Style>
