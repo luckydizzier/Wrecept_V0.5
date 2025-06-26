@@ -16,8 +16,6 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     private string _language = "hu";
 
-    [ObservableProperty]
-    private int _fontScale;
 
     public SettingsViewModel(ISettingsService service)
     {
@@ -25,22 +23,18 @@ public partial class SettingsViewModel : ObservableObject
         var settings = _service.LoadAsync().GetAwaiter().GetResult();
         _theme = settings.Theme;
         _language = settings.Language;
-        _fontScale = settings.FontScale;
     }
 
     [RelayCommand]
     private async Task SaveAsync(object window)
     {
-        await _service.SaveAsync(new Settings { Theme = Theme, Language = Language, FontScale = FontScale });
+        await _service.SaveAsync(new Settings { Theme = Theme, Language = Language });
         App.ApplyTheme(Theme);
         App.ApplyLanguage(Language);
-        App.ApplyFontScale(FontScale);
         if (window is System.Windows.Window w)
             w.DialogResult = true;
     }
 
-    [RelayCommand]
-    private void ResetFontScale() => FontScale = 0;
 
     [RelayCommand]
     private void Cancel(object window)

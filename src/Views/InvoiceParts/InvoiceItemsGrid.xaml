@@ -12,7 +12,7 @@
               AutoGenerateColumns="False"
               CanUserAddRows="False"
               TabIndex="0"
-              RowHeight="{DynamicResource RowHeight}"
+              RowHeight="26"
               Loaded="ItemsGrid_OnLoaded"
               KeyDown="ItemsGrid_OnKeyDown">
         <DataGrid.Style>

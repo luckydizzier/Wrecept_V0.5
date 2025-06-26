@@ -55,19 +55,7 @@ public class SettingsServiceTests : IDisposable
 
         Assert.Equal("Light", settings.Theme);
         Assert.Equal("hu", settings.Language);
-        Assert.Equal(0, settings.FontScale);
     }
 
-    [Fact]
-    public async Task SaveAsync_ShouldPersistFontScale()
-    {
-        var service = new JsonSettingsService();
-        var input = new Settings { FontScale = 3 };
-
-        await service.SaveAsync(input);
-        var result = await service.LoadAsync();
-
-        Assert.Equal(3, result.FontScale);
-    }
 }
 

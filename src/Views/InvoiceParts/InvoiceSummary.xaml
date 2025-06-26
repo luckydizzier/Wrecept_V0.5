@@ -6,7 +6,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="VatGrid" Grid.Column="0" ItemsSource="{Binding VatSummaries}" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" RowHeight="{DynamicResource RowHeight}" TabIndex="0">
+        <DataGrid x:Name="VatGrid" Grid.Column="0" ItemsSource="{Binding VatSummaries}" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" RowHeight="26" TabIndex="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ÁFA %" Binding="{Binding Rate}" />
                 <DataGridTextColumn Header="Nettó" Binding="{Binding Net}" />
