@@ -10,7 +10,4 @@
     <sys:String x:Key="StartDate_Label">Kezdő dátum</sys:String>
     <sys:String x:Key="EndDate_Label">Záró dátum</sys:String>
     <sys:String x:Key="Filter_Button">Szűrés</sys:String>
-    <sys:String x:Key="Font_Label">Betűméret skála</sys:String>
-    <sys:String x:Key="Font_Tooltip">A betűméret skálázása az olvashatóság érdekében – az összes felületi elemre vonatkozik. A billentyűk listáját az F1 súgó mutatja.</sys:String>
-    <sys:String x:Key="Reset_Button">Visszaállítás</sys:String>
 </ResourceDictionary>

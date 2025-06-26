@@ -75,7 +75,6 @@ namespace Wrecept
                 ApplyLanguage("hu");
             }
 
-            ApplyFontScale(settings.FontScale);
 
             base.OnStartup(e);
 
@@ -153,32 +152,6 @@ namespace Wrecept
             dictionaries.Add(dict);
         }
 
-        public static void ApplyFontScale(int scale)
-        {
-            var baseSize = 14 + scale;
-            if (baseSize < 8) baseSize = 8;
-            Application.Current.Resources["BaseFontSize"] = baseSize;
-            var small = Math.Max(2, 4 + scale);
-            var medium = Math.Max(4, 8 + scale);
-            var large = Math.Max(6, 12 + scale);
-            Application.Current.Resources["SpacingSmall"] = new Thickness(small);
-            Application.Current.Resources["SpacingMedium"] = new Thickness(medium);
-            Application.Current.Resources["SpacingLarge"] = new Thickness(large);
-            Application.Current.Resources["MarginBottomSmall"] = new Thickness(0, 0, 0, small);
-            Application.Current.Resources["MarginBottomMedium"] = new Thickness(0, 0, 0, medium);
-            Application.Current.Resources["MarginBottomLarge"] = new Thickness(0, 0, 0, large);
-            Application.Current.Resources["MarginTopMedium"] = new Thickness(0, medium, 0, 0);
-            Application.Current.Resources["MarginTopLarge"] = new Thickness(0, large, 0, 0);
-            Application.Current.Resources["MarginVerticalSmall"] = new Thickness(0, small, 0, small);
-            Application.Current.Resources["MarginRightMediumBottomSmall"] = new Thickness(0, 0, medium, small);
-            Application.Current.Resources["MarginRightSmallBottomSmall"] = new Thickness(0, 0, small, small);
-            Application.Current.Resources["MarginTopSmallRightSmallBottomSmall"] = new Thickness(0, small, small, small);
-            Application.Current.Resources["MarginLeftLarge"] = new Thickness(large, 0, 0, 0);
-            Application.Current.Resources["MarginLeftMedium"] = new Thickness(medium, 0, 0, 0);
-            Application.Current.Resources["MarginLeftMediumTopMediumBottomSmall"] = new Thickness(medium, medium, 0, small);
-            Application.Current.Resources["IconSize"] = Math.Max(12, 16 + scale);
-            Application.Current.Resources["RowHeight"] = Math.Max(18, 26 + scale);
-        }
     }
 
 }

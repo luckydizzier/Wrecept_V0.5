@@ -32,7 +32,7 @@
 - [x] Confirm exit when pressing Esc in menu.
 - [x] Support PgUp/PgDn navigation for long lists.
 
-- [x] Implement global font scaling option.
+- [ ] **Removed:** global font scaling option dropped due to WPF limitations.
 - [x] Implement inline creator component for missing master data.
 - [ ] Extend InlineCreator for Supplier creation
 - [ ] Implement GrandTotal.AmountText using HungarianNumberConverter

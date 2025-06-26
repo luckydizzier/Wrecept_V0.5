@@ -11,7 +11,7 @@
                   SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
                   AutoGenerateColumns="False"
                   Height="300"
-                  RowHeight="{DynamicResource RowHeight}"
+                  RowHeight="26"
                   TabIndex="4"
                   PreviewKeyDown="InvoiceList_OnPreviewKeyDown">
             <DataGrid.Columns>

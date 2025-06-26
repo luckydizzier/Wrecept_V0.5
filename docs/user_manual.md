@@ -34,7 +34,7 @@ Részletesebb ismertetés: [plugin_command_bar.md](plugin_command_bar.md).
 Az **Alt+H** menüben érhető el a Súgó és a Névjegy ablak. A Súgó ablak röviden összefoglalja a dokumentáció helyét, míg a Névjegy a program verzióját mutatja. Mindkét ablak az Esc billentyűvel zárható.
 
 ## Beállítások és Témák
-A **Beállítások** ablakban választható ki a Light vagy Dark téma, valamint állítható a betűméret skálája. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek. A skála értéke -5 és +5 között mozog, a **Visszaállítás** gombbal 0-ra állítható.
+A **Beállítások** ablakban választható ki a Light vagy Dark téma, illetve a felület nyelve. A beállítások a kilépéskor automatikusan mentésre kerülnek a `%LOCALAPPDATA%/Wrecept/settings.json` fájlba, és következő indításkor betöltődnek.
 
 ## Hibakezelés
 Ha az alkalmazás nem tudja elérni a SQLite adatbázist, hibaüzenet jelenik meg,
