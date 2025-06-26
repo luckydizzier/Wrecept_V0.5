@@ -74,6 +74,8 @@ namespace Wrecept
                 ApplyLanguage("hu");
             }
 
+            ApplyFontScale(settings.FontScale);
+
             base.OnStartup(e);
 
             var invoices = Infrastructure.AppContext.InvoiceService.GetAllAsync().GetAwaiter().GetResult();
@@ -148,6 +150,11 @@ namespace Wrecept
             if (existing != null)
                 dictionaries.Remove(existing);
             dictionaries.Add(dict);
+        }
+
+        public static void ApplyFontScale(int scale)
+        {
+            Application.Current.Resources["BaseFontSize"] = 14 + scale;
         }
     }
 

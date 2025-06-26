@@ -42,3 +42,4 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Build setup.sh automation script. [Done]
 - Publish single-file executable. [Done]
 - Generate Windows installer via Inno Setup. [Done]
+- Global font scale setting. [Planned]
