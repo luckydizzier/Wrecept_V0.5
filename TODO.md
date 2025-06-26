@@ -43,3 +43,4 @@
 - [x] Wrap async payment method load in InvoiceHeaderViewModel with error handling
 - [x] Introduce InputLockScope to manage AppContext.InputLocked
 - [x] Generate unique invoice serial numbers
+- [x] Prevent placeholder selection when invoice list filter is empty
