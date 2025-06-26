@@ -35,5 +35,10 @@
     <Compile Include="..\..\src\Infrastructure\SqliteInvoiceRepository.cs" LinkBase="Infrastructure" />
     <Compile Include="..\..\src\ViewModels\ViewModelBase.cs" LinkBase="ViewModels" />
     <Compile Include="..\..\src\ViewModels\RestorableListViewModel.cs" LinkBase="ViewModels" />
+    <Compile Include="..\..\src\ViewModels\InvoiceEditorViewModel.cs" LinkBase="ViewModels" />
+    <Compile Include="..\..\src\ViewModels\InvoiceSidebarViewModel.cs" LinkBase="ViewModels" />
+    <Compile Include="..\..\src\ViewModels\InvoiceHeaderViewModel.cs" LinkBase="ViewModels" />
+    <Compile Include="..\..\src\ViewModels\InvoiceItemsViewModel.cs" LinkBase="ViewModels" />
+    <Compile Include="..\..\src\ViewModels\InvoiceSummaryViewModel.cs" LinkBase="ViewModels" />
   </ItemGroup>
 </Project>
