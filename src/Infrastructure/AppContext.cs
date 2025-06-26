@@ -8,9 +8,7 @@ using Microsoft.Data.Sqlite;
 using Wrecept.Services;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
-using Wrecept.Services;
 using Wrecept.Core.Plugins;
-using Wrecept.Infrastructure;
 
 public static class AppContext
 {

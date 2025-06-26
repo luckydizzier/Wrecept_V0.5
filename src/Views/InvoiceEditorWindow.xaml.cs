@@ -1,5 +1,6 @@
 namespace Wrecept.Views;
 
+using System.Windows;
 using System.Windows.Controls;
 
 public partial class InvoiceEditorWindow : UserControl

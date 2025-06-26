@@ -1,10 +1,10 @@
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.Infrastructure;
 
 namespace Wrecept.Views.Filters;
 
-public partial class ProductGroupFilterDialog : Window
+public partial class ProductGroupFilterDialog : UserControl
 {
     public ProductGroupFilterDialog()
     {
