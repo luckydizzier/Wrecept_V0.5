@@ -34,7 +34,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
     public bool IsReadOnly => !IsEditMode;
 
-    public InvoiceEditorViewModel(Invoice invoice, bool isEditMode, IInvoiceService invoiceService)
+    public InvoiceEditorViewModel(Invoice invoice, bool isEditMode, IInvoiceService invoiceService, ObservableCollection<Invoice>? invoices = null)
     {
         _original = invoice;
         _invoiceService = invoiceService;
@@ -48,7 +48,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         SaveCommand = new AsyncRelayCommand(SaveAsync);
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
 
-        SidebarViewModel = new InvoiceSidebarViewModel(new ObservableCollection<Invoice>());
+        SidebarViewModel = new InvoiceSidebarViewModel(invoices ?? new ObservableCollection<Invoice>());
         HeaderViewModel = new InvoiceHeaderViewModel(Invoice, Array.Empty<string>(), Array.Empty<string>());
         ItemsViewModel = new InvoiceItemsViewModel(Invoice);
         SummaryViewModel = new InvoiceSummaryViewModel(VatSummaries, GrandTotals);
