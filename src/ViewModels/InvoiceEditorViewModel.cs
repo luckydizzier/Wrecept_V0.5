@@ -35,6 +35,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private bool _isEditMode;
 
     public bool IsReadOnly => !IsEditMode;
+    public bool IsDatabaseAvailable => Infrastructure.AppContext.DatabaseAvailable;
 
     public InvoiceEditorViewModel(Invoice invoice, bool isEditMode, IInvoiceService invoiceService, ObservableCollection<Invoice>? invoices = null)
     {

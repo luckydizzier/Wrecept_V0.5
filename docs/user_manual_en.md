@@ -19,5 +19,8 @@ In **Alt+T** choose Suppliers or Products. **Insert** adds a new record, **F2** 
 ## Settings and Themes
 Choose Light or Dark theme in the **Settings** window. Settings are automatically saved to `%LOCALAPPDATA%/Wrecept/settings.json` on exit and restored next launch.
 
+## Plugins
+Commands from optional plugins appear under **Help → Plugins**. Copy plugin assemblies to a `Plugins` folder beside `Wrecept.exe`. Further info: [plugin_command_bar.md](plugin_command_bar.md).
+
 ## Error Handling
 If the SQLite database is unavailable, an error message is shown and the application continues in memory. For a locked file, close the other instance. If the database is corrupted, a new empty file is offered and the old one is kept with `.bak` extension. Missing files are created automatically. See `errors.log` under `%LOCALAPPDATA%/Wrecept` for details.

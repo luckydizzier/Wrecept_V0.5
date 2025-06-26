@@ -98,4 +98,32 @@ public class AppContextInitializeTests : IDisposable
         Assert.True(AppContext.IsDatabaseLocked(locked2));
         Assert.False(AppContext.IsDatabaseLocked(other));
     }
+
+    [Fact]
+    public void Initialize_ShouldCreateDatabase_WhenMissing()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Environment.SetEnvironmentVariable("LOCALAPPDATA", dir);
+
+        var ok = AppContext.Initialize();
+
+        Assert.True(ok);
+        Assert.True(File.Exists(Path.Combine(dir, "Wrecept", "wrecept.db")));
+    }
+
+    [Fact]
+    public void Initialize_ShouldReturnFalse_WhenFileLocked()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Environment.SetEnvironmentVariable("LOCALAPPDATA", dir);
+        var dbDir = Path.Combine(dir, "Wrecept");
+        Directory.CreateDirectory(dbDir);
+        var dbPath = Path.Combine(dbDir, "wrecept.db");
+        using var fs = File.Open(dbPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
+
+        var ok = AppContext.Initialize();
+
+        Assert.False(ok);
+        Assert.NotNull(AppContext.LastError);
+    }
 }

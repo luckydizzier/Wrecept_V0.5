@@ -76,7 +76,10 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     public bool Validate()
     {
-        HasError = string.IsNullOrWhiteSpace(ProductName) || Quantity <= 0 || string.IsNullOrWhiteSpace(UnitName);
+        HasError = string.IsNullOrWhiteSpace(ProductName)
+                   || Quantity <= 0
+                   || string.IsNullOrWhiteSpace(UnitName)
+                   || UnitPriceNet <= 0m;
         return !HasError;
     }
 }

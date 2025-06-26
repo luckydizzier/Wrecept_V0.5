@@ -31,3 +31,5 @@ A minimal example is provided in `src/Wrecept.Plugin.Greeting`.
 ## Upcoming Extensions
 Later milestones may introduce new interfaces for list or toolbar plugins.
 These will follow the same discovery rules and live under the `Wrecept.Core.Plugins` namespace.
+
+For an overview of the built-in domain models referenced by plugins, see [docs/architecture.md](architecture.md).

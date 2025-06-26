@@ -26,10 +26,12 @@
 - Specification drafted with agent task list. [Done]
 - Acceptance no longer requires screenshot inclusion.
 - Global error handling with log file and in-memory fallback. [Done]
-- Enhanced SQLite error handling for locked or corrupt database.
-  - Message when the DB file is locked.
-  - Automatic recovery on corruption with `.bak` backup.
-  - Missing file recreated on startup.
+ - Enhanced SQLite error handling for locked or corrupt database. [Done]
+   - Message when the DB file is locked. [Done]
+   - Automatic recovery on corruption with `.bak` backup. [Done]
+   - Missing file recreated on startup. [Done]
+
+M3.1 complete – proceeding with M4 features and preparing M5 release candidate.
 
 ## M4: Plugin Framework
 - Implement plugin loader and example plugin. [Done]

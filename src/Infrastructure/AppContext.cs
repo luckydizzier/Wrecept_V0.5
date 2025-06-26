@@ -16,9 +16,11 @@ public static class AppContext
     private static readonly Dictionary<Type, object> _services = new();
     private static bool _initialized;
     public static string DatabasePath { get; private set; } = string.Empty;
+    public static string? CustomDatabasePath { get; set; }
     public static string BaseDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
     public static Exception? LastError { get; private set; }
+    public static bool DatabaseAvailable => LastError is null;
     public static bool InputLocked { get; set; }
 
     public static bool Initialize()
@@ -27,7 +29,7 @@ public static class AppContext
             return LastError is null;
 
         var dir = AppDirectories.GetWritableAppDataDirectory();
-        DatabasePath = Path.Combine(dir, "wrecept.db");
+        DatabasePath = CustomDatabasePath ?? Path.Combine(dir, "wrecept.db");
         Console.WriteLine($"Database path: {DatabasePath}");
 
         SqlMapper.AddTypeHandler(new GuidTypeHandler());
