@@ -19,6 +19,9 @@ Az **Alt+T** menüben a Szállítók és Termékek ablakok érhetők el. Új rek
 ## Számlatételek kezelése
 A tételek alatti **Hozzáadás** gomb (vagy Enter az utolsó mezőben) rögzíti az új sort.
 Ha kötelező mező hiányzik, a sor piros háttérrel jelzi a hibát.
+Ha a termék neve nincs a törzsben, Enterrel megnyílik egy sor alatti gyors űrlap,
+ahol megadhatjuk a hiányzó adatokat. A Mentés gomb (vagy Enter) azonnal
+felveszi a terméket és kitölti a tételmezőt; Esc bezárja a formot.
 
 ## Bővítmények menü
 A **Súgó → Bővítmények** alatt jelennek meg a `Plugins` mappából betöltött modulok.
