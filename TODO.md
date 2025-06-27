@@ -67,3 +67,4 @@
 - [x] Refactor ViewModels to receive dependencies via constructors
 - [x] Update tests to build objects through the DI container
 - [x] Document DI usage and remove static AppContext
+- [ ] Validate required fields before saving invoices

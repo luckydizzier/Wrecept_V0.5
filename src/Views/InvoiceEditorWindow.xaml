@@ -24,7 +24,7 @@
         </Border>
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource SpacingLarge}">
-            <Button x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" Margin="{DynamicResource SpacingSmall}" />
+            <Button x:Name="SaveButton" x:Uid="Save_Button" Content="{DynamicResource Save_Button}" Command="{Binding SaveCommand}" Margin="{DynamicResource SpacingSmall}" />
             <Button x:Uid="Print_Button" Content="{DynamicResource Print_Button}" Command="{Binding PrintCommand}" Margin="{DynamicResource SpacingSmall}" />
             <Button x:Uid="Export_Button" Content="{DynamicResource Export_Button}" Command="{Binding ExportCommand}" Margin="{DynamicResource SpacingSmall}" />
             <Button x:Uid="Close_Button" Content="{DynamicResource Close_Button}" Command="{Binding ExitToListCommand}" />
