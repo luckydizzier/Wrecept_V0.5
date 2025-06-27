@@ -1,13 +1,14 @@
 <UserControl x:Class="Wrecept.Views.Filters.ProductFilterDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        KeyDown="Window_KeyDown">
+        KeyDown="Window_KeyDown"
+        FocusManager.FocusedElement="{Binding ElementName=ProductList}">
     <Grid Margin="{DynamicResource SpacingLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" TabIndex="0">
+        <ListBox x:Name="ProductList" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" TabIndex="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="2">

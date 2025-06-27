@@ -10,7 +10,6 @@ public partial class SettingsWindow : UserControl
     public SettingsWindow()
     {
         InitializeComponent();
-        Loaded += (_, _) => Keyboard.Focus(this);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)

@@ -1,6 +1,7 @@
 using Wrecept.Core.Domain;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
+using System.Threading.Tasks;
 using Wrecept.ViewModels;
 using Wrecept.Services;
 using Xunit;
@@ -89,6 +90,7 @@ public class InvoiceEditorViewModelTests
     {
         var repo = new InMemoryInvoiceRepository();
         var service = new DefaultInvoiceService(repo);
+        var nav = new StubNavigationService();
         var invoice = new Invoice { SerialNumber = "1", TransactionNumber = "T1" };
         var vm = new InvoiceEditorViewModel(
             invoice,
@@ -103,12 +105,41 @@ public class InvoiceEditorViewModelTests
             new JsonPriceHistoryService(),
             new FeedbackService(),
             new KeyboardDialogService(),
-            new NavigationService(),
+            nav,
             true);
 
         await vm.SaveAsync();
 
         Assert.True(vm.ExitRequested);
         Assert.Single(await repo.GetAllAsync());
+        Assert.Equal(1, nav.ShowCalls);
+    }
+
+    private class StubNavigationService : INavigationService
+    {
+        public int ShowCalls;
+        public Task ShowInvoiceListViewAsync()
+        {
+            ShowCalls++;
+            return Task.CompletedTask;
+        }
+
+        public void SetHost(MainWindowViewModel host) { }
+        public void ShowSupplierView() { }
+        public void ShowProductView() { }
+        public void ShowUnitView() { }
+        public void ShowProductGroupView() { }
+        public void ShowTaxRateView() { }
+        public void ShowSettingsView() { }
+        public void ShowFilterByDateView() { }
+        public void ShowFilterBySupplierView() { }
+        public void ShowFilterByProductGroupView() { }
+        public void ShowFilterByProductView() { }
+        public void ShowHelpView() { }
+        public void ShowAboutDialog() { }
+        public void ShowOnboardingOverlay() { }
+        public void ShowSavingOverlay() { }
+        public void CloseCurrentView() { }
+        public void ExitApplication() { }
     }
 }

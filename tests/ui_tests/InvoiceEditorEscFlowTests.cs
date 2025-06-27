@@ -23,6 +23,7 @@ public class InvoiceEditorEscFlowTests
     {
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
         var dialog = new StubDialog { Result = true };
+        var nav = new StubNavigationService();
         var vm = new InvoiceEditorViewModel(
             new Invoice
             {
@@ -43,7 +44,7 @@ public class InvoiceEditorEscFlowTests
             new JsonPriceHistoryService(),
             new FeedbackService(),
             dialog,
-            new NavigationService(),
+            nav,
             true);
 
         await vm.CancelByEscAsync();
@@ -56,6 +57,7 @@ public class InvoiceEditorEscFlowTests
     {
         var repo = new InMemoryInvoiceRepository();
         var service = new DefaultInvoiceService(repo);
+        var nav = new StubNavigationService();
         var vm = new InvoiceEditorViewModel(
             new Invoice(),
             true,
@@ -69,11 +71,40 @@ public class InvoiceEditorEscFlowTests
             new JsonPriceHistoryService(),
             new FeedbackService(),
             new KeyboardDialogService(),
-            new NavigationService(),
+            nav,
             true);
 
         await vm.SaveAsync();
 
         Assert.False(vm.ExitedByEsc);
+        Assert.Equal(1, nav.ShowCalls);
+    }
+
+    private class StubNavigationService : INavigationService
+    {
+        public int ShowCalls;
+        public Task ShowInvoiceListViewAsync()
+        {
+            ShowCalls++;
+            return Task.CompletedTask;
+        }
+
+        public void SetHost(MainWindowViewModel host) { }
+        public void ShowSupplierView() { }
+        public void ShowProductView() { }
+        public void ShowUnitView() { }
+        public void ShowProductGroupView() { }
+        public void ShowTaxRateView() { }
+        public void ShowSettingsView() { }
+        public void ShowFilterByDateView() { }
+        public void ShowFilterBySupplierView() { }
+        public void ShowFilterByProductGroupView() { }
+        public void ShowFilterByProductView() { }
+        public void ShowHelpView() { }
+        public void ShowAboutDialog() { }
+        public void ShowOnboardingOverlay() { }
+        public void ShowSavingOverlay() { }
+        public void CloseCurrentView() { }
+        public void ExitApplication() { }
     }
 }

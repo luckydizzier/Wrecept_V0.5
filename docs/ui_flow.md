@@ -39,6 +39,8 @@
 3. Ctrl+S mentésre, Esc az aktuális sor vagy ablak bezárására szolgál; Esc-sorozat esetén először a szerkesztő, majd a főmenü aktiválódik.
 4. A menüsor Alt-tal, a gombok AccessKey jelöléssel érhetők el; az Enter és Esc útvonal minden dialógusban egységes.
 5. Fontos mezők gyorsbillentyűi: Alt+N – Szállító, Alt+P – Számlaszám, Alt+D – Dátum, Alt+T – Tranzakciószám.
+6. Az OnboardingOverlay megnyitásakor a Bezár gombon van a fókusz.
+7. A szűrő- és beállítóablakok a `FocusManager.FocusedElement` tulajdonsággal jelölik ki az első mezőt.
 
 🧾 Exit & Save flow
 A szerkesztőből kilépés kizárólag az Esc megnyomásával történik.
