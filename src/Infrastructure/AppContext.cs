@@ -154,6 +154,7 @@ public static class AppContext
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<ISettingsService, JsonSettingsService>();
         services.AddSingleton<IPriceHistoryService, JsonPriceHistoryService>();
+        services.AddSingleton<IStatusService, StatusService>();
         services.AddSingleton<IFeedbackService, FeedbackService>();
     }
 
