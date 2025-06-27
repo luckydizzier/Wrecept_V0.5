@@ -55,9 +55,9 @@
 - [x] Replace KeyDown handlers with InputBindings in master data views
 - [ ] Auto-open inline lookup dropdowns when name fields receive focus
 - [ ] Integrate lookup dropdown directly below search fields with Up/Down + Enter/Esc handling
-- [ ] Record and apply latest product prices via JsonPriceHistoryService
-- [ ] Document automatic lookup flow in user manual and ui_flow
-- [ ] Add tests for JsonPriceHistoryService
+- [x] Record and apply latest product prices via JsonPriceHistoryService
+- [x] Document automatic lookup flow in user manual and ui_flow
+- [x] Add tests for JsonPriceHistoryService
 - [x] Add EF Core packages and WreceptDbContext
 - [x] Implement EF-based repositories
 - [x] Replace Dapper repositories in DI
