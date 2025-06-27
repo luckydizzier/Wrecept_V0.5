@@ -32,6 +32,18 @@ public class InvoiceEditorViewModelTests
             new DefaultTaxRateService(new InMemoryTaxRateRepository()),
             new JsonPriceHistoryService(),
             new FeedbackService(),
+            new KeyboardDialogService(),
+            new NavigationService(
+                service,
+                new DefaultSupplierService(new InMemorySupplierRepository()),
+                new DefaultPaymentMethodService(new InMemoryPaymentMethodRepository()),
+                new DefaultProductService(new InMemoryProductRepository()),
+                new DefaultProductGroupService(new InMemoryProductGroupRepository()),
+                new DefaultUnitService(new InMemoryUnitRepository()),
+                new DefaultTaxRateService(new InMemoryTaxRateRepository()),
+                new JsonPriceHistoryService(),
+                new FeedbackService(),
+                new JsonSettingsService()),
             true);
 
         Assert.NotSame(invoice, vm.Invoice);
@@ -57,6 +69,8 @@ public class InvoiceEditorViewModelTests
             new DefaultTaxRateService(new InMemoryTaxRateRepository()),
             new JsonPriceHistoryService(),
             new FeedbackService(),
+            new KeyboardDialogService(),
+            new NavigationService(),
             true);
         vm.Invoice.SerialNumber = "2";
         vm.Invoice.Supplier = new Supplier { Id = Guid.NewGuid(), Name = "B" };
@@ -87,6 +101,8 @@ public class InvoiceEditorViewModelTests
             new DefaultTaxRateService(new InMemoryTaxRateRepository()),
             new JsonPriceHistoryService(),
             new FeedbackService(),
+            new KeyboardDialogService(),
+            new NavigationService(),
             true);
 
         await vm.SaveAsync();

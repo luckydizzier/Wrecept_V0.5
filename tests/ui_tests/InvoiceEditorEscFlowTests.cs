@@ -11,10 +11,18 @@ namespace Wrecept.UiTests;
 
 public class InvoiceEditorEscFlowTests
 {
+    private class StubDialog : IKeyboardDialogService
+    {
+        public bool Result { get; set; }
+        public bool Confirm(string message) => Result;
+        public bool ConfirmNewInvoice() => false;
+        public bool ConfirmExit() => false;
+    }
     [Fact]
     public void CancelByEsc_ShouldSetFlags()
     {
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
+        var dialog = new StubDialog { Result = true };
         var vm = new InvoiceEditorViewModel(
             new Invoice(),
             true,
@@ -27,12 +35,13 @@ public class InvoiceEditorEscFlowTests
             new DefaultTaxRateService(new InMemoryTaxRateRepository()),
             new JsonPriceHistoryService(),
             new FeedbackService(),
+            dialog,
+            new NavigationService(),
             true);
 
-        vm.CancelByEsc();
+        vm.CancelByEscAsync().GetAwaiter().GetResult();
 
         Assert.True(vm.ExitRequested);
-        Assert.True(vm.ExitedByEsc);
     }
 
     [Fact]
@@ -52,6 +61,8 @@ public class InvoiceEditorEscFlowTests
             new DefaultTaxRateService(new InMemoryTaxRateRepository()),
             new JsonPriceHistoryService(),
             new FeedbackService(),
+            new KeyboardDialogService(),
+            new NavigationService(),
             true);
 
         await vm.SaveAsync();

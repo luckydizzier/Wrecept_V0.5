@@ -20,6 +20,7 @@ public interface INavigationService
     void ShowHelpView();
     void ShowAboutDialog();
     void ShowOnboardingOverlay();
+    void ShowSavingOverlay();
     void CloseCurrentView();
     void ExitApplication();
 }
