@@ -162,4 +162,23 @@ Details:
 * All updates must be submitted as dedicated PR.
 * Mark proposals with `NEEDS_HUMAN_DECISION`.
 
+## 7. Task Submission Protocol
+
+All new development or documentation tasks must follow the structure defined in `TASK_TEMPLATE.md`.
+
+### Rules:
+- Only agents or the human maintainer may add entries to `TASKLOG.md`.
+- Each task must include:
+  - A linked milestone
+  - An assigned agent (matching §2 and §3)
+  - A future `docs/progress/` log file expectation
+- Optional: reference to a `Specs/*.md` file
+- If a task is ambiguous or unassignable → mark with `NEEDS_HUMAN_DECISION`.
+
+### Format:
+See `TASK_TEMPLATE.md` for the canonical input format.
+
+> Task entries that do not follow the template must be flagged by the Maintainer agent.
+
+
 > “Modularity means putting every idea in the right place—no more, no less.”
