@@ -74,11 +74,11 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 ## M7.2: Feedback System
 - Unified audio and visual cues for actions and validation [Done]
 
-- Lookup Autocomplete and Price Memory
-- Inline lookup dropdowns open automatically on field focus with instant filtering.
-- Product selection pre-fills the latest recorded price.
-- Price history stored locally in JSON file.
-- Updated documentation and tests for new behaviour.
+- Lookup Autocomplete and Price Memory [Done]
+- Inline lookup dropdowns open automatically on field focus with instant filtering. [Done]
+- Product selection pre-fills the latest recorded price. [Done]
+- Price history stored locally in JSON file. [Done]
+- Updated documentation and tests for new behaviour. [Done]
 
 ## M8: EF Core Migration
 - Introduce Entity Framework Core with SQLite provider. [Done]
