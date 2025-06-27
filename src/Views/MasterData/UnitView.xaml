@@ -2,6 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         PreviewKeyDown="Window_KeyDown">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Insert" Command="{Binding AddCommand}" />
+        <KeyBinding Key="F2" Command="{Binding SaveCommand}" />
+        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" />
+    </UserControl.InputBindings>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

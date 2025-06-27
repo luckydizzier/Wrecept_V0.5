@@ -17,17 +17,5 @@ public partial class UnitView : UserControl
         {
             Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
-        else if (e.Key == Key.Insert)
-        {
-            (DataContext as ViewModels.UnitListViewModel)?.AddCommand.Execute(null);
-        }
-        else if (e.Key == Key.F2)
-        {
-            (DataContext as ViewModels.UnitListViewModel)?.SaveCommand.Execute(null);
-        }
-        else if (e.Key == Key.Delete)
-        {
-            (DataContext as ViewModels.UnitListViewModel)?.DeleteCommand.Execute(null);
-        }
     }
 }

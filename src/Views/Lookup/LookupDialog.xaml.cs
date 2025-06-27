@@ -11,15 +11,4 @@ public partial class LookupDialog : UserControl
         Loaded += (_, _) => SearchBox.Focus();
     }
 
-    private void Window_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Escape)
-        {
-            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
-        }
-        else if (e.Key == Key.Enter)
-        {
-            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
-        }
-    }
 }
