@@ -95,6 +95,16 @@ This document is the single source of truth for every ChatGPT agent that helps d
   * May request automated script adjustments.
   * Coordinates review cycles and merge readiness.
 
+### 2.9 audit_agent
+
+* **Focus:** Identify outdated keyboard shortcuts and verify focus behavior across views.
+* **Outputs:**
+  * `audit_agent.md` – Operational checklist.
+  * Progress logs under `docs/progress/` detailing issues and fixes.
+* **Rules:**
+  * May annotate code with `DEPRECATED` comments but defers refactoring to owning agents.
+  * Runs before major feature merges and every two hours when idle.
+
 ## 3. File Ownership Map
 
 | Path / Pattern                      | Owner Agent       |
@@ -110,6 +120,7 @@ This document is the single source of truth for every ChatGPT agent that helps d
 | `Specs/**/*.md`                     | Architect         |
 | `docs/ui_flow.md`, `docs/themes.md` | ux\_agent         |
 | `docs/**/*.md` (except Specs, UI)   | DocWriter         |
+| `audit_agent.md`                    | DocWriter         |
 | `docs/progress/**/*`                | All (self-logged) |
 | `*.sh`, `*.iss`, `*.csproj`         | Architect         |
 | `Directory.Build.props`             | Architect         |
