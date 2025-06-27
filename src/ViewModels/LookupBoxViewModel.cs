@@ -3,11 +3,6 @@ using System.Collections.ObjectModel;
 
 namespace Wrecept.ViewModels;
 
-public class LookupItem<T>(T value, string display)
-{
-    public T Value { get; } = value;
-    public string Display { get; } = display;
-}
 
 public partial class LookupBoxViewModel<T> : ObservableObject
 {
