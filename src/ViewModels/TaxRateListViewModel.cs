@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 namespace Wrecept.ViewModels;
 
 public partial class TaxRateListViewModel : RestorableListViewModel<TaxRate>
 {
     private readonly ITaxRateService _service;
+    private readonly IStatusService _statusService;
 
     private ObservableCollection<TaxRate> _rates = new();
 
@@ -28,9 +30,10 @@ public partial class TaxRateListViewModel : RestorableListViewModel<TaxRate>
         set => SelectedItem = value;
     }
 
-    public TaxRateListViewModel(ITaxRateService service)
+    public TaxRateListViewModel(ITaxRateService service, IStatusService statusService)
     {
         _service = service;
+        _statusService = statusService;
         _ = LoadAsync();
     }
 
@@ -57,7 +60,7 @@ public partial class TaxRateListViewModel : RestorableListViewModel<TaxRate>
     {
         if (SelectedRate is null) return;
         await _service.SaveAsync(SelectedRate);
-        Infrastructure.AppContext.SetStatus("ÁFA-kulcs mentve");
+        _statusService.SetStatus("ÁFA-kulcs mentve");
     }
 
     [RelayCommand]

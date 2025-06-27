@@ -17,6 +17,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
 {
     private readonly Invoice _original;
     private readonly IInvoiceService _invoiceService;
+    private readonly IPriceHistoryService _historyService;
+    private readonly IFeedbackService _feedbackService;
 
     public InvoiceSidebarViewModel SidebarViewModel { get; }
     public InvoiceHeaderViewModel HeaderViewModel { get; }
@@ -40,12 +42,26 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private bool _isEditMode;
 
     public bool IsReadOnly => !IsEditMode;
-    public bool IsDatabaseAvailable => Infrastructure.AppContext.DatabaseAvailable;
+    public bool IsDatabaseAvailable { get; }
 
-    public InvoiceEditorViewModel(Invoice invoice, bool isEditMode, IInvoiceService invoiceService, ObservableCollection<Invoice>? invoices = null)
+    public InvoiceEditorViewModel(
+        Invoice invoice,
+        bool isEditMode,
+        IInvoiceService invoiceService,
+        ISupplierService supplierService,
+        IPaymentMethodService paymentMethodService,
+        IProductService productService,
+        IProductGroupService productGroupService,
+        IUnitService unitService,
+        ITaxRateService taxRateService,
+        IPriceHistoryService historyService,
+        IFeedbackService feedbackService,
+        bool isDatabaseAvailable,
+        ObservableCollection<Invoice>? invoices = null)
     {
         _original = invoice;
         _invoiceService = invoiceService;
+        IsDatabaseAvailable = isDatabaseAvailable;
         _invoice = new Invoice
         {
             Id = invoice.Id,
@@ -64,17 +80,19 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
         SidebarViewModel = new InvoiceSidebarViewModel(
             invoices ?? new ObservableCollection<Invoice>(),
-            Infrastructure.AppContext.SupplierService);
+            supplierService);
         HeaderViewModel = new InvoiceHeaderViewModel(
             Invoice,
-            Infrastructure.AppContext.PaymentMethodService,
-            Infrastructure.AppContext.SupplierService);
+            paymentMethodService,
+            supplierService);
         ItemsViewModel = new InvoiceItemsViewModel(
             Invoice,
-            Infrastructure.AppContext.ProductService,
-            Infrastructure.AppContext.ProductGroupService,
-            Infrastructure.AppContext.UnitService,
-            Infrastructure.AppContext.TaxRateService);
+            productService,
+            productGroupService,
+            unitService,
+            taxRateService,
+            historyService,
+            feedbackService);
         SummaryViewModel = new InvoiceSummaryViewModel(VatSummaries, GrandTotals);
     }
 
@@ -121,7 +139,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         await _invoiceService.SaveAsync(Invoice);
         foreach (var item in Invoice.Items)
         {
-            Infrastructure.AppContext.PriceHistoryService.RecordPrice(item.Product.Name, item.UnitPriceNet);
+            _historyService.RecordPrice(item.Product.Name, item.UnitPriceNet);
         }
         ExitRequested = true;
         ExitedByEsc = false;

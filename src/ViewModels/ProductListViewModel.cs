@@ -3,15 +3,19 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Wrecept.Infrastructure;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 namespace Wrecept.ViewModels;
 
 public partial class ProductListViewModel : RestorableListViewModel<Product>
 {
     private readonly IProductService _service;
+    private readonly IProductGroupService _groupService;
+    private readonly ITaxRateService _taxService;
+    private readonly IUnitService _unitService;
+    private readonly IStatusService _statusService;
 
     private ObservableCollection<Product> _products = new();
 
@@ -30,9 +34,18 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
         set => SelectedItem = value;
     }
 
-    public ProductListViewModel(IProductService service)
+    public ProductListViewModel(
+        IProductService service,
+        IProductGroupService groupService,
+        ITaxRateService taxService,
+        IUnitService unitService,
+        IStatusService statusService)
     {
         _service = service;
+        _groupService = groupService;
+        _taxService = taxService;
+        _unitService = unitService;
+        _statusService = statusService;
         _ = LoadAsync();
     }
 
@@ -48,13 +61,13 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
     [RelayCommand]
     private async Task AddAsync()
     {
-        var groups = await Infrastructure.AppContext.ProductGroupService.GetAllAsync();
-        var taxes = await Infrastructure.AppContext.TaxRateService.GetAllAsync();
-        var units = await Infrastructure.AppContext.UnitService.GetAllAsync();
+        var groups = await _groupService.GetAllAsync();
+        var taxes = await _taxService.GetAllAsync();
+        var units = await _unitService.GetAllAsync();
 
         if (!groups.Any() || !taxes.Any() || !units.Any())
         {
-            Infrastructure.AppContext.SetStatus("Nincs rögzített termékcsoport, adókulcs vagy mértékegység.");
+            _statusService.SetStatus("Nincs rögzített termékcsoport, adókulcs vagy mértékegység.");
             return;
         }
 
@@ -77,7 +90,7 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
     {
         if (SelectedProduct is null) return;
         await _service.SaveAsync(SelectedProduct);
-        Infrastructure.AppContext.SetStatus("Termék mentve");
+        _statusService.SetStatus("Termék mentve");
     }
 
     [RelayCommand]

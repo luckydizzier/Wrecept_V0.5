@@ -4,34 +4,40 @@ using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.ViewModels;
 using Wrecept.Infrastructure;
+using Wrecept.Services;
 using Xunit;
 
 namespace Wrecept.Tests;
 
 public class ProductListViewModelTests
 {
-    private static void SetupServices(bool includeGroups, bool includeTaxes, bool includeUnits)
+    private static (
+        IProductGroupService groupService,
+        ITaxRateService taxService,
+        IUnitService unitService,
+        IStatusService statusService) SetupServices(bool includeGroups, bool includeTaxes, bool includeUnits)
     {
         var groupRepo = new InMemoryProductGroupRepository();
         var taxRepo = new InMemoryTaxRateRepository();
         var unitRepo = new InMemoryUnitRepository();
-        AppContext.ProductGroupService = new DefaultProductGroupService(groupRepo);
-        AppContext.TaxRateService = new DefaultTaxRateService(taxRepo);
-        AppContext.UnitService = new DefaultUnitService(unitRepo);
+        var groupService = new DefaultProductGroupService(groupRepo);
+        var taxService = new DefaultTaxRateService(taxRepo);
+        var unitService = new DefaultUnitService(unitRepo);
         if (includeGroups)
-            AppContext.ProductGroupService.SaveAsync(new ProductGroup { Name = "G" }).Wait();
+            groupService.SaveAsync(new ProductGroup { Name = "G" }).Wait();
         if (includeTaxes)
-            AppContext.TaxRateService.SaveAsync(new TaxRate { Label = "T" }).Wait();
+            taxService.SaveAsync(new TaxRate { Label = "T" }).Wait();
         if (includeUnits)
-            AppContext.UnitService.SaveAsync(new Unit { Name = "U", Symbol = "u" }).Wait();
+            unitService.SaveAsync(new Unit { Name = "U", Symbol = "u" }).Wait();
+        return (groupService, taxService, unitService, new StatusService());
     }
 
     [Fact]
     public async Task AddCommand_ShouldAddProduct_WhenDependenciesExist()
     {
-        SetupServices(true, true, true);
+        var (groupService, taxService, unitService, status) = SetupServices(true, true, true);
         var productService = new DefaultProductService(new InMemoryProductRepository());
-        var vm = new ProductListViewModel(productService);
+        var vm = new ProductListViewModel(productService, groupService, taxService, unitService, status);
 
         await vm.AddCommand.ExecuteAsync(null);
 
@@ -42,11 +48,11 @@ public class ProductListViewModelTests
     [Fact]
     public async Task AddCommand_ShouldShowStatus_WhenGroupMissing()
     {
-        SetupServices(false, true, true);
+        var (groupService, taxService, unitService, status) = SetupServices(false, true, true);
         var productService = new DefaultProductService(new InMemoryProductRepository());
         string? message = null;
-        AppContext.StatusMessageSetter = m => message = m;
-        var vm = new ProductListViewModel(productService);
+        status.StatusMessageSetter = m => message = m;
+        var vm = new ProductListViewModel(productService, groupService, taxService, unitService, status);
 
         await vm.AddCommand.ExecuteAsync(null);
 
@@ -57,11 +63,11 @@ public class ProductListViewModelTests
     [Fact]
     public async Task AddCommand_ShouldShowStatus_WhenTaxRateMissing()
     {
-        SetupServices(true, false, true);
+        var (groupService2, taxService2, unitService2, status2) = SetupServices(true, false, true);
         var productService = new DefaultProductService(new InMemoryProductRepository());
         string? message = null;
-        AppContext.StatusMessageSetter = m => message = m;
-        var vm = new ProductListViewModel(productService);
+        status2.StatusMessageSetter = m => message = m;
+        var vm = new ProductListViewModel(productService, groupService2, taxService2, unitService2, status2);
 
         await vm.AddCommand.ExecuteAsync(null);
 
@@ -72,11 +78,11 @@ public class ProductListViewModelTests
     [Fact]
     public async Task AddCommand_ShouldShowStatus_WhenUnitMissing()
     {
-        SetupServices(true, true, false);
+        var (groupService3, taxService3, unitService3, status3) = SetupServices(true, true, false);
         var productService = new DefaultProductService(new InMemoryProductRepository());
         string? message = null;
-        AppContext.StatusMessageSetter = m => message = m;
-        var vm = new ProductListViewModel(productService);
+        status3.StatusMessageSetter = m => message = m;
+        var vm = new ProductListViewModel(productService, groupService3, taxService3, unitService3, status3);
 
         await vm.AddCommand.ExecuteAsync(null);
 

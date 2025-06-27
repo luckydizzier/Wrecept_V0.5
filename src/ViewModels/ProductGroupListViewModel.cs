@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 namespace Wrecept.ViewModels;
 
 public partial class ProductGroupListViewModel : RestorableListViewModel<ProductGroup>
 {
     private readonly IProductGroupService _service;
+    private readonly IStatusService _statusService;
 
     private ObservableCollection<ProductGroup> _groups = new();
 
@@ -28,9 +30,10 @@ public partial class ProductGroupListViewModel : RestorableListViewModel<Product
         set => SelectedItem = value;
     }
 
-    public ProductGroupListViewModel(IProductGroupService service)
+    public ProductGroupListViewModel(IProductGroupService service, IStatusService statusService)
     {
         _service = service;
+        _statusService = statusService;
         _ = LoadAsync();
     }
 
@@ -57,7 +60,7 @@ public partial class ProductGroupListViewModel : RestorableListViewModel<Product
     {
         if (SelectedGroup is null) return;
         await _service.SaveAsync(SelectedGroup);
-        Infrastructure.AppContext.SetStatus("Termékcsoport mentve");
+        _statusService.SetStatus("Termékcsoport mentve");
     }
 
     [RelayCommand]
