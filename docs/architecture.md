@@ -37,6 +37,7 @@ Az `Infrastructure.AppContext.InputLocked` jelző megakadályozza a párbeszéda
 
 ## Keyboard Bindings
 A master data nézetek gyorsbillentyűit `InputBindings` köti össze a ViewModelben definiált parancsokkal. Így az Insert, F2 és Delete gombok közvetlenül az `AddCommand`, `SaveCommand` és `DeleteCommand` műveleteket hívják meg, míg az Esc továbbra is a `NavigationService` segítségével zárja be az aktuális ablakot.
+Az **InvoiceItemsGrid** ugyanígy kezeli a tételsorokat: a `StartEditCommand` (F2 vagy Ctrl+L) megnyitja a megfelelő keresőt, a `ConfirmEntryCommand` (Enter) rögzíti az új sort, míg a `CancelEntryCommand` (Esc) törli a bevitelt.
 
 ## Feedback Service
 A new `IFeedbackService` centralises sound cues. The default `FeedbackService` plays short beep patterns (startup, exit, accept, reject, error) via `Console.Beep`. `VisualFeedback` helpers flash controls in warning, error or success colours. The service is registered in the DI container for global access.

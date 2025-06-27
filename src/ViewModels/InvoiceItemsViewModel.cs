@@ -30,6 +30,10 @@ public partial class InvoiceItemsViewModel : ObservableObject
     public LookupBoxViewModel<Unit> UnitLookup { get; }
     public LookupBoxViewModel<TaxRate> TaxRateLookup { get; }
 
+    public IRelayCommand<int> StartEditCommand { get; }
+    public IAsyncRelayCommand<int> ConfirmEntryCommand { get; }
+    public IRelayCommand CancelEntryCommand { get; }
+
 
     public InvoiceItemsViewModel(
         Invoice invoice,
@@ -56,6 +60,9 @@ public partial class InvoiceItemsViewModel : ObservableObject
             Rows.Add(new InvoiceItemRowViewModel(item));
         }
         AddItemCommand = new RelayCommand(AddItem);
+        StartEditCommand = new RelayCommand<int>(StartEdit);
+        ConfirmEntryCommand = new AsyncRelayCommand<int>(ConfirmEntryAsync);
+        CancelEntryCommand = new RelayCommand(CancelEntry);
         ProductLookup = new LookupBoxViewModel<Product>(SearchProductsAsync, p => p.Name, OnProductSelected, () => { });
         UnitLookup = new LookupBoxViewModel<Unit>(SearchUnitsAsync, u => u.Name, OnUnitSelected, () => { });
         TaxRateLookup = new LookupBoxViewModel<TaxRate>(SearchTaxRatesAsync, t => t.Label, OnTaxRateSelected, () => { });
@@ -139,6 +146,36 @@ public partial class InvoiceItemsViewModel : ObservableObject
     private void OnTaxRateSelected(TaxRate rate)
     {
         Entry.VatRatePercent = rate.Percentage;
+    }
+
+    private void StartEdit(int column)
+    {
+        if (column == 0)
+            OpenProductLookup();
+        else if (column == 2)
+            OpenUnitLookup();
+        else if (column == 4)
+            OpenTaxRateLookup();
+    }
+
+    private async Task ConfirmEntryAsync(int column)
+    {
+        if (column == 0)
+        {
+            await TryOpenProductCreatorAsync();
+            return;
+        }
+
+        if (column == 4)
+        {
+            if (AddItemCommand.CanExecute(null))
+                AddItemCommand.Execute(null);
+        }
+    }
+
+    private void CancelEntry()
+    {
+        Entry.Clear();
     }
 
     private void OnProductSaved(Product product)
