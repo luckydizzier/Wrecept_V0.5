@@ -4,6 +4,7 @@ using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
 using Wrecept.ViewModels;
 using Wrecept.Services;
+using Wrecept.Infrastructure;
 using Xunit;
 
 namespace Wrecept.UiTests;
