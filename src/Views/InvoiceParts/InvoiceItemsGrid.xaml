@@ -1,7 +1,8 @@
 <UserControl x:Class="Wrecept.Views.InvoiceParts.InvoiceItemsGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:inline="clr-namespace:Wrecept.Views.Inline">
+             xmlns:inline="clr-namespace:Wrecept.Views.Inline"
+             xmlns:lookup="clr-namespace:Wrecept.Views.Lookup">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -28,7 +29,10 @@
         </DataGrid.Style>
         <DataGrid.RowDetailsTemplate>
             <DataTemplate>
-                <inline:InlineProductCreator DataContext="{Binding DataContext.ProductCreator, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                <StackPanel>
+                    <lookup:LookupBox DataContext="{Binding DataContext.ProductLookup, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                    <inline:InlineProductCreator DataContext="{Binding DataContext.ProductCreator, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                </StackPanel>
             </DataTemplate>
         </DataGrid.RowDetailsTemplate>
         <DataGrid.RowStyle>

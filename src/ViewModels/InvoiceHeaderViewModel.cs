@@ -22,21 +22,32 @@ public partial class InvoiceHeaderViewModel : ObservableObject
     public InlineSupplierCreatorViewModel? SupplierCreator { get; private set; }
 
     private readonly ISupplierService _supplierService;
-    private readonly ILookupDialogPresenter _lookupPresenter;
     private readonly IPaymentMethodService _paymentMethodService;
+    public LookupBoxViewModel<Supplier> SupplierLookup { get; }
 
     public InvoiceHeaderViewModel(
         Invoice invoice,
         IPaymentMethodService paymentMethodService,
-        ISupplierService supplierService,
-        ILookupDialogPresenter lookupPresenter)
+        ISupplierService supplierService)
     {
         _supplierService = supplierService;
-        _lookupPresenter = lookupPresenter;
         _paymentMethodService = paymentMethodService;
         Invoice = invoice;
         CalculationModes = new[] { CalculationMode.Net, CalculationMode.Gross };
+        SupplierLookup = new LookupBoxViewModel<Supplier>(SearchSuppliersAsync, s => s.Name, OnSupplierSelected, () => { });
         _ = LoadPaymentMethodsAsync();
+    }
+
+    private async Task<List<Supplier>> SearchSuppliersAsync(string term)
+    {
+        var all = await _supplierService.GetAllAsync();
+        return all.Where(s => s.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    private void OnSupplierSelected(Supplier supplier)
+    {
+        Invoice.Supplier = supplier;
+        OnPropertyChanged(nameof(Invoice));
     }
 
     private async Task LoadPaymentMethodsAsync()
@@ -82,23 +93,9 @@ public partial class InvoiceHeaderViewModel : ObservableObject
         OnPropertyChanged(nameof(SupplierCreator));
     }
 
-    public async Task<bool> OpenSupplierLookupAsync()
+    public void OpenSupplierLookup()
     {
-        async Task<List<Supplier>> Search(string term)
-        {
-            var all = await _supplierService.GetAllAsync();
-            return all.Where(s => s.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
-
-        var vm = new LookupDialogViewModel<Supplier>(Search, s => s.Name);
-        var result = _lookupPresenter.ShowDialog(vm);
-        if (result == true && vm.SelectedItem != null)
-        {
-            Invoice.Supplier = vm.SelectedItem.Value;
-            OnPropertyChanged(nameof(Invoice));
-            return true;
-        }
-        return false;
+        SupplierLookup.Open();
     }
 
     public void NotifyInvoiceChanged()

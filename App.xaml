@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/Wrecept;component/Themes/Light.xaml" />
                 <ResourceDictionary Source="/Wrecept;component/Resources/Strings.hu.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <sys:Double x:Key="BaseFontSize">14</sys:Double>
             <Thickness x:Key="SpacingSmall">4</Thickness>
             <Thickness x:Key="SpacingMedium">8</Thickness>

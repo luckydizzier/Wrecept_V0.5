@@ -1,0 +1,17 @@
+<UserControl x:Class="Wrecept.Views.Lookup.LookupBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBox x:Name="SearchBox"
+                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 KeyDown="SearchBox_KeyDown"
+                 GotKeyboardFocus="SearchBox_GotKeyboardFocus"
+                 ToolTip="{DynamicResource Search_Tooltip}"/>
+        <ListBox x:Name="ResultList"
+                 ItemsSource="{Binding Results}"
+                 SelectedItem="{Binding SelectedItem}"
+                 DisplayMemberPath="Display"
+                 Visibility="{Binding IsDropDownOpen, Converter={StaticResource BoolToVisibilityConverter}}"
+                 KeyDown="ResultList_KeyDown"/>
+    </StackPanel>
+</UserControl>

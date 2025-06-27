@@ -9,10 +9,6 @@ namespace Wrecept.Tests;
 
 public class InvoiceHeaderInlineCreatorTests
 {
-    private class StubPresenter : ILookupDialogPresenter
-    {
-        public bool? ShowDialog<T>(LookupDialogViewModel<T> vm) => null;
-    }
     [Fact]
     public async Task TryOpenSupplierCreator_ShouldReturnTrue_WhenNameMissing()
     {
@@ -22,7 +18,7 @@ public class InvoiceHeaderInlineCreatorTests
         var pmService = new DefaultPaymentMethodService(pmRepo);
         await pmService.SaveAsync(new PaymentMethod { Label = "Készpénz" });
         var invoice = new Invoice { Supplier = new Supplier { Name = "Új Szállító" } };
-        var vm = new InvoiceHeaderViewModel(invoice, pmService, service, new StubPresenter());
+        var vm = new InvoiceHeaderViewModel(invoice, pmService, service);
 
         var opened = await vm.TryOpenSupplierCreatorAsync();
 

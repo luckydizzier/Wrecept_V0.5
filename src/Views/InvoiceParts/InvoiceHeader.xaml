@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:inline="clr-namespace:Wrecept.Views.Inline"
+             xmlns:lookup="clr-namespace:Wrecept.Views.Lookup"
              xmlns:vm="clr-namespace:Wrecept.ViewModels">
     <Grid Margin="{DynamicResource MarginBottomLarge}">
         <Grid.ColumnDefinitions>
@@ -18,7 +19,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Supplier_Label}" Margin="0,0,5,5"/>
-        <TextBox x:Name="SupplierNameBox" Grid.Row="0" Grid.Column="1" Text="{Binding Invoice.Supplier.Name}" Margin="{DynamicResource MarginRightMediumBottomSmall}" TabIndex="0" KeyDown="SupplierNameBox_OnKeyDown" GotKeyboardFocus="SupplierNameBox_OnGotKeyboardFocus" ToolTip="{DynamicResource Search_Tooltip}" />
+        <lookup:LookupBox x:Name="SupplierNameBox" Grid.Row="0" Grid.Column="1" DataContext="{Binding SupplierLookup}" Margin="{DynamicResource MarginRightMediumBottomSmall}" TabIndex="0" />
         <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource Address_Label}" Margin="0,0,5,5"/>
         <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Invoice.Supplier.Address}" Margin="{DynamicResource MarginBottomSmall}" TabIndex="1" />
         <TextBlock Grid.Column="0" Grid.Row="1" Text="{DynamicResource TaxNumber_Label}" Margin="0,5,5,5"/>

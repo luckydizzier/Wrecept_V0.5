@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
-using Wrecept.Views.Lookup;
 using Wrecept.Services;
 using System;
 using System.Linq;
@@ -25,15 +24,16 @@ public partial class InvoiceItemsViewModel : ObservableObject
     private readonly IProductGroupService _groupService;
     private readonly IUnitService _unitService;
     private readonly ITaxRateService _taxService;
-    private readonly ILookupDialogPresenter _lookupPresenter;
+    public LookupBoxViewModel<Product> ProductLookup { get; }
+    public LookupBoxViewModel<Unit> UnitLookup { get; }
+    public LookupBoxViewModel<TaxRate> TaxRateLookup { get; }
 
     public InvoiceItemsViewModel(Invoice invoice)
         : this(invoice,
             Infrastructure.AppContext.ProductService,
             Infrastructure.AppContext.ProductGroupService,
             Infrastructure.AppContext.UnitService,
-            Infrastructure.AppContext.TaxRateService,
-            Infrastructure.AppContext.LookupPresenter)
+            Infrastructure.AppContext.TaxRateService)
     {
     }
 
@@ -42,14 +42,12 @@ public partial class InvoiceItemsViewModel : ObservableObject
         IProductService productService,
         IProductGroupService groupService,
         IUnitService unitService,
-        ITaxRateService taxService,
-        ILookupDialogPresenter lookupPresenter)
+        ITaxRateService taxService)
     {
         _productService = productService;
         _groupService = groupService;
         _unitService = unitService;
         _taxService = taxService;
-        _lookupPresenter = lookupPresenter;
 
         Invoice = invoice;
         Rows = new ObservableCollection<InvoiceItemRowViewModel>();
@@ -60,6 +58,9 @@ public partial class InvoiceItemsViewModel : ObservableObject
             Rows.Add(new InvoiceItemRowViewModel(item));
         }
         AddItemCommand = new RelayCommand(AddItem);
+        ProductLookup = new LookupBoxViewModel<Product>(SearchProductsAsync, p => p.Name, OnProductSelected, () => { });
+        UnitLookup = new LookupBoxViewModel<Unit>(SearchUnitsAsync, u => u.Name, OnUnitSelected, () => { });
+        TaxRateLookup = new LookupBoxViewModel<TaxRate>(SearchTaxRatesAsync, t => t.Label, OnTaxRateSelected, () => { });
     }
 
     public bool LastAddSuccess { get; private set; }
@@ -106,6 +107,42 @@ public partial class InvoiceItemsViewModel : ObservableObject
         return true;
     }
 
+    private async Task<List<Product>> SearchProductsAsync(string term)
+    {
+        var all = await _productService.GetAllAsync();
+        return all.Where(p => p.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    private async Task<List<Unit>> SearchUnitsAsync(string term)
+    {
+        var all = await _unitService.GetAllAsync();
+        return all.Where(u => u.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    private async Task<List<TaxRate>> SearchTaxRatesAsync(string term)
+    {
+        var all = await _taxService.GetAllAsync();
+        return all.Where(t => t.Label.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    private void OnProductSelected(Product product)
+    {
+        Entry.ProductName = product.Name;
+        var price = Infrastructure.AppContext.PriceHistoryService.GetLatestPrice(product.Name);
+        if (price.HasValue)
+            Entry.UnitPriceNet = price.Value;
+    }
+
+    private void OnUnitSelected(Unit unit)
+    {
+        Entry.UnitName = unit.Name;
+    }
+
+    private void OnTaxRateSelected(TaxRate rate)
+    {
+        Entry.VatRatePercent = rate.Percentage;
+    }
+
     private void OnProductSaved(Product product)
     {
         Entry.ProductName = product.Name;
@@ -119,60 +156,18 @@ public partial class InvoiceItemsViewModel : ObservableObject
         OnPropertyChanged(nameof(ProductCreator));
     }
 
-    public async Task<bool> OpenProductLookupAsync()
+    public void OpenProductLookup()
     {
-        async Task<List<Product>> Search(string term)
-        {
-            var all = await _productService.GetAllAsync();
-            return all.Where(p => p.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
-
-        var vm = new LookupDialogViewModel<Product>(Search, p => p.Name);
-        var result = _lookupPresenter.ShowDialog(vm);
-        if (result == true && vm.SelectedItem != null)
-        {
-            Entry.ProductName = vm.SelectedItem.Value.Name;
-            var price = Infrastructure.AppContext.PriceHistoryService.GetLatestPrice(vm.SelectedItem.Value.Name);
-            if (price.HasValue)
-                Entry.UnitPriceNet = price.Value;
-            return true;
-        }
-        return false;
+        ProductLookup.Open();
     }
 
-    public async Task<bool> OpenUnitLookupAsync()
+    public void OpenUnitLookup()
     {
-        async Task<List<Unit>> Search(string term)
-        {
-            var all = await _unitService.GetAllAsync();
-            return all.Where(u => u.Name.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
-
-        var vm = new LookupDialogViewModel<Unit>(Search, u => u.Name);
-        var result = _lookupPresenter.ShowDialog(vm);
-        if (result == true && vm.SelectedItem != null)
-        {
-            Entry.UnitName = vm.SelectedItem.Value.Name;
-            return true;
-        }
-        return false;
+        UnitLookup.Open();
     }
 
-    public async Task<bool> OpenTaxRateLookupAsync()
+    public void OpenTaxRateLookup()
     {
-        async Task<List<TaxRate>> Search(string term)
-        {
-            var all = await _taxService.GetAllAsync();
-            return all.Where(t => t.Label.Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
-
-        var vm = new LookupDialogViewModel<TaxRate>(Search, t => t.Label);
-        var result = _lookupPresenter.ShowDialog(vm);
-        if (result == true && vm.SelectedItem != null)
-        {
-            Entry.VatRatePercent = vm.SelectedItem.Value.Percentage;
-            return true;
-        }
-        return false;
+        TaxRateLookup.Open();
     }
 }

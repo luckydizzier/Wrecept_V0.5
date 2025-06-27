@@ -23,7 +23,7 @@
     <sys:String x:Key="SupplierFilter_Title">Supplier Filter</sys:String>
     <sys:String x:Key="ProductGroupFilter_Title">Product Group Filter</sys:String>
     <sys:String x:Key="LookupDialog_Title">Search</sys:String>
-    <sys:String x:Key="Search_Tooltip">F2 or Ctrl+L: lookup</sys:String>
+    <sys:String x:Key="Search_Tooltip">Up/Down, Enter, Esc: lookup</sys:String>
     <sys:String x:Key="Help_Title">Help</sys:String>
     <sys:String x:Key="Help_Text">The user manual can be found in docs/user_manual.md. Keyboard help is shown in the OnboardingOverlay window via F1.</sys:String>
     <sys:String x:Key="About_Title">About</sys:String>
