@@ -30,3 +30,6 @@ Az `Infrastructure.AppContext.InputLocked` jelző megakadályozza a párbeszéda
 
 ## Feedback Service
 A new `IFeedbackService` centralises sound cues. The default `FeedbackService` plays short beep patterns (startup, exit, accept, reject, error) via `Console.Beep`. `VisualFeedback` helpers flash controls in warning, error or success colours. The service is registered in `AppContext` for global access.
+
+## Persistence Layer
+Data is stored in a local SQLite file accessed through **Entity Framework Core**. A single `WreceptDbContext` maps the domain entities to tables and is created by `AppContext` on startup. When the database is unavailable or corrupt, in-memory repositories provide a fallback.
