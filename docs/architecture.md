@@ -33,3 +33,6 @@ A new `IFeedbackService` centralises sound cues. The default `FeedbackService` p
 
 ## Persistence Layer
 Data is stored in a local SQLite file accessed through **Entity Framework Core**. A single `WreceptDbContext` maps the domain entities to tables and is created by `AppContext` on startup. When the database is unavailable or corrupt, in-memory repositories provide a fallback.
+
+## Planned Dependency Injection
+A jelenlegi statikus `AppContext` egyetlen példányban tárolja az összes szolgáltatást. A következő verzióban ezt egy DI konténer váltja fel. A szolgáltatások és tárolók a `Microsoft.Extensions.DependencyInjection` segítségével regisztrálódnak, a ViewModel-ek pedig konstruktoron keresztül kapják meg őket. Ez a felépítés könnyebb tesztelhetőséget és rugalmasabb bővíthetőséget eredményez.
