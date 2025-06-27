@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -17,11 +18,13 @@ public partial class KeyboardConfirmDialog : UserControl
         base.OnPreviewKeyDown(e);
         if (e.Key == Key.I || e.Key == Key.Enter)
         {
-            Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            Window.GetWindow(this)!.DialogResult = true;
+            e.Handled = true;
         }
         else if (e.Key == Key.N || e.Key == Key.Escape)
         {
-            Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            Window.GetWindow(this)!.DialogResult = false;
+            e.Handled = true;
         }
     }
 }
