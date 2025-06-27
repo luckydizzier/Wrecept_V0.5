@@ -148,7 +148,6 @@ public partial class InvoiceEditorViewModel : ObservableObject
         {
             _navigationService.ShowSavingOverlay();
             await SaveAsync();
-            await _navigationService.ShowInvoiceListViewAsync();
         }
     }
 
@@ -185,6 +184,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         _feedbackService.Accept();
         ExitRequested = true;
         ExitedByEsc = false;
+        await _navigationService.ShowInvoiceListViewAsync();
     }
 
     private void PrintInvoice()

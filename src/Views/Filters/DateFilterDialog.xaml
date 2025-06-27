@@ -1,7 +1,8 @@
 <UserControl x:Class="Wrecept.Views.Filters.DateFilterDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        KeyDown="Window_KeyDown">
+        KeyDown="Window_KeyDown"
+        FocusManager.FocusedElement="{Binding ElementName=FromDatePicker}">
     <Grid Margin="{DynamicResource SpacingLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,7 +14,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Uid="StartDate_Label" Grid.Row="0" Grid.Column="0" Text="{DynamicResource StartDate_Label}" Margin="{DynamicResource MarginRightSmallBottomSmall}"/>
-        <DatePicker Grid.Row="0" Grid.Column="1" SelectedDate="{Binding FromDate}" TabIndex="0"/>
+        <DatePicker x:Name="FromDatePicker" Grid.Row="0" Grid.Column="1" SelectedDate="{Binding FromDate}" TabIndex="0"/>
         <TextBlock x:Uid="EndDate_Label" Grid.Row="1" Grid.Column="0" Text="{DynamicResource EndDate_Label}" Margin="{DynamicResource MarginTopSmallRightSmallBottomSmall}"/>
         <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding ToDate}" TabIndex="1"/>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">

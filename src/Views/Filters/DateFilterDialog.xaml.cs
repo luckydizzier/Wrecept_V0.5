@@ -10,7 +10,6 @@ public partial class DateFilterDialog : UserControl
     public DateFilterDialog()
     {
         InitializeComponent();
-        Loaded += (_, _) => Keyboard.Focus(this);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)

@@ -1,13 +1,14 @@
 <UserControl x:Class="Wrecept.Views.Filters.SupplierFilterDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        KeyDown="Window_KeyDown">
+        KeyDown="Window_KeyDown"
+        FocusManager.FocusedElement="{Binding ElementName=SupplierList}">
     <Grid Margin="{DynamicResource SpacingLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" TabIndex="0">
+        <ListBox x:Name="SupplierList" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" TabIndex="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="2">

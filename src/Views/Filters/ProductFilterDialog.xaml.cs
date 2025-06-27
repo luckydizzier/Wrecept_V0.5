@@ -10,7 +10,6 @@ public partial class ProductFilterDialog : UserControl
     public ProductFilterDialog()
     {
         InitializeComponent();
-        Loaded += (_, _) => Keyboard.Focus(this);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)

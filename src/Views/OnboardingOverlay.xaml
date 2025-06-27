@@ -1,7 +1,8 @@
 <UserControl x:Class="Wrecept.Views.OnboardingOverlay"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        KeyDown="Window_OnKeyDown">
+        KeyDown="Window_OnKeyDown"
+        FocusManager.FocusedElement="{Binding ElementName=CloseButton}">
     <Border Background="White" Opacity="0.9" Padding="{DynamicResource SpacingLarge}">
         <StackPanel>
             <TextBlock Text="{DynamicResource Shortcuts_Title}" FontWeight="Bold" Margin="{DynamicResource MarginBottomMedium}" FontSize="{DynamicResource BaseFontSize}" />
@@ -9,7 +10,7 @@
             <TextBlock Text="{DynamicResource Shortcut_Open}" FontSize="{DynamicResource BaseFontSize}" />
             <TextBlock Text="{DynamicResource Shortcut_Back}" FontSize="{DynamicResource BaseFontSize}" />
             <TextBlock Text="{DynamicResource Shortcut_Help}" FontSize="{DynamicResource BaseFontSize}" />
-            <Button x:Uid="CloseSimple_Button" Content="{DynamicResource CloseSimple_Button}" Click="OnClose" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}" TabIndex="0" IsDefault="True" FontSize="{DynamicResource BaseFontSize}" />
+            <Button x:Name="CloseButton" x:Uid="CloseSimple_Button" Content="{DynamicResource CloseSimple_Button}" Click="OnClose" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}" TabIndex="0" IsDefault="True" FontSize="{DynamicResource BaseFontSize}" />
         </StackPanel>
     </Border>
 </UserControl>
