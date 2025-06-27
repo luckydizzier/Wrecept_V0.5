@@ -43,7 +43,7 @@ Az **InvoiceItemsGrid** ugyanígy kezeli a tételsorokat: a `StartEditCommand` (
 A new `IFeedbackService` centralises sound cues. The default `FeedbackService` plays short beep patterns (startup, exit, accept, reject, error) via `Console.Beep`. `VisualFeedback` helpers flash controls in warning, error or success colours. The service is registered in the DI container for global access.
 
 ## Persistence Layer
-Data is stored in a local SQLite file accessed through **Entity Framework Core**. A single `WreceptDbContext` maps the domain entities to tables and is created via the DI container on startup. When the database is unavailable or corrupt, in-memory repositories provide a fallback.
+Data is stored in a local SQLite file accessed through **Entity Framework Core**. A single `WreceptDbContext` maps the domain entities to tables and is created via the DI container on startup. When the database is unavailable or corrupt, in-memory repositories provide a fallback. On startup the `SchemaUpgradeService` checks for missing columns and issues simple `ALTER TABLE` commands so older databases remain compatible.
 
 ## Dependency Injection
 Az alkalmazás minden szolgáltatását a `Microsoft.Extensions.DependencyInjection` konténer kezeli. A ViewModel-ek konstruktoron keresztül jutnak a szükséges függőségekhez, így a statikus `AppContext` szerepe megszűnt. A tesztek saját szolgáltatásgyűjteményt építenek fel, így a komponensek könnyen izolálhatók.
