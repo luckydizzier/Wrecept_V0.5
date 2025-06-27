@@ -65,7 +65,7 @@ public partial class InvoiceSidebarViewModel : ObservableObject
         if (SelectedSupplier != null)
             query = query.Where(i => i.Supplier.Id == SelectedSupplier.Id);
         Invoices = new ObservableCollection<Invoice>(query);
-        if (!Invoices.Contains(SelectedInvoice))
+        if (SelectedInvoice == null || !Invoices.Contains(SelectedInvoice))
             SelectedInvoice = Invoices.FirstOrDefault();
     }
 }

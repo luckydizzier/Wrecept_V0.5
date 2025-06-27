@@ -60,9 +60,12 @@ public static class SeedDataService
             {
                 Id = productId,
                 Name = "Teszt termék",
-                Group = await db.ProductGroups.FindAsync(groupId)!,
-                TaxRate = await db.TaxRates.FindAsync(vatId)!,
-                DefaultUnit = await db.Units.FindAsync(unitId)!
+                Group = await db.ProductGroups.FindAsync(groupId)
+                    ?? throw new InvalidOperationException("Group missing"),
+                TaxRate = await db.TaxRates.FindAsync(vatId)
+                    ?? throw new InvalidOperationException("VAT missing"),
+                DefaultUnit = await db.Units.FindAsync(unitId)
+                    ?? throw new InvalidOperationException("Unit missing")
             });
         }
         else
@@ -92,9 +95,11 @@ public static class SeedDataService
                 SerialNumber = "INV-001",
                 TransactionNumber = "TXN-001",
                 IssueDate = DateOnly.FromDateTime(DateTime.Today),
-                Supplier = await db.Suppliers.FindAsync(supplierId)!,
+                Supplier = await db.Suppliers.FindAsync(supplierId)
+                    ?? throw new InvalidOperationException("Supplier missing"),
                 CalculationMode = CalculationMode.Net,
-                PaymentMethod = await db.PaymentMethods.FindAsync(payId)!,
+                PaymentMethod = await db.PaymentMethods.FindAsync(payId)
+                    ?? throw new InvalidOperationException("Payment method missing"),
                 Notes = string.Empty
             });
         }
@@ -108,13 +113,16 @@ public static class SeedDataService
             var item = new InvoiceItem
             {
                 Id = Guid.NewGuid(),
-                Product = await db.Products.FindAsync(productId)!,
+                Product = await db.Products.FindAsync(productId)
+                    ?? throw new InvalidOperationException("Product missing"),
                 Quantity = 1,
-                Unit = await db.Units.FindAsync(unitId)!,
+                Unit = await db.Units.FindAsync(unitId)
+                    ?? throw new InvalidOperationException("Unit missing"),
                 UnitPriceNet = 100,
                 VatRatePercent = 27
             };
-            var invoice = await db.Invoices.FindAsync(invoiceId)!;
+            var invoice = await db.Invoices.FindAsync(invoiceId)
+                ?? throw new InvalidOperationException("Invoice missing");
             invoice.Items.Add(item);
             db.InvoiceItems.Add(item);
         }

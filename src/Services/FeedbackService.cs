@@ -6,7 +6,11 @@ public class FeedbackService : IFeedbackService
 {
     private readonly Action<int, int> _beep;
 
-    public FeedbackService() : this(Console.Beep) { }
+    public FeedbackService() : this((f, d) =>
+    {
+        if (OperatingSystem.IsWindows())
+            Console.Beep(f, d);
+    }) { }
 
     public FeedbackService(Action<int, int> beep)
     {
@@ -29,7 +33,8 @@ public class FeedbackService : IFeedbackService
             }
             catch
             {
-                System.Media.SystemSounds.Beep.Play();
+                if (OperatingSystem.IsWindows())
+                    System.Media.SystemSounds.Beep.Play();
             }
         }
     }
