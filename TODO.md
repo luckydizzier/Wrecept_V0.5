@@ -52,3 +52,7 @@
 - [x] Close Help, About and F1 overlay windows with Escape
 - [x] Provide CRUD windows for Units, Product Groups and Tax Rates
 - [x] Implement unified audio and visual feedback system
+- [ ] Auto-open lookup dialogs when name fields receive focus
+- [ ] Record and apply latest product prices via JsonPriceHistoryService
+- [ ] Document automatic lookup flow in user manual and ui_flow
+- [ ] Add tests for JsonPriceHistoryService

@@ -132,6 +132,9 @@ public partial class InvoiceItemsViewModel : ObservableObject
         if (result == true && vm.SelectedItem != null)
         {
             Entry.ProductName = vm.SelectedItem.Value.Name;
+            var price = Infrastructure.AppContext.PriceHistoryService.GetLatestPrice(vm.SelectedItem.Value.Name);
+            if (price.HasValue)
+                Entry.UnitPriceNet = price.Value;
             return true;
         }
         return false;

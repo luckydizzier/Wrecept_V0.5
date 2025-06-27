@@ -14,7 +14,8 @@
               TabIndex="0"
               RowHeight="26"
               Loaded="ItemsGrid_OnLoaded"
-              KeyDown="ItemsGrid_OnKeyDown">
+              KeyDown="ItemsGrid_OnKeyDown"
+              BeginningEdit="ItemsGrid_OnBeginningEdit">
         <DataGrid.Style>
             <Style TargetType="DataGrid">
                 <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
