@@ -9,6 +9,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Infrastructure;
 using Wrecept.Views.Dialogs;
+using Wrecept.ViewModels;
 
 namespace Wrecept
 {

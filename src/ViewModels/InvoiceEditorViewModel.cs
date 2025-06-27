@@ -19,7 +19,6 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private readonly Invoice _original;
     private readonly IInvoiceService _invoiceService;
     private readonly IPriceHistoryService _historyService;
-    private readonly IFeedbackService _feedbackService;
 
     public InvoiceSidebarViewModel SidebarViewModel { get; }
     public InvoiceHeaderViewModel HeaderViewModel { get; }
@@ -62,6 +61,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     {
         _original = invoice;
         _invoiceService = invoiceService;
+        _historyService = historyService;
         IsDatabaseAvailable = isDatabaseAvailable;
         _invoice = new Invoice
         {

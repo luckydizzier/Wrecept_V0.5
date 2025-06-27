@@ -27,7 +27,20 @@ public class NavigationService : INavigationService
         {
             var list = new ObservableCollection<Invoice>(invoices);
             var current = list.FirstOrDefault() ?? new Invoice { Supplier = new Supplier() };
-            var vm = new InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
+            var vm = new InvoiceEditorViewModel(
+                current,
+                false,
+                WreceptAppContext.InvoiceService,
+                WreceptAppContext.SupplierService,
+                WreceptAppContext.PaymentMethodService,
+                WreceptAppContext.ProductService,
+                WreceptAppContext.ProductGroupService,
+                WreceptAppContext.UnitService,
+                WreceptAppContext.TaxRateService,
+                WreceptAppContext.PriceHistoryService,
+                WreceptAppContext.FeedbackService,
+                WreceptAppContext.DatabaseAvailable,
+                list);
             var view = new Views.InvoiceEditorWindow { DataContext = vm };
             view.Loaded += (_, _) => vm.OnLoaded();
             Show(view);
@@ -36,35 +49,48 @@ public class NavigationService : INavigationService
 
     public void ShowSupplierView()
     {
-        var vm = new SupplierListViewModel(WreceptAppContext.SupplierService);
+        var vm = new SupplierListViewModel(
+            WreceptAppContext.SupplierService,
+            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
         var view = new Views.MasterData.SupplierView { DataContext = vm };
         Show(view);
     }
 
     public void ShowUnitView()
     {
-        var vm = new UnitListViewModel(WreceptAppContext.UnitService);
+        var vm = new UnitListViewModel(
+            WreceptAppContext.UnitService,
+            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
         var view = new Views.MasterData.UnitView { DataContext = vm };
         Show(view);
     }
 
     public void ShowProductGroupView()
     {
-        var vm = new ProductGroupListViewModel(WreceptAppContext.ProductGroupService);
+        var vm = new ProductGroupListViewModel(
+            WreceptAppContext.ProductGroupService,
+            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
         var view = new Views.MasterData.ProductGroupView { DataContext = vm };
         Show(view);
     }
 
     public void ShowTaxRateView()
     {
-        var vm = new TaxRateListViewModel(WreceptAppContext.TaxRateService);
+        var vm = new TaxRateListViewModel(
+            WreceptAppContext.TaxRateService,
+            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
         var view = new Views.MasterData.TaxRateView { DataContext = vm };
         Show(view);
     }
 
     public void ShowProductView()
     {
-        var vm = new ProductListViewModel(WreceptAppContext.ProductService);
+        var vm = new ProductListViewModel(
+            WreceptAppContext.ProductService,
+            WreceptAppContext.ProductGroupService,
+            WreceptAppContext.TaxRateService,
+            WreceptAppContext.UnitService,
+            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
         var view = new Views.MasterData.ProductView { DataContext = vm };
         Show(view);
     }
@@ -78,28 +104,39 @@ public class NavigationService : INavigationService
 
     public void ShowFilterByDateView()
     {
-        var vm = new DateFilterViewModel(async (_, _) => { });
+        var vm = new DateFilterViewModel(
+            (_, _) => Task.CompletedTask,
+            this);
         var dlg = new Views.Filters.DateFilterDialog { DataContext = vm };
         Show(dlg);
     }
 
     public void ShowFilterBySupplierView()
     {
-        var vm = new SupplierFilterViewModel(async _ => { }, WreceptAppContext.SupplierService);
+        var vm = new SupplierFilterViewModel(
+            _ => Task.CompletedTask,
+            WreceptAppContext.SupplierService,
+            this);
         var dlg = new Views.Filters.SupplierFilterDialog { DataContext = vm };
         Show(dlg);
     }
 
     public void ShowFilterByProductGroupView()
     {
-        var vm = new ProductGroupFilterViewModel(async _ => { }, WreceptAppContext.ProductGroupService);
+        var vm = new ProductGroupFilterViewModel(
+            _ => Task.CompletedTask,
+            WreceptAppContext.ProductGroupService,
+            this);
         var dlg = new Views.Filters.ProductGroupFilterDialog { DataContext = vm };
         Show(dlg);
     }
 
     public void ShowFilterByProductView()
     {
-        var vm = new ProductFilterViewModel(async _ => { }, WreceptAppContext.ProductService);
+        var vm = new ProductFilterViewModel(
+            _ => Task.CompletedTask,
+            WreceptAppContext.ProductService,
+            this);
         var dlg = new Views.Filters.ProductFilterDialog { DataContext = vm };
         Show(dlg);
     }

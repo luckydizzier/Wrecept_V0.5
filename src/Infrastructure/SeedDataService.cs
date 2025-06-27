@@ -103,16 +103,18 @@ public static class SeedDataService
 
         if (!await db.InvoiceItems.AnyAsync())
         {
-            db.InvoiceItems.Add(new InvoiceItem
+            var item = new InvoiceItem
             {
                 Id = Guid.NewGuid(),
                 Product = await db.Products.FindAsync(productId)!,
                 Quantity = 1,
                 Unit = await db.Units.FindAsync(unitId)!,
                 UnitPriceNet = 100,
-                VatRatePercent = 27,
-                Invoice = await db.Invoices.FindAsync(invoiceId)!
-            });
+                VatRatePercent = 27
+            };
+            var invoice = await db.Invoices.FindAsync(invoiceId)!;
+            invoice.Items.Add(item);
+            db.InvoiceItems.Add(item);
         }
 
         await db.SaveChangesAsync();
