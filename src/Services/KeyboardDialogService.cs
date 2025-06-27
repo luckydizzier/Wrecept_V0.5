@@ -20,7 +20,9 @@ public class KeyboardDialogService : IKeyboardDialogService
         return window.ShowDialog() == true;
     }
 
-    public bool ConfirmNewInvoice() => Show("Create new invoice? (I: Yes, N or Esc: No)");
+    public bool Confirm(string message) => Show(message);
 
-    public bool ConfirmExit() => Show("Biztosan kilépsz? (I: Igen, N vagy Esc: Nem)");
+    public bool ConfirmNewInvoice() => Confirm("Create new invoice? (I: Yes, N or Esc: No)");
+
+    public bool ConfirmExit() => Confirm("Biztosan kilépsz? (I: Igen, N vagy Esc: Nem)");
 }

@@ -15,6 +15,7 @@ public class ExitConfirmationTests
     private class StubDialog : IKeyboardDialogService
     {
         public bool ExitAsked { get; private set; }
+        public bool Confirm(string message) => false;
         public bool ConfirmNewInvoice() => false;
         public bool ConfirmExit() { ExitAsked = true; return false; }
     }
