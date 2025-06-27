@@ -61,7 +61,7 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard RepeatBehavior="2x" AutoReverse="True">
-                            <ColorAnimation Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" To="{DynamicResource FlashWarningColor}" Duration="0:0:0.1" />
+                            <ColorAnimation Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" To="{StaticResource FlashWarningColor}" Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
