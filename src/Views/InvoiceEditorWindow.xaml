@@ -5,6 +5,7 @@
         xmlns:views="clr-namespace:Wrecept.Views">
     <UserControl.InputBindings>
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}" />
+        <!-- DEPRECATED: Ctrl+S will be removed, autosave occurs on exit -->
         <KeyBinding Key="Escape" Command="{Binding CancelByEscCommand}" />
     </UserControl.InputBindings>
 
