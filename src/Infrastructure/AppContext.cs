@@ -98,6 +98,7 @@ public static class AppContext
     public static ILookupDialogPresenter LookupPresenter { get; private set; } = null!;
     public static INavigationService NavigationService { get; private set; } = null!;
     public static ISettingsService SettingsService { get; private set; } = null!;
+    public static IPriceHistoryService PriceHistoryService { get; private set; } = null!;
     private static readonly List<IMenuPlugin> _menuPlugins = new();
     public static IReadOnlyList<IMenuPlugin> MenuPlugins => _menuPlugins;
     public static Action<string>? StatusMessageSetter { get; set; }
@@ -166,6 +167,7 @@ public static class AppContext
         LookupPresenter = new LookupDialogPresenter();
         NavigationService = new NavigationService();
         SettingsService = new JsonSettingsService();
+        PriceHistoryService = new JsonPriceHistoryService();
 
         _services[typeof(IInvoiceService)] = InvoiceService;
         FeedbackService = new FeedbackService();
@@ -181,6 +183,7 @@ public static class AppContext
         _services[typeof(ILookupDialogPresenter)] = LookupPresenter;
         _services[typeof(INavigationService)] = NavigationService;
         _services[typeof(ISettingsService)] = SettingsService;
+        _services[typeof(IPriceHistoryService)] = PriceHistoryService;
     }
 
     private static void LoadMenuPlugins()

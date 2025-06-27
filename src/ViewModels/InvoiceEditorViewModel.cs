@@ -118,6 +118,10 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public async Task SaveAsync()
     {
         await _invoiceService.SaveAsync(Invoice);
+        foreach (var item in Invoice.Items)
+        {
+            Infrastructure.AppContext.PriceHistoryService.RecordPrice(item.Product.Name, item.UnitPriceNet);
+        }
         ExitRequested = true;
         ExitedByEsc = false;
     }

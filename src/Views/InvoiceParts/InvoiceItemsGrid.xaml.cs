@@ -73,4 +73,17 @@ public partial class InvoiceItemsGrid : UserControl
             }
         }
     }
+
+    private async void ItemsGrid_OnBeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+    {
+        if (DataContext is InvoiceItemsViewModel vm && e.Row.Item == vm.Entry)
+        {
+            if (e.Column.DisplayIndex == 0)
+                await vm.OpenProductLookupAsync();
+            else if (e.Column.DisplayIndex == 2)
+                await vm.OpenUnitLookupAsync();
+            else if (e.Column.DisplayIndex == 4)
+                await vm.OpenTaxRateLookupAsync();
+        }
+    }
 }

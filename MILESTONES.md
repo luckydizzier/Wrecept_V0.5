@@ -72,3 +72,9 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 
 ## M7.2: Feedback System
 - Unified audio and visual cues for actions and validation [Done]
+
+## M7.3: Lookup Autocomplete and Price Memory
+- Lookup dialogs open automatically on field focus with instant filtering.
+- Product selection pre-fills the latest recorded price.
+- Price history stored locally in JSON file.
+- Updated documentation and tests for new behaviour.
