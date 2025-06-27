@@ -15,12 +15,18 @@ public partial class OnboardingOverlay : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            CloseOverlay();
         }
     }
 
     private void OnClose(object sender, RoutedEventArgs e)
     {
+        CloseOverlay();
+    }
+
+    private void CloseOverlay()
+    {
         Infrastructure.AppContext.NavigationService.CloseCurrentView();
+        Window.GetWindow(this)?.Close();
     }
 }
