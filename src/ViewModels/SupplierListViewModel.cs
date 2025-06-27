@@ -46,7 +46,7 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
     [RelayCommand]
     private void Add()
     {
-        var supplier = new Supplier { Id = Guid.NewGuid(), Name = "" };
+        var supplier = new Supplier { Id = Guid.Empty, Name = "" };
         _suppliers.Add(supplier);
         SelectedSupplier = supplier;
         EnsureValidSelection();

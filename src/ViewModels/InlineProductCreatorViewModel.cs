@@ -66,7 +66,7 @@ public partial class InlineProductCreatorViewModel : InlineCreatorViewModel<Prod
     {
         var product = new Product
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.Empty,
             Name = Name,
             Group = SelectedGroup!,
             TaxRate = SelectedTaxRate!,

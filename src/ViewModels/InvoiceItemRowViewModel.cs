@@ -50,7 +50,7 @@ public partial class InvoiceItemRowViewModel : ObservableObject
 
     public InvoiceItem ToModel() => new()
     {
-        Id = Guid.NewGuid(),
+        Id = Guid.Empty,
         Product = new Product { Name = ProductName },
         Quantity = Quantity,
         Unit = new Unit { Name = UnitName },
