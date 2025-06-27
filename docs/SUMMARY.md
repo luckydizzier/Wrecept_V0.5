@@ -57,3 +57,27 @@ graph TD
 | Error message updates | DocWriter | `docs/user_manual_hu.md` |
 | Keyboard handling | CodeGen-CSharp | `InvoiceEditorWindow.xaml.cs`, `*ViewModel.cs` |
 
+## 6. Agent Workflow Guidelines
+
+All agents MUST consult this SUMMARY.md before performing file analysis or code generation. The following conventions apply:
+
+- Agents should **not modify layers above their ownership scope** unless explicitly instructed.
+- For **feature implementations**, follow this sequence:
+  1. Update or create the relevant ViewModel in `src/ViewModels`
+  2. Update XAML or create new views in `src/Views`
+  3. Wire services via `src/Services` using interfaces from `Wrecept.Core.CoreLib`
+  4. Register new dependencies via `AppContext.java` (or equivalent bootstrapper)
+
+### Example Agent Map
+
+| Task | Trigger File | Responsible Agent | Notes |
+|------|---------------|-------------------|-------|
+| New field in invoice | `InvoiceEditorViewModel.cs` | CodeGen-CSharp | Update `InvoiceItemsGrid.xaml` accordingly |
+| New plugin | `Plugin` directory | PluginAgent | Register in plugin loader |
+| Localization | `Resources/messages_*.resx` | DocWriter | Follow i18n conventions |
+
+### References in AGENTS.md
+
+Each section in AGENTS.md (root_agent, ui_agent, etc.) should include a `project_map` reference to `docs/SUMMARY.md` and confirm compliance before task execution.
+
+> Agents violating these scope boundaries may produce side effects and will be terminated by root_agent.
