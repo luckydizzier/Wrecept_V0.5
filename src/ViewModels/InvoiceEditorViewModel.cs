@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 namespace Wrecept.ViewModels;
 
