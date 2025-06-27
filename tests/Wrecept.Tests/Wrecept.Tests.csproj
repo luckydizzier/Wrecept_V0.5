@@ -27,10 +27,6 @@
     <ProjectReference Include="..\..\src\Wrecept.Core.CoreLib\Wrecept.Core.CoreLib.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\db\schema_v1.sql" Link="db\schema_v1.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\src\Infrastructure\SqliteMigrator.cs" LinkBase="Infrastructure" />
     <Compile Include="..\..\src\Infrastructure\SeedDataService.cs" LinkBase="Infrastructure" />
     <Compile Include="..\..\src\Infrastructure\WreceptDbContext.cs" LinkBase="Infrastructure" />
     <Compile Include="..\..\src\Infrastructure\EfInvoiceRepository.cs" LinkBase="Infrastructure" />

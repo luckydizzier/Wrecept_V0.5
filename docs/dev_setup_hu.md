@@ -11,7 +11,7 @@
 2. Futtasd a `./setup.sh` scriptet a megoldás visszaállításához, buildeléséhez és teszteléséhez.
 3. A helyi SQLite adatbázis a `%LOCALAPPDATA%/Wrecept/wrecept.db` útvonalon jön létre.
    Ha a `%LOCALAPPDATA%` nem elérhető, a futtatható állomány mappáját használjuk.
-   A szükséges `schema_v1.sql` az alkalmazásba van beágyazva, ezért külön fájlra nincs szükség.
+   A SQLite sémát már az Entity Framework Core hozza létre első futtatáskor.
 
 ## Hibakeresés
 - Győződj meg róla, hogy a `dotnet` elérhető az útvonalon.
