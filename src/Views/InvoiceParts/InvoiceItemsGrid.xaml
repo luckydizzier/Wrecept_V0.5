@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:inline="clr-namespace:Wrecept.Views.Inline"
              xmlns:lookup="clr-namespace:Wrecept.Views.Lookup">
+    <UserControl.InputBindings>
+        <KeyBinding Key="F2" Command="{Binding StartEditCommand}" CommandParameter="{Binding ElementName=ItemsGrid, Path=CurrentColumn.DisplayIndex}" />
+        <KeyBinding Key="L" Modifiers="Control" Command="{Binding StartEditCommand}" CommandParameter="{Binding ElementName=ItemsGrid, Path=CurrentColumn.DisplayIndex}" />
+        <KeyBinding Key="Enter" Command="{Binding ConfirmEntryCommand}" CommandParameter="{Binding ElementName=ItemsGrid, Path=CurrentColumn.DisplayIndex}" />
+        <KeyBinding Key="Escape" Command="{Binding CancelEntryCommand}" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -15,7 +21,6 @@
               TabIndex="0"
               RowHeight="26"
               Loaded="ItemsGrid_OnLoaded"
-              KeyDown="ItemsGrid_OnKeyDown"
               BeginningEdit="ItemsGrid_OnBeginningEdit">
         <DataGrid.Style>
             <Style TargetType="DataGrid">
