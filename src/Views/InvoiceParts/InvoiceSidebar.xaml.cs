@@ -13,7 +13,7 @@ public partial class InvoiceSidebar : UserControl
         {
             if (InvoiceList.Items.Count > 0)
                 InvoiceList.SelectedIndex = 0;
-            SearchBox.Focus();
+            InvoiceList.Focus();
         };
     }
 

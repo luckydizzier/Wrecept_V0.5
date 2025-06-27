@@ -9,6 +9,7 @@
 ## Invoice editor layout
 
 * A fő felület négy részre tagolt: InvoiceSidebar, InvoiceHeader, InvoiceItemsGrid és InvoiceSummary.
+* A bal panel tetején "📄 Számlák" felirat látható, alatta középre igazított számlalista kap helyet.
 * A fejléc bal oldala a szállító adatait, jobb oldala a számla jellemzőit tartalmazza.
 * A grid kiemelt vizuális elemmé válik: nagyobb betűméret, váltakozó sorszínek, a placeholder sor halványabban jelenik meg.
 * Fejlett mezők (pl. megjegyzés, számítás mód) alapból összehúzva, csak szerkesztés után nyílnak le.
@@ -34,8 +35,8 @@
 
 ## Keyboard & focus logic
 
-1. A Tab sorrend: Sidebar kereső → Header mezők → ItemsGrid → Summary → alsó eszköztár.
-2. Minden új nézetre lépéskor a logikus első mező (Sidebar kereső) kap fókuszt. A fókusz a `FocusManager.FocusedElement` beállítással indul a SearchBoxon.
+1. A Tab sorrend: Sidebar lista → Header mezők → ItemsGrid → Summary → alsó eszköztár.
+2. Minden új nézetre lépéskor a logikus első mező (Sidebar lista) kap fókuszt. A fókusz a `FocusManager.FocusedElement` beállítással indul az InvoiceList.
 3. Ctrl+S mentésre, Esc az aktuális sor vagy ablak bezárására szolgál; Esc-sorozat esetén először a szerkesztő, majd a főmenü aktiválódik.
 4. A menüsor Alt-tal, a gombok AccessKey jelöléssel érhetők el; az Enter és Esc útvonal minden dialógusban egységes.
 5. Fontos mezők gyorsbillentyűi: Alt+N – Szállító, Alt+P – Számlaszám, Alt+D – Dátum, Alt+T – Tranzakciószám.
