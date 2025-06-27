@@ -1,47 +1,47 @@
 # UI Flow
 
-## Feedback Cues
-- Indításkor a "tu-ta-ti" hangjelzés hallható.
-- Kilépéskor "ti-ta-tu" csendül fel.
-- Sikeres műveletnél "ta-ti" hang szól és a vezérlő zölden felvillan.
-- Elutasításkor "ti-ta" jelzés hallatszik.
-- Hiba esetén kétszer "tu" hang, a mező pedig sárga vagy piros háttérrel villan fel.
+## Startup flow
+1. Az alkalmazás indításakor az **InvoiceEditorWindow** nyílik meg teljes szélességben, automatikusan igazodva a képernyőhöz.
+2. A számlalistában a legfelső tétel azonnal kiválasztott állapotú; a kurzor is ide kerül, így a Fel nyíllal új számlát lehet létrehozni.
+3. Első indításkor egy átlátszó súgóablak jelenik meg a főbb gyorsbillentyűkkel, `Esc`-pel vagy a **Bezár** gombbal zárható, később `F1` hívja elő.
 
-## Onboarding Overlay
-- Első indításkor megjelenik egy átlátszó súgóablak a főbb gyorsbillentyűkkel.
-- `Esc` vagy a **Bezár** gomb zárja be az ablakot, a fókusz ekkor a főmenüre kerül.
-- A **F1** billentyű bármikor újra előhívja ezt az útmutatót.
+## Invoice editor layout
+* A fő felület négy részre tagolt: **InvoiceSidebar**, **InvoiceHeader**, **InvoiceItemsGrid** és **InvoiceSummary**.
+* A fejléc bal oldala a szállító adatait, jobb oldala a számla jellemzőit tartalmazza.
+* A grid kiemelt vizuális elemmé válik: nagyobb betűméret, váltakozó sorszínek, a placeholder sor halványabban jelenik meg.
+* Fejlett mezők (pl. megjegyzés, számítás mód) alapból összehúzva, csak szerkesztés után nyílnak le.
 
-## Menu System
-- Felső menüsor Alt billentyűvel aktiválható.
-- Számlák menü: kezelő nézet megnyitása és lista frissítése.
-- Törzsek menü: törzsadat karbantartó nézet.
-- Listák menü: dátum, szállító, termékcsoport és termék szerinti keresés.
-- Súgó menü: **Billentyűk** (F1), Súgó, Névjegy, **Beállítások**, Bővítmények és Kilépés.
-- Aktív menüben az `Esc` kilépési megerősítést kér.
+```
+------------------------------
+| Sidebar | Header          |
+|         |-----------------|
+|         | ItemsGrid       |
+|         |-----------------|
+|         | Summary         |
+------------------------------
+```
 
-### Dátum szűrő dialógus
-1. A "Listák" menüben a **Dátum alapú keresés** pont választása megnyit egy kis ablakot két DatePicker mezővel.
-2. A "Kezdő dátum" és "Záró dátum" mezők Tab sorrendben elérhetők, Enter bármelyik mezőn aktiválja a **Szűrés** gombot.
-3. `Esc` bármikor bezárja a dialógust változtatás nélkül a **Mégse** gombon keresztül.
-4. A Szűrés gomb a kiválasztott tartomány alapján frissíti a számlalistát és a fókuszt visszaadja a főablaknak.
+## Field interaction map
+* Szállító, termék és más törzsadat mezők fókuszba kerülésekor automatikusan legördül a keresőlista.
+* A lista első eleme előválasztott, a fel/le nyíllal mozogható, Enterrel kiválasztható, gépelésre pedig azonnal szűkül.
+* A tételgrid utolsó mezőjén Enter új sort nyit; Escape a szerkesztést szakítja meg és a placeholder sor visszaáll.
+* A **Hozzáadás** gomb alapértelmezett, így Enterrel is aktiválható.
 
-## Invoice Editor Focus Flow
-1. A nézet betöltésekor a számlalistán a legfrissebb sor aktív.
-2. A szerkesztő négy UserControl-ból áll: **InvoiceSidebar**, **InvoiceHeader**, **InvoiceItemsGrid** és **InvoiceSummary**. Mindegyik saját ViewModelen keresztül kommunikál a fő nézettel.
-3. A Tab sorrend a következő:
-   1. Számlalistát tartalmazó Sidebar mezők – kereső és dátummezők azonnal szűrik a listát; a táblázat nem enged új sor felvételt
-   2. Header mezők (Szállító → Cím → Adószám → Számlaszám → Dátum → Fizetési mód → Számítás módja)
-   3. Tételgrid első sora szerkeszthető; Enter a legutolsó mezőn sorba illeszti az adatokat, Esc törli a bevitelt
-   4. Összesítő tábla
-4. `Esc` bármelyik nézetben bezárja az ablakot. Ha Esc-cel történik a zárás, a főablakban a következő Esc már a főmenüre teszi a fókuszt, és ekkor jelenik meg a státuszsorban **"Fókusz: főmenü"**.
-5. `Ctrl+S` menti a módosításokat és bezárja az ablakot.
-6. Lista elején vagy végén történő navigációnál rövid hangjelzés szólal meg és státusz üzenet jelenik meg.
-7. A felső menüsor navigációs célú (pl. Törzsek, Listák), az alsó eszköztár akcióorientált: **Mentés**, **Nyomtatás**, **Bezárás**, **Export**.
-8. A tételgrid mellett egy ➕ gomb helyezkedik el, amely az `AddItemCommand`-hez van kötve.
-9. Az új sor csak akkor kerül mentésre, ha minden mező kitöltött; hibás mező piros háttérrel jelölve.
-10. Ha a termék neve ismeretlen és Entert nyomunk, a sor alatt megjelenik egy inline űrlap.
-    - A formon Termékcsoport, Mértékegység, Egységár és ÁFA adható meg.
-    - Enter menti, Escape elveti; siker esetén a termék bekerül a listába és kiválasztódik.
-    - A tervezett sor dőlt betűvel (ghost row) látszik.
-11. A névmezőkre lépve a mező alatt egy találati lista jelenik meg, amely gépelés közben szűkül. A fel/le nyilak mozgatják a kijelölést, Enter kiválaszt, Esc bezár.
+## Keyboard & focus logic
+1. A Tab sorrend: Sidebar kereső → Header mezők → ItemsGrid → Summary → alsó eszköztár.
+2. Minden új nézetre lépéskor a logikus első mező kap fókuszt, a lista ablak már nem igényel kézi átméretezést.
+3. `Ctrl+S` mentésre, `Esc` az aktuális sor vagy ablak bezárására szolgál; Esc-sorozat esetén először a szerkesztő, majd a főmenü aktiválódik.
+4. A menüsor Alt-tal, a gombok AccessKey jelöléssel érhetők el; az Enter és Esc útvonal minden dialógusban egységes.
+
+## Feedback & affordance rules
+* Indításkor "tu-ta-ti" hang, kilépéskor "ti-ta-tu" csendül fel.
+* Sikeres műveletkor zöld villanás és "ta-ti" hang jelzi a mentést.
+* Hiba esetén piros vagy sárga háttér, kétszer "tu" hang, illetve tooltip magyarázat jelenik meg.
+* Gombok vizuálisan kiemelt státuszban vannak, a **Hozzáadás** gomb primer színű.
+* Sor mentésénél rövid zöld villanás, hibánál rezgő animáció segít a visszajelzésben.
+
+## Accessibility/Resizability notes
+* A teljes felület rugalmasan skálázódik, nincs szükség manuális ablakméretezésre.
+* A billentyűs navigáció minden elemre kiterjed; vizuális fókuszkeret segíti a tájékozódást.
+* A kontrasztarány és betűméret megfelel a `themes.md` irányelveinek, a hangjelzések letilthatók a beállításokban.
+
