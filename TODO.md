@@ -57,8 +57,8 @@
 - [ ] Record and apply latest product prices via JsonPriceHistoryService
 - [ ] Document automatic lookup flow in user manual and ui_flow
 - [ ] Add tests for JsonPriceHistoryService
-- [ ] Add EF Core packages and WreceptDbContext
-- [ ] Implement EF-based repositories
-- [ ] Replace Dapper repositories in DI
-- [ ] Update repository tests for EF Core
-- [ ] Document ORM switch in architecture and dev setup
+- [x] Add EF Core packages and WreceptDbContext
+- [x] Implement EF-based repositories
+- [x] Replace Dapper repositories in DI
+- [x] Update repository tests for EF Core
+- [x] Document ORM switch in architecture and dev setup

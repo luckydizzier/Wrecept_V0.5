@@ -20,7 +20,7 @@ This project is a modern reimplementation of an earlier DOS/DBASE 4/Clipper writ
 | Language     | C# (.NET 8)                     |
 | UI           | WPF (Windows Presentation Foundation) |
 | Architecture | MVVM                            |
-| Database     | SQLite + Dapper ORM             |
+| Database     | SQLite + Entity Framework Core |
 | Build        | Visual Studio 2022              |
 | Packaging    | dotnet publish with single .exe |
 | Repo         | GitHub (private)                |
