@@ -53,8 +53,8 @@
 - [x] Provide CRUD windows for Units, Product Groups and Tax Rates
 - [x] Implement unified audio and visual feedback system
 - [x] Replace KeyDown handlers with InputBindings in master data views
-- [ ] Auto-open inline lookup dropdowns when name fields receive focus
-- [ ] Integrate lookup dropdown directly below search fields with Up/Down + Enter/Esc handling
+- [x] Auto-open inline lookup dropdowns when name fields receive focus
+- [x] Integrate lookup dropdown directly below search fields with Up/Down + Enter/Esc handling
 - [x] Record and apply latest product prices via JsonPriceHistoryService
 - [x] Document automatic lookup flow in user manual and ui_flow
 - [x] Add tests for JsonPriceHistoryService
