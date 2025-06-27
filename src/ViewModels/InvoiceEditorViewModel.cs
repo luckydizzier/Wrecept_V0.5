@@ -72,6 +72,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
             SerialNumber = invoice.SerialNumber,
             IssueDate = invoice.IssueDate,
             Supplier = invoice.Supplier ?? new Supplier(),
+            CalculationMode = invoice.CalculationMode,
             PaymentMethod = invoice.PaymentMethod ?? new PaymentMethod(),
             Notes = invoice.Notes
         };
@@ -106,6 +107,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         Invoice.SerialNumber = _original.SerialNumber;
         Invoice.IssueDate = _original.IssueDate;
         Invoice.Supplier = _original.Supplier;
+        Invoice.CalculationMode = _original.CalculationMode;
         Invoice.PaymentMethod = _original.PaymentMethod;
         Invoice.Notes = _original.Notes;
         Invoice.Items.Clear();
