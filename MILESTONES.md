@@ -71,4 +71,4 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - F1 overlay closes with Esc [Done]
 
 ## M7.2: Feedback System
-- Unified audio and visual cues for actions and validation
+- Unified audio and visual cues for actions and validation [Done]
