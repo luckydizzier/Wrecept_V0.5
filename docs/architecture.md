@@ -22,6 +22,13 @@ Ilyenkor egy újrahasználható **InlineCreator** jelenik meg soron belül, ahol
 kiegészítő mezőket Enterrel menthetjük, Esc kilép. A komponens ViewModelje
 generikus, így később beszállító vagy fizetési mód rögzítésére is alkalmazható.
 
+## Inline Lookup
+Az **LookupBox** komponens teszi lehetővé, hogy a név mezők alatt azonnal
+megjelenjen egy szűrhető találati lista. A fókusz megérkezése automatikusan
+kinyitja a listát, a fel/le nyilak lépkednek az elemek között, `Enter` elfogad,
+`Esc` bezár. A vezérlő az invoice szerkesztő fej- és tételrészeiben használatos,
+közvetlenül a keresőmezők alatt jelenik meg.
+
 ## Hungarian Number Converter
 A `HungarianNumberConverter` osztály a pénzösszegek szöveges kiírását végzi. A `GrandTotal.AmountText` ezen keresztül adja vissza a számla végösszegét magyarul.
 

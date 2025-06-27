@@ -16,6 +16,9 @@ Select Date, Supplier, Product Group or Product filters from **Alt+L**. Press En
 ## Master Data Maintenance
 In **Alt+T** choose Suppliers or Products. **Insert** adds a new record, **F2** saves changes, **Del** deletes the selected entry.
 
+## Invoice Item Handling
+The total amount is also spelled out below the summary using HungarianNumberConverter. The **Add** button (or Enter on the last field) stores the new line. Missing required fields highlight the row in red. If the product name is unknown, pressing Enter shows a small inline form where you can fill in the details. Save (or Enter) immediately adds the product and populates the item; Esc closes the form. When a name field gains focus, a lookup list opens automatically and filters as you type. F2 or Ctrl+L can open it manually as well.
+
 ## Help and About
 The **Alt+H** menu provides access to **Keyboard** (F1), the user manual and the **About** dialog. All of these windows close with Esc.
 
