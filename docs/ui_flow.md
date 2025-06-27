@@ -35,9 +35,10 @@
 ## Keyboard & focus logic
 
 1. A Tab sorrend: Sidebar kereső → Header mezők → ItemsGrid → Summary → alsó eszköztár.
-2. Minden új nézetre lépéskor a logikus első mező kap fókuszt, a lista ablak már nem igényel kézi átméretezést.
+2. Minden új nézetre lépéskor a logikus első mező (Sidebar kereső) kap fókuszt. A fókusz a `FocusManager.FocusedElement` beállítással indul a SearchBoxon.
 3. Ctrl+S mentésre, Esc az aktuális sor vagy ablak bezárására szolgál; Esc-sorozat esetén először a szerkesztő, majd a főmenü aktiválódik.
 4. A menüsor Alt-tal, a gombok AccessKey jelöléssel érhetők el; az Enter és Esc útvonal minden dialógusban egységes.
+5. Fontos mezők gyorsbillentyűi: Alt+N – Szállító, Alt+P – Számlaszám, Alt+D – Dátum, Alt+T – Tranzakciószám.
 
 🧾 Exit & Save flow
 A szerkesztőből kilépés kizárólag az Esc megnyomásával történik.

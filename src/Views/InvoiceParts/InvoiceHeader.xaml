@@ -19,20 +19,20 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Supplier_Label}" Margin="0,0,5,5"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Supplier_Label}" Target="{Binding ElementName=SupplierNameBox}" AccessKeyManager.AccessKey="N" Margin="0,0,5,5"/>
         <lookup:LookupBox x:Name="SupplierNameBox" Grid.Row="0" Grid.Column="1" DataContext="{Binding SupplierLookup}" Margin="{DynamicResource MarginRightMediumBottomSmall}" TabIndex="0" />
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource Address_Label}" Margin="0,0,5,5"/>
-        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Invoice.Supplier.Address}" Margin="{DynamicResource MarginBottomSmall}" TabIndex="1" />
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="{DynamicResource TaxNumber_Label}" Margin="0,5,5,5"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Invoice.Supplier.TaxNumber}" TabIndex="2" />
-        <TextBlock Grid.Column="2" Grid.Row="1" Text="{DynamicResource InvoiceNumber_Header}" Margin="0,5,5,5"/>
-        <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Invoice.SerialNumber}" Margin="{DynamicResource MarginVerticalSmall}" TabIndex="3" />
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource Date_Label}" Margin="0,5,5,5"/>
-        <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Invoice.IssueDate}" TabIndex="4" />
-        <TextBlock Grid.Column="2" Grid.Row="2" Text="{DynamicResource PaymentMethod_Label}" Margin="0,5,5,5"/>
-        <ComboBox Grid.Column="3" Grid.Row="2" ItemsSource="{Binding PaymentMethods}" SelectedItem="{Binding Invoice.PaymentMethod}" DisplayMemberPath="Label" Margin="0,5,0,5" TabIndex="5" />
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="{DynamicResource TransactionNumber_Label}" Margin="0,5,5,5"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Invoice.TransactionNumber}" Margin="{DynamicResource MarginBottomSmall}" TabIndex="6" />
+        <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Address_Label}" Target="{Binding ElementName=AddressBox}" AccessKeyManager.AccessKey="C" Margin="0,0,5,5"/>
+        <TextBox x:Name="AddressBox" Grid.Row="0" Grid.Column="3" Text="{Binding Invoice.Supplier.Address}" Margin="{DynamicResource MarginBottomSmall}" TabIndex="1" />
+        <Label Grid.Column="0" Grid.Row="1" Content="{DynamicResource TaxNumber_Label}" Target="{Binding ElementName=TaxNumberBox}" AccessKeyManager.AccessKey="A" Margin="0,5,5,5"/>
+        <TextBox x:Name="TaxNumberBox" Grid.Column="1" Grid.Row="1" Text="{Binding Invoice.Supplier.TaxNumber}" TabIndex="2" />
+        <Label Grid.Column="2" Grid.Row="1" Content="{DynamicResource InvoiceNumber_Header}" Target="{Binding ElementName=SerialBox}" AccessKeyManager.AccessKey="P" Margin="0,5,5,5"/>
+        <TextBox x:Name="SerialBox" Grid.Column="3" Grid.Row="1" Text="{Binding Invoice.SerialNumber}" Margin="{DynamicResource MarginVerticalSmall}" TabIndex="3" />
+        <Label Grid.Column="0" Grid.Row="2" Content="{DynamicResource Date_Label}" Target="{Binding ElementName=IssueDateBox}" AccessKeyManager.AccessKey="D" Margin="0,5,5,5"/>
+        <DatePicker x:Name="IssueDateBox" Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Invoice.IssueDate}" TabIndex="4" />
+        <Label Grid.Column="2" Grid.Row="2" Content="{DynamicResource PaymentMethod_Label}" Target="{Binding ElementName=PaymentMethodBox}" AccessKeyManager.AccessKey="M" Margin="0,5,5,5"/>
+        <ComboBox x:Name="PaymentMethodBox" Grid.Column="3" Grid.Row="2" ItemsSource="{Binding PaymentMethods}" SelectedItem="{Binding Invoice.PaymentMethod}" DisplayMemberPath="Label" Margin="0,5,0,5" TabIndex="5" />
+        <Label Grid.Column="0" Grid.Row="3" Content="{DynamicResource TransactionNumber_Label}" Target="{Binding ElementName=TransactionBox}" AccessKeyManager.AccessKey="T" Margin="0,5,5,5"/>
+        <TextBox x:Name="TransactionBox" Grid.Column="1" Grid.Row="3" Text="{Binding Invoice.TransactionNumber}" Margin="{DynamicResource MarginBottomSmall}" TabIndex="6" />
         <TextBlock Grid.Column="0" Grid.Row="4" Text="{DynamicResource CalculationMode_Label}" Margin="0,5,5,0">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
