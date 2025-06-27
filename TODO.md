@@ -62,3 +62,7 @@
 - [x] Replace Dapper repositories in DI
 - [x] Update repository tests for EF Core
 - [x] Document ORM switch in architecture and dev setup
+- [ ] Introduce dependency injection container and register all services
+- [ ] Refactor ViewModels to receive dependencies via constructors
+- [ ] Update tests to build objects through the DI container
+- [ ] Document DI usage and remove static AppContext

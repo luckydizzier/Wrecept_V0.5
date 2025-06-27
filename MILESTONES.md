@@ -83,3 +83,8 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Introduce Entity Framework Core with SQLite provider. [Done]
 - Replace Dapper repositories and update DI registration. [Done]
 - Update tests and documentation to reflect the new ORM. [Done]
+
+## M9: Dependency Injection Container
+- Replace static AppContext with Microsoft.Extensions.DependencyInjection
+- Refactor ViewModels and services to use constructor injection
+- Update tests and documentation for new startup model
