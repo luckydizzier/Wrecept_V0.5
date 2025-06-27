@@ -5,7 +5,9 @@
              xmlns:lookup="clr-namespace:Wrecept.Views.Lookup">
     <UserControl.InputBindings>
         <KeyBinding Key="F2" Command="{Binding StartEditCommand}" CommandParameter="{Binding ElementName=ItemsGrid, Path=CurrentColumn.DisplayIndex}" />
+        <!-- DEPRECATED: F2 manual edit to open lookup will be removed -->
         <KeyBinding Key="L" Modifiers="Control" Command="{Binding StartEditCommand}" CommandParameter="{Binding ElementName=ItemsGrid, Path=CurrentColumn.DisplayIndex}" />
+        <!-- DEPRECATED: Ctrl+L manual edit to open lookup will be removed -->
         <KeyBinding Key="Enter" Command="{Binding ConfirmEntryCommand}" CommandParameter="{Binding ElementName=ItemsGrid, Path=CurrentColumn.DisplayIndex}" />
         <KeyBinding Key="Escape" Command="{Binding CancelEntryCommand}" />
     </UserControl.InputBindings>

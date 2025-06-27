@@ -5,6 +5,7 @@
     <UserControl.InputBindings>
         <KeyBinding Key="Insert" Command="{Binding AddCommand}" />
         <KeyBinding Key="F2" Command="{Binding SaveCommand}" />
+        <!-- DEPRECATED: F2 save will be removed, use Save button or autosave -->
         <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" />
     </UserControl.InputBindings>
     <Grid Margin="10">
