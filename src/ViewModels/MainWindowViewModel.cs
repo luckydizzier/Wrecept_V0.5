@@ -10,10 +10,6 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
 
-    public MainWindowViewModel() : this(Wrecept.Infrastructure.AppContext.NavigationService, Wrecept.Infrastructure.AppContext.MenuPlugins)
-    {
-    }
-
     public MainWindowViewModel(INavigationService navigationService, IEnumerable<IMenuPlugin>? plugins = null)
     {
         _navigationService = navigationService;

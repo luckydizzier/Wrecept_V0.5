@@ -8,7 +8,6 @@
         xmlns:views="clr-namespace:Wrecept.Views"
         mc:Ignorable="d"
         Title="{DynamicResource MainWindow_Title}" WindowStartupLocation="CenterScreen" Height="450" Width="800"
-        DataContext="{DynamicResource MainWindowViewModel}"
         PreviewKeyDown="MainWindow_OnPreviewKeyDown">
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding ShowOnboardingOverlayCommand}" />

@@ -33,7 +33,6 @@
             <Style TargetType="TextBlock">
                 <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
             </Style>
-            <vm:MainWindowViewModel x:Key="MainWindowViewModel" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

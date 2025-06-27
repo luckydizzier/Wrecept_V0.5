@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Infrastructure;
 using Wrecept.Views.Dialogs;
 
@@ -17,6 +18,9 @@ namespace Wrecept
     public partial class App : Application
     {
         private string _logPath = string.Empty;
+        private IServiceProvider? _services;
+
+        public static IServiceProvider Services => ((App)Current)._services!;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -55,6 +59,23 @@ namespace Wrecept
                 }
             }
 
+            var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            services.AddSingleton(Infrastructure.AppContext.InvoiceService);
+            services.AddSingleton(Infrastructure.AppContext.InvoiceItemService);
+            services.AddSingleton(Infrastructure.AppContext.ProductService);
+            services.AddSingleton(Infrastructure.AppContext.ProductGroupService);
+            services.AddSingleton(Infrastructure.AppContext.SupplierService);
+            services.AddSingleton(Infrastructure.AppContext.PaymentMethodService);
+            services.AddSingleton(Infrastructure.AppContext.TaxRateService);
+            services.AddSingleton(Infrastructure.AppContext.UnitService);
+            services.AddSingleton(Infrastructure.AppContext.NavigationService);
+            services.AddSingleton(Infrastructure.AppContext.DialogService);
+            services.AddSingleton(Infrastructure.AppContext.FeedbackService);
+            services.AddSingleton(Infrastructure.AppContext.SettingsService);
+            services.AddSingleton(Infrastructure.AppContext.PriceHistoryService);
+            services.AddSingleton<MainWindowViewModel>();
+            _services = services.BuildServiceProvider();
+
             var settings = Infrastructure.AppContext.SettingsService.LoadAsync().GetAwaiter().GetResult();
             try
             {
@@ -77,7 +98,8 @@ namespace Wrecept
 
             base.OnStartup(e);
 
-            var mainWindow = new MainWindow();
+            var mainVm = Services.GetRequiredService<MainWindowViewModel>();
+            var mainWindow = new MainWindow(mainVm);
             MainWindow = mainWindow;
             mainWindow.Show();
             Infrastructure.AppContext.FeedbackService.Startup();
