@@ -1,5 +1,11 @@
 # UI Flow
 
+## Feedback Cues
+- Indításkor a "tu-ta-ti" hangjelzés hallható.
+- Kilépéskor "ti-ta-tu" csendül fel.
+- Sikeres műveletnél "ta-ti" hang szól és a vezérlő zölden felvillan.
+- Elutasításkor "ti-ta" jelzés hallatszik.
+- Hiba esetén kétszer "tu" hang, a mező pedig sárga vagy piros háttérrel villan fel.
 
 ## Menu System
 - Felső menüsor Alt billentyűvel aktiválható.
