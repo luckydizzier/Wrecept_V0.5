@@ -180,5 +180,10 @@ See `TASK_TEMPLATE.md` for the canonical input format.
 
 > Task entries that do not follow the template must be flagged by the Maintainer agent.
 
+## 8. Project Map
+
+All agents must consult `docs/SUMMARY.md` before exploring the repository. The file provides a high-level directory overview, dependency graph and keyboard map so agents can quickly locate the relevant components.
+The Maintainer agent ensures this summary is kept in sync after structural changes.
+
 
 > “Modularity means putting every idea in the right place—no more, no less.”
