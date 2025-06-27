@@ -20,6 +20,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private readonly IInvoiceService _invoiceService;
     private readonly IPriceHistoryService _historyService;
     private readonly IFeedbackService _feedbackService;
+    private readonly IKeyboardDialogService _dialogService;
+    private readonly INavigationService _navigationService;
 
     public InvoiceSidebarViewModel SidebarViewModel { get; }
     public InvoiceHeaderViewModel HeaderViewModel { get; }
@@ -33,7 +35,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public IRelayCommand PrintCommand { get; }
     public IRelayCommand ExportCommand { get; }
     public IRelayCommand ExitToListCommand { get; }
-    public IRelayCommand CancelByEscCommand { get; }
+    public IAsyncRelayCommand CancelByEscCommand { get; }
     public bool ExitRequested { get; private set; }
     public bool ExitedByEsc { get; private set; }
     public bool LastSaveSuccess { get; private set; }
@@ -58,6 +60,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
         ITaxRateService taxRateService,
         IPriceHistoryService historyService,
         IFeedbackService feedbackService,
+        IKeyboardDialogService dialogService,
+        INavigationService navigationService,
         bool isDatabaseAvailable,
         ObservableCollection<Invoice>? invoices = null)
     {
@@ -65,6 +69,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
         _invoiceService = invoiceService;
         _historyService = historyService;
         _feedbackService = feedbackService;
+        _dialogService = dialogService;
+        _navigationService = navigationService;
         IsDatabaseAvailable = isDatabaseAvailable;
         _invoice = new Invoice
         {
@@ -81,7 +87,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         PrintCommand = new RelayCommand(PrintInvoice);
         ExportCommand = new RelayCommand(ExportInvoice);
         ExitToListCommand = new RelayCommand(() => ExitRequested = true);
-        CancelByEscCommand = new RelayCommand(CancelByEsc);
+        CancelByEscCommand = new AsyncRelayCommand(CancelByEscAsync);
 
         SidebarViewModel = new InvoiceSidebarViewModel(
             invoices ?? new ObservableCollection<Invoice>(),
@@ -133,11 +139,15 @@ public partial class InvoiceEditorViewModel : ObservableObject
         UpdateSummaries();
     }
 
-    public void CancelByEsc()
+    public async Task CancelByEscAsync()
     {
-        CancelEdit();
-        ExitedByEsc = true;
-        ExitRequested = true;
+        var confirm = _dialogService.Confirm("Mentsem a számlát?");
+        if (confirm)
+        {
+            _navigationService.ShowSavingOverlay();
+            await SaveAsync();
+            await _navigationService.ShowInvoiceListViewAsync();
+        }
     }
 
     private bool Validate()

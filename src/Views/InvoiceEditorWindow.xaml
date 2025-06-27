@@ -9,7 +9,6 @@
     </UserControl.InputBindings>
 
     <DockPanel>
-        <views:MainMenu DockPanel.Dock="Top" x:Name="MenuBar" DataContext="{DynamicResource MainWindowViewModel}" />
         <Border DockPanel.Dock="Top" Background="{DynamicResource ErrorBrush}" Padding="{DynamicResource SpacingMedium}" Visibility="Collapsed">
             <Border.Style>
                 <Style TargetType="Border">

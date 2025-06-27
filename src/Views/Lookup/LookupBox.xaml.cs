@@ -15,6 +15,8 @@ public partial class LookupBox : UserControl
     {
         var vm = DataContext as dynamic;
         vm?.Open();
+        if (sender is TextBox tb)
+            tb.SelectAll();
     }
 
     private void SearchBox_KeyDown(object sender, KeyEventArgs e)

@@ -1,0 +1,7 @@
+<UserControl x:Class="Wrecept.Views.SavingOverlay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Background="White" Opacity="0.8" Padding="{DynamicResource SpacingLarge}">
+        <TextBlock x:Uid="Saving_Label" Text="Számla mentése..." FontSize="{DynamicResource BaseFontSize}"/>
+    </Border>
+</UserControl>

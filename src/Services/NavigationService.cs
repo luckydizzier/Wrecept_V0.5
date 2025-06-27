@@ -5,6 +5,8 @@ using System.Windows.Controls;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 using Wrecept.ViewModels;
+using Wrecept.Core.Repositories;
+using Wrecept.Core.Services;
 
 namespace Wrecept.Services;
 
@@ -21,6 +23,20 @@ public class NavigationService : INavigationService
     private readonly IFeedbackService _feedbackService;
     private readonly ISettingsService _settingsService;
     private MainWindowViewModel? _host;
+
+    public NavigationService() : this(
+        new DefaultInvoiceService(new InMemoryInvoiceRepository()),
+        new DefaultSupplierService(new InMemorySupplierRepository()),
+        new DefaultPaymentMethodService(new InMemoryPaymentMethodRepository()),
+        new DefaultProductService(new InMemoryProductRepository()),
+        new DefaultProductGroupService(new InMemoryProductGroupRepository()),
+        new DefaultUnitService(new InMemoryUnitRepository()),
+        new DefaultTaxRateService(new InMemoryTaxRateRepository()),
+        new JsonPriceHistoryService(),
+        new FeedbackService(),
+        new JsonSettingsService())
+    {
+    }
 
     public NavigationService(
         IInvoiceService invoiceService,
@@ -73,6 +89,8 @@ public class NavigationService : INavigationService
                 _taxRateService,
                 _priceHistoryService,
                 _feedbackService,
+                App.Services.GetRequiredService<IKeyboardDialogService>(),
+                this,
                 Infrastructure.AppContext.DatabaseAvailable,
                 list);
             var view = new Views.InvoiceEditorWindow { DataContext = vm };
@@ -190,6 +208,12 @@ public class NavigationService : INavigationService
     public void ShowOnboardingOverlay()
     {
         var overlay = new Views.OnboardingOverlay();
+        Show(overlay);
+    }
+
+    public void ShowSavingOverlay()
+    {
+        var overlay = new Views.SavingOverlay();
         Show(overlay);
     }
 

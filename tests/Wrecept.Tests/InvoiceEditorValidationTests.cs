@@ -35,6 +35,8 @@ public class InvoiceEditorValidationTests
             new DefaultTaxRateService(new InMemoryTaxRateRepository()),
             new JsonPriceHistoryService(),
             new FeedbackService(),
+            new KeyboardDialogService(),
+            new NavigationService(),
             true);
 
         await vm.SaveAsync();
@@ -76,6 +78,8 @@ public class InvoiceEditorValidationTests
             new DefaultTaxRateService(new InMemoryTaxRateRepository()),
             new JsonPriceHistoryService(),
             new FeedbackService(),
+            new KeyboardDialogService(),
+            new NavigationService(),
             true);
 
         await vm.SaveAsync();
