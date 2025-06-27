@@ -55,7 +55,7 @@
     </Style>
 
     <!-- Error Styling -->
-    <Style TargetType="TextBox">
+    <Style TargetType="TextBox" x:Shared="False">
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
                 <Trigger.EnterActions>
