@@ -1,4 +1,5 @@
 using System.Windows.Controls;
+using Wrecept.Services;
 
 namespace Wrecept.Views.InvoiceParts;
 
@@ -19,7 +20,7 @@ public partial class InvoiceSidebar : UserControl
     {
         if (e.Key == System.Windows.Input.Key.Up && InvoiceList.SelectedIndex == 0)
         {
-            var confirm = Infrastructure.AppContext.DialogService.ConfirmNewInvoice();
+            var confirm = App.Services.GetRequiredService<IKeyboardDialogService>().ConfirmNewInvoice();
             e.Handled = true;
             if (confirm && DataContext is ViewModels.InvoiceSidebarViewModel vm)
             {

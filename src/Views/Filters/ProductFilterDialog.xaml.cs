@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
-using Wrecept.Infrastructure;
+using Wrecept.Services;
 
 namespace Wrecept.Views.Filters;
 
@@ -16,12 +16,12 @@ public partial class ProductFilterDialog : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            Infrastructure.AppContext.NavigationService.CloseCurrentView();
-            Infrastructure.AppContext.SetStatus("Fókusz: főmenü");
+            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
+            App.Services.GetRequiredService<IStatusService>().SetStatus("Fókusz: főmenü");
         }
         else if (e.Key == Key.Enter)
         {
-            Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
         }
     }
 }

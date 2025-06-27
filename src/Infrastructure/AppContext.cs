@@ -3,6 +3,7 @@ namespace Wrecept.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Wrecept.Services;
@@ -12,7 +13,6 @@ using Wrecept.Core.Plugins;
 
 public static class AppContext
 {
-    private static readonly Dictionary<Type, object> _services = new();
     private static bool _initialized;
     public static string DatabasePath { get; private set; } = string.Empty;
     public static string? CustomDatabasePath { get; set; }
@@ -22,7 +22,7 @@ public static class AppContext
     public static bool DatabaseAvailable => LastError is null;
     public static bool InputLocked { get; set; }
 
-    public static bool Initialize()
+    public static bool Initialize(IServiceCollection services)
     {
         if (_initialized)
             return LastError is null;
@@ -41,7 +41,7 @@ public static class AppContext
             dbContext.Database.EnsureCreated();
             SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
 
-            SetupSqliteServices(dbContext);
+            SetupSqliteServices(services, dbContext);
 
             _initialized = true;
             LastError = null;
@@ -50,14 +50,14 @@ public static class AppContext
         catch (SqliteException ex)
         {
             Console.Error.WriteLine($"SQLite init error: {ex.Message}");
-            SetupInMemoryServices();
+            SetupInMemoryServices(services);
             _initialized = true;
             LastError = ex;
             return false;
         }
     }
 
-    public static bool TryRecoverDatabase()
+    public static bool TryRecoverDatabase(IServiceCollection services)
     {
         var backup = DatabasePath + ".bak";
         try
@@ -73,7 +73,7 @@ public static class AppContext
             var dbContext = new WreceptDbContext(options);
             dbContext.Database.EnsureCreated();
             SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
-            SetupSqliteServices(dbContext);
+            SetupSqliteServices(services, dbContext);
             LastError = null;
             return true;
         }
@@ -81,7 +81,7 @@ public static class AppContext
         {
             Console.Error.WriteLine($"Recovery failed: {ex.Message}");
             LastError = ex;
-            SetupInMemoryServices();
+            SetupInMemoryServices(services);
             return false;
         }
     }
@@ -90,32 +90,13 @@ public static class AppContext
 
     public static bool IsDatabaseCorrupt(SqliteException ex) => ex.SqliteErrorCode is 11 or 26;
 
-    public static IInvoiceService InvoiceService { get; private set; } = null!;
-    public static IInvoiceItemService InvoiceItemService { get; private set; } = null!;
-    public static IProductService ProductService { get; private set; } = null!;
-    public static IProductGroupService ProductGroupService { get; private set; } = null!;
-    public static ISupplierService SupplierService { get; private set; } = null!;
-    public static IPaymentMethodService PaymentMethodService { get; private set; } = null!;
-    public static ITaxRateService TaxRateService { get; private set; } = null!;
-    public static IUnitService UnitService { get; private set; } = null!;
-    public static IKeyboardDialogService DialogService { get; private set; } = null!;
-    public static IFeedbackService FeedbackService { get; private set; } = null!;
-    public static INavigationService NavigationService { get; private set; } = null!;
-    public static ISettingsService SettingsService { get; private set; } = null!;
-    public static IPriceHistoryService PriceHistoryService { get; private set; } = null!;
     private static readonly List<IMenuPlugin> _menuPlugins = new();
     public static IReadOnlyList<IMenuPlugin> MenuPlugins => _menuPlugins;
     public static Action<string>? StatusMessageSetter { get; set; }
 
     public static void SetStatus(string message) => StatusMessageSetter?.Invoke(message);
 
-    public static T GetService<T>() where T : class
-    {
-        return _services[typeof(T)] as T
-               ?? throw new InvalidOperationException($"Service of type {typeof(T).Name} not registered.");
-    }
-
-    private static void SetupSqliteServices(WreceptDbContext dbContext)
+    private static void SetupSqliteServices(IServiceCollection services, WreceptDbContext dbContext)
     {
 
         var invoiceRepo = new EfInvoiceRepository(dbContext);
@@ -127,13 +108,13 @@ public static class AppContext
         var taxRateRepo = new EfTaxRateRepository(dbContext);
         var unitRepo = new EfUnitRepository(dbContext);
 
-        RegisterServices(invoiceRepo, invoiceItemRepo, productRepo, productGroupRepo,
+        RegisterServices(services, invoiceRepo, invoiceItemRepo, productRepo, productGroupRepo,
             supplierRepo, paymentMethodRepo, taxRateRepo, unitRepo);
 
         LoadMenuPlugins();
     }
 
-    private static void SetupInMemoryServices()
+    private static void SetupInMemoryServices(IServiceCollection services)
     {
         var invoiceRepo = new InMemoryInvoiceRepository();
         var invoiceItemRepo = new InMemoryInvoiceItemRepository();
@@ -144,13 +125,14 @@ public static class AppContext
         var taxRateRepo = new InMemoryTaxRateRepository();
         var unitRepo = new InMemoryUnitRepository();
 
-        RegisterServices(invoiceRepo, invoiceItemRepo, productRepo, productGroupRepo,
+        RegisterServices(services, invoiceRepo, invoiceItemRepo, productRepo, productGroupRepo,
             supplierRepo, paymentMethodRepo, taxRateRepo, unitRepo);
 
         LoadMenuPlugins();
     }
 
     private static void RegisterServices(
+        IServiceCollection services,
         IInvoiceRepository invoiceRepo,
         IInvoiceItemRepository invoiceItemRepo,
         IProductRepository productRepo,
@@ -160,33 +142,19 @@ public static class AppContext
         ITaxRateRepository taxRateRepo,
         IUnitRepository unitRepo)
     {
-        InvoiceService = new DefaultInvoiceService(invoiceRepo);
-        InvoiceItemService = new DefaultInvoiceItemService(invoiceItemRepo);
-        ProductService = new DefaultProductService(productRepo);
-        ProductGroupService = new DefaultProductGroupService(productGroupRepo);
-        SupplierService = new DefaultSupplierService(supplierRepo);
-        PaymentMethodService = new DefaultPaymentMethodService(paymentMethodRepo);
-        TaxRateService = new DefaultTaxRateService(taxRateRepo);
-        UnitService = new DefaultUnitService(unitRepo);
-        DialogService = new KeyboardDialogService();
-        NavigationService = new NavigationService();
-        SettingsService = new JsonSettingsService();
-        PriceHistoryService = new JsonPriceHistoryService();
-
-        _services[typeof(IInvoiceService)] = InvoiceService;
-        FeedbackService = new FeedbackService();
-        _services[typeof(IInvoiceItemService)] = InvoiceItemService;
-        _services[typeof(IProductService)] = ProductService;
-        _services[typeof(IProductGroupService)] = ProductGroupService;
-        _services[typeof(ISupplierService)] = SupplierService;
-        _services[typeof(IPaymentMethodService)] = PaymentMethodService;
-        _services[typeof(ITaxRateService)] = TaxRateService;
-        _services[typeof(IFeedbackService)] = FeedbackService;
-        _services[typeof(IUnitService)] = UnitService;
-        _services[typeof(IKeyboardDialogService)] = DialogService;
-        _services[typeof(INavigationService)] = NavigationService;
-        _services[typeof(ISettingsService)] = SettingsService;
-        _services[typeof(IPriceHistoryService)] = PriceHistoryService;
+        services.AddSingleton<IInvoiceService>(new DefaultInvoiceService(invoiceRepo));
+        services.AddSingleton<IInvoiceItemService>(new DefaultInvoiceItemService(invoiceItemRepo));
+        services.AddSingleton<IProductService>(new DefaultProductService(productRepo));
+        services.AddSingleton<IProductGroupService>(new DefaultProductGroupService(productGroupRepo));
+        services.AddSingleton<ISupplierService>(new DefaultSupplierService(supplierRepo));
+        services.AddSingleton<IPaymentMethodService>(new DefaultPaymentMethodService(paymentMethodRepo));
+        services.AddSingleton<ITaxRateService>(new DefaultTaxRateService(taxRateRepo));
+        services.AddSingleton<IUnitService>(new DefaultUnitService(unitRepo));
+        services.AddSingleton<IKeyboardDialogService, KeyboardDialogService>();
+        services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<ISettingsService, JsonSettingsService>();
+        services.AddSingleton<IPriceHistoryService, JsonPriceHistoryService>();
+        services.AddSingleton<IFeedbackService, FeedbackService>();
     }
 
     private static void LoadMenuPlugins()

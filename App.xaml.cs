@@ -27,7 +27,8 @@ namespace Wrecept
         {
             SetupGlobalHandlers();
 
-            var ok = Infrastructure.AppContext.Initialize();
+            var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            var ok = Infrastructure.AppContext.Initialize(services);
             if (!ok && Infrastructure.AppContext.LastError is SqliteException se)
             {
                 LogException(se);
@@ -39,9 +40,10 @@ namespace Wrecept
                 }
                 else if (Infrastructure.AppContext.IsDatabaseCorrupt(se))
                 {
-                    var confirm = Infrastructure.AppContext.DialogService.Confirm(
+                    var dialog = services.BuildServiceProvider().GetRequiredService<IKeyboardDialogService>();
+                    var confirm = dialog.Confirm(
                         "Adatbázis sérült. Újra legyen létrehozva? (I: Igen, N: Nem)");
-                    if (confirm && Infrastructure.AppContext.TryRecoverDatabase())
+                    if (confirm && Infrastructure.AppContext.TryRecoverDatabase(services))
                     {
                         ok = true;
                     }
@@ -60,24 +62,12 @@ namespace Wrecept
                 }
             }
 
-            var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
-            services.AddSingleton(Infrastructure.AppContext.InvoiceService);
-            services.AddSingleton(Infrastructure.AppContext.InvoiceItemService);
-            services.AddSingleton(Infrastructure.AppContext.ProductService);
-            services.AddSingleton(Infrastructure.AppContext.ProductGroupService);
-            services.AddSingleton(Infrastructure.AppContext.SupplierService);
-            services.AddSingleton(Infrastructure.AppContext.PaymentMethodService);
-            services.AddSingleton(Infrastructure.AppContext.TaxRateService);
-            services.AddSingleton(Infrastructure.AppContext.UnitService);
-            services.AddSingleton(Infrastructure.AppContext.NavigationService);
-            services.AddSingleton(Infrastructure.AppContext.DialogService);
-            services.AddSingleton(Infrastructure.AppContext.FeedbackService);
-            services.AddSingleton(Infrastructure.AppContext.SettingsService);
-            services.AddSingleton(Infrastructure.AppContext.PriceHistoryService);
-            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton(provider => new MainWindowViewModel(
+                provider.GetRequiredService<INavigationService>(),
+                Infrastructure.AppContext.MenuPlugins));
             _services = services.BuildServiceProvider();
-
-            var settings = Infrastructure.AppContext.SettingsService.LoadAsync().GetAwaiter().GetResult();
+            var settingsService = Services.GetRequiredService<ISettingsService>();
+            var settings = settingsService.LoadAsync().GetAwaiter().GetResult();
             try
             {
                 ApplyTheme(settings.Theme);
@@ -103,7 +93,7 @@ namespace Wrecept
             var mainWindow = new MainWindow(mainVm);
             MainWindow = mainWindow;
             mainWindow.Show();
-            Infrastructure.AppContext.FeedbackService.Startup();
+            Services.GetRequiredService<IFeedbackService>().Startup();
 
             if (settings.ShowOnboarding)
             {
@@ -121,7 +111,7 @@ namespace Wrecept
                 };
                 window.ShowDialog();
                 settings.ShowOnboarding = false;
-                _ = Infrastructure.AppContext.SettingsService.SaveAsync(settings);
+                _ = settingsService.SaveAsync(settings);
             }
         }
 

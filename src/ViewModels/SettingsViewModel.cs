@@ -1,6 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Wrecept.Infrastructure;
 using Wrecept.Services;
 using Wrecept;
 using System.Threading.Tasks;
@@ -10,6 +9,7 @@ namespace Wrecept.ViewModels;
 public partial class SettingsViewModel : ObservableObject
 {
     private readonly ISettingsService _service;
+    private readonly INavigationService _navigation;
 
     [ObservableProperty]
     private string _theme = "Light";
@@ -18,9 +18,10 @@ public partial class SettingsViewModel : ObservableObject
     private string _language = "hu";
 
 
-    public SettingsViewModel(ISettingsService service)
+    public SettingsViewModel(ISettingsService service, INavigationService navigation)
     {
         _service = service;
+        _navigation = navigation;
         _ = LoadAsync();
     }
 
@@ -37,13 +38,13 @@ public partial class SettingsViewModel : ObservableObject
         await _service.SaveAsync(new Settings { Theme = Theme, Language = Language });
         App.ApplyTheme(Theme);
         App.ApplyLanguage(Language);
-        Infrastructure.AppContext.NavigationService.CloseCurrentView();
+        _navigation.CloseCurrentView();
     }
 
 
     [RelayCommand]
     private void Cancel()
     {
-        Infrastructure.AppContext.NavigationService.CloseCurrentView();
+        _navigation.CloseCurrentView();
     }
 }

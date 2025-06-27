@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
-using Wrecept.Infrastructure;
+using Wrecept.Services;
 
 namespace Wrecept.Views.Settings;
 
@@ -16,7 +16,7 @@ public partial class SettingsWindow : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
         }
     }
 }

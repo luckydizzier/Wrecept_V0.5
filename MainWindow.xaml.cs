@@ -1,18 +1,23 @@
 using System.Windows;
 using System.Windows.Input;
-using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 using Wrecept.ViewModels;
+using Wrecept.Services;
 
 namespace Wrecept;
 
 public partial class MainWindow : Window
 {
+    private readonly IKeyboardDialogService _dialog;
+    private readonly INavigationService _navigation;
+
     public MainWindow(ViewModels.MainWindowViewModel vm)
     {
         InitializeComponent();
         DataContext = vm;
-        WreceptAppContext.StatusMessageSetter = msg => vm.StatusMessage = msg;
-        WreceptAppContext.NavigationService.SetHost(vm);
+        _dialog = App.Services.GetRequiredService<IKeyboardDialogService>();
+        _navigation = App.Services.GetRequiredService<INavigationService>();
+        App.Services.GetRequiredService<IStatusService>().StatusMessageSetter = msg => vm.StatusMessage = msg;
+        _navigation.SetHost(vm);
     }
 
     private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
@@ -22,12 +27,12 @@ public partial class MainWindow : Window
         if (MenuBar.IsKeyboardFocusWithin && e.Key == Key.Escape)
         {
             Infrastructure.AppContext.InputLocked = true;
-            var confirm = WreceptAppContext.DialogService.ConfirmExit();
+            var confirm = _dialog.ConfirmExit();
             Infrastructure.AppContext.InputLocked = false;
             e.Handled = true;
             if (confirm)
             {
-                WreceptAppContext.NavigationService.ExitApplication();
+                _navigation.ExitApplication();
             }
         }
     }

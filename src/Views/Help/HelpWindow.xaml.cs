@@ -1,5 +1,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
+using Wrecept.Services;
 
 namespace Wrecept.Views.Help;
 
@@ -14,7 +15,7 @@ public partial class HelpWindow : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
         }
     }
 }

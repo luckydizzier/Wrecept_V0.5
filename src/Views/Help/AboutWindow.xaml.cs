@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Wrecept.Services;
 
 namespace Wrecept.Views.Help;
 
@@ -15,12 +16,12 @@ public partial class AboutWindow : UserControl
     {
         if (e.Key == Key.Escape)
         {
-            Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
         }
     }
 
     private void OnClose(object sender, RoutedEventArgs e)
     {
-        Wrecept.Infrastructure.AppContext.NavigationService.CloseCurrentView();
+        App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
     }
 }
