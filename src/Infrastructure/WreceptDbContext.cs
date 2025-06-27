@@ -78,6 +78,7 @@ public class WreceptDbContext : DbContext
             e.ToTable("Invoices");
             e.HasKey(i => i.Id);
             e.Property(i => i.SerialNumber).IsRequired();
+            e.Property(i => i.TransactionNumber).IsRequired();
             e.Property(i => i.CalculationMode).IsRequired();
             e.Property<Guid>("SupplierId");
             e.Property<Guid>("PaymentMethodId");

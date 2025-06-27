@@ -17,6 +17,7 @@
                   PreviewKeyDown="InvoiceList_OnPreviewKeyDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{DynamicResource InvoiceNumber_Header}" Binding="{Binding SerialNumber}" />
+                <DataGridTextColumn Header="{DynamicResource TransactionNumber_Header}" Binding="{Binding TransactionNumber}" />
                 <DataGridTextColumn Header="{DynamicResource Date_Header}" Binding="{Binding IssueDate}" />
             </DataGrid.Columns>
         </DataGrid>

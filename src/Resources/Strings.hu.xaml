@@ -56,6 +56,8 @@
     <sys:String x:Key="Address_Label">Cím</sys:String>
     <sys:String x:Key="TaxNumber_Label">Adószám</sys:String>
     <sys:String x:Key="PaymentMethod_Label">Fizetési mód</sys:String>
+    <sys:String x:Key="TransactionNumber_Label">Tranzakció szám</sys:String>
+    <sys:String x:Key="TransactionNumber_Header">Tranzakció szám</sys:String>
     <sys:String x:Key="CalculationMode_Label">Számítás módja</sys:String>
     <sys:String x:Key="MainWindow_Title">Főablak</sys:String>
     <sys:String x:Key="NewInvoice_Button">Új számla</sys:String>

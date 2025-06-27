@@ -76,6 +76,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         {
             Id = invoice.Id,
             SerialNumber = invoice.SerialNumber,
+            TransactionNumber = invoice.TransactionNumber,
             IssueDate = invoice.IssueDate,
             Supplier = invoice.Supplier ?? new Supplier(),
             CalculationMode = invoice.CalculationMode,
@@ -111,6 +112,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     {
         Invoice.Id = _original.Id;
         Invoice.SerialNumber = _original.SerialNumber;
+        Invoice.TransactionNumber = _original.TransactionNumber;
         Invoice.IssueDate = _original.IssueDate;
         Invoice.Supplier = _original.Supplier;
         Invoice.CalculationMode = _original.CalculationMode;
@@ -153,6 +155,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private bool Validate()
     {
         if (string.IsNullOrWhiteSpace(Invoice.SerialNumber))
+            return false;
+        if (string.IsNullOrWhiteSpace(Invoice.TransactionNumber))
             return false;
         if (string.IsNullOrWhiteSpace(Invoice.Supplier.Name))
             return false;

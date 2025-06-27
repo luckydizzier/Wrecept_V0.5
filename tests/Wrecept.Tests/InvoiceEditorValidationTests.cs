@@ -20,6 +20,7 @@ public class InvoiceEditorValidationTests
         var invoice = new Invoice
         {
             SerialNumber = string.Empty,
+            TransactionNumber = string.Empty,
             Supplier = new Supplier(),
             PaymentMethod = new PaymentMethod(),
         };
@@ -54,6 +55,7 @@ public class InvoiceEditorValidationTests
         var invoice = new Invoice
         {
             SerialNumber = "1",
+            TransactionNumber = "T1",
             Supplier = new Supplier { Name = "A" },
             PaymentMethod = new PaymentMethod { Label = "Cash" },
         };

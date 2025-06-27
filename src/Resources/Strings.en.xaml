@@ -56,6 +56,8 @@
     <sys:String x:Key="Address_Label">Address</sys:String>
     <sys:String x:Key="TaxNumber_Label">Tax Number</sys:String>
     <sys:String x:Key="PaymentMethod_Label">Payment Method</sys:String>
+    <sys:String x:Key="TransactionNumber_Label">Transaction Number</sys:String>
+    <sys:String x:Key="TransactionNumber_Header">Transaction No.</sys:String>
     <sys:String x:Key="CalculationMode_Label">Calculation Mode</sys:String>
     <sys:String x:Key="MainWindow_Title">Main Window</sys:String>
     <sys:String x:Key="NewInvoice_Button">New Invoice</sys:String>
