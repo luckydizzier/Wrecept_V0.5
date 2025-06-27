@@ -19,7 +19,7 @@ public class InvoiceEditorEscFlowTests
         public bool ConfirmExit() => false;
     }
     [Fact]
-    public void CancelByEsc_ShouldSetFlags()
+    public async Task CancelByEsc_ShouldSetFlags()
     {
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
         var dialog = new StubDialog { Result = true };
@@ -46,7 +46,7 @@ public class InvoiceEditorEscFlowTests
             new NavigationService(),
             true);
 
-        vm.CancelByEscAsync().GetAwaiter().GetResult();
+        await vm.CancelByEscAsync();
 
         Assert.True(vm.ExitRequested);
     }
