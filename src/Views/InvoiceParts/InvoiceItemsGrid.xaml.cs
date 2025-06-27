@@ -23,7 +23,7 @@ public partial class InvoiceItemsGrid : UserControl
         }
     }
 
-    private void ItemsGrid_OnKeyDown(object sender, KeyEventArgs e)
+    private async void ItemsGrid_OnKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is InvoiceItemsViewModel vm)
         {

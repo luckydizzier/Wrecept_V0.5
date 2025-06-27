@@ -13,13 +13,14 @@ public partial class LookupBox : UserControl
 
     private void SearchBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
-        if (DataContext is LookupBoxViewModel<object> vm)
-            vm.Open();
+        var vm = DataContext as dynamic;
+        vm?.Open();
     }
 
     private void SearchBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (DataContext is not dynamic vm) return;
+        var vm = DataContext as dynamic;
+        if (vm == null) return;
         if (e.Key == Key.Down)
         {
             ResultList.Focus();
@@ -41,7 +42,8 @@ public partial class LookupBox : UserControl
 
     private void ResultList_KeyDown(object sender, KeyEventArgs e)
     {
-        if (DataContext is not dynamic vm) return;
+        var vm = DataContext as dynamic;
+        if (vm == null) return;
         if (e.Key == Key.Enter)
         {
             vm.Accept();
