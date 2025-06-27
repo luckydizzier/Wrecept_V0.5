@@ -1,118 +1,120 @@
-using Dapper;
+using Microsoft.EntityFrameworkCore;
+using Wrecept.Core.Domain;
 
 namespace Wrecept.Infrastructure;
 
 public static class SeedDataService
 {
-    public static async Task SeedAsync(SqliteConnectionFactory factory)
+    public static async Task SeedAsync(WreceptDbContext db)
     {
-        await using var conn = factory.CreateConnection();
-        await conn.OpenAsync().ConfigureAwait(false);
-
-        long count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM Suppliers").ConfigureAwait(false);
-        if (count == 0)
+        if (!await db.Suppliers.AnyAsync())
         {
-            await conn.ExecuteAsync("INSERT INTO Suppliers (Id, Name, Address, TaxId, BankAccountNumber) VALUES (@Id, @Name, @Address, @TaxId, @BankAccountNumber)",
-                new { Id = Guid.NewGuid().ToString(), Name = "Minta Kft.", Address = "Budapest", TaxId = "11111111-1-11", BankAccountNumber = "11111111-11111111" }).ConfigureAwait(false);
+            db.Suppliers.Add(new Supplier
+            {
+                Id = Guid.NewGuid(),
+                Name = "Minta Kft.",
+                Address = "Budapest",
+                TaxId = "11111111-1-11",
+                BankAccountNumber = "11111111-11111111"
+            });
         }
 
-        count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM ProductGroups").ConfigureAwait(false);
-        Guid groupId = Guid.NewGuid();
-        if (count == 0)
+        Guid groupId;
+        if (!await db.ProductGroups.AnyAsync())
         {
-            await conn.ExecuteAsync("INSERT INTO ProductGroups (Id, Name) VALUES (@Id, @Name)", new { Id = groupId.ToString(), Name = "Általános" }).ConfigureAwait(false);
+            groupId = Guid.NewGuid();
+            db.ProductGroups.Add(new ProductGroup { Id = groupId, Name = "Általános" });
         }
         else
         {
-            groupId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM ProductGroups LIMIT 1").ConfigureAwait(false);
+            groupId = await db.ProductGroups.Select(pg => pg.Id).FirstAsync();
         }
 
-        count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM TaxRates").ConfigureAwait(false);
-        Guid vatId = Guid.NewGuid();
-        if (count == 0)
+        Guid vatId;
+        if (!await db.TaxRates.AnyAsync())
         {
-            await conn.ExecuteAsync("INSERT INTO TaxRates (Id, Label, Percentage) VALUES (@Id, @Label, @Percentage)", new { Id = vatId.ToString(), Label = "ÁFA 27%", Percentage = 27 }).ConfigureAwait(false);
+            vatId = Guid.NewGuid();
+            db.TaxRates.Add(new TaxRate { Id = vatId, Label = "ÁFA27%", Percentage = 27 });
         }
         else
         {
-            vatId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM TaxRates LIMIT 1").ConfigureAwait(false);
+            vatId = await db.TaxRates.Select(tr => tr.Id).FirstAsync();
         }
 
-        count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM Units").ConfigureAwait(false);
-        Guid unitId = Guid.NewGuid();
-        if (count == 0)
+        Guid unitId;
+        if (!await db.Units.AnyAsync())
         {
-            await conn.ExecuteAsync("INSERT INTO Units (Id, Name, Symbol) VALUES (@Id, @Name, @Symbol)", new { Id = unitId.ToString(), Name = "darab", Symbol = "db" }).ConfigureAwait(false);
+            unitId = Guid.NewGuid();
+            db.Units.Add(new Unit { Id = unitId, Name = "darab", Symbol = "db" });
         }
         else
         {
-            unitId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM Units LIMIT 1").ConfigureAwait(false);
+            unitId = await db.Units.Select(u => u.Id).FirstAsync();
         }
 
-        count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM Products").ConfigureAwait(false);
-        Guid productId = Guid.NewGuid();
-        if (count == 0)
+        Guid productId;
+        if (!await db.Products.AnyAsync())
         {
-            await conn.ExecuteAsync(
-                "INSERT INTO Products (Id, Name, ProductGroupId, TaxRateId, DefaultUnitId) VALUES (@Id, @Name, @GroupId, @TaxId, @UnitId)",
-                new
-                {
-                    Id = productId.ToString(),
-                    Name = "Teszt termék",
-                    GroupId = groupId.ToString(),
-                    TaxId = vatId.ToString(),
-                    UnitId = unitId.ToString()
-                }).ConfigureAwait(false);
+            productId = Guid.NewGuid();
+            db.Products.Add(new Product
+            {
+                Id = productId,
+                Name = "Teszt termék",
+                Group = await db.ProductGroups.FindAsync(groupId)!,
+                TaxRate = await db.TaxRates.FindAsync(vatId)!,
+                DefaultUnit = await db.Units.FindAsync(unitId)!
+            });
         }
         else
         {
-            productId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM Products LIMIT 1").ConfigureAwait(false);
+            productId = await db.Products.Select(p => p.Id).FirstAsync();
         }
 
-        count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM PaymentMethods").ConfigureAwait(false);
-        Guid payId = Guid.NewGuid();
-        if (count == 0)
+        Guid payId;
+        if (!await db.PaymentMethods.AnyAsync())
         {
-            await conn.ExecuteAsync("INSERT INTO PaymentMethods (Id, Label) VALUES (@Id, @Label)", new { Id = payId.ToString(), Label = "Készpénz" }).ConfigureAwait(false);
+            payId = Guid.NewGuid();
+            db.PaymentMethods.Add(new PaymentMethod { Id = payId, Label = "Készpénz" });
         }
         else
         {
-            payId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM PaymentMethods LIMIT 1").ConfigureAwait(false);
+            payId = await db.PaymentMethods.Select(pm => pm.Id).FirstAsync();
         }
 
-        count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM Invoices").ConfigureAwait(false);
-        Guid invoiceId = Guid.NewGuid();
-        Guid supplierId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM Suppliers LIMIT 1").ConfigureAwait(false);
-        if (count == 0)
+        Guid invoiceId;
+        Guid supplierId = await db.Suppliers.Select(s => s.Id).FirstAsync();
+        if (!await db.Invoices.AnyAsync())
         {
-            await conn.ExecuteAsync(
-                "INSERT INTO Invoices (Id, SerialNumber, IssueDate, SupplierId, PaymentMethodId, Notes) VALUES (@Id, @Serial, @Date, @Sup, @Pay, '')",
-                new
-                {
-                    Id = invoiceId.ToString(),
-                    Serial = "INV-001",
-                    Date = DateOnly.FromDateTime(DateTime.Today).ToString("yyyy-MM-dd"),
-                    Sup = supplierId.ToString(),
-                    Pay = payId.ToString()
-                }).ConfigureAwait(false);
+            invoiceId = Guid.NewGuid();
+            db.Invoices.Add(new Invoice
+            {
+                Id = invoiceId,
+                SerialNumber = "INV-001",
+                IssueDate = DateOnly.FromDateTime(DateTime.Today),
+                Supplier = await db.Suppliers.FindAsync(supplierId)!,
+                PaymentMethod = await db.PaymentMethods.FindAsync(payId)!,
+                Notes = string.Empty
+            });
         }
         else
         {
-            invoiceId = await conn.QuerySingleAsync<Guid>("SELECT Id FROM Invoices LIMIT 1").ConfigureAwait(false);
+            invoiceId = await db.Invoices.Select(i => i.Id).FirstAsync();
         }
 
-        count = await conn.ExecuteScalarAsync<long>("SELECT COUNT(*) FROM InvoiceItems").ConfigureAwait(false);
-        if (count == 0)
+        if (!await db.InvoiceItems.AnyAsync())
         {
-            await conn.ExecuteAsync(
-                "INSERT INTO InvoiceItems (Id, InvoiceId, ProductId, Quantity, UnitId, UnitPriceNet, VatRatePercent) VALUES (@Id, @InvId, @ProdId, 1, @UnitId, 100, 27)",
-                new
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    InvId = invoiceId.ToString(),
-                    ProdId = productId.ToString(),
-                    UnitId = unitId.ToString()
-                }).ConfigureAwait(false);
+            db.InvoiceItems.Add(new InvoiceItem
+            {
+                Id = Guid.NewGuid(),
+                Product = await db.Products.FindAsync(productId)!,
+                Quantity = 1,
+                Unit = await db.Units.FindAsync(unitId)!,
+                UnitPriceNet = 100,
+                VatRatePercent = 27,
+                Invoice = await db.Invoices.FindAsync(invoiceId)!
+            });
         }
+
+        await db.SaveChangesAsync();
     }
 }

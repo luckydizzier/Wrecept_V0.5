@@ -35,10 +35,13 @@ public static class AppContext
         try
         {
             SqliteMigrator.EnsureCreatedAsync(DatabasePath).GetAwaiter().GetResult();
-            var connectionFactory = new SqliteConnectionFactory(DatabasePath);
-            SeedDataService.SeedAsync(connectionFactory).GetAwaiter().GetResult();
+            var options = new DbContextOptionsBuilder<WreceptDbContext>()
+                .UseSqlite($"Data Source={DatabasePath}")
+                .Options;
+            var dbContext = new WreceptDbContext(options);
+            SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
 
-            SetupSqliteServices(connectionFactory);
+            SetupSqliteServices(dbContext);
 
             _initialized = true;
             LastError = null;
@@ -65,9 +68,12 @@ public static class AppContext
                 File.Delete(DatabasePath);
             }
             SqliteMigrator.EnsureCreatedAsync(DatabasePath).GetAwaiter().GetResult();
-            var factory = new SqliteConnectionFactory(DatabasePath);
-            SeedDataService.SeedAsync(factory).GetAwaiter().GetResult();
-            SetupSqliteServices(factory);
+            var options = new DbContextOptionsBuilder<WreceptDbContext>()
+                .UseSqlite($"Data Source={DatabasePath}")
+                .Options;
+            var dbContext = new WreceptDbContext(options);
+            SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
+            SetupSqliteServices(dbContext);
             LastError = null;
             return true;
         }
@@ -109,12 +115,8 @@ public static class AppContext
                ?? throw new InvalidOperationException($"Service of type {typeof(T).Name} not registered.");
     }
 
-    private static void SetupSqliteServices(SqliteConnectionFactory connectionFactory)
+    private static void SetupSqliteServices(WreceptDbContext dbContext)
     {
-        var options = new DbContextOptionsBuilder<WreceptDbContext>()
-            .UseSqlite($"Data Source={connectionFactory.DbPath}")
-            .Options;
-        var dbContext = new WreceptDbContext(options);
 
         var invoiceRepo = new EfInvoiceRepository(dbContext);
         var invoiceItemRepo = new EfInvoiceItemRepository(dbContext);
