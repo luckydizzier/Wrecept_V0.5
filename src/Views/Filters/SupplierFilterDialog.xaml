@@ -7,7 +7,18 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" TabIndex="0"/>
+        <ListBox ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" TabIndex="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <TextBlock Text="{Binding Name}" Width="120" />
+                        <TextBlock Text="{Binding Address}" Width="150" Margin="5,0,0,0" />
+                        <TextBlock Text="{Binding TaxId}" Width="120" Margin="5,0,0,0" />
+                        <TextBlock Text="{Binding BankAccountNumber}" Width="120" Margin="5,0,0,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">
             <Button x:Uid="Filter_Button" Content="{DynamicResource Filter_Button}" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="{DynamicResource SpacingSmall}" TabIndex="1" IsDefault="True" />
             <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" TabIndex="2" IsCancel="True" />
