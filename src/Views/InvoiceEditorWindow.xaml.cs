@@ -27,11 +27,19 @@ public partial class InvoiceEditorWindow : UserControl
 
     private void ViewModelOnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (sender is ViewModels.InvoiceEditorViewModel vm &&
-            e.PropertyName == nameof(ViewModels.InvoiceEditorViewModel.ExitRequested) &&
-            vm.ExitRequested)
+        if (sender is ViewModels.InvoiceEditorViewModel vm)
         {
-            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
+            if (e.PropertyName == nameof(ViewModels.InvoiceEditorViewModel.ExitRequested) && vm.ExitRequested)
+            {
+                App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
+            }
+            else if (e.PropertyName == nameof(ViewModels.InvoiceEditorViewModel.LastSaveSuccess))
+            {
+                if (vm.LastSaveSuccess)
+                    VisualFeedback.FlashSuccess(SaveButton);
+                else
+                    VisualFeedback.FlashError(SaveButton);
+            }
         }
     }
 }

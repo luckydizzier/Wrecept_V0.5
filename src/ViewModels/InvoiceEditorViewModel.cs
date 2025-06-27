@@ -19,6 +19,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     private readonly Invoice _original;
     private readonly IInvoiceService _invoiceService;
     private readonly IPriceHistoryService _historyService;
+    private readonly IFeedbackService _feedbackService;
 
     public InvoiceSidebarViewModel SidebarViewModel { get; }
     public InvoiceHeaderViewModel HeaderViewModel { get; }
@@ -35,6 +36,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
     public IRelayCommand CancelByEscCommand { get; }
     public bool ExitRequested { get; private set; }
     public bool ExitedByEsc { get; private set; }
+    public bool LastSaveSuccess { get; private set; }
     [ObservableProperty]
     private Invoice _invoice;
 
@@ -62,6 +64,7 @@ public partial class InvoiceEditorViewModel : ObservableObject
         _original = invoice;
         _invoiceService = invoiceService;
         _historyService = historyService;
+        _feedbackService = feedbackService;
         IsDatabaseAvailable = isDatabaseAvailable;
         _invoice = new Invoice
         {
@@ -135,13 +138,35 @@ public partial class InvoiceEditorViewModel : ObservableObject
         ExitRequested = true;
     }
 
+    private bool Validate()
+    {
+        if (string.IsNullOrWhiteSpace(Invoice.SerialNumber))
+            return false;
+        if (string.IsNullOrWhiteSpace(Invoice.Supplier.Name))
+            return false;
+        if (Invoice.PaymentMethod == null || string.IsNullOrWhiteSpace(Invoice.PaymentMethod.Label))
+            return false;
+        if (Invoice.Items.Count == 0)
+            return false;
+        return true;
+    }
+
     public async Task SaveAsync()
     {
+        if (!Validate())
+        {
+            LastSaveSuccess = false;
+            _feedbackService.Error();
+            return;
+        }
+
         await _invoiceService.SaveAsync(Invoice);
         foreach (var item in Invoice.Items)
         {
             _historyService.RecordPrice(item.Product.Name, item.UnitPriceNet);
         }
+        LastSaveSuccess = true;
+        _feedbackService.Accept();
         ExitRequested = true;
         ExitedByEsc = false;
     }
