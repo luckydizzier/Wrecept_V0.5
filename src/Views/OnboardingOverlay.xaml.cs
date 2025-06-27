@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Wrecept.Services;
 
 namespace Wrecept.Views;
 
@@ -26,7 +27,7 @@ public partial class OnboardingOverlay : UserControl
 
     private void CloseOverlay()
     {
-        Infrastructure.AppContext.NavigationService.CloseCurrentView();
+        App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
         Window.GetWindow(this)?.Close();
     }
 }

@@ -39,10 +39,10 @@ Az `Infrastructure.AppContext.InputLocked` jelző megakadályozza a párbeszéda
 A master data nézetek gyorsbillentyűit `InputBindings` köti össze a ViewModelben definiált parancsokkal. Így az Insert, F2 és Delete gombok közvetlenül az `AddCommand`, `SaveCommand` és `DeleteCommand` műveleteket hívják meg, míg az Esc továbbra is a `NavigationService` segítségével zárja be az aktuális ablakot.
 
 ## Feedback Service
-A new `IFeedbackService` centralises sound cues. The default `FeedbackService` plays short beep patterns (startup, exit, accept, reject, error) via `Console.Beep`. `VisualFeedback` helpers flash controls in warning, error or success colours. The service is registered in `AppContext` for global access.
+A new `IFeedbackService` centralises sound cues. The default `FeedbackService` plays short beep patterns (startup, exit, accept, reject, error) via `Console.Beep`. `VisualFeedback` helpers flash controls in warning, error or success colours. The service is registered in the DI container for global access.
 
 ## Persistence Layer
-Data is stored in a local SQLite file accessed through **Entity Framework Core**. A single `WreceptDbContext` maps the domain entities to tables and is created by `AppContext` on startup. When the database is unavailable or corrupt, in-memory repositories provide a fallback.
+Data is stored in a local SQLite file accessed through **Entity Framework Core**. A single `WreceptDbContext` maps the domain entities to tables and is created via the DI container on startup. When the database is unavailable or corrupt, in-memory repositories provide a fallback.
 
 ## Dependency Injection
 Az alkalmazás minden szolgáltatását a `Microsoft.Extensions.DependencyInjection` konténer kezeli. A ViewModel-ek konstruktoron keresztül jutnak a szükséges függőségekhez, így a statikus `AppContext` szerepe megszűnt. A tesztek saját szolgáltatásgyűjteményt építenek fel, így a komponensek könnyen izolálhatók.

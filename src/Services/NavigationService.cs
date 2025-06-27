@@ -3,14 +3,47 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Wrecept.Core.Domain;
-using WreceptAppContext = Wrecept.Infrastructure.AppContext;
 using Wrecept.ViewModels;
 
 namespace Wrecept.Services;
 
 public class NavigationService : INavigationService
 {
+    private readonly IInvoiceService _invoiceService;
+    private readonly ISupplierService _supplierService;
+    private readonly IPaymentMethodService _paymentMethodService;
+    private readonly IProductService _productService;
+    private readonly IProductGroupService _productGroupService;
+    private readonly IUnitService _unitService;
+    private readonly ITaxRateService _taxRateService;
+    private readonly IPriceHistoryService _priceHistoryService;
+    private readonly IFeedbackService _feedbackService;
+    private readonly ISettingsService _settingsService;
     private MainWindowViewModel? _host;
+
+    public NavigationService(
+        IInvoiceService invoiceService,
+        ISupplierService supplierService,
+        IPaymentMethodService paymentMethodService,
+        IProductService productService,
+        IProductGroupService productGroupService,
+        IUnitService unitService,
+        ITaxRateService taxRateService,
+        IPriceHistoryService priceHistoryService,
+        IFeedbackService feedbackService,
+        ISettingsService settingsService)
+    {
+        _invoiceService = invoiceService;
+        _supplierService = supplierService;
+        _paymentMethodService = paymentMethodService;
+        _productService = productService;
+        _productGroupService = productGroupService;
+        _unitService = unitService;
+        _taxRateService = taxRateService;
+        _priceHistoryService = priceHistoryService;
+        _feedbackService = feedbackService;
+        _settingsService = settingsService;
+    }
 
     public void SetHost(MainWindowViewModel host) => _host = host;
 
@@ -22,7 +55,7 @@ public class NavigationService : INavigationService
 
     public async Task ShowInvoiceListViewAsync()
     {
-        var invoices = await WreceptAppContext.InvoiceService.GetAllAsync();
+        var invoices = await _invoiceService.GetAllAsync();
         await Application.Current.Dispatcher.InvokeAsync(() =>
         {
             var list = new ObservableCollection<Invoice>(invoices);
@@ -30,16 +63,16 @@ public class NavigationService : INavigationService
             var vm = new InvoiceEditorViewModel(
                 current,
                 false,
-                WreceptAppContext.InvoiceService,
-                WreceptAppContext.SupplierService,
-                WreceptAppContext.PaymentMethodService,
-                WreceptAppContext.ProductService,
-                WreceptAppContext.ProductGroupService,
-                WreceptAppContext.UnitService,
-                WreceptAppContext.TaxRateService,
-                WreceptAppContext.PriceHistoryService,
-                WreceptAppContext.FeedbackService,
-                WreceptAppContext.DatabaseAvailable,
+                _invoiceService,
+                _supplierService,
+                _paymentMethodService,
+                _productService,
+                _productGroupService,
+                _unitService,
+                _taxRateService,
+                _priceHistoryService,
+                _feedbackService,
+                Infrastructure.AppContext.DatabaseAvailable,
                 list);
             var view = new Views.InvoiceEditorWindow { DataContext = vm };
             view.Loaded += (_, _) => vm.OnLoaded();
@@ -50,8 +83,8 @@ public class NavigationService : INavigationService
     public void ShowSupplierView()
     {
         var vm = new SupplierListViewModel(
-            WreceptAppContext.SupplierService,
-            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
+            _supplierService,
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
         var view = new Views.MasterData.SupplierView { DataContext = vm };
         Show(view);
     }
@@ -59,8 +92,8 @@ public class NavigationService : INavigationService
     public void ShowUnitView()
     {
         var vm = new UnitListViewModel(
-            WreceptAppContext.UnitService,
-            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
+            _unitService,
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
         var view = new Views.MasterData.UnitView { DataContext = vm };
         Show(view);
     }
@@ -68,8 +101,8 @@ public class NavigationService : INavigationService
     public void ShowProductGroupView()
     {
         var vm = new ProductGroupListViewModel(
-            WreceptAppContext.ProductGroupService,
-            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
+            _productGroupService,
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
         var view = new Views.MasterData.ProductGroupView { DataContext = vm };
         Show(view);
     }
@@ -77,8 +110,8 @@ public class NavigationService : INavigationService
     public void ShowTaxRateView()
     {
         var vm = new TaxRateListViewModel(
-            WreceptAppContext.TaxRateService,
-            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
+            _taxRateService,
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
         var view = new Views.MasterData.TaxRateView { DataContext = vm };
         Show(view);
     }
@@ -86,18 +119,18 @@ public class NavigationService : INavigationService
     public void ShowProductView()
     {
         var vm = new ProductListViewModel(
-            WreceptAppContext.ProductService,
-            WreceptAppContext.ProductGroupService,
-            WreceptAppContext.TaxRateService,
-            WreceptAppContext.UnitService,
-            new StatusService { StatusMessageSetter = WreceptAppContext.StatusMessageSetter });
+            _productService,
+            _productGroupService,
+            _taxRateService,
+            _unitService,
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
         var view = new Views.MasterData.ProductView { DataContext = vm };
         Show(view);
     }
 
     public void ShowSettingsView()
     {
-        var vm = new SettingsViewModel(WreceptAppContext.SettingsService);
+        var vm = new SettingsViewModel(_settingsService, this);
         var view = new Views.Settings.SettingsWindow { DataContext = vm };
         Show(view);
     }
@@ -115,7 +148,7 @@ public class NavigationService : INavigationService
     {
         var vm = new SupplierFilterViewModel(
             _ => Task.CompletedTask,
-            WreceptAppContext.SupplierService,
+            _supplierService,
             this);
         var dlg = new Views.Filters.SupplierFilterDialog { DataContext = vm };
         Show(dlg);
@@ -125,7 +158,7 @@ public class NavigationService : INavigationService
     {
         var vm = new ProductGroupFilterViewModel(
             _ => Task.CompletedTask,
-            WreceptAppContext.ProductGroupService,
+            _productGroupService,
             this);
         var dlg = new Views.Filters.ProductGroupFilterDialog { DataContext = vm };
         Show(dlg);
@@ -135,7 +168,7 @@ public class NavigationService : INavigationService
     {
         var vm = new ProductFilterViewModel(
             _ => Task.CompletedTask,
-            WreceptAppContext.ProductService,
+            _productService,
             this);
         var dlg = new Views.Filters.ProductFilterDialog { DataContext = vm };
         Show(dlg);
@@ -167,7 +200,7 @@ public class NavigationService : INavigationService
 
     public void ExitApplication()
     {
-        WreceptAppContext.FeedbackService.Exit();
+        _feedbackService.Exit();
         System.Windows.Application.Current.Shutdown();
     }
 }

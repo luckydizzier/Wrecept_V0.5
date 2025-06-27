@@ -1,5 +1,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
+using Wrecept.Services;
 
 namespace Wrecept.Views.MasterData;
 
@@ -15,7 +16,7 @@ public partial class ProductGroupView : UserControl
         if (Infrastructure.AppContext.InputLocked) return;
         if (e.Key == Key.Escape)
         {
-            Infrastructure.AppContext.NavigationService.CloseCurrentView();
+            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
         }
     }
 }
