@@ -2,6 +2,7 @@ namespace Wrecept.Views;
 
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Services;
 
 public partial class InvoiceEditorWindow : UserControl
