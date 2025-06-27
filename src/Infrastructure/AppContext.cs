@@ -3,8 +3,8 @@ namespace Wrecept.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Dapper;
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Wrecept.Services;
 using Wrecept.Core.Repositories;
 using Wrecept.Core.Services;
@@ -31,7 +31,6 @@ public static class AppContext
         DatabasePath = CustomDatabasePath ?? Path.Combine(dir, "wrecept.db");
         Console.WriteLine($"Database path: {DatabasePath}");
 
-        SqlMapper.AddTypeHandler(new GuidTypeHandler());
 
         try
         {
@@ -112,14 +111,19 @@ public static class AppContext
 
     private static void SetupSqliteServices(SqliteConnectionFactory connectionFactory)
     {
-        var invoiceRepo = new SqliteInvoiceRepository(connectionFactory);
-        var invoiceItemRepo = new InMemoryInvoiceItemRepository();
-        var productRepo = new SqliteProductRepository(connectionFactory);
-        var productGroupRepo = new SqliteProductGroupRepository(connectionFactory);
-        var supplierRepo = new SqliteSupplierRepository(connectionFactory);
-        var paymentMethodRepo = new SqlitePaymentMethodRepository(connectionFactory);
-        var taxRateRepo = new SqliteTaxRateRepository(connectionFactory);
-        var unitRepo = new SqliteUnitRepository(connectionFactory);
+        var options = new DbContextOptionsBuilder<WreceptDbContext>()
+            .UseSqlite($"Data Source={connectionFactory.DbPath}")
+            .Options;
+        var dbContext = new WreceptDbContext(options);
+
+        var invoiceRepo = new EfInvoiceRepository(dbContext);
+        var invoiceItemRepo = new EfInvoiceItemRepository(dbContext);
+        var productRepo = new EfProductRepository(dbContext);
+        var productGroupRepo = new EfProductGroupRepository(dbContext);
+        var supplierRepo = new EfSupplierRepository(dbContext);
+        var paymentMethodRepo = new EfPaymentMethodRepository(dbContext);
+        var taxRateRepo = new EfTaxRateRepository(dbContext);
+        var unitRepo = new EfUnitRepository(dbContext);
 
         RegisterServices(invoiceRepo, invoiceItemRepo, productRepo, productGroupRepo,
             supplierRepo, paymentMethodRepo, taxRateRepo, unitRepo);

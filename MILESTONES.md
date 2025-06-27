@@ -78,3 +78,8 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Product selection pre-fills the latest recorded price.
 - Price history stored locally in JSON file.
 - Updated documentation and tests for new behaviour.
+
+## M8: EF Core Migration
+- Introduce Entity Framework Core with SQLite provider.
+- Replace Dapper repositories and update DI registration.
+- Update tests and documentation to reflect the new ORM.

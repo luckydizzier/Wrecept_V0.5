@@ -11,7 +11,7 @@
 2. Run `./setup.sh` to restore, build and test the solution.
 3. The local SQLite database is created at `%LOCALAPPDATA%/Wrecept/wrecept.db`.
    If `%LOCALAPPDATA%` is unavailable, the executable directory is used instead.
-   The required `schema_v1.sql` is embedded so no extra file is needed.
+   Entity Framework Core handles the schema (`schema_v1.sql` remains for seeding).
 
 ## Troubleshooting
 - Ensure `dotnet` is available on the PATH.
