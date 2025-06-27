@@ -34,11 +34,11 @@ public static class AppContext
 
         try
         {
-            SqliteMigrator.EnsureCreatedAsync(DatabasePath).GetAwaiter().GetResult();
             var options = new DbContextOptionsBuilder<WreceptDbContext>()
                 .UseSqlite($"Data Source={DatabasePath}")
                 .Options;
             var dbContext = new WreceptDbContext(options);
+            dbContext.Database.EnsureCreated();
             SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
 
             SetupSqliteServices(dbContext);
@@ -67,11 +67,11 @@ public static class AppContext
                 File.Copy(DatabasePath, backup, true);
                 File.Delete(DatabasePath);
             }
-            SqliteMigrator.EnsureCreatedAsync(DatabasePath).GetAwaiter().GetResult();
             var options = new DbContextOptionsBuilder<WreceptDbContext>()
                 .UseSqlite($"Data Source={DatabasePath}")
                 .Options;
             var dbContext = new WreceptDbContext(options);
+            dbContext.Database.EnsureCreated();
             SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
             SetupSqliteServices(dbContext);
             LastError = null;

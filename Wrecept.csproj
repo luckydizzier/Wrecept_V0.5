@@ -24,9 +24,6 @@
     <ProjectReference Include="src/Wrecept.Core/Wrecept.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="db/schema_v1.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="tests\**\*.cs" />
     <Compile Remove="src/Wrecept.Core\**\*.cs" />
     <Compile Remove="src/Wrecept.Core.CoreLib\**\*.cs" />
