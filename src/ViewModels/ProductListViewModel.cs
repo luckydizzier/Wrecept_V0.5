@@ -60,7 +60,7 @@ public partial class ProductListViewModel : RestorableListViewModel<Product>
 
         var product = new Product
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.Empty,
             Name = string.Empty,
             Group = groups.First(),
             TaxRate = taxes.First(),

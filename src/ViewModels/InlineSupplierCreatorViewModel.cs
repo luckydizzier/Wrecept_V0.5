@@ -24,7 +24,7 @@ public partial class InlineSupplierCreatorViewModel : InlineCreatorViewModel<Sup
     {
         var supplier = new Supplier
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.Empty,
             Name = Name,
             TaxId = TaxId
         };
