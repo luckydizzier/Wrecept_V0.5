@@ -14,7 +14,7 @@ public class InvoiceServiceTests
     {
         var repo = new InMemoryInvoiceRepository();
         var service = new DefaultInvoiceService(repo);
-        var invoice = new Invoice { SerialNumber = "1" };
+        var invoice = new Invoice { SerialNumber = "1", TransactionNumber = "T1" };
 
         await service.SaveAsync(invoice);
 
@@ -25,7 +25,7 @@ public class InvoiceServiceTests
     public async Task SaveAsync_ShouldUpdateInvoice_WhenIdExists()
     {
         var repo = new InMemoryInvoiceRepository();
-        var invoice = new Invoice { Id = Guid.NewGuid(), SerialNumber = "1" };
+        var invoice = new Invoice { Id = Guid.NewGuid(), SerialNumber = "1", TransactionNumber = "T1" };
         await repo.AddAsync(invoice);
         var service = new DefaultInvoiceService(repo);
 
@@ -40,7 +40,7 @@ public class InvoiceServiceTests
     public async Task DeleteAsync_ShouldRemoveInvoice()
     {
         var repo = new InMemoryInvoiceRepository();
-        var invoice = new Invoice { Id = Guid.NewGuid(), SerialNumber = "1" };
+        var invoice = new Invoice { Id = Guid.NewGuid(), SerialNumber = "1", TransactionNumber = "T1" };
         await repo.AddAsync(invoice);
         var service = new DefaultInvoiceService(repo);
 

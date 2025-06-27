@@ -25,6 +25,7 @@ public class EfInvoiceRepositoryTests
         {
             Id = Guid.NewGuid(),
             SerialNumber = "INV-TEST",
+            TransactionNumber = "TINV-1",
             IssueDate = DateOnly.FromDateTime(DateTime.Today),
             Supplier = await context.Suppliers.FirstAsync(),
             PaymentMethod = await context.PaymentMethods.FirstAsync()

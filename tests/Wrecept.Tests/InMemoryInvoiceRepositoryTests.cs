@@ -12,7 +12,7 @@ public class InMemoryInvoiceRepositoryTests
     [Fact]
     public async Task Constructor_ShouldSeedData()
     {
-        var seed = new List<Invoice> { new() { Id = Guid.NewGuid(), SerialNumber = "1" } };
+        var seed = new List<Invoice> { new() { Id = Guid.NewGuid(), SerialNumber = "1", TransactionNumber = "T1" } };
         var repo = new InMemoryInvoiceRepository(seed);
 
         var all = await repo.GetAllAsync();

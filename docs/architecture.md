@@ -2,7 +2,7 @@
 
 Wrecept használata során a legfontosabb entitások az alábbiak:
 
-- **Invoice** – fejlécadatok (sorszám, dátum, fizetési mód, számítás módja) és a hozzátartozó tételek listája.
+- **Invoice** – fejlécadatok (sorszám, tranzakciószám, dátum, fizetési mód, számítás módja) és a hozzátartozó tételek listája.
 - **InvoiceItem** – egy számla termék- vagy szolgáltatás sorát írja le.
 - **Supplier** – név, cím és adószám; kiállító vagy vevő szerepben használható.
 - **Product** és **ProductGroup** – terméktörzs elemei csoportokba rendezve.

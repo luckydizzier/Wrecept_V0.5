@@ -15,8 +15,8 @@ public class InvoiceSidebarViewModelTests
         var supplierService = new DefaultSupplierService(new Core.Repositories.InMemorySupplierRepository());
         var invoices = new ObservableCollection<Invoice>
         {
-            new Invoice { SerialNumber = "A1", IssueDate = new DateOnly(2024,1,1), Supplier = new Supplier { Id = Guid.NewGuid() } },
-            new Invoice { SerialNumber = "B2", IssueDate = new DateOnly(2024,2,1), Supplier = new Supplier { Id = Guid.NewGuid() } }
+            new Invoice { SerialNumber = "A1", TransactionNumber = "TA1", IssueDate = new DateOnly(2024,1,1), Supplier = new Supplier { Id = Guid.NewGuid() } },
+            new Invoice { SerialNumber = "B2", TransactionNumber = "TB2", IssueDate = new DateOnly(2024,2,1), Supplier = new Supplier { Id = Guid.NewGuid() } }
         };
         var vm = new InvoiceSidebarViewModel(invoices, supplierService)
         {

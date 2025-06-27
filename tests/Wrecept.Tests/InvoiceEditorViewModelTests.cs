@@ -15,6 +15,7 @@ public class InvoiceEditorViewModelTests
         var invoice = new Invoice
         {
             SerialNumber = "1",
+            TransactionNumber = "T1",
             Supplier = new Supplier { Id = Guid.NewGuid(), Name = "A" },
             PaymentMethod = new PaymentMethod { Id = Guid.NewGuid(), Name = "C" }
         };
@@ -55,7 +56,7 @@ public class InvoiceEditorViewModelTests
     [Fact]
     public void CancelEdit_ShouldRevertChanges()
     {
-        var invoice = new Invoice { SerialNumber = "1" };
+        var invoice = new Invoice { SerialNumber = "1", TransactionNumber = "T1" };
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
         var vm = new InvoiceEditorViewModel(
             invoice,
@@ -88,7 +89,7 @@ public class InvoiceEditorViewModelTests
     {
         var repo = new InMemoryInvoiceRepository();
         var service = new DefaultInvoiceService(repo);
-        var invoice = new Invoice { SerialNumber = "1" };
+        var invoice = new Invoice { SerialNumber = "1", TransactionNumber = "T1" };
         var vm = new InvoiceEditorViewModel(
             invoice,
             true,

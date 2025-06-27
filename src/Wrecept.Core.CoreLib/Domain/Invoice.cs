@@ -4,6 +4,7 @@ public record class Invoice
 {
     public Guid Id { get; set; }
     public string SerialNumber { get; set; } = string.Empty;
+    public string TransactionNumber { get; set; } = string.Empty;
     public DateOnly IssueDate { get; set; }
     public Supplier Supplier { get; set; } = default!;
     public CalculationMode CalculationMode { get; set; }

@@ -24,7 +24,14 @@ public class InvoiceEditorEscFlowTests
         var service = new DefaultInvoiceService(new InMemoryInvoiceRepository());
         var dialog = new StubDialog { Result = true };
         var vm = new InvoiceEditorViewModel(
-            new Invoice(),
+            new Invoice
+            {
+                SerialNumber = "1",
+                TransactionNumber = "T1",
+                Supplier = new Supplier { Name = "A" },
+                PaymentMethod = new PaymentMethod { Label = "Cash" },
+                Items = { new InvoiceItem { Id = Guid.NewGuid(), Product = new Product { Name = "P" }, Quantity = 1, Unit = new Unit { Name = "db" }, UnitPriceNet = 100, VatRatePercent = 27 } }
+            },
             true,
             service,
             new DefaultSupplierService(new InMemorySupplierRepository()),

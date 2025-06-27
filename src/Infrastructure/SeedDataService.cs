@@ -90,6 +90,7 @@ public static class SeedDataService
             {
                 Id = invoiceId,
                 SerialNumber = "INV-001",
+                TransactionNumber = "TXN-001",
                 IssueDate = DateOnly.FromDateTime(DateTime.Today),
                 Supplier = await db.Suppliers.FindAsync(supplierId)!,
                 CalculationMode = CalculationMode.Net,
