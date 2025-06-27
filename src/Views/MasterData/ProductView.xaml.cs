@@ -18,17 +18,5 @@ public partial class ProductView : UserControl
         {
             Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
-        else if (e.Key == Key.Insert)
-        {
-            (DataContext as ViewModels.ProductListViewModel)?.AddCommand.Execute(null);
-        }
-        else if (e.Key == Key.F2)
-        {
-            (DataContext as ViewModels.ProductListViewModel)?.SaveCommand.Execute(null);
-        }
-        else if (e.Key == Key.Delete)
-        {
-            (DataContext as ViewModels.ProductListViewModel)?.DeleteCommand.Execute(null);
-        }
     }
 }

@@ -17,17 +17,5 @@ public partial class TaxRateView : UserControl
         {
             Infrastructure.AppContext.NavigationService.CloseCurrentView();
         }
-        else if (e.Key == Key.Insert)
-        {
-            (DataContext as ViewModels.TaxRateListViewModel)?.AddCommand.Execute(null);
-        }
-        else if (e.Key == Key.F2)
-        {
-            (DataContext as ViewModels.TaxRateListViewModel)?.SaveCommand.Execute(null);
-        }
-        else if (e.Key == Key.Delete)
-        {
-            (DataContext as ViewModels.TaxRateListViewModel)?.DeleteCommand.Execute(null);
-        }
     }
 }
