@@ -31,9 +31,13 @@ public partial class InvoiceHeader : UserControl
 
     private async void SupplierNameBox_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
-        if (DataContext is InvoiceHeaderViewModel vm && string.IsNullOrWhiteSpace(vm.Invoice.Supplier.Name))
+        if (DataContext is InvoiceHeaderViewModel vm)
         {
-            await vm.OpenSupplierLookupAsync();
+            var name = vm.Invoice.Supplier?.Name;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                await vm.OpenSupplierLookupAsync();
+            }
         }
     }
 }

@@ -50,7 +50,10 @@ public partial class InvoiceEditorViewModel : ObservableObject
         {
             Id = invoice.Id,
             SerialNumber = invoice.SerialNumber,
-            IssueDate = invoice.IssueDate
+            IssueDate = invoice.IssueDate,
+            Supplier = invoice.Supplier ?? new Supplier(),
+            PaymentMethod = invoice.PaymentMethod ?? new PaymentMethod(),
+            Notes = invoice.Notes
         };
         IsEditMode = isEditMode;
         SaveCommand = new AsyncRelayCommand(SaveAsync);

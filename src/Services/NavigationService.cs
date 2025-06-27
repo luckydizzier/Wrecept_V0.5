@@ -26,7 +26,7 @@ public class NavigationService : INavigationService
         await Application.Current.Dispatcher.InvokeAsync(() =>
         {
             var list = new ObservableCollection<Invoice>(invoices);
-            var current = list.FirstOrDefault() ?? new Invoice();
+            var current = list.FirstOrDefault() ?? new Invoice { Supplier = new Supplier() };
             var vm = new InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
             var view = new Views.InvoiceEditorWindow { DataContext = vm };
             view.Loaded += (_, _) => vm.OnLoaded();
