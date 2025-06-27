@@ -4,4 +4,4 @@
 - Database file path now visible and logged on startup.
 - Keyboard stability verified with new unit tests covering edge cases.
 
-- Dependency injection container planned with milestone M9 and specification.
+- M9 milestone created to plan dependency injection container introduction.
