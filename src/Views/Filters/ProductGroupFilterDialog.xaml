@@ -7,7 +7,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" TabIndex="0"/>
+        <ListBox ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" TabIndex="0" DisplayMemberPath="Name"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{DynamicResource MarginTopLarge}">
             <Button x:Uid="Filter_Button" Content="{DynamicResource Filter_Button}" Command="{Binding ApplyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="{DynamicResource SpacingSmall}" TabIndex="1" IsDefault="True" />
             <Button x:Uid="Cancel_Button" Content="{DynamicResource Cancel_Button}" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" TabIndex="2" IsCancel="True" />
