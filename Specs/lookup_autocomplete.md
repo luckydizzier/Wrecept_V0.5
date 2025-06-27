@@ -1,21 +1,21 @@
 # Lookup Autocomplete and Price Memory
 
 ## Context
-Keyboard-driven lookup dialogs currently open via F2 or Ctrl+L. This extra keystroke slows down data entry when adding invoice items or selecting suppliers.
+Keyboard-driven lookup dropdowns currently open via F2 or Ctrl+L. This extra keystroke slows down data entry when adding invoice items or selecting suppliers.
 
 ## Objectives
-- Automatically open the lookup dialog when entering name fields (supplier, product, unit, tax rate).
+- Automatically open the inline lookup list when entering name fields (supplier, product, unit, tax rate).
 - Filter results as the user types and allow selection with Up/Down + Enter.
 - When a product is chosen, pre-fill the unit price with the most recent price used for that product.
 - Keep price history so previous values remain queryable.
 
 ## Constraints
-- Must remain fully keyboard navigable; Esc closes the dialog without selection.
+- Must remain fully keyboard navigable; Esc closes the list without selection.
 - Store price history locally without introducing new external dependencies.
 - UI strings remain Hungarian.
 
 ## Tasks
-1. **CodeGen-XAML** – Add focus handlers to open lookup dialogs automatically in `InvoiceHeader` and `InvoiceItemsGrid`.
+1. **CodeGen-XAML** – Add focus handlers to open lookup dropdowns automatically in `InvoiceHeader` and `InvoiceItemsGrid`.
 2. **CodeGen-CSharp** – Implement `JsonPriceHistoryService` with `GetLatestPrice` and `RecordPrice` methods.
 3. **CodeGen-CSharp** – Inject price service into `AppContext` and record prices when saving invoices.
 4. **CodeGen-CSharp** – On product lookup selection, fill unit price from history when available.

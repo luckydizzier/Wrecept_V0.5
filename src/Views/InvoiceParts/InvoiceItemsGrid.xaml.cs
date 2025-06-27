@@ -23,18 +23,18 @@ public partial class InvoiceItemsGrid : UserControl
         }
     }
 
-    private async void ItemsGrid_OnKeyDown(object sender, KeyEventArgs e)
+    private void ItemsGrid_OnKeyDown(object sender, KeyEventArgs e)
     {
         if (DataContext is InvoiceItemsViewModel vm)
         {
             if ((e.Key == Key.F2 || (e.Key == Key.L && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))) && ItemsGrid.SelectedIndex == 0)
             {
                 if (ItemsGrid.CurrentColumn.DisplayIndex == 0)
-                    await vm.OpenProductLookupAsync();
+                    vm.OpenProductLookup();
                 else if (ItemsGrid.CurrentColumn.DisplayIndex == 2)
-                    await vm.OpenUnitLookupAsync();
+                    vm.OpenUnitLookup();
                 else if (ItemsGrid.CurrentColumn.DisplayIndex == 4)
-                    await vm.OpenTaxRateLookupAsync();
+                    vm.OpenTaxRateLookup();
                 e.Handled = true;
                 return;
             }
@@ -74,16 +74,16 @@ public partial class InvoiceItemsGrid : UserControl
         }
     }
 
-    private async void ItemsGrid_OnBeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+    private void ItemsGrid_OnBeginningEdit(object sender, DataGridBeginningEditEventArgs e)
     {
         if (DataContext is InvoiceItemsViewModel vm && e.Row.Item == vm.Entry)
         {
             if (e.Column.DisplayIndex == 0)
-                await vm.OpenProductLookupAsync();
+                vm.OpenProductLookup();
             else if (e.Column.DisplayIndex == 2)
-                await vm.OpenUnitLookupAsync();
+                vm.OpenUnitLookup();
             else if (e.Column.DisplayIndex == 4)
-                await vm.OpenTaxRateLookupAsync();
+                vm.OpenTaxRateLookup();
         }
     }
 }

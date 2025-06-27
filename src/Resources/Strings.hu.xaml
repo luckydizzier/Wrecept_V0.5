@@ -23,7 +23,7 @@
     <sys:String x:Key="SupplierFilter_Title">Szállító szűrő</sys:String>
     <sys:String x:Key="ProductGroupFilter_Title">Termékcsoport szűrő</sys:String>
     <sys:String x:Key="LookupDialog_Title">Keresés</sys:String>
-    <sys:String x:Key="Search_Tooltip">F2 vagy Ctrl+L: keresés</sys:String>
+    <sys:String x:Key="Search_Tooltip">Fel/Le, Enter, Esc: keresés</sys:String>
     <sys:String x:Key="Help_Title">Súgó</sys:String>
     <sys:String x:Key="Help_Text">A felhasználói kézikönyv a docs/user_manual.md fájlban található. A F1 billentyűvel előhívható billentyűs súgó az OnboardingOverlay ablakban jelenik meg.</sys:String>
     <sys:String x:Key="About_Title">Névjegy</sys:String>

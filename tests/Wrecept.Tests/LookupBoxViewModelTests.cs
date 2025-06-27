@@ -6,13 +6,14 @@ using Xunit;
 
 namespace Wrecept.Tests;
 
-public class LookupDialogViewModelTests
+public class LookupBoxViewModelTests
 {
     [Fact]
     public async Task SearchText_ShouldFilterResults()
     {
         var data = new List<string> { "alma", "banan", "korte" };
-        var vm = new LookupDialogViewModel<string>(term => Task.FromResult(data.Where(d => d.Contains(term)).ToList()), s => s);
+        var vm = new LookupBoxViewModel<string>(term => Task.FromResult(data.Where(d => d.Contains(term)).ToList()), s => s, _ => { }, () => { });
+        vm.Open();
         await Task.Delay(10); // allow initial load
         vm.SearchText = "a";
         await Task.Delay(10);
