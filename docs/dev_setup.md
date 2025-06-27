@@ -12,6 +12,7 @@
 3. The local SQLite database is created at `%LOCALAPPDATA%/Wrecept/wrecept.db`.
    If `%LOCALAPPDATA%` is unavailable, the executable directory is used instead.
    Entity Framework Core automatically creates the necessary tables on first run.
+4. A kiszolgálói és ViewModel függőségek a beépített DI konténerben regisztrálódnak, melyet a `App` osztály hoz létre.
 
 ## Troubleshooting
 - Ensure `dotnet` is available on the PATH.

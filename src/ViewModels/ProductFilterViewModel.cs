@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 namespace Wrecept.ViewModels;
 
@@ -13,6 +14,7 @@ public partial class ProductFilterViewModel : ObservableObject
 {
     private readonly Func<Guid?, Task> _apply;
     private readonly IProductService _service;
+    private readonly INavigationService _navigation;
 
     [ObservableProperty]
     private List<Product> _products = new();
@@ -20,10 +22,11 @@ public partial class ProductFilterViewModel : ObservableObject
     [ObservableProperty]
     private Product? _selectedProduct;
 
-    public ProductFilterViewModel(Func<Guid?, Task> apply, IProductService service)
+    public ProductFilterViewModel(Func<Guid?, Task> apply, IProductService service, INavigationService navigation)
     {
         _apply = apply;
         _service = service;
+        _navigation = navigation;
         _ = LoadProductsAsync();
     }
 
@@ -37,12 +40,12 @@ public partial class ProductFilterViewModel : ObservableObject
     private async Task ApplyAsync()
     {
         await _apply(SelectedProduct?.Id);
-        Infrastructure.AppContext.NavigationService.CloseCurrentView();
+        _navigation.CloseCurrentView();
     }
 
     [RelayCommand]
     private void Cancel()
     {
-        Infrastructure.AppContext.NavigationService.CloseCurrentView();
+        _navigation.CloseCurrentView();
     }
 }

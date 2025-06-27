@@ -13,11 +13,14 @@ public class InvoiceItemsInlineCreatorTests
     {
         var invoice = new Invoice();
         var repo = new Wrecept.Core.Repositories.InMemoryProductRepository();
-        var vm = new InvoiceItemsViewModel(invoice,
+        var vm = new InvoiceItemsViewModel(
+            invoice,
             new DefaultProductService(repo),
             new DefaultProductGroupService(new Wrecept.Core.Repositories.InMemoryProductGroupRepository()),
             new DefaultUnitService(new Wrecept.Core.Repositories.InMemoryUnitRepository()),
-            new DefaultTaxRateService(new Wrecept.Core.Repositories.InMemoryTaxRateRepository()));
+            new DefaultTaxRateService(new Wrecept.Core.Repositories.InMemoryTaxRateRepository()),
+            new Infrastructure.JsonPriceHistoryService(),
+            new Services.FeedbackService());
 
         vm.Entry.ProductName = "NewProd";
 

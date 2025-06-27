@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 namespace Wrecept.ViewModels;
 
 public partial class UnitListViewModel : RestorableListViewModel<Unit>
 {
     private readonly IUnitService _service;
+    private readonly IStatusService _statusService;
 
     private ObservableCollection<Unit> _units = new();
 
@@ -28,9 +30,10 @@ public partial class UnitListViewModel : RestorableListViewModel<Unit>
         set => SelectedItem = value;
     }
 
-    public UnitListViewModel(IUnitService service)
+    public UnitListViewModel(IUnitService service, IStatusService statusService)
     {
         _service = service;
+        _statusService = statusService;
         _ = LoadAsync();
     }
 
@@ -57,7 +60,7 @@ public partial class UnitListViewModel : RestorableListViewModel<Unit>
     {
         if (SelectedUnit is null) return;
         await _service.SaveAsync(SelectedUnit);
-        Infrastructure.AppContext.SetStatus("Mértékegység mentve");
+        _statusService.SetStatus("Mértékegység mentve");
     }
 
     [RelayCommand]

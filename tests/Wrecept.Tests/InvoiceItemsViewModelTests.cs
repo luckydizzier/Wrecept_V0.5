@@ -10,7 +10,14 @@ public class InvoiceItemsViewModelTests
     public void AddItemCommand_ShouldAddRowAndClearEntry()
     {
         var invoice = new Invoice();
-        var vm = new InvoiceItemsViewModel(invoice);
+        var vm = new InvoiceItemsViewModel(
+            invoice,
+            new Core.Services.DefaultProductService(new Core.Repositories.InMemoryProductRepository()),
+            new Core.Services.DefaultProductGroupService(new Core.Repositories.InMemoryProductGroupRepository()),
+            new Core.Services.DefaultUnitService(new Core.Repositories.InMemoryUnitRepository()),
+            new Core.Services.DefaultTaxRateService(new Core.Repositories.InMemoryTaxRateRepository()),
+            new Infrastructure.JsonPriceHistoryService(),
+            new Services.FeedbackService());
 
         vm.Entry.ProductName = "Teszt";
         vm.Entry.Quantity = 2;
@@ -31,7 +38,14 @@ public class InvoiceItemsViewModelTests
     public void AddItemCommand_ShouldIgnoreInvalidEntry()
     {
         var invoice = new Invoice();
-        var vm = new InvoiceItemsViewModel(invoice);
+        var vm = new InvoiceItemsViewModel(
+            invoice,
+            new Core.Services.DefaultProductService(new Core.Repositories.InMemoryProductRepository()),
+            new Core.Services.DefaultProductGroupService(new Core.Repositories.InMemoryProductGroupRepository()),
+            new Core.Services.DefaultUnitService(new Core.Repositories.InMemoryUnitRepository()),
+            new Core.Services.DefaultTaxRateService(new Core.Repositories.InMemoryTaxRateRepository()),
+            new Infrastructure.JsonPriceHistoryService(),
+            new Services.FeedbackService());
 
         vm.AddItemCommand.Execute(null);
 

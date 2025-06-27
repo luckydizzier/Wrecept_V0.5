@@ -24,30 +24,28 @@ public partial class InvoiceItemsViewModel : ObservableObject
     private readonly IProductGroupService _groupService;
     private readonly IUnitService _unitService;
     private readonly ITaxRateService _taxService;
+    private readonly IPriceHistoryService _historyService;
+    private readonly IFeedbackService _feedbackService;
     public LookupBoxViewModel<Product> ProductLookup { get; }
     public LookupBoxViewModel<Unit> UnitLookup { get; }
     public LookupBoxViewModel<TaxRate> TaxRateLookup { get; }
 
-    public InvoiceItemsViewModel(Invoice invoice)
-        : this(invoice,
-            Infrastructure.AppContext.ProductService,
-            Infrastructure.AppContext.ProductGroupService,
-            Infrastructure.AppContext.UnitService,
-            Infrastructure.AppContext.TaxRateService)
-    {
-    }
 
     public InvoiceItemsViewModel(
         Invoice invoice,
         IProductService productService,
         IProductGroupService groupService,
         IUnitService unitService,
-        ITaxRateService taxService)
+        ITaxRateService taxService,
+        IPriceHistoryService historyService,
+        IFeedbackService feedbackService)
     {
         _productService = productService;
         _groupService = groupService;
         _unitService = unitService;
         _taxService = taxService;
+        _historyService = historyService;
+        _feedbackService = feedbackService;
 
         Invoice = invoice;
         Rows = new ObservableCollection<InvoiceItemRowViewModel>();
@@ -70,7 +68,7 @@ public partial class InvoiceItemsViewModel : ObservableObject
         if (!Entry.Validate())
         {
             LastAddSuccess = false;
-            Infrastructure.AppContext.FeedbackService.Error();
+            _feedbackService.Error();
             return;
         }
 
@@ -79,7 +77,7 @@ public partial class InvoiceItemsViewModel : ObservableObject
         Rows.Add(new InvoiceItemRowViewModel(model));
         Entry.Clear();
         LastAddSuccess = true;
-        Infrastructure.AppContext.FeedbackService.Accept();
+        _feedbackService.Accept();
         OnPropertyChanged(nameof(Rows));
     }
 
@@ -128,7 +126,7 @@ public partial class InvoiceItemsViewModel : ObservableObject
     private void OnProductSelected(Product product)
     {
         Entry.ProductName = product.Name;
-        var price = Infrastructure.AppContext.PriceHistoryService.GetLatestPrice(product.Name);
+        var price = _historyService.GetLatestPrice(product.Name);
         if (price.HasValue)
             Entry.UnitPriceNet = price.Value;
     }

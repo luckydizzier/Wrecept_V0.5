@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
+using Wrecept.Services;
 
 namespace Wrecept.ViewModels;
 
 public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
 {
     private readonly ISupplierService _service;
+    private readonly IStatusService _statusService;
 
     private ObservableCollection<Supplier> _suppliers = new();
 
@@ -28,9 +30,10 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
         set => SelectedItem = value;
     }
 
-    public SupplierListViewModel(ISupplierService service)
+    public SupplierListViewModel(ISupplierService service, IStatusService statusService)
     {
         _service = service;
+        _statusService = statusService;
         _ = LoadAsync();
     }
 
@@ -57,7 +60,7 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
     {
         if (SelectedSupplier is null) return;
         await _service.SaveAsync(SelectedSupplier);
-        Infrastructure.AppContext.SetStatus("Beszállító mentve");
+        _statusService.SetStatus("Beszállító mentve");
     }
 
     [RelayCommand]
