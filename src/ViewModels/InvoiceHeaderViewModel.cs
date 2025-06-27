@@ -36,24 +36,18 @@ public partial class InvoiceHeaderViewModel : ObservableObject
         _paymentMethodService = paymentMethodService;
         Invoice = invoice;
         CalculationModes = new[] { CalculationMode.Net, CalculationMode.Gross };
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                await LoadPaymentMethodsAsync().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Infrastructure.AppContext.SetStatus(ex.Message);
-            }
-        });
+        _ = LoadPaymentMethodsAsync();
     }
 
     private async Task LoadPaymentMethodsAsync()
     {
-        PaymentMethods = await _paymentMethodService.GetAllAsync();
-        if (Invoice.PaymentMethod == null && PaymentMethods.Count > 0)
-            Invoice.PaymentMethod = PaymentMethods[0];
+        var methods = await _paymentMethodService.GetAllAsync();
+        await Application.Current.Dispatcher.InvokeAsync(() =>
+        {
+            PaymentMethods = methods;
+            if (Invoice.PaymentMethod == null && PaymentMethods.Count > 0)
+                Invoice.PaymentMethod = PaymentMethods[0];
+        });
     }
 
     public async Task<bool> TryOpenSupplierCreatorAsync()

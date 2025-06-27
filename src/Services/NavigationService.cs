@@ -22,12 +22,15 @@ public class NavigationService : INavigationService
     public async Task ShowInvoiceListViewAsync()
     {
         var invoices = await WreceptAppContext.InvoiceService.GetAllAsync();
-        var list = new ObservableCollection<Invoice>(invoices);
-        var current = list.FirstOrDefault() ?? new Invoice();
-        var vm = new InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
-        var view = new Views.InvoiceEditorWindow { DataContext = vm };
-        view.Loaded += (_, _) => vm.OnLoaded();
-        Show(view);
+        await Application.Current.Dispatcher.InvokeAsync(() =>
+        {
+            var list = new ObservableCollection<Invoice>(invoices);
+            var current = list.FirstOrDefault() ?? new Invoice();
+            var vm = new InvoiceEditorViewModel(current, false, WreceptAppContext.InvoiceService, list);
+            var view = new Views.InvoiceEditorWindow { DataContext = vm };
+            view.Loaded += (_, _) => vm.OnLoaded();
+            Show(view);
+        });
     }
 
     public void ShowSupplierView()
