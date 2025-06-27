@@ -34,9 +34,9 @@ namespace Wrecept
                 }
                 else if (Infrastructure.AppContext.IsDatabaseCorrupt(se))
                 {
-                    var dialog = new KeyboardConfirmDialog(
+                    var confirm = Infrastructure.AppContext.DialogService.Confirm(
                         "Adatbázis sérült. Újra legyen létrehozva? (I: Igen, N: Nem)");
-                    if (dialog.ShowDialog() == true && Infrastructure.AppContext.TryRecoverDatabase())
+                    if (confirm && Infrastructure.AppContext.TryRecoverDatabase())
                     {
                         ok = true;
                     }
