@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Infrastructure;
+using Wrecept.Services;
 using Wrecept.Views.Dialogs;
 using Wrecept.ViewModels;
 
