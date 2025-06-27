@@ -7,16 +7,12 @@ namespace Wrecept;
 
 public partial class MainWindow : Window
 {
-
-    public MainWindow()
+    public MainWindow(ViewModels.MainWindowViewModel vm)
     {
         InitializeComponent();
-
-        if (DataContext is ViewModels.MainWindowViewModel vm)
-        {
-            WreceptAppContext.StatusMessageSetter = msg => vm.StatusMessage = msg;
-            WreceptAppContext.NavigationService.SetHost(vm);
-        }
+        DataContext = vm;
+        WreceptAppContext.StatusMessageSetter = msg => vm.StatusMessage = msg;
+        WreceptAppContext.NavigationService.SetHost(vm);
     }
 
     private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
