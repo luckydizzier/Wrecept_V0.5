@@ -41,6 +41,27 @@ public class NavigationService : INavigationService
         Show(view);
     }
 
+    public void ShowUnitView()
+    {
+        var vm = new UnitListViewModel(WreceptAppContext.UnitService);
+        var view = new Views.MasterData.UnitView { DataContext = vm };
+        Show(view);
+    }
+
+    public void ShowProductGroupView()
+    {
+        var vm = new ProductGroupListViewModel(WreceptAppContext.ProductGroupService);
+        var view = new Views.MasterData.ProductGroupView { DataContext = vm };
+        Show(view);
+    }
+
+    public void ShowTaxRateView()
+    {
+        var vm = new TaxRateListViewModel(WreceptAppContext.TaxRateService);
+        var view = new Views.MasterData.TaxRateView { DataContext = vm };
+        Show(view);
+    }
+
     public void ShowProductView()
     {
         var vm = new ProductListViewModel(WreceptAppContext.ProductService);

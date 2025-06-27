@@ -40,8 +40,11 @@
     <sys:String x:Key="Product_Header">Termék</sys:String>
     <sys:String x:Key="Quantity_Header">Mennyiség</sys:String>
     <sys:String x:Key="Unit_Header">Egység</sys:String>
+    <sys:String x:Key="UnitSymbol_Header">Jel</sys:String>
     <sys:String x:Key="UnitPrice_Header">Egységár</sys:String>
     <sys:String x:Key="VatRate_Header">ÁFA %</sys:String>
+    <sys:String x:Key="ProductGroup_Header">Csoport</sys:String>
+    <sys:String x:Key="TaxRateLabel_Header">Megnevezés</sys:String>
     <sys:String x:Key="Net_Header">Nettó</sys:String>
     <sys:String x:Key="Vat_Header">ÁFA</sys:String>
     <sys:String x:Key="Gross_Header">Bruttó</sys:String>
@@ -63,6 +66,9 @@
     <sys:String x:Key="Menu_Masters">_Törzsek</sys:String>
     <sys:String x:Key="Menu_Suppliers">Szállítók</sys:String>
     <sys:String x:Key="Menu_Products">Termékek</sys:String>
+    <sys:String x:Key="Menu_Units">Mértékegységek</sys:String>
+    <sys:String x:Key="Menu_ProductGroups">Termékcsoportok</sys:String>
+    <sys:String x:Key="Menu_TaxRates">ÁFA-kulcsok</sys:String>
     <sys:String x:Key="Menu_Lists">_Listák</sys:String>
     <sys:String x:Key="Menu_FilterByDate">Dátum alapú keresés</sys:String>
     <sys:String x:Key="Menu_FilterBySupplier">Szállító alapú keresés</sys:String>

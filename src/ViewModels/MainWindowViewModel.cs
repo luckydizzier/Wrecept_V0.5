@@ -56,6 +56,27 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void OpenUnitView()
+    {
+        _navigationService.ShowUnitView();
+        StatusMessage = "Mértékegységek";
+    }
+
+    [RelayCommand]
+    private void OpenProductGroupView()
+    {
+        _navigationService.ShowProductGroupView();
+        StatusMessage = "Termékcsoportok";
+    }
+
+    [RelayCommand]
+    private void OpenTaxRateView()
+    {
+        _navigationService.ShowTaxRateView();
+        StatusMessage = "ÁFA-kulcsok";
+    }
+
+    [RelayCommand]
     private void FilterByDateView()
     {
         _navigationService.ShowFilterByDateView();

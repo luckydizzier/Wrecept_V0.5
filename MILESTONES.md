@@ -63,6 +63,7 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Unique invoice numbering independent of list count
 - Fix invoice list crash when filter result is empty
 - Disable row addition in Supplier and Product grids
+- CRUD windows for Unit, ProductGroup and TaxRate management [Done]
 - Graceful handling for settings save and invoice export errors [Done]
 - Default/Cancel actions on filter and settings dialogs [Done]
 - Cancel placeholder row entry with Esc [Done]
