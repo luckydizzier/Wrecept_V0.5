@@ -14,6 +14,9 @@
         <MenuItem Header="{DynamicResource Menu_Masters}" InputGestureText="Alt+T">
             <MenuItem Header="{DynamicResource Menu_Suppliers}" Command="{Binding OpenSupplierViewCommand}" />
             <MenuItem Header="{DynamicResource Menu_Products}" Command="{Binding OpenProductViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_Units}" Command="{Binding OpenUnitViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_ProductGroups}" Command="{Binding OpenProductGroupViewCommand}" />
+            <MenuItem Header="{DynamicResource Menu_TaxRates}" Command="{Binding OpenTaxRateViewCommand}" />
         </MenuItem>
         <MenuItem Header="{DynamicResource Menu_Lists}" InputGestureText="Alt+L">
             <MenuItem Header="{DynamicResource Menu_FilterByDate}" Command="{Binding FilterByDateViewCommand}" />

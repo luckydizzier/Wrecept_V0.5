@@ -40,8 +40,11 @@
     <sys:String x:Key="Product_Header">Product</sys:String>
     <sys:String x:Key="Quantity_Header">Quantity</sys:String>
     <sys:String x:Key="Unit_Header">Unit</sys:String>
+    <sys:String x:Key="UnitSymbol_Header">Symbol</sys:String>
     <sys:String x:Key="UnitPrice_Header">Unit Price</sys:String>
     <sys:String x:Key="VatRate_Header">VAT %</sys:String>
+    <sys:String x:Key="ProductGroup_Header">Group</sys:String>
+    <sys:String x:Key="TaxRateLabel_Header">Label</sys:String>
     <sys:String x:Key="Net_Header">Net</sys:String>
     <sys:String x:Key="Vat_Header">VAT</sys:String>
     <sys:String x:Key="Gross_Header">Gross</sys:String>
@@ -63,6 +66,9 @@
     <sys:String x:Key="Menu_Masters">_Master Data</sys:String>
     <sys:String x:Key="Menu_Suppliers">Suppliers</sys:String>
     <sys:String x:Key="Menu_Products">Products</sys:String>
+    <sys:String x:Key="Menu_Units">Units</sys:String>
+    <sys:String x:Key="Menu_ProductGroups">Product Groups</sys:String>
+    <sys:String x:Key="Menu_TaxRates">Tax Rates</sys:String>
     <sys:String x:Key="Menu_Lists">_Lists</sys:String>
     <sys:String x:Key="Menu_FilterByDate">Search by Date</sys:String>
     <sys:String x:Key="Menu_FilterBySupplier">Search by Supplier</sys:String>
