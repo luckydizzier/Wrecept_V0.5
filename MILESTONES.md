@@ -61,6 +61,7 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Async loading wrapped with error handling
 - Input lock management via IDisposable scope
 - Unique invoice numbering independent of list count
+- CalculationMode field persisted on invoices
 - Fix invoice list crash when filter result is empty
 - Disable row addition in Supplier and Product grids
 - Validate required fields when saving invoices

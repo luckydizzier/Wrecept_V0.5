@@ -92,6 +92,7 @@ public static class SeedDataService
                 SerialNumber = "INV-001",
                 IssueDate = DateOnly.FromDateTime(DateTime.Today),
                 Supplier = await db.Suppliers.FindAsync(supplierId)!,
+                CalculationMode = CalculationMode.Net,
                 PaymentMethod = await db.PaymentMethods.FindAsync(payId)!,
                 Notes = string.Empty
             });
