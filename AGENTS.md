@@ -1,135 +1,165 @@
-﻿# AGENTS.md – Multi-Agent Charter for **Wrecept**
+AGENTS.md – Multi-Agent Charter for Wrecept
 
-This document is the single source of truth for every **ChatGPT agent** that helps design, implement, test and document the Wrecept code-base.  
-Agents never become runtime components; they only read, create or modify repository files.
-
----
+This document is the single source of truth for every ChatGPT agent that helps design, implement, test and document the Wrecept code-base. Agents never become runtime components; they only read, create or modify repository files.
 
 ## 1. Core Principles
 
-1. **Single Responsibility** – each agent has one clearly bounded focus.  
-2. **File Ownership** – an agent may only touch files it owns (see §3).  
-3. **Traceability** – every change is logged under `docs/progress/`.  
-4. **Docs First** – architecture, interfaces and UX flows are documented **before** code is generated.  
-5. **Human Gate** – any ambiguous decision is surfaced as `NEEDS_HUMAN_DECISION`.  
-6. **No Orphans** – new files must be claimed by exactly one agent.  
-7. **Hungarian First** – UI text and user-visible messages remain Hungarian; code, comments and docs are English.
-
----
+* **Single Responsibility** – Each agent has one clearly bounded focus.
+* **File Ownership** – An agent may only touch files it owns (see §3).
+* **Traceability** – Every change is logged under `docs/progress/`.
+* **Docs First** – Architecture, interfaces and UX flows are documented before code is generated.
+* **Human Gate** – Any ambiguous decision is surfaced as `NEEDS_HUMAN_DECISION`.
+* **No Orphans** – New files must be claimed by exactly one agent.
+* **Hungarian First** – UI text and user-visible messages remain Hungarian; code, comments and docs are English.
+* **Milestone Alignment** – All tasks must reference a milestone and agent in their declaration (see `TASKLOG.md`).
+* **Review Cycle** – All changes must pass through Reviewer agent approval.
 
 ## 2. Agent Profiles
 
-### 2.1 **Architect**
-- **Focus:** Translate business goals into development tasks and high-level design artifacts.  
-- **Input:** user stories, issues, feature ideas.  
-- **Output:**  
-  - `Specs/<topic>.md` – structured specification (context, objectives, constraints).  
-  - Updates to `TODO.md`, `MILESTONES.md`.  
-- **Special Rules:** May create/update directory trees but never source code.
+### 2.1 Architect
 
-### 2.2 **CodeGen-CSharp**
-- **Focus:** Produce or refactor `.cs` files (Models, ViewModels, Services, DI setup).  
-- **Input:** specs, existing C# source.  
-- **Output:** full, compilable C# files inside fenced ```csharp blocks.  
-- **Constraints:**  
-  - Follow MVVM and **CommunityToolkit.Mvvm** conventions.  
-  - Inject dependencies via constructors only.  
-  - No explanatory prose outside the code block.
+* **Focus:** Translate business goals into milestones and specifications.
+* **Inputs:** User stories, issues, feature ideas.
+* **Outputs:**
 
-### 2.3 **CodeGen-XAML**
-- **Focus:** Create or update `.xaml` views, DataTemplates and resource dictionaries.  
-- **Input/Output:** analogous to CodeGen-CSharp but for XAML.  
-- **Constraints:**  
-  - Keyboard-first navigation (Tab, arrow keys, accelerators).  
-  - No embedded code-behind.
+  * `Specs/<topic>.md` – Structured specifications.
+  * Updates to `MILESTONES.md`, `TODO.md`, `TASKLOG.md`.
+  * `Directory.Build.props`, `.editorconfig`, `.csproj`, `.sh`, `.iss` files.
+* **Rules:** Does not modify source code directly. May request `NEEDS_HUMAN_DECISION`.
 
-### 2.4 **ux_agent**
-- **Focus:** Define and refine keyboard-driven UX behavior across all views.
-- **Input:** XAML files, ViewModel UI states, event bindings.
-- **Output:** UX recommendations, focus paths, TabIndex maps.
-- **Constraints:** No source code generation—delegate visual changes to `CodeGen-XAML`, document all else.
+### 2.2 CodeGen-CSharp
 
-### 2.5 **TestWriter**
-- **Focus:** Generate xUnit + FluentAssertions tests.  
-- **Input:** new or changed source code.  
-- **Output:** full `.cs` test files.  
-- **Coverage:** Happy path, edge cases, error handling (≥ 3 cases per public method).  
+* **Focus:** Create or refactor `.cs` files (models, services, ViewModels).
+* **Constraints:**
 
-### 2.6 **DocWriter**
-- **Focus:** Update or create technical/user docs (`README`, `HOWTO`, `architecture.md`, …).  
-- **Style:** succinct, task-oriented, reuse existing sections—no duplication.  
+  * MVVM with CommunityToolkit.Mvvm.
+  * Dependency injection only via constructor.
+  * Output only fenced `csharp` code blocks.
+  * Never modify files not explicitly assigned to this agent.
 
-### 2.7 **Reviewer**
-- **Focus:** Static analysis and code review comments.  
-- **Input:** diff or entire file set.  
-- **Output:** PR-style feedback list with ✔ / ❌ markers and actionable suggestions.  
-- **Must NOT:** modify files directly.
+### 2.3 CodeGen-XAML
 
----
+* **Focus:** Create or update `.xaml` views, DataTemplates, resource dictionaries.
+* **Constraints:**
 
-## 3. File-Ownership Map
+  * Keyboard-first navigation (Tab, arrows, accelerators).
+  * No embedded code-behind logic.
 
-| Path / Pattern                        | Owner Agent        |
-|---------------------------------------|--------------------|
-| `src/**/*.cs` (non-UI)                | CodeGen-CSharp     |
-| `src/**/*.xaml`                       | CodeGen-XAML       |
-| `src/**/*ViewModel.cs`                | CodeGen-CSharp     |
-| `src/Views/Filters/*`                 | CodeGen-XAML       |
-| `src/Views/MasterData/*`              | CodeGen-XAML       |
-| `src/Views/Settings/*`                | CodeGen-XAML       |
-| `src/Views/Lookup/*`                  | CodeGen-XAML       |
-| `tests/**/*.cs`                       | TestWriter         |
-| `Specs/**/*.md`                       | Architect          |
-| `docs/ui_flow.md`, `docs/themes.md`   | ux_agent           |
-| `docs/**/*.md` (except Specs, UI docs)| DocWriter          |
-| `docs/progress/**/*`                  | *all* (each logs own work) |
-| `Directory.Build.props`, `.editorconfig` | Architect (with NEEDS_HUMAN_DECISION) |
-| `*.csproj`                             | Architect |
-| `*.sh`                                 | Architect |
-| `*.iss`                                | Architect |
-| `db/**/*.sql`                         | CodeGen-CSharp |
+### 2.4 ux\_agent
 
-> **Rule:** If a file path is missing here, the *first* agent that creates it becomes the owner and must update this table.
+* **Focus:** Define UX behavior and keyboard interaction across views.
+* **Outputs:**
 
----
+  * `docs/ui_flow.md`, focus order maps, recommendations.
+* **Constraints:**
+
+  * Does not generate code.
+  * Delegates visual/UI changes to CodeGen-XAML.
+
+### 2.5 TestWriter
+
+* **Focus:** Generate xUnit + FluentAssertions test files.
+* **Coverage:**
+
+  * Happy path
+  * Edge cases
+  * Error handling (≥ 3 test cases/public method)
+
+### 2.6 DocWriter
+
+* **Focus:** Maintain project documentation.
+* **Outputs:**
+
+  * `README.md`, `HOWTO.md`, `architecture.md`, etc.
+* **Style:**
+
+  * Succinct, non-redundant, section-reuse oriented.
+
+### 2.7 Reviewer
+
+* **Focus:** Perform static analysis and code reviews.
+* **Outputs:**
+
+  * PR-style feedback list (`✔` / `❌` and actionable comments).
+* **Rules:** May not modify files directly.
+
+### 2.8 Maintainer
+
+* **Focus:** Cross-check milestone, TODO and progress logs for consistency.
+* **Outputs:**
+
+  * Audit reports, sync proposals.
+  * Flags inconsistencies in `TASKLOG.md`.
+* **Privileges:**
+
+  * May request automated script adjustments.
+  * Coordinates review cycles and merge readiness.
+
+## 3. File Ownership Map
+
+| Path / Pattern                      | Owner Agent       |
+| ----------------------------------- | ----------------- |
+| `src/**/*.cs` (non-UI)              | CodeGen-CSharp    |
+| `src/**/*.xaml`                     | CodeGen-XAML      |
+| `src/**/*ViewModel.cs`              | CodeGen-CSharp    |
+| `src/Views/Filters/*`               | CodeGen-XAML      |
+| `src/Views/MasterData/*`            | CodeGen-XAML      |
+| `src/Views/Settings/*`              | CodeGen-XAML      |
+| `src/Views/Lookup/*`                | CodeGen-XAML      |
+| `tests/**/*.cs`                     | TestWriter        |
+| `Specs/**/*.md`                     | Architect         |
+| `docs/ui_flow.md`, `docs/themes.md` | ux\_agent         |
+| `docs/**/*.md` (except Specs, UI)   | DocWriter         |
+| `docs/progress/**/*`                | All (self-logged) |
+| `*.sh`, `*.iss`, `*.csproj`         | Architect         |
+| `Directory.Build.props`             | Architect         |
+| `.editorconfig`                     | Architect         |
+
+**Rule:** If a path is missing, the first agent creating it becomes owner and must update this table.
 
 ## 4. Standard Workflow
 
-1. **Architect** creates/updates a `Specs` file and corresponding TODO items.  
-2. **CodeGen-CSharp** and/or **CodeGen-XAML** implement the spec.  
-3. **TestWriter** adds/updates tests for the new code.  
-4. **Reviewer** analyses the diff and reports ✔ / ❌ items.  
-5. If ❌ remain → go back to step 2.  
-6. **DocWriter** updates docs to reflect the change.  
-7. All agents log their actions in  
-   `docs/progress/<timestamp>_<agent>.md` using the template:
+1. **Planning**
 
-   ### <Short action title>
-   *Timestamp:* 2025-06-24T15:34:08  
-   *Files touched:* src/…, docs/…  
-   *Summary:* one-sentence summary  
-   *Details:* bullet list of significant points  
+   * Architect creates/upgrades milestone entries and specs.
+   * Maintainer logs and aligns new tasks in `TASKLOG.md`.
 
-8. Human maintainer reviews and merges.
+2. **Implementation**
 
----
+   * CodeGen agents implement features from spec.
+   * TestWriter generates tests.
+   * ux\_agent proposes or adjusts UX flows.
 
-## 5. Coding & Documentation Conventions (Quick-Ref)
+3. **Review and Merge**
 
-* **C#**: .NET 8, nullable enabled, `file-scoped` namespaces, PascalCase public APIs.
-* **XAML**: `x:Name` for focusable elements; use `x:Uid` for localisation.
-* **Tests**: Method naming `MethodUnderTest_ShouldExpectedBehavior_WhenCondition`.
-* **Commits**: `[agent] <scope>: <subject>` e.g. `CodeGen-CSharp Invoice: add VAT breakdown`.
-* **Progress Logs**: UTC timestamps in file names; body in English.
+   * Reviewer evaluates diffs and issues ✔ / ❌ decisions.
+   * Maintainer coordinates merge readiness.
 
----
+4. **Documentation**
+
+   * DocWriter updates relevant user/tech docs.
+   * All agents log work in `docs/progress/<timestamp>_<agent>.md`:
+
+```markdown
+Timestamp: 2025-06-24T15:34:08
+Files touched: src/…, docs/…
+Summary: One-sentence summary
+Details:
+- Bullet list of relevant changes or notes
+```
+
+## 5. Coding & Documentation Conventions (Quick Ref)
+
+* **C#:** .NET 8, nullable enabled, file-scoped namespaces, PascalCase.
+* **XAML:** `x:Name` for focusable elements, `x:Uid` for localisation.
+* **Tests:** `MethodUnderTest_ShouldExpectedBehavior_WhenCondition`.
+* **Commits:** `[agent] <scope>: <subject>`
+* **Logs:** UTC timestamps in filename; Markdown body in English.
 
 ## 6. Extending This Charter
 
-1. Propose new agent or file type → add section under §2 + row in §3.
-2. Tag change request with `NEEDS_HUMAN_DECISION`.
-3. Upon approval, update this document in a dedicated PR before code generation starts.
+* Add new agent → create §2 entry and update §3 ownership.
+* All updates must be submitted as dedicated PR.
+* Mark proposals with `NEEDS_HUMAN_DECISION`.
 
----
-
-*“Modularity means putting every idea in the right place—no more, no less.”*
+> “Modularity means putting every idea in the right place—no more, no less.”
