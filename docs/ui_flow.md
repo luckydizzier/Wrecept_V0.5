@@ -7,6 +7,11 @@
 - Elutasításkor "ti-ta" jelzés hallatszik.
 - Hiba esetén kétszer "tu" hang, a mező pedig sárga vagy piros háttérrel villan fel.
 
+## Onboarding Overlay
+- Első indításkor megjelenik egy átlátszó súgóablak a főbb gyorsbillentyűkkel.
+- `Esc` vagy a **Bezár** gomb zárja be az ablakot, a fókusz ekkor a főmenüre kerül.
+- A **F1** billentyű bármikor újra előhívja ezt az útmutatót.
+
 ## Menu System
 - Felső menüsor Alt billentyűvel aktiválható.
 - Számlák menü: kezelő nézet megnyitása és lista frissítése.
