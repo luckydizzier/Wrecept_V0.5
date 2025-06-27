@@ -11,5 +11,6 @@ public class BoolToVisibilityConverter : IValueConverter
         => value is bool b && b ? Visibility.Visible : Visibility.Collapsed;
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        // Reverse conversion isn't used anywhere; keep unimplemented to avoid silent misuse.
         => throw new NotImplementedException();
 }
