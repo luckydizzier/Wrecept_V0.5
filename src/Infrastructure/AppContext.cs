@@ -39,6 +39,7 @@ public static class AppContext
                 .Options;
             var dbContext = new WreceptDbContext(options);
             dbContext.Database.EnsureCreated();
+            SchemaUpgradeService.EnsureLatestSchema(dbContext);
             SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
 
             SetupSqliteServices(services, dbContext);
@@ -72,6 +73,7 @@ public static class AppContext
                 .Options;
             var dbContext = new WreceptDbContext(options);
             dbContext.Database.EnsureCreated();
+            SchemaUpgradeService.EnsureLatestSchema(dbContext);
             SeedDataService.SeedAsync(dbContext).GetAwaiter().GetResult();
             SetupSqliteServices(services, dbContext);
             LastError = null;
