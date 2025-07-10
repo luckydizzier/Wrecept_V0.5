@@ -36,13 +36,14 @@
 ## Keyboard & focus logic
 
 1. A Tab sorrend: Sidebar lista → Header mezők → ItemsGrid → Summary → alsó eszköztár.
-2. Minden új nézetre lépéskor a logikus első mező (Sidebar lista) kap fókuszt. A fókusz a `FocusManager.FocusedElement` beállítással indul az InvoiceList.
-3. A `CommandManagerService` automatikusan hozzáadja az aktuális nézet `IUserCommand` gyorsbillentyűit.
-4. Ctrl+S mentésre, Esc az aktuális sor vagy ablak bezárására szolgál; Esc-sorozat esetén először a szerkesztő, majd a főmenü aktiválódik.
-5. A menüsor Alt-tal, a gombok AccessKey jelöléssel érhetők el; az Enter és Esc útvonal minden dialógusban egységes.
-6. Fontos mezők gyorsbillentyűi: Alt+N – Szállító, Alt+P – Számlaszám, Alt+D – Dátum, Alt+T – Tranzakciószám.
-7. Az OnboardingOverlay megnyitásakor a Bezár gombon van a fókusz.
-8. A szűrő- és beállítóablakok a `FocusManager.FocusedElement` tulajdonsággal jelölik ki az első mezőt.
+2. Minden új nézetre lépéskor a `FocusService` állítja be a logikus első mező fókuszát. A nézetek a `Loaded` eseményben hívják a `SetInitialFocus` metódust.
+3. A ViewModel bármikor hívhatja a `Focus(Control)` metódust, így a fókusz logikája nem kerül a nézetek kód-behindjébe.
+4. A `CommandManagerService` automatikusan hozzáadja az aktuális nézet `IUserCommand` gyorsbillentyűit.
+5. Ctrl+S mentésre, Esc az aktuális sor vagy ablak bezárására szolgál; Esc-sorozat esetén először a szerkesztő, majd a főmenü aktiválódik.
+6. A menüsor Alt-tal, a gombok AccessKey jelöléssel érhetők el; az Enter és Esc útvonal minden dialógusban egységes.
+7. Fontos mezők gyorsbillentyűi: Alt+N – Szállító, Alt+P – Számlaszám, Alt+D – Dátum, Alt+T – Tranzakciószám.
+8. Az OnboardingOverlay megnyitásakor a Bezár gombon van a fókusz.
+9. A szűrő- és beállítóablakok a `FocusManager.FocusedElement` tulajdonsággal jelölik ki az első mezőt.
 
 🧾 Exit & Save flow
 A szerkesztőből kilépés kizárólag az Esc megnyomásával történik.
