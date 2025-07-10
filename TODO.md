@@ -70,3 +70,5 @@
 - [x] Support CalculationMode on Invoice entity
 - [x] Add TransactionNumber field to Invoice entity and schema
 - [ ] Validate required fields before saving invoices
+- [ ] Introduce IUserCommand interface and CommandManagerService
+- [ ] Replace all KeyDown handlers with IUserCommand implementations

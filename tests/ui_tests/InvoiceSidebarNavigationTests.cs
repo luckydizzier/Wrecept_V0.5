@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Threading.Tasks;
 using System.Windows.Interop;
 using Wrecept.Views.InvoiceParts;
 using Wrecept.ViewModels;
@@ -23,7 +24,7 @@ public class InvoiceSidebarNavigationTests
     }
 
     [StaFact]
-    public void UpArrowOnFirstItem_ShouldAskForNewInvoice()
+    public async Task UpArrowOnFirstItem_ShouldAskForNewInvoice()
     {
         var dialog = new StubDialog { Result = true };
         App.Services = new ServiceCollection().AddSingleton<IKeyboardDialogService>(dialog).BuildServiceProvider();
@@ -32,14 +33,9 @@ public class InvoiceSidebarNavigationTests
             new Invoice { SerialNumber = "1" },
             new Invoice { SerialNumber = "2" }
         };
-        var vm = new InvoiceSidebarViewModel(invoices, new DefaultSupplierService(new Core.Repositories.InMemorySupplierRepository()));
-        var sidebar = new InvoiceSidebar { DataContext = vm };
-        sidebar.Measure(new System.Windows.Size(100,100));
-        sidebar.Arrange(new System.Windows.Rect(0,0,100,100));
-        var method = typeof(InvoiceSidebar).GetMethod("InvoiceList_OnPreviewKeyDown", BindingFlags.NonPublic | BindingFlags.Instance)!;
-        var source = new HwndSource(new HwndSourceParameters());
-        var args = new KeyEventArgs(Keyboard.PrimaryDevice, source, 0, Key.Up) { RoutedEvent = Keyboard.PreviewKeyDownEvent };
-        method.Invoke(sidebar, new object[] { sidebar, args });
+        var vm = new InvoiceSidebarViewModel(invoices, new DefaultSupplierService(new Core.Repositories.InMemorySupplierRepository()), dialog);
+        vm.SelectedInvoice = invoices[0];
+        await vm.NewInvoiceCommand.ExecuteAsync();
         Assert.NotNull(vm.SelectedInvoice);
         Assert.Null(vm.SelectedInvoice.Id);
     }

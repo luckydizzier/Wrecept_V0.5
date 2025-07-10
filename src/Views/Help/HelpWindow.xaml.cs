@@ -1,5 +1,4 @@
 using System.Windows.Controls;
-using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Services;
 
@@ -10,13 +9,7 @@ public partial class HelpWindow : UserControl
     public HelpWindow()
     {
         InitializeComponent();
+        DataContext = new ViewModels.HelpWindowViewModel(App.Services.GetRequiredService<INavigationService>());
     }
 
-    private void Window_OnKeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Escape)
-        {
-            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
-        }
-    }
 }

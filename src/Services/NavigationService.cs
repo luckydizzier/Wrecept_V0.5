@@ -23,6 +23,7 @@ public class NavigationService : INavigationService
     private readonly IPriceHistoryService _priceHistoryService;
     private readonly IFeedbackService _feedbackService;
     private readonly ISettingsService _settingsService;
+    private readonly CommandManagerService _commands;
     private MainWindowViewModel? _host;
 
     public NavigationService() : this(
@@ -35,7 +36,8 @@ public class NavigationService : INavigationService
         new DefaultTaxRateService(new InMemoryTaxRateRepository()),
         new JsonPriceHistoryService(),
         new FeedbackService(),
-        new JsonSettingsService())
+        new JsonSettingsService(),
+        new CommandManagerService())
     {
     }
 
@@ -49,7 +51,8 @@ public class NavigationService : INavigationService
         ITaxRateService taxRateService,
         IPriceHistoryService priceHistoryService,
         IFeedbackService feedbackService,
-        ISettingsService settingsService)
+        ISettingsService settingsService,
+        CommandManagerService commands)
     {
         _invoiceService = invoiceService;
         _supplierService = supplierService;
@@ -61,6 +64,7 @@ public class NavigationService : INavigationService
         _priceHistoryService = priceHistoryService;
         _feedbackService = feedbackService;
         _settingsService = settingsService;
+        _commands = commands;
     }
 
     public void SetHost(MainWindowViewModel host) => _host = host;
@@ -69,6 +73,7 @@ public class NavigationService : INavigationService
     {
         if (_host is not null)
             _host.CurrentView = view;
+        _commands.SetActiveView(view);
     }
 
     public async Task ShowInvoiceListViewAsync()
@@ -104,7 +109,8 @@ public class NavigationService : INavigationService
     {
         var vm = new SupplierListViewModel(
             _supplierService,
-            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter },
+            this);
         var view = new Views.MasterData.SupplierView { DataContext = vm };
         Show(view);
     }
@@ -113,7 +119,8 @@ public class NavigationService : INavigationService
     {
         var vm = new UnitListViewModel(
             _unitService,
-            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter },
+            this);
         var view = new Views.MasterData.UnitView { DataContext = vm };
         Show(view);
     }
@@ -122,7 +129,8 @@ public class NavigationService : INavigationService
     {
         var vm = new ProductGroupListViewModel(
             _productGroupService,
-            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter },
+            this);
         var view = new Views.MasterData.ProductGroupView { DataContext = vm };
         Show(view);
     }
@@ -131,7 +139,8 @@ public class NavigationService : INavigationService
     {
         var vm = new TaxRateListViewModel(
             _taxRateService,
-            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter },
+            this);
         var view = new Views.MasterData.TaxRateView { DataContext = vm };
         Show(view);
     }
@@ -143,7 +152,8 @@ public class NavigationService : INavigationService
             _productGroupService,
             _taxRateService,
             _unitService,
-            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter });
+            new StatusService { StatusMessageSetter = Infrastructure.AppContext.StatusMessageSetter },
+            this);
         var view = new Views.MasterData.ProductView { DataContext = vm };
         Show(view);
     }

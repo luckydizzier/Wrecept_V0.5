@@ -12,8 +12,7 @@
                   Height="300"
                   RowHeight="26"
                   TabIndex="0"
-                  FocusVisualStyle="{x:Null}"
-                  PreviewKeyDown="InvoiceList_OnPreviewKeyDown">
+                  FocusVisualStyle="{x:Null}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{DynamicResource InvoiceNumber_Header}" Binding="{Binding SerialNumber}" />
                 <DataGridTextColumn Header="{DynamicResource TransactionNumber_Header}" Binding="{Binding TransactionNumber}" />

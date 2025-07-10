@@ -99,6 +99,7 @@ namespace Wrecept
             if (settings.ShowOnboarding)
             {
                 var overlay = new Views.OnboardingOverlay();
+                Services.GetRequiredService<CommandManagerService>().SetActiveView(overlay);
                 var window = new Window
                 {
                     Content = overlay,

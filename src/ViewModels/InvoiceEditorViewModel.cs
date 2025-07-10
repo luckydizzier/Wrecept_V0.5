@@ -92,7 +92,8 @@ public partial class InvoiceEditorViewModel : ObservableObject
 
         SidebarViewModel = new InvoiceSidebarViewModel(
             invoices ?? new ObservableCollection<Invoice>(),
-            supplierService);
+            supplierService,
+            dialogService);
         HeaderViewModel = new InvoiceHeaderViewModel(
             Invoice,
             paymentMethodService,
