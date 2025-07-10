@@ -1,7 +1,6 @@
 <UserControl x:Class="Wrecept.Views.MasterData.SupplierView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        PreviewKeyDown="Window_KeyDown">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.InputBindings>
         <KeyBinding Key="Insert" Command="{Binding AddCommand}" />
         <KeyBinding Key="F2" Command="{Binding SaveCommand}" />

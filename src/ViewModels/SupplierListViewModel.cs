@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Wrecept.Core.Domain;
 using Wrecept.Core.Services;
 using Wrecept.Services;
@@ -13,6 +14,7 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
 {
     private readonly ISupplierService _service;
     private readonly IStatusService _statusService;
+    private readonly INavigationService _navigation;
 
     private ObservableCollection<Supplier> _suppliers = new();
 
@@ -31,11 +33,20 @@ public partial class SupplierListViewModel : RestorableListViewModel<Supplier>
     }
 
     public SupplierListViewModel(ISupplierService service, IStatusService statusService)
+    : this(service, statusService, App.Services.GetRequiredService<INavigationService>())
+    {
+    }
+
+    public SupplierListViewModel(ISupplierService service, IStatusService statusService, INavigationService navigation)
     {
         _service = service;
         _statusService = statusService;
+        _navigation = navigation;
         _ = LoadAsync();
+        CloseCommand = new UserRelayCommand(() => { _navigation.CloseCurrentView(); return Task.CompletedTask; }, new KeyGesture(Key.Escape));
     }
+
+    public IUserCommand CloseCommand { get; }
 
     private async Task LoadAsync()
     {

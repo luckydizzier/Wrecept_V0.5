@@ -158,6 +158,7 @@ public static class AppContext
         services.AddSingleton<IPriceHistoryService, JsonPriceHistoryService>();
         services.AddSingleton<IStatusService, StatusService>();
         services.AddSingleton<IFeedbackService, FeedbackService>();
+        services.AddSingleton<CommandManagerService>();
     }
 
     private static void LoadMenuPlugins()

@@ -91,3 +91,7 @@ M3.1 complete – proceeding with M4 features and preparing M5 release candidate
 - Replace static AppContext with Microsoft.Extensions.DependencyInjection [Done]
 - Refactor ViewModels and services to use constructor injection [Done]
 - Update tests and documentation for new startup model [Done]
+
+## M10: Command Manager
+- Centralize keyboard shortcuts via IUserCommand and CommandManagerService
+- Remove legacy KeyDown handlers from views

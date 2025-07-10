@@ -1,5 +1,4 @@
 using System.Windows.Controls;
-using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Services;
 
@@ -12,12 +11,4 @@ public partial class ProductView : UserControl
         InitializeComponent();
     }
 
-    private void Window_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (Infrastructure.AppContext.InputLocked) return;
-        if (e.Key == Key.Escape)
-        {
-            App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
-        }
-    }
 }

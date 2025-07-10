@@ -36,7 +36,7 @@ A `HungarianNumberConverter` osztály a pénzösszegek szöveges kiírását vé
 Az `Infrastructure.AppContext.InputLocked` jelző megakadályozza a párbeszédablakok közbeni billentyűfeldolgozást. A `NavigationService` `InputLockScope` osztállyal vezérli ezt, amely `IDisposable`-ként automatikusan visszaállítja a jelzőt kivétel esetén is.
 
 ## Keyboard Bindings
-A master data nézetek gyorsbillentyűit `InputBindings` köti össze a ViewModelben definiált parancsokkal. Így az Insert, F2 és Delete gombok közvetlenül az `AddCommand`, `SaveCommand` és `DeleteCommand` műveleteket hívják meg, míg az Esc továbbra is a `NavigationService` segítségével zárja be az aktuális ablakot.
+A master data nézetek gyorsbillentyűit a `CommandManagerService` adja az aktuális nézethez. A ViewModel rétegben minden `IUserCommand` megadja a hozzátartozó `KeyGesture`-t és az aszinkron műveletet. Így az Insert, F2 és Delete gombok közvetlenül az `AddCommand`, `SaveCommand` és `DeleteCommand` műveleteket hívják meg, míg az Esc a `CloseCommand`-on keresztül zárja be az ablakot.
 Az **InvoiceItemsGrid** ugyanígy kezeli a tételsorokat: a `StartEditCommand` (F2 vagy Ctrl+L) megnyitja a megfelelő keresőt, a `ConfirmEntryCommand` (Enter) rögzíti az új sort, míg a `CancelEntryCommand` (Esc) törli a bevitelt.
 
 ## Feedback Service

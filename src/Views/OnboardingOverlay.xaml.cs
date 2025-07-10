@@ -1,6 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Wrecept.Services;
 
@@ -11,24 +10,9 @@ public partial class OnboardingOverlay : UserControl
     public OnboardingOverlay()
     {
         InitializeComponent();
+        var vm = new ViewModels.OnboardingOverlayViewModel(App.Services.GetRequiredService<INavigationService>());
+        vm.CloseWindow = () => Window.GetWindow(this)?.Close();
+        DataContext = vm;
     }
 
-    private void Window_OnKeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Escape)
-        {
-            CloseOverlay();
-        }
-    }
-
-    private void OnClose(object sender, RoutedEventArgs e)
-    {
-        CloseOverlay();
-    }
-
-    private void CloseOverlay()
-    {
-        App.Services.GetRequiredService<INavigationService>().CloseCurrentView();
-        Window.GetWindow(this)?.Close();
-    }
 }
