@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Services;
 using System.Windows.Controls;
 
 
@@ -8,12 +10,7 @@ public partial class InvoiceSidebar : UserControl
     public InvoiceSidebar()
     {
         InitializeComponent();
-        Loaded += (_, _) =>
-        {
-            if (InvoiceList.Items.Count > 0)
-                InvoiceList.SelectedIndex = 0;
-            InvoiceList.Focus();
-        };
+        Loaded += (_, _) => App.Services.GetRequiredService<IFocusService>().SetInitialFocus(this);
     }
 
 }

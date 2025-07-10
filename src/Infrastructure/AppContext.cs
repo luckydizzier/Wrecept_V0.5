@@ -158,6 +158,7 @@ public static class AppContext
         services.AddSingleton<IPriceHistoryService, JsonPriceHistoryService>();
         services.AddSingleton<IStatusService, StatusService>();
         services.AddSingleton<IFeedbackService, FeedbackService>();
+        services.AddSingleton<IFocusService, FocusService>();
         services.AddSingleton<CommandManagerService>();
     }
 

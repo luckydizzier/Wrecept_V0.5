@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using Wrecept.Services;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Wrecept.ViewModels;
@@ -9,16 +11,19 @@ public partial class InvoiceHeader : UserControl
     public InvoiceHeader()
     {
         InitializeComponent();
-        Loaded += (_, _) =>
-        {
-            SupplierNameBox.SearchBox.Focus();
-            AccessKeyManager.Register("N", SupplierNameBox);
-            AccessKeyManager.Register("C", AddressBox);
-            AccessKeyManager.Register("A", TaxNumberBox);
-            AccessKeyManager.Register("P", SerialBox);
-            AccessKeyManager.Register("D", IssueDateBox);
-            AccessKeyManager.Register("M", PaymentMethodBox);
-            AccessKeyManager.Register("T", TransactionBox);
-        };
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        var focus = App.Services.GetRequiredService<IFocusService>();
+        focus.SetInitialFocus(this);
+        AccessKeyManager.Register("N", SupplierNameBox);
+        AccessKeyManager.Register("C", AddressBox);
+        AccessKeyManager.Register("A", TaxNumberBox);
+        AccessKeyManager.Register("P", SerialBox);
+        AccessKeyManager.Register("D", IssueDateBox);
+        AccessKeyManager.Register("M", PaymentMethodBox);
+        AccessKeyManager.Register("T", TransactionBox);
     }
 }
